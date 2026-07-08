@@ -1,0 +1,82 @@
+{
+  "viral_skeleton_elements": [
+    {
+      "element": "Hook",
+      "timeframe": "0-5s",
+      "description": "Accroche qui crée un vide cognitif ou une statistique choquante. Pas de 'Bonjour à tous'. Le spectateur doit se dire 'Je dois savoir la suite'.",
+      "extraction_fields": ["type_hook", "phrase_exacte", "emotion_cible"]
+    },
+    {
+      "element": "Promise",
+      "timeframe": "5-15s",
+      "description": "Annonce claire de la valeur de la vidéo sans tout dévoiler. Le spectateur sait ce qu'il gagne à rester.",
+      "extraction_fields": ["promesse_explicite", "promesse_implicite"]
+    },
+    {
+      "element": "Rehook_1",
+      "timeframe": "60-90s",
+      "description": "Relance d'attention (open loop, changement de rythme, révélation partielle). Empêche le drop-off.",
+      "extraction_fields": ["type_rehook", "phrase_exacte"]
+    },
+    {
+      "element": "Rehook_2",
+      "timeframe": "milieu",
+      "description": "Second point de rétention. Peut être un cliffhanger, une question, ou un changement de sujet.",
+      "extraction_fields": ["type_rehook", "phrase_exacte"]
+    },
+    {
+      "element": "Body_Structure",
+      "timeframe": "global",
+      "description": "Structure narrative globale (ex: liste ordonnée, storytelling chronologique, problème-solution, avant-après).",
+      "extraction_fields": ["type_structure", "nombre_sections", "rythme"]
+    },
+    {
+      "element": "Payoff",
+      "timeframe": "fin",
+      "description": "Réponse concrète à la promesse du début. Le spectateur doit sentir que sa question est résolue.",
+      "extraction_fields": ["reponse_promesse", "satisfaction_cible"]
+    },
+    {
+      "element": "CTA",
+      "timeframe": "très fin",
+      "description": "Appel à l'action intégré au contexte de la vidéo (pas juste 'abonne-toi'). Lié au sujet.",
+      "extraction_fields": ["type_cta", "phrase_exacte", "lien_sujet"]
+    }
+  ],
+  "thumbnail_skeleton_elements": [
+    {
+      "element": "Composition",
+      "description": "Position des éléments (ex: personnage à gauche, objet à droite, texte centré)."
+    },
+    {
+      "element": "Contraste_Couleurs",
+      "description": "Palette dominante, niveau de contraste, lisibilité sur mobile."
+    },
+    {
+      "element": "Emotion_Expression",
+      "description": "Expression du visage, posture, intensité émotionnelle."
+    },
+    {
+      "element": "Texte_Image",
+      "description": "Mots affichés (max 3-4), police, couleur, encadré."
+    },
+    {
+      "element": "Curiosity_Gap",
+      "description": "Élément visuel qui crée un mystère (objet flouté, flèche, zone illuminée)."
+    }
+  ],
+  "metadata_elements": [
+    {
+      "element": "Title",
+      "description": "Titre optimisé : curiosité + clarté + mots-clés. Max 60 caractères visibles."
+    },
+    {
+      "element": "Description",
+      "description": "Description avec hook répété, chapitres, liens, SEO."
+    },
+    {
+      "element": "Tags",
+      "description": "Tags pertinents (mix large + spécifique)."
+    }
+  ]
+}
