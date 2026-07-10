@@ -24,7 +24,7 @@ CMS_PATH = os.path.join(_SCRIPT_DIR, "liber_perturabo.json")
 CAMPAIGN_LOG = os.path.join(_SCRIPT_DIR, "TRACKING", "IW_CAMPAIGN_LOG.md")
 TRANSFER_LOG = os.path.join(_SCRIPT_DIR, "TRACKING", "IW_TRANSFER_LOG.md")
 
-VALID_FRIGATES = ["F01", "F02", "F03", "F04", "F05", "TYRANT", "CAPTEURS"]
+VALID_FRIGATES = ["F01", "F02", "F03", "F04", "F05", "F06", "TYRANT", "CAPTEURS"]
 
 FLEET_STATUS_FLOW = [
     "pending_reconnaissance",
@@ -34,6 +34,7 @@ FLEET_STATUS_FLOW = [
     "script_forged",
     "thumbnail_forged",
     "niche_mapped",
+    "identity_forged",
     "artefact_ready",
     "complete",
 ]
@@ -44,6 +45,7 @@ FRIGATE_STATUS_KEY = {
     "F03": "f03_forgeward",
     "F04": "f04_herald",
     "F05": "f05_grand_compass",
+    "F06": "f06_identity_forge",
     "TYRANT": "tyrant_report",
     "CAPTEURS": "capteurs",
 }
@@ -55,6 +57,7 @@ FRIGATE_TRANSITIONS = {
     "F03": "script_forged",
     "F04": "thumbnail_forged",
     "F05": "niche_mapped",
+    "F06": "identity_forged",
 }
 
 PRECONDITIONS = {
@@ -64,6 +67,7 @@ PRECONDITIONS = {
     "F03": ["skeleton_extracted"],
     "F04": ["script_forged"],
     "F05": ["specimen_captured"],
+    "F06": ["niche_mapped"],
 }
 
 

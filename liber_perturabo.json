@@ -44,6 +44,13 @@
     "output_path": null,
     "niche_report_hash": null
   },
+  "f06_identity_forge": {
+    "status": "pending",
+    "output_path": null,
+    "channel_identity_hash": null,
+    "channel_registered": false,
+    "channel_slug": null
+  },
   "capteurs": {
     "status": "idle",
     "last_sweep": null,

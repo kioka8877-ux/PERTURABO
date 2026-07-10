@@ -9,7 +9,7 @@ Flux Mode Vidéo :
   [Porte 1] → TYRANT → SENTINEL → BREACHER → [Porte 2] → FORGEWARD → HERALD → [Porte 3] → [Porte 4]
 
 Flux Mode Chaîne :
-  [Porte 1] → TYRANT → SENTINEL → GRAND_COMPASS → [Porte 2] → FORGEWARD → [Porte 3] → [Porte 4]
+  [Porte 1] → TYRANT → SENTINEL → GRAND_COMPASS → IDENTITY_FORGE → [Porte 2] → FORGEWARD → [Porte 3] → [Porte 4]
 
 Usage:
   python orchestrator.py --mode video --url "https://..." --niche "..." --format SHORT --duree 60
@@ -53,6 +53,8 @@ _FREGATES = {
             "out": os.path.join(_PROJECT_ROOT, "F04_HERALD", "OUT")},
     "F05": {"in": os.path.join(_PROJECT_ROOT, "F05_GRAND_COMPASS", "IN"),
             "out": os.path.join(_PROJECT_ROOT, "F05_GRAND_COMPASS", "OUT")},
+    "F06": {"in": os.path.join(_PROJECT_ROOT, "F06_IDENTITY_FORGE", "IN"),
+            "out": os.path.join(_PROJECT_ROOT, "F06_IDENTITY_FORGE", "OUT")},
 }
 
 
@@ -87,6 +89,7 @@ def create_ledger(siege_id: str, mode: str, url: str, niche: str,
         "f03_forgeward": None,
         "f04_herald": None,
         "f05_grand_compass": None,
+        "f06_identity_forge": None,
         "gate_decisions": {},
         "final_output": None,
     }
@@ -170,6 +173,17 @@ def present_gate(gate_num: str, ledger: dict):
                 print(f"   Niche recommandée : {report.get('recommended_niche', 'N/A')}")
                 for v in report.get("blue_ocean_validations", [])[:3]:
                     print(f"   → {v['niche']} : {v['verdict']} (confiance: {v.get('confidence_score', 'N/A')}/10)")
+            if ledger.get("f06_identity_forge"):
+                identity = ledger["f06_identity_forge"]
+                print(f"\n📋 Identité de chaîne forgée par IDENTITY_FORGE :")
+                names = identity.get("channel_names", [])
+                for n in names[:5]:
+                    print(f"   #{n.get('rank', '?')}: {n.get('name', 'N/A')} (mem: {n.get('memorability_score', '?')}/10, seo: {n.get('seo_score', '?')}/10)")
+                tov = identity.get("tone_of_voice", {})
+                print(f"   Tone : {tov.get('register', 'N/A')}")
+                print(f"   Format : {identity.get('format_standard', {}).get('structure', 'N/A')}")
+                print(f"   Banner : {'✅' if os.path.exists(os.path.join(_FREGATES['F06']['out'], 'banner.png')) else '❌'}")
+                print(f"   Logo   : {'✅' if os.path.exists(os.path.join(_FREGATES['F06']['out'], 'logo.png')) else '❌'}")
 
     elif gate_num == "3":
         # Porte 3 : afficher le script
@@ -326,6 +340,14 @@ def resume_siege():
             print(f"  cd F05_GRAND_COMPASS/CODEBASE && python grand_compass.py --prepare")
             print(f"  # L'IRON produit niche_report.json")
             print(f"  python grand_compass.py --finalize")
+            print(f"\n[ORCH] Après GRAND_COMPASS → IDENTITY_FORGE :")
+            print(f"  cp F05_GRAND_COMPASS/OUT/niche_report.json F06_IDENTITY_FORGE/IN/")
+            print(f"  cp F01_SENTINEL/OUT/specimen.json F06_IDENTITY_FORGE/IN/")
+            print(f"  cd F06_IDENTITY_FORGE/CODEBASE && python identity_forge.py --prepare --niche \"<niche>\"")
+            print(f"  # L'IRON produit channel_identity.json + banner.png + logo.png")
+            print(f"  python identity_forge.py --finalize")
+            print(f"  # Warsmith choisit le nom puis :")
+            print(f"  python identity_forge.py --register --channel-name \"Nom Choisi\"")
 
         # Charger les outputs si disponibles
         specimen_path = os.path.join(_FREGATES["F01"]["out"], "specimen.json")
@@ -346,7 +368,15 @@ def resume_siege():
                 with open(report_path, "r", encoding="utf-8") as f:
                     ledger["f05_grand_compass"] = json.load(f)
                 save_ledger(ledger)
-                present_gate("2", ledger)
+
+            # Charger F06_IDENTITY_FORGE si disponible
+            identity_path = os.path.join(_FREGATES["F06"]["out"], "channel_identity.json")
+            if os.path.exists(identity_path):
+                with open(identity_path, "r", encoding="utf-8") as f:
+                    ledger["f06_identity_forge"] = json.load(f)
+                save_ledger(ledger)
+
+            present_gate("2", ledger)
 
         save_ledger(ledger)
 
@@ -489,6 +519,7 @@ def cmd_status(args):
     print(f"║  F03 FORGEWARD:{'✅' if ledger.get('f03_forgeward') else '❌':<37}║")
     print(f"║  F04 HERALD  : {'✅' if ledger.get('f04_herald') else '❌':<37}║")
     print(f"║  F05 COMPASS : {'✅' if ledger.get('f05_grand_compass') else '❌':<37}║")
+    print(f"║  F06 IDENTITY:{'✅' if ledger.get('f06_identity_forge') else '❌':<37}║")
     decisions = ledger.get("gate_decisions", {})
     for g in ["1", "2", "3", "4"]:
         d = decisions.get(f"gate_{g}", {})
