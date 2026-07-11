@@ -55,6 +55,14 @@ _FREGATES = {
             "out": os.path.join(_PROJECT_ROOT, "F05_GRAND_COMPASS", "OUT")},
     "F06": {"in": os.path.join(_PROJECT_ROOT, "F06_IDENTITY_FORGE", "IN"),
             "out": os.path.join(_PROJECT_ROOT, "F06_IDENTITY_FORGE", "OUT")},
+    "S01": {"in": os.path.join(_PROJECT_ROOT, "S01_SENTINEL", "IN"),
+            "out": os.path.join(_PROJECT_ROOT, "S01_SENTINEL", "OUT")},
+    "S02": {"in": os.path.join(_PROJECT_ROOT, "S02_BREACHER", "IN"),
+            "out": os.path.join(_PROJECT_ROOT, "S02_BREACHER", "OUT")},
+    "S03": {"in": os.path.join(_PROJECT_ROOT, "S03_FORGEWARD", "IN"),
+            "out": os.path.join(_PROJECT_ROOT, "S03_FORGEWARD", "OUT")},
+    "S04": {"in": os.path.join(_PROJECT_ROOT, "S04_HERALD", "IN"),
+            "out": os.path.join(_PROJECT_ROOT, "S04_HERALD", "OUT")},
 }
 
 

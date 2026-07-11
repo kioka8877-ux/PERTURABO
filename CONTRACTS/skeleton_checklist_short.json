@@ -1,0 +1,56 @@
+{
+  "format": "SHORT",
+  "description": "Checklist d'extraction du squelette viral d'un YouTube Short",
+  "max_duration": 60,
+  "skeleton_elements": [
+    {
+      "element": "Visual_Hook_Frame",
+      "timeframe": "0-0.5s",
+      "description": "La première frame qui stoppe le scroll. Contraste élevé, mouvement, émotion forte. Lisible à la taille d'un ongle sur mobile.",
+      "extract": ["type_visuel", "contraste", "mouvement", "emotion_cible", "lisibilite_mobile"]
+    },
+    {
+      "element": "Verbal_Text_Hook",
+      "timeframe": "0-3s",
+      "description": "Une phrase qui crée un vide cognitif immédiat. Type : statistique choc, question, affirmation contre-intuitive, cliffhanger.",
+      "extract": ["type_hook", "phrase_exacte", "vide_cognitif", "valeur_perçue"]
+    },
+    {
+      "element": "Content_Format",
+      "timeframe": "global",
+      "description": "Type de format de contenu parmi : visual_only, text_on_screen, voiceover, green_screen, duet_reply, image_carousel.",
+      "extract": ["format_type", "reproductible_en_série"]
+    },
+    {
+      "element": "Escalade_Rythme",
+      "timeframe": "3-50s",
+      "description": "Chaque seconde doit apporter de l'info nouvelle. Pas de sag (baisse de tension).",
+      "extract": ["rythme", "info_par_seconde", "moments_sag", "pattern_escalade"]
+    },
+    {
+      "element": "Payoff",
+      "timeframe": "3-5s avant la fin",
+      "description": "Le fait dingue final. Doit répondre au hook du début.",
+      "extract": ["phrase_exacte", "satisfaction_cible", "reponse_au_hook"]
+    },
+    {
+      "element": "Loop_Hook",
+      "timeframe": "dernière seconde",
+      "description": "La fin reconnecte au début pour forcer le re-regard. Techniques : callback, visual_match_cut, audio_continuity, cliffhanger, open_question.",
+      "extract": ["type_loop", "technique_utilisée", "force_re_regard", "combinaison_techniques"]
+    }
+  ],
+  "metrics_extractible": {
+    "via_yt_dlp": ["view_count", "like_count", "duration", "upload_date", "title", "channel", "subscriber_count"],
+    "note": "yt-dlp view_count pour Shorts = ~50% du chiffre affiché sur la page (engaged views vs reely views)"
+  },
+  "metrics_inferrable_par_gemini": {
+    "signals": ["swipe_away_estimation", "completion_estimation", "loop_potentiel"],
+    "echelle": ["faible", "moyen", "élevé"]
+  },
+  "outlier_score": {
+    "formula": "video_views / channel_shorts_baseline",
+    "thresholds": {"notable": 2, "strong": "3-5", "breakout": "10+"},
+    "critical_rule": "NE JAMAIS mixer baseline Long et Shorts"
+  }
+}
