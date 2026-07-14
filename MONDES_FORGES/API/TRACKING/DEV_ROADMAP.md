@@ -1,6 +1,6 @@
 # DEV_ROADMAP — Monde-Forge API
 
-## Statut global : Phase 1 complète — Phase 2 à démarrer
+## Statut global : Phase 2 complète — Phase 3 à démarrer
 
 ---
 
@@ -23,32 +23,41 @@
 
 ---
 
-## Phase 2 — liber_api.json + IW_CUSTOS.py ⬜
+## Phase 2 — liber_api.json + IW_CUSTOS.py ✅
 
-- [ ] Créer `liber_api.json` avec tous les champs définis (fleet_status, frégates F01-F06, gate_decisions)
-- [ ] Adapter `IW_CUSTOS.py` depuis le YOUTUBE pour le Monde-Forge API
-  - Paramètre `--monde api`
-  - FLEET_STATUS_FLOW API
-  - VALID_FRIGATES API
-  - Gestion des 4 Gates
+- [x] `liber_api.json` — bus d'état complet du siège
+  - fleet_status, siege_id, monde, warsmith_brief
+  - tyrant_report avec territoire/démon/faille/signal_agents/cartographie_prix
+  - f01 à f06 avec tous les champs spécifiques (hashes, counts, urls)
+  - gate_decisions × 4 avec label/validated/timestamp/notes
+  - siege_timestamps pour mesurer la durée de chaque phase
+- [x] `IW_CUSTOS.py` — orchestrateur complet
+  - `--mode reset` : initialise un nouveau siège avec ID auto ou custom
+  - `--mode check-out` : autorise une frégate + vérifie gate requise
+  - `--mode check-in` : valide output + avance fleet_status + affiche next action
+  - `--mode gate` : valide/rejette une gate + affiche ce qui est débloqué
+  - `--mode validate` : vérifie le schéma du liber
+  - `--mode status` : tableau de bord complet avec icônes
 
 ---
 
 ## Phase 3 — ai_gateway.py ⬜
 
-- [ ] Créer `ai_gateway.py` dans CORE/
-- [ ] Routing par frégate (F01 → Haiku, F02 → DeepSeek Flash, F03/F05 → Sonnet, F04/F06 → Gemini Flash)
-- [ ] Support AI_GATEWAY_BASE_URL + AI_GATEWAY_API_KEY
-- [ ] Fonction commune `call_oracle(frigate_id, prompt)` utilisée par toutes les frégates
+- [ ] Créer `ai_gateway.py` dans CORE/ (partagé entre tous les Mondes-Forges)
+- [ ] Routing par frégate : F01 → Haiku, F02 → DeepSeek Flash, F03/F05 → Sonnet, F04/F06 → Gemini Flash
+- [ ] Support `AI_GATEWAY_BASE_URL` + `AI_GATEWAY_API_KEY` (variables d'env)
+- [ ] Fonction centrale `call_oracle(frigate_id, prompt, schema=None)` → JSON validé
+- [ ] Retry automatique (max 3) si réponse non-JSON ou JSON invalide
+- [ ] Log de chaque appel Oracle dans TRACKING/IW_CAMPAIGN_LOG.md
 
 ---
 
 ## Phase 4 — TYRANT ⬜
 
 - [ ] `TYRANT/CODEBASE/tyrant.py` — script Python complet
-  - Modules : load_archivum(), assemble_prompt(), call_oracle(), write_liber()
-  - Lit ARCHIVUM/targets/ + ARCHIVUM/rules/
-  - Produit le JSON TYRANT assessment dans le liber
+  - `--prepare` : charge ARCHIVUM couches froide + chaude, assemble iron_prompt.txt
+  - IRON lit iron_prompt.txt → produit tyrant_output.json
+  - `--finalize` : valide JSON, check-in IW_CUSTOS, affiche fiche Gate 1
 - [ ] `TYRANT/IN/` — structure des fichiers d'entrée
 - [ ] `TYRANT/OUT/` — structure des fichiers de sortie
 
@@ -61,7 +70,7 @@
   - Module `sentinel_gh` : GitHub API — wrappers actifs, issues, étoiles
   - Module `sentinel_web` : Jina Reader pour docs et articles
   - Output : `ARCHIVUM/targets/[siege_id]/raw_intel.json`
-- [ ] Test standalone : `python sentinel.py --categorie "linkedin-scraper"`
+  - Check-in IW_CUSTOS automatique en fin d'exécution
 
 ---
 
@@ -70,9 +79,9 @@
 - [ ] `F02_BREACHER/CODEBASE/breacher.py`
   - Lit `raw_intel.json` depuis ARCHIVUM/targets/
   - Croise avec ARCHIVUM/rules/ (couche froide)
-  - Calcule le score sur 4 dimensions
-  - Génère les 20 angles d'attaque depuis `api_scoring_checklist.json`
-  - Output : update liber_api.json (f02 section)
+  - Calcule score sur 4 dimensions (formula api_scoring_checklist.json)
+  - Génère les 20 angles d'attaque depuis les types définis
+  - Output : update liber_api.json (f02 section) + angles_attaque.json
 
 ---
 
@@ -81,7 +90,7 @@
 - [ ] `F03_FORGEWARD/CODEBASE/forgeward.py`
   - Lit les 20 angles depuis le liber
   - Pour chaque angle : génère api.py + openapi.json + requirements.txt + deploy.sh
-  - Génération en parallèle (asyncio ou ThreadPoolExecutor)
+  - Génération en parallèle (asyncio / ThreadPoolExecutor)
   - Output : `ARCHIVUM/targets/[siege_id]/ironwarriors/[id]/`
 - [ ] Templates de base dans `ARCHIVUM/templates/`
 

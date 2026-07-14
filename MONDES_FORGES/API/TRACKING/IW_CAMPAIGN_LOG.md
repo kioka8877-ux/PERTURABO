@@ -2,8 +2,6 @@
 
 ## Journal de construction — à lire en premier si contexte perdu
 
-Ce fichier permet à tout agent arrivant à froid de reconstituer le contexte en 5 minutes.
-
 ---
 
 ## [CONSTRUCTION] Session fondatrice — Doctrine complète
@@ -50,13 +48,13 @@ pending_reconnaissance → tyrant_report_ready → intel_captured → target_sco
 ### Les 4 Gates (validation Warsmith)
 
 - **Gate 1** : après TYRANT — valider la cible (30 secondes)
-- **Gate 2** : après BREACHER — valider les 20 angles (2 minutes)
-- **Gate 3** : après FORGEWARD — review 2-3 Iron Warriors (5 minutes)
-- **Gate 4** : après HERALD — valider les listings avant publication (5 minutes)
+- **Gate 2** : après F01 SENTINEL — valider les 20 angles BREACHER (2 minutes)
+- **Gate 3** : après F03 FORGEWARD — review 2-3 Iron Warriors code (5 minutes)
+- **Gate 4** : après F04 HERALD — valider les listings avant publication (5 minutes)
 
 ### ARCHIVUM à deux couches
 
-**Couche froide** (rarement mise à jour — doctrine accumulée) :
+**Couche froide** (rarement mise à jour) :
 - `rules/` — patterns distillés des sieges passés
 - `templates/` — specs OpenAPI + code FastAPI réutilisables
 - `markets/` — cartographie scorée des catégories RapidAPI
@@ -90,14 +88,33 @@ fregates F01-F06 (IN/OUT/CODEBASE/TRACKING).
 
 5 fichiers dans CONTRACTS/ :
 - `system_prompt.md` : doctrine RapidAPI + Iron Warriors + stack technique
-- `tyrant_prompt.md` : 5 questions (territoire, démon, faille, signal agents, cartographie prix) + format JSON
-- `iron_prompt.md` : contrat de l'exécuteur (JSON brut, schéma exact, code fonctionnel)
+- `tyrant_prompt.md` : 5 questions + format JSON TYRANT assessment
+- `iron_prompt.md` : contrat exécuteur (JSON brut, schéma exact, code fonctionnel)
 - `anti_bullshit.md` : 4 filtres (source obligatoire, chiffres prouvés, patterns ARCHIVUM, seuils TYRANT)
-- `api_scoring_checklist.json` : 4 dimensions pondérées, 20 types d'angles d'attaque, seuils SIEGEZ/ATTENDEZ/REORIENTEZ
+- `api_scoring_checklist.json` : 4 dimensions pondérées, 20 types d'angles d'attaque
+
+---
+
+## [CONSTRUCTION] Phase 2 — liber_api.json + IW_CUSTOS.py créés
+
+**liber_api.json** : bus d'état complet
+- 9 états fleet_status (pending_reconnaissance → complete)
+- tyrant_report avec les 5 dimensions (territoire, démon, faille, signal_agents, cartographie_prix)
+- f01 à f06 avec tous les champs spécifiques (hashes, counts, deploy_urls)
+- 4 gate_decisions avec label/validated/timestamp/notes
+- siege_timestamps pour mesurer la durée de chaque phase
+
+**IW_CUSTOS.py** : 6 modes
+- `reset` : nouveau siège, remet tout à zéro
+- `check-out` : autorise une frégate + vérifie gate requise avant autorisation
+- `check-in` : valide output + avance fleet_status + affiche next action
+- `gate` : valide/rejette une des 4 gates + affiche ce qui est débloqué
+- `validate` : vérifie le schéma du liber
+- `status` : tableau de bord complet avec icônes
 
 ---
 
 ## Prochaine étape
 
-**Phase 2** : liber_api.json + IW_CUSTOS.py
+**Phase 3** : `ai_gateway.py` dans CORE/ — routeur Oracle partagé entre tous les Mondes-Forges.
 Voir DEV_ROADMAP.md pour le détail.
