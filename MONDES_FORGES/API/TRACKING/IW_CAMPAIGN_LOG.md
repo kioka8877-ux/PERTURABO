@@ -1,20 +1,17 @@
 # IW_CAMPAIGN_LOG — MONDE-FORGE API
 
-## [CONSTRUCTION] Phase 0-4
-- Architecture PERTURABO, CONTRACTS, liber_api.json, IW_CUSTOS.py, ai_gateway.py, TYRANT
+## [CONSTRUCTION] Phases 0-6
+- Architecture, CONTRACTS, liber, IW_CUSTOS, ai_gateway, TYRANT, F01 SENTINEL, F02 BREACHER
 
-## [CONSTRUCTION] Phase 5 — F01 SENTINEL frégate
-- sentinel_rapid.py : scrape RapidAPI via Jina Reader + regex parsing
-- sentinel_gh.py : GitHub code search par host RapidAPI
-- sentinel_web.py : Jina Reader générique
-- sentinel.py : orchestrateur 3 modes → ARCHIVUM/targets/[siege_id]/raw_intel.json
+## [CONSTRUCTION] Phase 7 — F03 FORGEWARD + F04 HERALD
+- forgeward.py : 20 prompts indépendants → call_oracle_batch(max_workers=5)
+- Chaque prompt = angle d'attaque + cible + contracts → JSON warrior complet
+- Matérialisation : api.py + requirements.txt + openapi.json + deploy.sh + meta.json
+- herald.py : prompts listing → call_oracle_batch → listing RapidAPI + README
+- Listing : titre SEO (avec nom concurrent), description 200-400 chars, 5 tags
+- README : optimisé LLM (mention 'AI agent', 'LLM', 'automation', openapi.json)
+- Gate 4 : récap final affiché au Warsmith
 
-## [CONSTRUCTION] Phase 6 — F02 BREACHER frégate
-- breacher.py : scoring 4 dimensions pondérées
-- 20 angles d'attaque (prix, endpoint, niche, format, vitesse)
-- Gate 2 interactive : fiche cible → validation Warsmith
-- _extract_json : extraction JSON robuste depuis réponse Oracle
-
-## Prochaine étape : Phase 7 — F03 FORGEWARD + F04 HERALD
-- forgeward.py : 20 codes FastAPI en parallèle
-- herald.py : listings RapidAPI + README GitHub LLM-ready
+## Prochaine étape : Phase 8 — F05 GRAND COMPASS + F06 CAPTEURS
+- grand_compass.py : deploy Railway/GitHub en parallèle + capture URLs
+- capteurs.py : monitoring quotidien RapidAPI + GitHub + ledgers ARCHIVUM
