@@ -1,87 +1,67 @@
 # DEV_ROADMAP — Monde-Forge API
 
-## Statut global : Phase 2 complète — Phase 3 à démarrer
+## Statut global : Phase 3 complète — Phase 4 à démarrer
 
 ---
 
 ## Phase 0 — Structure et tracking ✅
-
 - [x] Créer MONDES_FORGES/API/ avec toutes les sous-structures
-- [x] Créer les tracking docs (IW_CAMPAIGN_LOG.md, IW_TRANSFER_LOG.md, DEV_ROADMAP.md)
-- [x] Créer les logs par frégate (F01 à F06)
-- [x] Créer les dossiers TYRANT et ORCHESTRATOR avec IN/OUT/CODEBASE
-
----
+- [x] Tracking docs, logs par frégate, dossiers TYRANT et ORCHESTRATOR
 
 ## Phase 1 — CONTRACTS ✅
-
-- [x] `CONTRACTS/system_prompt.md` — doctrine RapidAPI + Iron Warriors
-- [x] `CONTRACTS/tyrant_prompt.md` — 5 questions : territoire, démon, latence, wrappers, pricing
-- [x] `CONTRACTS/iron_prompt.md` — contrat de l'exécuteur
-- [x] `CONTRACTS/anti_bullshit.md` — filtre données prouvées
-- [x] `CONTRACTS/api_scoring_checklist.json` — grille de scoring des cibles (4 dimensions × poids)
-
----
+- [x] system_prompt.md, tyrant_prompt.md, iron_prompt.md, anti_bullshit.md, api_scoring_checklist.json
 
 ## Phase 2 — liber_api.json + IW_CUSTOS.py ✅
-
-- [x] `liber_api.json` — bus d'état complet du siège
-  - fleet_status, siege_id, monde, warsmith_brief
-  - tyrant_report avec territoire/démon/faille/signal_agents/cartographie_prix
-  - f01 à f06 avec tous les champs spécifiques (hashes, counts, urls)
-  - gate_decisions × 4 avec label/validated/timestamp/notes
-  - siege_timestamps pour mesurer la durée de chaque phase
-- [x] `IW_CUSTOS.py` — orchestrateur complet
-  - `--mode reset` : initialise un nouveau siège avec ID auto ou custom
-  - `--mode check-out` : autorise une frégate + vérifie gate requise
-  - `--mode check-in` : valide output + avance fleet_status + affiche next action
-  - `--mode gate` : valide/rejette une gate + affiche ce qui est débloqué
-  - `--mode validate` : vérifie le schéma du liber
-  - `--mode status` : tableau de bord complet avec icônes
+- [x] liber_api.json : 9 fleet_status, tyrant_report 5 dimensions, f01-f06, 4 gates, siege_timestamps
+- [x] IW_CUSTOS.py : 6 modes (reset/check-out/check-in/gate/validate/status)
 
 ---
 
-## Phase 3 — ai_gateway.py ⬜
+## Phase 3 — ai_gateway.py ✅
 
-- [ ] Créer `ai_gateway.py` dans CORE/ (partagé entre tous les Mondes-Forges)
-- [ ] Routing par frégate : F01 → Haiku, F02 → DeepSeek Flash, F03/F05 → Sonnet, F04/F06 → Gemini Flash
-- [ ] Support `AI_GATEWAY_BASE_URL` + `AI_GATEWAY_API_KEY` (variables d'env)
-- [ ] Fonction centrale `call_oracle(frigate_id, prompt, schema=None)` → JSON validé
-- [ ] Retry automatique (max 3) si réponse non-JSON ou JSON invalide
-- [ ] Log de chaque appel Oracle dans TRACKING/IW_CAMPAIGN_LOG.md
+- [x] `CORE/ai_gateway.py` créé — routeur Oracle partagé entre tous les Mondes-Forges
+  - Routing modèles par frégate : F01→Haiku, F02→DeepSeek Flash, F03/F05→Sonnet, F04→Gemini Flash, F06→Haiku
+  - `call_oracle(frigate_id, prompt, ...)` → JSON validé avec retry (max 3)
+  - `call_oracle_batch(frigate_id, prompts, max_workers=5)` → 20 Iron Warriors en parallèle
+  - `ping()` → test de connectivité
+  - Gestion des formats : JSON pur, ```json...```, extraction depuis texte
+  - Retry avec contexte d'erreur injecté dans le message suivant
+  - CLI : `python ai_gateway.py --ping` / `--frigate F02 --prompt "..."`
+- [x] `CORE/requirements.txt` mis à jour (openai, httpx, pydantic, fastapi, uvicorn)
+- [x] `CORE/.env.example` créé (AI_GATEWAY_BASE_URL, AI_GATEWAY_API_KEY, GITHUB_TOKEN, RAPIDAPI_KEY, RAILWAY_TOKEN)
 
 ---
 
 ## Phase 4 — TYRANT ⬜
 
-- [ ] `TYRANT/CODEBASE/tyrant.py` — script Python complet
-  - `--prepare` : charge ARCHIVUM couches froide + chaude, assemble iron_prompt.txt
-  - IRON lit iron_prompt.txt → produit tyrant_output.json
-  - `--finalize` : valide JSON, check-in IW_CUSTOS, affiche fiche Gate 1
-- [ ] `TYRANT/IN/` — structure des fichiers d'entrée
-- [ ] `TYRANT/OUT/` — structure des fichiers de sortie
+- [ ] `TYRANT/CODEBASE/tyrant.py`
+  - `--prepare` : charge ARCHIVUM couches froide + chaude, assemble le prompt
+  - Appelle `call_oracle("TYRANT", prompt)` via ai_gateway
+  - `--finalize` : valide JSON tyrant_output, check-in IW_CUSTOS, affiche fiche Gate 1
+- [ ] `TYRANT/CODEBASE/contracts_loader.py` — charge CONTRACTS/ + ARCHIVUM/rules/ + ARCHIVUM/markets/
+- [ ] `TYRANT/IN/` — structure des fichiers d'entrée (warsmith_brief.json)
+- [ ] `TYRANT/OUT/tyrant_output.json` — structure du fichier de sortie
 
 ---
 
 ## Phase 5 — F01 SENTINEL ⬜
 
 - [ ] `F01_SENTINEL/CODEBASE/sentinel.py`
-  - Module `sentinel_rapid` : scrape listings RapidAPI (score, latence, pricing, reviews)
-  - Module `sentinel_gh` : GitHub API — wrappers actifs, issues, étoiles
-  - Module `sentinel_web` : Jina Reader pour docs et articles
+  - Module `sentinel_rapid` : scrape RapidAPI listings (score, latence, pricing, reviews)
+  - Module `sentinel_gh` : GitHub API — wrappers actifs, issues, stars
+  - Module `sentinel_web` : Jina Reader (`https://r.jina.ai/[URL]`) pour docs et articles
+  - Appelle `call_oracle("F01", ...)` pour structurer les données brutes
   - Output : `ARCHIVUM/targets/[siege_id]/raw_intel.json`
-  - Check-in IW_CUSTOS automatique en fin d'exécution
 
 ---
 
 ## Phase 6 — F02 BREACHER ⬜
 
 - [ ] `F02_BREACHER/CODEBASE/breacher.py`
-  - Lit `raw_intel.json` depuis ARCHIVUM/targets/
-  - Croise avec ARCHIVUM/rules/ (couche froide)
-  - Calcule score sur 4 dimensions (formula api_scoring_checklist.json)
-  - Génère les 20 angles d'attaque depuis les types définis
-  - Output : update liber_api.json (f02 section) + angles_attaque.json
+  - Lit `raw_intel.json` + ARCHIVUM/rules/ (couche froide)
+  - Calcule score 4 dimensions (api_scoring_checklist.json)
+  - Génère 20 angles d'attaque
+  - Appelle `call_oracle("F02", ...)` via DeepSeek Flash
 
 ---
 
@@ -89,24 +69,22 @@
 
 - [ ] `F03_FORGEWARD/CODEBASE/forgeward.py`
   - Lit les 20 angles depuis le liber
-  - Pour chaque angle : génère api.py + openapi.json + requirements.txt + deploy.sh
-  - Génération en parallèle (asyncio / ThreadPoolExecutor)
-  - Output : `ARCHIVUM/targets/[siege_id]/ironwarriors/[id]/`
-- [ ] Templates de base dans `ARCHIVUM/templates/`
+  - Appelle `call_oracle_batch("F03", 20_prompts, max_workers=5)` → 20 × FastAPI code
+  - Output : `ARCHIVUM/targets/[siege_id]/ironwarriors/[id]/` × 20
 
 ---
 
 ## Phase 8 — F04 HERALD + F05 GRAND COMPASS + F06 CAPTEURS ⬜
 
-- [ ] `F04_HERALD/CODEBASE/herald.py` — listing_rapidapi.md + README.md pour chaque Iron Warrior
-- [ ] `F05_GRAND_COMPASS/CODEBASE/grand_compass.py` — validation blue ocean, déploiement Railway/Render
-- [ ] `F06_CAPTEURS/CODEBASE/capteurs.py` — monitoring post-siège, update ARCHIVUM/ledgers/
+- [ ] F04 HERALD : listings RapidAPI + README GitHub (call_oracle_batch "F04")
+- [ ] F05 GRAND COMPASS : blue ocean + déploiement Railway/Render
+- [ ] F06 CAPTEURS : monitoring post-siège, update ARCHIVUM/ledgers/
 
 ---
 
 ## Phase 9 — ORCHESTRATOR + test siège complet ⬜
 
-- [ ] `ORCHESTRATOR/CODEBASE/orchestrator.py` — orchestration semi-manuelle des 4 Gates
+- [ ] orchestrator.py — orchestration semi-manuelle des 4 Gates
 - [ ] Test siège complet "enclenche" → 20 Iron Warriors déployés
 - [ ] Premier ledger : survie/mort après 7 jours
 
