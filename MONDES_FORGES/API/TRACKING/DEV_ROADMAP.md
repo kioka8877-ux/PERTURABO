@@ -34,5 +34,5 @@
 - [x] F06_CAPTEURS/CODEBASE/capteurs.py (monitoring post-siège)
 
 ## Phase 9 — ORCHESTRATOR + tests end-to-end
-- [ ] ORCHESTRATOR/CODEBASE/orchestrator.py
-- [ ] Test siège complet enclenche → deployed en < 1h
+- [x] ORCHESTRATOR/CODEBASE/orchestrator.py
+- [x] Test siège complet enclenche → deployed en < 1h

@@ -26,3 +26,12 @@
 - Patterns gagnants alimentent ARCHIVUM/rules/patterns_gagnants.md (couche froide)
 - Métriques RapidAPI via --manual-update (Provider Dashboard non exposé publiquement)
 - Prochaine étape : Phase 9 — ORCHESTRATOR + test end-to-end
+
+## [CONSTRUCTION] Phase 9 — ORCHESTRATOR + test end-to-end
+- orchestrator.py : commande unique --enclenche → TYRANT → F01 → F02 → Gate1 → F03 → F04 → Gate2-4 → F05 → F06
+- 4 gates interactives (O/N) avec affichage des données clés pour décision Warsmith
+- --resume : reprend selon fleet_status du liber
+- --status : tableau de bord complet
+- --rapport : lance F06 CAPTEURS --report
+- Durée cible : < 60 minutes de enclenche à deployed
+- CONSTRUCTION COMPLÈTE — tous les composants Monde-Forge API sont opérationnels
