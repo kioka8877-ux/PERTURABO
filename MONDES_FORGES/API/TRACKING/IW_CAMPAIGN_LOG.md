@@ -8,110 +8,72 @@
 
 ### Contexte projet
 
-PERTURABO est un système de production automatisé organisé en flotte de frégates.
-Structure : CORE/ + MONDES_FORGES/ (YOUTUBE existant + API en construction).
-Chaque Monde-Forge est autonome : son liber, son ARCHIVUM, ses frégates, ses CONTRACTS.
+PERTURABO = système de siège automatisé. CORE/ + MONDES_FORGES/ (YOUTUBE + API).
+Chaque Monde-Forge autonome : liber, ARCHIVUM, frégates, CONTRACTS.
 
-### Doctrine du Monde-Forge API
+### Doctrine API résumée
 
-**Objectif** : identifier une catégorie d'API RapidAPI faible, produire 20 variantes concurrentes (Iron Warriors) en moins d'1 heure, les déployer simultanément.
-
-**Input Warsmith** : "enclenche" → le système trouve la cible seul.
-
-**Règles absolues** :
-- 1 catégorie ciblée, 20 Iron Warriors simultanés (pas 20 catégories, 1 API)
-- Stack 100% gratuit : FastAPI + httpx + Railway/Render tier gratuit
-- Latence Iron Warrior < 500ms (arme principale contre les leaders lents)
-- Marge nette : 75% après commission RapidAPI (25%)
-
-**Référence cash flow** : ~500$/mois à partir du mois 4-5.
+- Input : "enclenche" → système trouve la cible seul
+- Output : 20 Iron Warriors (APIs FastAPI) en < 1 heure
+- Stack 100% gratuit : FastAPI + Railway/Render
+- Cash flow cible : 500$/mois à partir du mois 4-5
 
 ### FLEET_STATUS_FLOW
-
 ```
 pending_reconnaissance → tyrant_report_ready → intel_captured → target_scored
 → ironwarriors_forged → listings_ready → market_mapped → deployed → complete
 ```
 
-### Architecture des frégates
+### Frégates et modèles
 
-| Frégate | Rôle | Modèle |
-|---|---|---|
-| TYRANT | Analyse territoire, identifie démon et faille | claude-sonnet-4.6 |
-| F01 SENTINEL | Scraping multi-source (RapidAPI + GitHub + web) | claude-haiku-4.5 |
-| F02 BREACHER | Scoring cible + génération 20 angles d'attaque | deepseek-v4-flash |
-| F03 FORGEWARD | Production 20 × (api.py + openapi.json + deploy.sh) | claude-sonnet-4.6 |
-| F04 HERALD | Production 20 × (listing RapidAPI + README GitHub) | gemini-3.5-flash |
-| F05 GRAND COMPASS | Validation blue ocean + déploiement Railway/Render | claude-sonnet-4.6 |
-| F06 CAPTEURS | Monitoring post-siège, update ARCHIVUM/ledgers/ | claude-haiku-4.5 |
+TYRANT → claude-sonnet-4.6 | F01 → haiku-4.5 | F02 → deepseek-v4-flash
+F03/F05 → sonnet-4.6 | F04 → gemini-3.5-flash | F06 → haiku-4.5
 
-### Les 4 Gates (validation Warsmith)
+### Gates
 
-- **Gate 1** : après TYRANT — valider la cible (30 secondes)
-- **Gate 2** : après F01 SENTINEL — valider les 20 angles BREACHER (2 minutes)
-- **Gate 3** : après F03 FORGEWARD — review code Iron Warriors (5 minutes)
-- **Gate 4** : après F04 HERALD — valider listings avant publication (5 minutes)
-
-### ARCHIVUM deux couches
-
-Froide : rules/, templates/, markets/, docs/
-Chaude : targets/, github/, ledgers/
-
-### IA spécialisées
-
-Jina Reader, Firecrawl, Tavily, GitHub API — tous gratuits
+Gate 1 : après TYRANT (valider cible)
+Gate 2 : après F01/F02 (valider 20 angles)
+Gate 3 : après F03 (review code Iron Warriors)
+Gate 4 : après F04 (valider listings RapidAPI)
 
 ---
 
-## [CONSTRUCTION] Phase 0 — Structure créée
+## [CONSTRUCTION] Phases 0-3 — Structure + CONTRACTS + liber + IW_CUSTOS + ai_gateway.py
 
-Dossiers ARCHIVUM, CONTRACTS, TYRANT, ORCHESTRATOR, frégates F01-F06.
-
----
-
-## [CONSTRUCTION] Phase 1 — CONTRACTS créés
-
-system_prompt.md, tyrant_prompt.md, iron_prompt.md, anti_bullshit.md, api_scoring_checklist.json
+Voir commits précédents.
 
 ---
 
-## [CONSTRUCTION] Phase 2 — liber_api.json + IW_CUSTOS.py
+## [CONSTRUCTION] Phase 4 — TYRANT créé
 
-liber_api.json : 9 fleet_status, 5 dimensions TYRANT, f01-f06 complets, 4 gates, timestamps.
-IW_CUSTOS.py : 6 modes (reset/check-out/check-in/gate/validate/status).
+**Différence clé avec YOUTUBE** : pas de IRON manuel. `call_oracle("TYRANT", prompt)` direct.
 
----
+**contracts_loader.py** — charge :
+- CONTRACTS/ (system_prompt, tyrant_prompt, anti_bullshit, api_scoring_checklist)
+- ARCHIVUM/rules/ (patterns distillés — vide au premier siège)
+- ARCHIVUM/markets/ (cartographie RapidAPI — vide au premier siège)
+- ARCHIVUM/ledgers/ (résultats sieges passés — vide au premier siège)
+- warsmith_brief depuis liber_api.json
 
-## [CONSTRUCTION] Phase 3 — ai_gateway.py
+**tyrant.py** — flux complet en une commande :
+1. `load_all()` — charge tout
+2. `assemble_prompt()` — prompt 5 questions + checklist + ARCHIVUM + brief
+3. `call_oracle("TYRANT", prompt)` — Oracle répond avec tyrant_assessment JSON
+4. `validate_output()` — vérifie champs obligatoires, recommandation, score
+5. `update_liber()` — écrit tyrant_report dans liber_api.json
+6. `check_in()` — IW_CUSTOS check-in → fleet_status: tyrant_report_ready
+7. `print_gate1_fiche()` — tableau de bord complet pour le Warsmith
 
-**Fichier** : `CORE/ai_gateway.py` — partagé entre tous les Mondes-Forges.
+**Comportement premier siège** (ARCHIVUM vide) :
+- Si `categorie_hint` fourni → Oracle raisonne sur cette catégorie
+- Si aucun hint → Oracle identifie la meilleure cible selon la grille
+- Champs sans données réelles → `null` (anti_bullshit strictement respecté)
 
-**Différence clé avec YOUTUBE** : le YOUTUBE Monde-Forge utilise un IRON manuel (iron_prompt.txt 
-lu par Claude en conversation). Le API Monde-Forge est **automatisé** — chaque frégate appelle 
-`call_oracle()` directement, pas d'étape manuelle.
-
-**Fonctions** :
-- `call_oracle(frigate_id, prompt, ...)` — appel unique avec retry (max 3)
-  - Retry avec contexte d'erreur injecté si JSON invalide
-  - Extraction JSON robuste : pur / markdown / extraction heuristique
-- `call_oracle_batch(frigate_id, prompts, max_workers=5)` — parallèle
-  - Conçu pour F03 : 20 prompts → 20 api.py en simultané
-  - max_workers=5 par défaut (évite rate limiting)
-- `ping()` — test connectivité
-- CLI direct : `python ai_gateway.py --ping`
-
-**Routing modèles** :
-- F02 → deepseek-v4-flash (analytique + économique pour le scoring)
-- F03/F05/TYRANT → claude-sonnet-4.6 (raisonnement + code)
-- F04/F06 → gemini-3.5-flash / haiku (volume + vitesse)
-
-**Fichiers ajoutés dans CORE/** :
-- `requirements.txt` : openai, httpx, pydantic, fastapi, uvicorn
-- `.env.example` : AI_GATEWAY_BASE_URL, AI_GATEWAY_API_KEY, GITHUB_TOKEN, RAPIDAPI_KEY, RAILWAY_TOKEN
+**Fichier IN** : `warsmith_brief.example.json` — template pour le brief Warsmith
 
 ---
 
 ## Prochaine étape
 
-**Phase 4** : TYRANT — premier vrai cerveau du système.
-Lit l'ARCHIVUM, appelle call_oracle("TYRANT"), produit le JSON d'assessment pour Gate 1.
+**Phase 5** : F01 SENTINEL — scraping multi-source (RapidAPI + GitHub + web).
+Alimentera ARCHIVUM/targets/ avec les données réelles pour F02 BREACHER.
