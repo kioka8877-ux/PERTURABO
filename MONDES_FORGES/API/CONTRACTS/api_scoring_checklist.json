@@ -1,90 +1,79 @@
 {
-  "_comment": "Grille de scoring d'une cible API RapidAPI. Utilisée par F02 BREACHER.",
-  "_version": "1.0",
-  "scoring_formula": {
-    "description": "Score = popularite*0.35 + latence_faille*0.25 + wrappers_actifs*0.20 + frustration_pricing*0.20",
-    "max_score": 100,
-    "threshold_strong_target": 70
-  },
+  "version": "1.0",
+  "description": "Grille de scoring pour identifier la cible optimale \u00e0 assi\u00e9ger",
+  "scoring_formula": "score = (popularite * 0.35) + (latence_score * 0.25) + (wrappers_score * 0.20) + (frustration_pricing_score * 0.20)",
   "dimensions": {
-    "popularite_rapidapi": {
+    "popularite": {
       "weight": 0.35,
-      "description": "Score de popularité RapidAPI (0-10). Mesure le volume de requêtes réelles.",
+      "description": "Score de popularit\u00e9 RapidAPI (0-10)",
       "scoring": {
-        "9.5_to_10": 100,
-        "9_to_9.5": 80,
-        "8_to_9": 60,
-        "7_to_8": 40,
-        "below_7": 20
-      },
-      "signal": "Score 9.5+ = trafic dominant par agents/bots — marché chaud"
+        "9.5-10": 100,
+        "8.5-9.4": 75,
+        "7.0-8.4": 50,
+        "5.0-6.9": 25,
+        "<5.0": 0
+      }
     },
-    "latence_faille": {
+    "latence_score": {
       "weight": 0.25,
-      "description": "Latence moyenne du leader (ms). Plus elle est élevée, plus la faille est exploitable.",
+      "description": "Latence moyenne de l'API leader (ms) \u2014 plus c'est \u00e9lev\u00e9, mieux c'est pour nous",
       "scoring": {
-        "above_5000ms": 100,
-        "3000_to_5000ms": 80,
-        "2000_to_3000ms": 60,
-        "1000_to_2000ms": 40,
-        "below_1000ms": 10
-      },
-      "signal": "FastAPI async bien implémenté descend sous 400ms — avantage structurel"
+        ">5000ms": 100,
+        "2000-5000ms": 75,
+        "1000-1999ms": 50,
+        "500-999ms": 25,
+        "<500ms": 0
+      }
     },
-    "wrappers_github_actifs": {
+    "wrappers_score": {
       "weight": 0.2,
-      "description": "Nombre de repos GitHub qui importent cet API host. Mesure l'adoption réelle par les agents.",
+      "description": "Signal adoption agents \u2014 nombre de repos GitHub qui importent l'API",
       "scoring": {
-        "above_100_repos": 100,
-        "50_to_100": 80,
-        "20_to_50": 60,
-        "5_to_20": 40,
-        "below_5": 20
-      },
-      "signal": "Wrappers actifs = les agents de codage (Cursor, Claude Code) le connaissent déjà"
+        ">500 repos": 100,
+        "200-500 repos": 75,
+        "50-199 repos": 50,
+        "10-49 repos": 25,
+        "<10 repos": 0
+      }
     },
-    "frustration_pricing": {
+    "frustration_pricing_score": {
       "weight": 0.2,
-      "description": "Niveau de frustration pricing dans les reviews RapidAPI.",
+      "description": "Niveau de frustration sur le pricing dans les reviews et issues",
       "scoring": {
-        "explicit_too_expensive_multiple_reviews": 100,
-        "implicit_price_mention_negative": 70,
-        "neutral_on_price": 40,
-        "positive_on_price": 10
-      },
-      "signal": "Frustration pricing = porte ouverte pour undercut agressif"
+        ">30% reviews n\u00e9gatives sur prix": 100,
+        "20-30% reviews n\u00e9gatives": 75,
+        "10-19% reviews n\u00e9gatives": 50,
+        "1-9% reviews n\u00e9gatives": 25,
+        "0% reviews n\u00e9gatives": 0
+      }
     }
   },
-  "angle_categories": {
-    "prix": [
-      "freemium (1k req/mois)",
-      "$2/mois 10k req",
-      "$5/mois 50k req",
-      "$10/mois 200k req",
-      "$25/mois 1M req"
-    ],
-    "endpoint_focus": "Découper l'API cible en micro-endpoints spécialisés",
-    "audience": [
-      "e-commerce",
-      "recrutement",
-      "sales automation",
-      "marketing",
-      "data science"
-    ],
-    "format_output": [
-      "JSON pur",
-      "JSON+CSV",
-      "JSON+résumé texte",
-      "JSON+markdown"
-    ],
-    "vitesse": [
-      "async ultra-rapide (< 400ms)",
-      "avec cache Redis (< 100ms repeat)"
-    ]
+  "thresholds": {
+    "SIEGEZ": 70,
+    "ATTENDEZ": 50,
+    "REORIENTEZ": 0
   },
-  "disqualification_criteria": {
-    "popularite_below_7": "Marché trop petit ou inexistant",
-    "success_rate_leader_below_95": "Leader instable — guerre d'attrition risquée",
-    "categorie_requires_legal_compliance": "RGPD, CCPA etc. — complexité juridique hors scope"
-  }
+  "angle_types": [
+    "prix_agressif",
+    "endpoint_focus_email",
+    "endpoint_focus_bulk",
+    "endpoint_focus_company",
+    "endpoint_focus_profile",
+    "latence_ultra_rapide",
+    "format_json_pur",
+    "format_json_csv",
+    "format_json_resume",
+    "niche_ecommerce",
+    "niche_recrutement",
+    "niche_sales",
+    "niche_marketing",
+    "tier_freemium_genereux",
+    "tier_micro_2usd",
+    "tier_standard_5usd",
+    "tier_pro_10usd",
+    "tier_agency_25usd",
+    "async_optimise",
+    "cache_intelligent"
+  ],
+  "iron_warrior_count": 20
 }

@@ -1,40 +1,45 @@
-# CONTRAT ANTI-BULLSHIT — FILTRE DES FAUSSES RÈGLES — Monde-Forge API
+# ANTI-BULLSHIT — Monde-Forge API
 
-## OBJECTIF
-Quand tu analyses les données ARCHIVUM (rules/, markets/, targets/), tu dois faire la
-différence entre une **vraie règle de marché** et du **bruit**. Tu ne ressors QUE les patterns validés.
+## Principe
 
-## 4 RÈGLES DE FILTRAGE
+Toute règle, tout pattern, tout insight dans ce système doit être prouvé par des données réelles.
+Pas d'intuitions. Pas de "généralement". Pas de "il est probable que".
 
-### 1. Exception isolée ≠ Règle
-Si une API a eu 10k abonnés suite à un événement viral unique, c'est de la **chance**, pas une règle.
-→ Ignore. Garde uniquement les patterns **répétables sur plusieurs APIs**.
+## Filtres actifs
 
-### 2. Contradiction = Contextualisation
-Si l'ARCHIVUM dit "prix bas convertit mieux" ET "prix premium signale la qualité",
-tu ne choisis pas un camp. Tu **contextualises**.
-→ Ex : "Prix bas pour capter les agents automatisés. Prix premium pour les équipes DevOps."
+### Filtre 1 — Source obligatoire
 
-### 3. Opinion ≠ Donnée
-Ignore "cette API a l'air bien faite".
-Garde uniquement : "latence moyenne 412ms sur 30 jours" ou "87% success rate".
-→ Critère : la règle peut-elle être mesurée ? Si non → opinion → ignore.
+Chaque affirmation stratégique doit citer sa source :
+- `source: rapidapi_review` — review extraite de RapidAPI
+- `source: github_issue` — issue GitHub ouverte ou fermée
+- `source: github_search` — résultat de recherche code GitHub
+- `source: archivum_rules` — pattern distillé depuis ARCHIVUM/rules/
+- `source: ledger` — résultat d'un Iron Warrior déployé
 
-### 4. Récurrence minimale
-Une règle n'est validée que si elle apparaît chez **au moins 2 APIs différentes**
-OU si elle est **logiquement démontrée** par une seule API avec des données concrètes.
-→ 1 API + 0 preuve = hypothèse, pas règle.
+Si la source est absente → le champ est `null`. Jamais une estimation présentée comme un fait.
 
-## CE QUE TU DOIS TOUJOURS CONSERVER
-- Les patterns de pricing qui convertissent (freemium → paid)
-- Les règles de latence (< 500ms = critère agents automatisés)
-- Les patterns de popularité RapidAPI (score 9.5+ = trafic machine dominant)
-- Les signaux wrappers GitHub (>20 wrappers actifs = adoption réelle)
-- Les catégories où les agents consomment en volume (scraping, data extraction, format conversion)
+### Filtre 2 — Chiffres prouvés
 
-## CE QUE TU DOIS TOUJOURS REJETER
-- Les success stories ponctuelles sans pattern répétable
-- Les opinions esthétiques sur la qualité du code
-- Les conseils contradictoires sans contexte marché
-- Les règles basées sur 0 donnée mesurable
-- Les conseils génériques ("fais une bonne API") sans méthode concrète
+Un score de popularité vient de RapidAPI. Pas d'une estimation.
+Une latence vient d'une mesure réelle. Pas d'une approximation.
+Un nombre de repos GitHub vient d'une requête API. Pas d'un "beaucoup".
+
+### Filtre 3 — Patterns ARCHIVUM uniquement
+
+Les règles dans ARCHIVUM/rules/ sont les seuls patterns valides pour guider FORGEWARD.
+Un pattern "semble fonctionner" n'entre pas dans rules/ tant qu'il n'a pas été validé par un ledger avec > 3 Iron Warriors survivants à 30 jours.
+
+### Filtre 4 — Recommandation TYRANT
+
+TYRANT ne recommande "SIEGEZ" que si :
+- Score global ≥ 70/100
+- Faille prouvée (pas supposée)
+- Signal agents ≥ "moyen"
+- Zone d'attaque prix identifiée
+
+En dessous de ces seuils : "ATTENDEZ" ou "REORIENTEZ".
+
+## Ce filtre s'applique à toutes les frégates
+
+F01 → F06 : si une donnée ne peut pas être sourcée, elle est absente du liber.
+Un liber incomplet est préférable à un liber contenant des inventions.
