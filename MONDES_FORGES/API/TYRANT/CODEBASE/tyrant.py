@@ -1,391 +1,202 @@
 """
-tyrant.py — TYRANT : L'Oeil de Perturabo
-==========================================
+TYRANT — MONDE-FORGE API
+Frégate de renseignement stratégique.
+Identifie le demon RapidAPI, évalue sa vulnerabilite, propose 20 angles d'attaque.
 
-Le TYRANT voit le territoire avant le siège. Il ne produit rien. Il analyse.
-Identifie le démon, la faille, le signal agents, la cartographie prix.
-Recommande : SIEGEZ / ATTENDEZ / REORIENTEZ.
-
-Différence avec le TYRANT YOUTUBE : pas de IRON manuel.
-Le TYRANT API appelle call_oracle() directement — siège en 1 heure.
-
-Flux :
-  python tyrant.py           → exécution complète (prepare + oracle + finalize)
-  python tyrant.py --status  → état courant
-  python tyrant.py --finalize --from-file path → re-valider un output existant
-
-Output :
-  TYRANT/OUT/tyrant_output.json — rapport d'assessment pour Gate 1
+Usage:
+    python tyrant.py --prepare    → assemble iron_prompt.txt dans TYRANT/IN/
+    python tyrant.py --iron       → appelle l'Oracle, produit tyrant_output.json
+    python tyrant.py --finalize   → valide, check-in IW_CUSTOS, affiche Gate 1
 """
 
 import argparse
 import json
-import os
+import subprocess
 import sys
-from datetime import datetime, timezone
+from pathlib import Path
 
-_SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
-_TYRANT_DIR  = os.path.dirname(_SCRIPT_DIR)
-_MONDE_ROOT  = os.path.dirname(_TYRANT_DIR)
-_TYRANT_OUT  = os.path.join(_TYRANT_DIR, "OUT")
-_TYRANT_IN   = os.path.join(_TYRANT_DIR, "IN")
-_LIBER       = os.path.join(_MONDE_ROOT, "liber_api.json")
-_CORE        = os.path.abspath(os.path.join(_MONDE_ROOT, "..", "..", "CORE"))
+# Paths
+TYRANT_DIR = Path(__file__).parent.parent        # MONDES_FORGES/API/TYRANT/
+MONDE_DIR = TYRANT_DIR.parent                    # MONDES_FORGES/API/
+CORE_DIR = MONDE_DIR.parent.parent / "CORE"      # CORE/
+IN_DIR = TYRANT_DIR / "IN"
+OUT_DIR = TYRANT_DIR / "OUT"
+IW_CUSTOS_PATH = MONDE_DIR / "IW_CUSTOS.py"
+LIBER_PATH = MONDE_DIR / "liber_api.json"
 
-sys.path.insert(0, _SCRIPT_DIR)
-sys.path.insert(0, _CORE)
+# Ajouter CORE au path pour ai_gateway
+sys.path.insert(0, str(CORE_DIR))
 
-from contracts_loader import load_all
-
-try:
-    from ai_gateway import call_oracle
-except ImportError:
-    print("[TYRANT] ERREUR: ai_gateway.py introuvable dans CORE/")
-    print(f"  Vérifie que CORE/ est bien à: {_CORE}")
-    sys.exit(1)
-
-
-def now_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+# Charger contracts_loader depuis le même dossier
+import importlib.util
+_spec = importlib.util.spec_from_file_location(
+    "contracts_loader", Path(__file__).parent / "contracts_loader.py"
+)
+contracts_loader = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(contracts_loader)
 
 
-# ─────────────────────────────────────────────
-# Assemblage du prompt
-# ─────────────────────────────────────────────
-def assemble_prompt(data: dict) -> str:
-    brief      = data["warsmith_brief"]
-    checklist  = json.dumps(data["api_scoring_checklist"], ensure_ascii=False, indent=2)
-    cat_hint   = brief.get("categorie_hint") or "Non spécifiée — le TYRANT identifie la meilleure cible"
-    target     = brief.get("target_hint") or "Non spécifié"
-    notes      = brief.get("notes") or "Aucune"
+def load_liber() -> dict:
+    if LIBER_PATH.exists():
+        return json.loads(LIBER_PATH.read_text(encoding="utf-8"))
+    return {}
 
-    return f"""# MISSION DU TYRANT — Monde-Forge API
 
-## CONTRAT DU TYRANT
-{data["tyrant_prompt"]}
+def prepare():
+    """Assemble iron_prompt.txt dans TYRANT/IN/."""
+    IN_DIR.mkdir(parents=True, exist_ok=True)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-## DOCTRINE GÉNÉRALE
-{data["system_prompt"]}
+    liber = load_liber()
+    warsmith_brief = liber.get("warsmith_brief", {"mode": "enclenche", "categorie_hint": None})
 
-## RÈGLES ANTI-BULLSHIT
-{data["anti_bullshit"]}
+    context = contracts_loader.assemble_context(warsmith_brief)
+    context_text = contracts_loader.format_for_prompt(context)
 
-## GRILLE DE SCORING (api_scoring_checklist.json)
-{checklist}
+    tyrant_prompt_path = MONDE_DIR / "CONTRACTS" / "tyrant_prompt.md"
+    tyrant_prompt = tyrant_prompt_path.read_text(encoding="utf-8") if tyrant_prompt_path.exists() else ""
+
+    iron_prompt = f"""{context_text}
 
 ---
 
-## MÉMOIRE IMPÉRIALE — RÈGLES DISTILLÉES (ARCHIVUM/rules/)
-{data["archivum_rules"]}
-
-## MÉMOIRE IMPÉRIALE — CARTOGRAPHIE MARCHÉ (ARCHIVUM/markets/)
-{data["archivum_markets"]}
-
-## MÉMOIRE IMPÉRIALE — LEDGERS SIEGES PASSÉS (ARCHIVUM/ledgers/)
-{data["archivum_ledgers"]}
+{tyrant_prompt}
 
 ---
 
-## BRIEF DU WARSMITH
-
-- **Mode** : {brief.get("mode", "enclenche")}
-- **Catégorie suggérée** : {cat_hint}
-- **Cible suggérée** : {target}
-- **Notes** : {notes}
-
----
-
-## INSTRUCTIONS
-
-Tu es le TYRANT. Tu vois le territoire RapidAPI avant le siège.
-Tu réponds aux 5 questions définies dans ton contrat.
-Si les données ARCHIVUM sont vides (premier siège), tu raisonnes sur ce que tu sais
-des marchés API et tu appliques la grille de scoring à la catégorie suggérée.
-Si aucune catégorie n'est suggérée, tu identifies la meilleure cible selon la grille.
-
-Applique rigoureusement anti_bullshit.md :
-- Chaque chiffre doit avoir une source (rapidapi_review, github_search, ledger, raisonnement)
-- Si tu n'as pas la donnée réelle, note `null` et explique dans justification
-- Ne jamais inventer un score de popularité ou une latence
-
-Retourne UNIQUEMENT le JSON défini dans ton contrat (format tyrant_assessment).
-Pas de texte avant, pas de texte après. JSON brut.
+Reponds UNIQUEMENT avec un objet JSON valide selon le schema specifie dans tyrant_prompt.md.
+Ne genere aucun texte avant ou apres le JSON.
 """
 
+    prompt_path = IN_DIR / "iron_prompt.txt"
+    prompt_path.write_text(iron_prompt, encoding="utf-8")
+    print(f"[TYRANT --prepare] iron_prompt.txt genere ({len(iron_prompt)} chars)")
+    print(f"Chemin : {prompt_path}")
 
-# ─────────────────────────────────────────────
-# Validation du tyrant_output.json
-# ─────────────────────────────────────────────
-def validate_output(output: dict) -> dict:
-    """Valide la structure du JSON produit par l'Oracle."""
-    root = output.get("tyrant_assessment", output)  # accepte les deux formes
 
-    required_top = ["territoire", "demon", "faille", "signal_agents",
-                    "cartographie_prix", "score_global", "recommandation", "justification"]
-    missing = [k for k in required_top if k not in root]
+def iron():
+    """Appelle l'Oracle et produit tyrant_output.json dans TYRANT/OUT/."""
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    prompt_path = IN_DIR / "iron_prompt.txt"
+    if not prompt_path.exists():
+        print("[TYRANT --iron] ERREUR : iron_prompt.txt introuvable. Lancer --prepare d'abord.")
+        sys.exit(1)
+
+    prompt = prompt_path.read_text(encoding="utf-8")
+
+    try:
+        from ai_gateway import call_oracle
+    except ImportError:
+        print(f"[TYRANT --iron] ERREUR : ai_gateway.py introuvable dans {CORE_DIR}")
+        sys.exit(1)
+
+    print("[TYRANT --iron] Appel Oracle en cours...")
+    result = call_oracle("TYRANT", prompt)
+
+    if result is None:
+        print("[TYRANT --iron] ERREUR : Oracle n'a pas repondu.")
+        sys.exit(1)
+
+    # Nettoyer les backticks markdown eventuels
+    clean = result.strip()
+    if clean.startswith("```"):
+        lines = clean.split("\n")
+        end = -1 if lines[-1].strip() == "```" else len(lines)
+        clean = "\n".join(lines[1:end])
+
+    try:
+        tyrant_output = json.loads(clean)
+    except json.JSONDecodeError as e:
+        print(f"[TYRANT --iron] ERREUR JSON : {e}")
+        print("Reponse brute (500 premiers chars) :")
+        print(result[:500])
+        # Sauvegarder quand meme pour debug
+        (OUT_DIR / "tyrant_raw_response.txt").write_text(result, encoding="utf-8")
+        sys.exit(1)
+
+    output_path = OUT_DIR / "tyrant_output.json"
+    output_path.write_text(json.dumps(tyrant_output, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"[TYRANT --iron] tyrant_output.json produit.")
+    print(f"Cible : {tyrant_output.get('cible', {}).get('nom', 'N/A')}")
+    print(f"Score : {tyrant_output.get('cible', {}).get('score_total', 'N/A')}/100")
+
+
+def finalize():
+    """Valide tyrant_output.json, check-in IW_CUSTOS, affiche Gate 1."""
+    output_path = OUT_DIR / "tyrant_output.json"
+    if not output_path.exists():
+        print("[TYRANT --finalize] ERREUR : tyrant_output.json introuvable. Lancer --iron d'abord.")
+        sys.exit(1)
+
+    tyrant_output = json.loads(output_path.read_text(encoding="utf-8"))
+
+    required = ["cible", "demon", "vulnerabilite", "angles_attaque", "recommandation"]
+    missing = [k for k in required if k not in tyrant_output]
     if missing:
-        return {"valid": False, "error": f"Champs manquants dans tyrant_assessment: {missing}"}
+        print(f"[TYRANT --finalize] ERREUR : champs manquants : {missing}")
+        sys.exit(1)
 
-    # Vérifier recommandation
-    reco = root.get("recommandation", "")
-    if reco not in ["SIEGEZ", "ATTENDEZ", "REORIENTEZ"]:
-        return {"valid": False, "error": f"recommandation invalide: '{reco}' (SIEGEZ|ATTENDEZ|REORIENTEZ)"}
-
-    # Score entre 0 et 100
-    score = root.get("score_global")
-    if score is not None and not (0 <= score <= 100):
-        return {"valid": False, "error": f"score_global hors plage: {score} (0-100)"}
-
-    return {"valid": True, "error": None, "assessment": root}
-
-
-# ─────────────────────────────────────────────
-# Écriture dans le liber_api.json
-# ─────────────────────────────────────────────
-def update_liber(assessment: dict):
-    """Met à jour la section tyrant_report dans liber_api.json."""
-    if not os.path.exists(_LIBER):
-        print("[TYRANT] ⚠️ liber_api.json introuvable — mise à jour ignorée")
-        return
-    with open(_LIBER, "r", encoding="utf-8") as f:
-        liber = json.load(f)
-
-    tr = liber.setdefault("tyrant_report", {})
-    tr["status"]          = "done"
-    tr["territoire"]      = assessment.get("territoire", {})
-    tr["demon"]           = assessment.get("demon", {})
-    tr["faille"]          = assessment.get("faille", {})
-    tr["signal_agents"]   = assessment.get("signal_agents", {})
-    tr["cartographie_prix"] = assessment.get("cartographie_prix", {})
-    tr["score_global"]    = assessment.get("score_global")
-    tr["recommandation"]  = assessment.get("recommandation")
-    tr["justification"]   = assessment.get("justification")
-    tr["output_path"]     = os.path.join(_TYRANT_OUT, "tyrant_output.json")
-
-    with open(_LIBER, "w", encoding="utf-8") as f:
-        json.dump(liber, f, indent=2, ensure_ascii=False)
-    print("[TYRANT] liber_api.json → tyrant_report mis à jour")
-
-
-# ─────────────────────────────────────────────
-# Check-in IW_CUSTOS
-# ─────────────────────────────────────────────
-def check_in(output_path: str):
-    custos = os.path.join(_MONDE_ROOT, "IW_CUSTOS.py")
-    if not os.path.exists(custos):
-        print("[TYRANT] ⚠️ IW_CUSTOS.py introuvable — check-in ignoré")
-        return
-    import subprocess
-    r = subprocess.run(
-        [sys.executable, custos, "--mode", "check-in",
-         "--frigate", "TYRANT", "--output", output_path],
-        capture_output=True, text=True, timeout=30
+    # Check-in IW_CUSTOS
+    result = subprocess.run(
+        [sys.executable, str(IW_CUSTOS_PATH),
+         "--mode", "check-in",
+         "--frigate", "TYRANT",
+         "--output", str(output_path)],
+        capture_output=True, text=True
     )
-    print(f"[TYRANT] IW_CUSTOS: {r.stdout.strip()}")
-    if r.stderr:
-        print(f"[TYRANT] IW_CUSTOS stderr: {r.stderr.strip()}")
-
-
-# ─────────────────────────────────────────────
-# Affichage Gate 1
-# ─────────────────────────────────────────────
-def print_gate1_fiche(assessment: dict):
-    t  = assessment.get("territoire", {})
-    d  = assessment.get("demon", {})
-    f  = assessment.get("faille", {})
-    sa = assessment.get("signal_agents", {})
-    cp = assessment.get("cartographie_prix", {})
-
-    reco  = assessment.get("recommandation", "?")
-    score = assessment.get("score_global", "?")
-    just  = assessment.get("justification", "")
-
-    reco_icon = {"SIEGEZ": "⚔️", "ATTENDEZ": "⏳", "REORIENTEZ": "🔄"}.get(reco, "?")
-
-    print()
-    print("╔══════════════════════════════════════════════════════════════╗")
-    print("║  TYRANT — FICHE GATE 1                                      ║")
-    print("╠══════════════════════════════════════════════════════════════╣")
-    print(f"║  Catégorie      : {str(t.get('categorie') or '—'):<42}║")
-    print(f"║  Leader         : {str(t.get('leader') or '—'):<42}║")
-    print(f"║  Popularité     : {str(t.get('score_popularite') or '—'):<42}║")
-    print("╠══════════════════════════════════════════════════════════════╣")
-    print(f"║  Démon          : {str(d.get('nom') or '—'):<42}║")
-    print(f"║  Latence        : {str(d.get('latence_ms') or '—') + 'ms':<42}║")
-    print(f"║  Prix dominant  : ${str(d.get('tier_dominant_prix') or '—'):<41}║")
-    print("╠══════════════════════════════════════════════════════════════╣")
-    print(f"║  Faille         : {str(f.get('type') or '—'):<42}║")
-    print(f"║  Preuve         : {str(f.get('preuve') or '—')[:42]:<42}║")
-    print("╠══════════════════════════════════════════════════════════════╣")
-    print(f"║  Signal agents  : {str(sa.get('verdict') or '—'):<42}║")
-    print(f"║  Repos GitHub   : {str(sa.get('repos_github') or '—'):<42}║")
-    print("╠══════════════════════════════════════════════════════════════╣")
-    print(f"║  Zone d'attaque : {str(cp.get('zone_attaque') or '—')[:42]:<42}║")
-    print("╠══════════════════════════════════════════════════════════════╣")
-    print(f"║  SCORE GLOBAL   : {str(score):<42}║")
-    print(f"║  RECOMMANDATION : {reco_icon + '  ' + reco:<42}║")
-    print("╠══════════════════════════════════════════════════════════════╣")
-    # Justification tronquée sur 2 lignes
-    just_lines = [just[i:i+42] for i in range(0, min(len(just), 84), 42)]
-    for line in just_lines:
-        print(f"║  {line:<60}║")
-    print("╚══════════════════════════════════════════════════════════════╝")
-    print()
-    print("  → Valider : python IW_CUSTOS.py --mode gate --gate 1 --decision yes")
-    print("  → Rejeter : python IW_CUSTOS.py --mode gate --gate 1 --decision no --notes 'raison'")
-    print()
-
-
-# ─────────────────────────────────────────────
-# Commandes
-# ─────────────────────────────────────────────
-def cmd_run(args):
-    """Exécution complète : prepare → oracle → finalize."""
-    print("=" * 60)
-    print("👁️  TYRANT — L'Oeil de Perturabo")
-    print("=" * 60)
-
-    # 1. Charger tous les contrats + ARCHIVUM
-    print("
-[TYRANT] Chargement ARCHIVUM + CONTRACTS...")
-    data = load_all()
-    print(f"[TYRANT] rules: {data['meta']['rules_count']} | "
-          f"markets: {data['meta']['markets_count']} | "
-          f"ledgers: {data['meta']['ledgers_count']}")
-    print(f"[TYRANT] Brief: {data['warsmith_brief']}")
-
-    # 2. Assembler le prompt
-    print("
-[TYRANT] Assemblage du prompt...")
-    prompt = assemble_prompt(data)
-    prompt_size = len(prompt.encode("utf-8")) / 1024
-    print(f"[TYRANT] Prompt: {prompt_size:.1f} KB")
-
-    # Sauvegarder le prompt pour audit
-    os.makedirs(_TYRANT_OUT, exist_ok=True)
-    prompt_path = os.path.join(_TYRANT_OUT, "iron_prompt.txt")
-    with open(prompt_path, "w", encoding="utf-8") as pf:
-        pf.write(prompt)
-
-    # 3. Appeler l'Oracle
-    print(f"
-[TYRANT] Appel Oracle (TYRANT → claude-sonnet-4.6)...")
-    result = call_oracle("TYRANT", prompt, expect_json=True)
-
-    if result["status"] == "error":
-        print(f"[TYRANT] ❌ Oracle error: {result['error']}")
-        sys.exit(1)
-
-    print(f"[TYRANT] ✅ Oracle répondu en {result['attempts']} tentative(s) — modèle: {result['model']}")
-
-    # 4. Sauvegarder le output brut
-    output = result["content"]
-    # Normaliser : accepte {"tyrant_assessment": {...}} ou directement l'objet
-    if "tyrant_assessment" not in output:
-        output = {"tyrant_assessment": output}
-
-    output_path = os.path.join(_TYRANT_OUT, "tyrant_output.json")
-    with open(output_path, "w", encoding="utf-8") as of:
-        json.dump(output, of, indent=2, ensure_ascii=False)
-    print(f"[TYRANT] Output sauvegardé: {output_path}")
-
-    # 5. Valider
-    val = validate_output(output)
-    if not val["valid"]:
-        print(f"[TYRANT] ❌ Validation échouée: {val['error']}")
-        print(f"[TYRANT] Output brut sauvegardé dans {output_path} pour inspection")
-        sys.exit(1)
-
-    assessment = val["assessment"]
-    print("[TYRANT] ✅ JSON valide")
-
-    # 6. Mettre à jour le liber
-    update_liber(assessment)
-
-    # 7. Check-in IW_CUSTOS
-    if not args.no_checkin:
-        check_in(output_path)
-
-    # 8. Afficher la fiche Gate 1
-    print_gate1_fiche(assessment)
-
-    print(f"{'=' * 60}")
-    print("👁️  TYRANT — ÉCLAIRAGE TERMINÉ")
-    print(f"{'=' * 60}")
-    print(f"Output: {output_path}")
-
-
-def cmd_finalize(args):
-    """Re-valider un output existant sans appeler l'Oracle."""
-    output_path = args.from_file or os.path.join(_TYRANT_OUT, "tyrant_output.json")
-
-    if not os.path.exists(output_path):
-        print(f"[TYRANT] ❌ Fichier introuvable: {output_path}")
-        sys.exit(1)
-
-    with open(output_path, "r", encoding="utf-8") as f:
-        output = json.load(f)
-
-    val = validate_output(output)
-    if not val["valid"]:
-        print(f"[TYRANT] ❌ Validation échouée: {val['error']}")
-        sys.exit(1)
-
-    assessment = val["assessment"]
-    print("[TYRANT] ✅ JSON valide")
-    update_liber(assessment)
-
-    if not args.no_checkin:
-        check_in(output_path)
-
-    print_gate1_fiche(assessment)
-
-
-def cmd_status(args):
-    prompt_path = os.path.join(_TYRANT_OUT, "iron_prompt.txt")
-    output_path = os.path.join(_TYRANT_OUT, "tyrant_output.json")
-
-    print()
-    print("╔═══════════════════════════════════════╗")
-    print("║  TYRANT — ÉTAT                        ║")
-    print("╠═══════════════════════════════════════╣")
-    print(f"║  iron_prompt.txt  : {'✅' if os.path.exists(prompt_path) else '❌'}{'  prêt' if os.path.exists(prompt_path) else '  absent'}                     ║")
-    print(f"║  tyrant_output.json: {'✅' if os.path.exists(output_path) else '❌'}{'  prêt' if os.path.exists(output_path) else '  absent'}                    ║")
-
-    if os.path.exists(_LIBER):
-        with open(_LIBER) as f:
-            liber = json.load(f)
-        tr_status = liber.get("tyrant_report", {}).get("status", "?")
-        reco = liber.get("tyrant_report", {}).get("recommandation") or "—"
-        score = liber.get("tyrant_report", {}).get("score_global") or "—"
-        print(f"║  liber status     : {tr_status:<19}║")
-        print(f"║  score / reco     : {str(score)}/{reco:<16}║")
-
-    print("╚═══════════════════════════════════════╝")
-
-    if not os.path.exists(output_path):
-        print("
-→ Lancer: python tyrant.py")
+    if result.returncode != 0:
+        print(f"[TYRANT --finalize] AVERTISSEMENT IW_CUSTOS : {result.stderr.strip()}")
     else:
-        print("
-→ Gate 1: python IW_CUSTOS.py --mode gate --gate 1 --decision yes")
-    print()
+        print(result.stdout.strip())
+
+    # ─── Affichage Gate 1 ───
+    cible = tyrant_output.get("cible", {})
+    demon = tyrant_output.get("demon", {})
+    vulne = tyrant_output.get("vulnerabilite", {})
+    angles = tyrant_output.get("angles_attaque", [])
+    reco = tyrant_output.get("recommandation", "")
+
+    sep = "=" * 62
+    print(f"\n{sep}")
+    print("              GATE 1 — TYRANT REPORT")
+    print(sep)
+    print(f"\nCIBLE IDENTIFIEE    : {cible.get('nom', 'N/A')}")
+    print(f"CATEGORIE           : {cible.get('categorie', 'N/A')}")
+    print(f"SCORE TOTAL         : {cible.get('score_total', 'N/A')}/100")
+    print(f"\nDEMON DOMINANT      : {demon.get('nom', 'N/A')}")
+    print(f"POPULARITE          : {demon.get('popularite_score', 'N/A')}/10")
+    print(f"LATENCE             : {demon.get('latence_ms', 'N/A')} ms  [FAILLE]")
+    print(f"FRUSTRATION PRICING : {demon.get('pricing_frustration', 'N/A')}/10")
+    print(f"\nVULNERABILITE       : {vulne.get('type', 'N/A')}")
+    print(f"DETAIL              : {vulne.get('detail', 'N/A')}")
+    print(f"\n20 ANGLES D'ATTAQUE (apercu 5/20) :")
+    for i, angle in enumerate(angles[:5], 1):
+        print(f"  {i:02d}. [{angle.get('type', '?')}] {angle.get('description', '')}")
+    if len(angles) > 5:
+        print(f"       ... +{len(angles) - 5} angles supplementaires dans tyrant_output.json")
+    print(f"\nRECOMMANDATION WARSMITH :")
+    print(f"  {reco}")
+    print(f"\n{sep}")
+    print("GATE 1 — En attente de validation Warsmith")
+    print("  python IW_CUSTOS.py --mode gate --gate 1 --decision yes")
+    print(f"{sep}\n")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="TYRANT — L'Oeil de Perturabo")
-    parser.add_argument("--status",      action="store_true", help="Afficher l'état courant")
-    parser.add_argument("--finalize",    action="store_true", help="Re-valider un output existant")
-    parser.add_argument("--from-file",   default=None,        help="Chemin vers tyrant_output.json existant")
-    parser.add_argument("--no-checkin",  action="store_true", help="Ne pas appeler IW_CUSTOS check-in")
+    parser = argparse.ArgumentParser(description="TYRANT — Frégate de renseignement stratégique API")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--prepare", action="store_true", help="Assembler iron_prompt.txt")
+    group.add_argument("--iron", action="store_true", help="Appeler l'Oracle")
+    group.add_argument("--finalize", action="store_true", help="Valider et check-in IW_CUSTOS")
     args = parser.parse_args()
 
-    if args.status:
-        cmd_status(args)
+    if args.prepare:
+        prepare()
+    elif args.iron:
+        iron()
     elif args.finalize:
-        cmd_finalize(args)
-    else:
-        cmd_run(args)
+        finalize()
 
 
 if __name__ == "__main__":

@@ -1,156 +1,147 @@
 """
-contracts_loader.py — Charge les contrats et l'ARCHIVUM pour le TYRANT API
-Récupère : tyrant_prompt.md, anti_bullshit.md, system_prompt.md,
-           ARCHIVUM/rules/, ARCHIVUM/markets/, ARCHIVUM/targets/,
-           api_scoring_checklist.json, liber_api.json (warsmith_brief)
+TYRANT contracts_loader.py — MONDE-FORGE API
+Assemble le contexte doctrinal pour le TYRANT.
+Lit la couche froide (rules, markets) et la couche chaude (targets existants).
 """
 
 import json
-import os
 from pathlib import Path
 
-_SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
-_TYRANT_DIR   = os.path.dirname(_SCRIPT_DIR)           # TYRANT/
-_MONDE_ROOT   = os.path.dirname(_TYRANT_DIR)           # MONDES_FORGES/API/
-_CONTRACTS    = os.path.join(_MONDE_ROOT, "CONTRACTS")
-_ARCHIVUM     = os.path.join(_MONDE_ROOT, "ARCHIVUM")
-_LIBER        = os.path.join(_MONDE_ROOT, "liber_api.json")
-
-
-def _read(path: str, default: str = "") -> str:
-    if not os.path.exists(path):
-        return default
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
-
-
-def _read_json(path: str, default=None):
-    if not os.path.exists(path):
-        return default
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except json.JSONDecodeError:
-        return default
+MONDE_ROOT = Path(__file__).parent.parent.parent  # MONDES_FORGES/API/
+CONTRACTS_DIR = MONDE_ROOT / "CONTRACTS"
+ARCHIVUM_DIR = MONDE_ROOT / "ARCHIVUM"
 
 
 def load_contracts() -> dict:
-    """Charge les 4 fichiers CONTRACTS/."""
+    contracts = {}
+    for fname in ["system_prompt.md", "tyrant_prompt.md", "anti_bullshit.md"]:
+        fpath = CONTRACTS_DIR / fname
+        key = fname.replace(".md", "").replace(".", "_")
+        contracts[key] = fpath.read_text(encoding="utf-8") if fpath.exists() else f"[{fname} not found]"
+    return contracts
+
+
+def load_cold_layer() -> dict:
+    cold = {"rules": [], "markets": []}
+
+    rules_dir = ARCHIVUM_DIR / "rules"
+    if rules_dir.exists():
+        for f in sorted(rules_dir.glob("*.md")):
+            cold["rules"].append({"name": f.stem, "content": f.read_text(encoding="utf-8")})
+
+    markets_dir = ARCHIVUM_DIR / "markets"
+    if markets_dir.exists():
+        for f in sorted(markets_dir.glob("*.json")):
+            try:
+                cold["markets"].append({
+                    "name": f.stem,
+                    "data": json.loads(f.read_text(encoding="utf-8"))
+                })
+            except json.JSONDecodeError:
+                pass
+
+    return cold
+
+
+def load_hot_layer() -> dict:
+    hot = {"recent_targets": [], "ledger_summary": None}
+
+    targets_dir = ARCHIVUM_DIR / "targets"
+    if targets_dir.exists():
+        target_dirs = sorted(
+            [d for d in targets_dir.iterdir() if d.is_dir()],
+            key=lambda d: d.stat().st_mtime,
+            reverse=True
+        )[:3]
+        for td in target_dirs:
+            raw_intel = td / "raw_intel.json"
+            if raw_intel.exists():
+                try:
+                    hot["recent_targets"].append({
+                        "siege_id": td.name,
+                        "intel": json.loads(raw_intel.read_text(encoding="utf-8"))
+                    })
+                except json.JSONDecodeError:
+                    pass
+
+    ledgers_dir = ARCHIVUM_DIR / "ledgers"
+    if ledgers_dir.exists():
+        ledger_files = list(ledgers_dir.glob("*.json"))
+        if ledger_files:
+            survivors, dead = [], []
+            for lf in ledger_files:
+                try:
+                    entry = json.loads(lf.read_text(encoding="utf-8"))
+                    (survivors if entry.get("status") == "alive" else dead).append(entry)
+                except json.JSONDecodeError:
+                    pass
+            hot["ledger_summary"] = {
+                "total_launched": len(ledger_files),
+                "survivors": len(survivors),
+                "dead": len(dead),
+                "survivor_patterns": [
+                    s.get("winning_pattern") for s in survivors if s.get("winning_pattern")
+                ]
+            }
+
+    return hot
+
+
+def load_scoring_checklist() -> dict:
+    checklist_path = CONTRACTS_DIR / "api_scoring_checklist.json"
+    if checklist_path.exists():
+        try:
+            return json.loads(checklist_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            pass
+    return {}
+
+
+def assemble_context(warsmith_brief: dict | None = None) -> dict:
     return {
-        "system_prompt":         _read(os.path.join(_CONTRACTS, "system_prompt.md")),
-        "tyrant_prompt":         _read(os.path.join(_CONTRACTS, "tyrant_prompt.md")),
-        "anti_bullshit":         _read(os.path.join(_CONTRACTS, "anti_bullshit.md")),
-        "api_scoring_checklist": _read_json(
-            os.path.join(_CONTRACTS, "api_scoring_checklist.json"), {}
-        ),
+        "contracts": load_contracts(),
+        "cold_layer": load_cold_layer(),
+        "hot_layer": load_hot_layer(),
+        "scoring_checklist": load_scoring_checklist(),
+        "warsmith_brief": warsmith_brief or {"mode": "enclenche", "categorie_hint": None}
     }
 
 
-def load_archivum_rules() -> str:
-    """Charge ARCHIVUM/rules/ — patterns distillés des sieges passés (couche froide)."""
-    rules_dir = os.path.join(_ARCHIVUM, "rules")
-    if not os.path.exists(rules_dir):
-        return "[ARCHIVUM/rules] Vide — premier siège, aucun pattern enregistré."
-    files = sorted(Path(rules_dir).glob("*.md"))
-    if not files:
-        return "[ARCHIVUM/rules] Vide — premier siège, aucun pattern enregistré."
+def format_for_prompt(context: dict) -> str:
     parts = []
-    for f in files:
-        content = f.read_text(encoding="utf-8").strip()
-        if content:
-            parts.append(f"--- {f.name} ---
-{content}")
-    return "
 
-".join(parts) if parts else "[ARCHIVUM/rules] Aucun fichier .md trouvé."
+    parts.append("# DOCTRINE SYSTEME")
+    parts.append(context["contracts"].get("system_prompt", ""))
 
+    if context["cold_layer"]["rules"]:
+        parts.append("\n# REGLES DISTILLEES (ARCHIVUM COUCHE FROIDE)")
+        for rule in context["cold_layer"]["rules"]:
+            parts.append(f"\n## {rule['name']}\n{rule['content']}")
 
-def load_archivum_markets() -> str:
-    """Charge ARCHIVUM/markets/ — cartographie scorée des catégories RapidAPI (couche froide)."""
-    markets_dir = os.path.join(_ARCHIVUM, "markets")
-    if not os.path.exists(markets_dir):
-        return "[ARCHIVUM/markets] Vide — cartographie non encore construite."
-    files = list(Path(markets_dir).glob("*.json")) + list(Path(markets_dir).glob("*.md"))
-    if not files:
-        return "[ARCHIVUM/markets] Vide — cartographie non encore construite."
-    parts = []
-    for f in sorted(files)[:10]:  # max 10 fichiers
-        try:
-            if f.suffix == ".json":
-                data = json.loads(f.read_text(encoding="utf-8"))
-                parts.append(f"--- {f.name} ---
-{json.dumps(data, ensure_ascii=False, indent=2)[:2000]}")
-            else:
-                parts.append(f"--- {f.name} ---
-{f.read_text(encoding='utf-8')[:2000]}")
-        except Exception:
-            continue
-    return "
+    hot = context["hot_layer"]
+    if hot.get("ledger_summary") and hot["ledger_summary"].get("survivor_patterns"):
+        parts.append("\n# PATTERNS GAGNANTS (IRON WARRIORS SURVIVANTS)")
+        for p in hot["ledger_summary"]["survivor_patterns"]:
+            parts.append(f"- {p}")
 
-".join(parts) if parts else "[ARCHIVUM/markets] Fichiers illisibles."
+    if context["cold_layer"]["markets"]:
+        parts.append("\n# CARTOGRAPHIE MARCHES RAPIDAPI")
+        for market in context["cold_layer"]["markets"]:
+            parts.append(f"\n## {market['name']}")
+            parts.append(json.dumps(market["data"], indent=2, ensure_ascii=False))
 
+    if context["scoring_checklist"]:
+        parts.append("\n# GRILLE DE SCORING CIBLES")
+        parts.append(json.dumps(context["scoring_checklist"], indent=2, ensure_ascii=False))
 
-def load_archivum_ledgers() -> str:
-    """Charge ARCHIVUM/ledgers/ — résultats des sieges passés (Iron Warriors survivants/morts)."""
-    ledgers_dir = os.path.join(_ARCHIVUM, "ledgers")
-    if not os.path.exists(ledgers_dir):
-        return "[ARCHIVUM/ledgers] Vide — aucun siège précédent."
-    files = sorted(Path(ledgers_dir).glob("*.json"), reverse=True)[:5]  # 5 derniers
-    if not files:
-        return "[ARCHIVUM/ledgers] Vide — aucun siège précédent."
-    parts = []
-    for f in files:
-        try:
-            data = json.loads(f.read_text(encoding="utf-8"))
-            parts.append(f"--- {f.name} ---
-{json.dumps(data, ensure_ascii=False, indent=2)[:1500]}")
-        except Exception:
-            continue
-    return "
+    parts.append("\n# FILTRE ANTI-BULLSHIT")
+    parts.append(context["contracts"].get("anti_bullshit", ""))
 
-".join(parts) if parts else "[ARCHIVUM/ledgers] Fichiers illisibles."
+    brief = context["warsmith_brief"]
+    parts.append("\n# BRIEF WARSMITH")
+    if brief.get("categorie_hint"):
+        parts.append(f"Categorie cible suggeree : {brief['categorie_hint']}")
+    else:
+        parts.append("Mode : ENCLENCHE — identifier la cible optimale de maniere autonome.")
 
-
-def load_warsmith_brief() -> dict:
-    """Charge le warsmith_brief depuis liber_api.json."""
-    liber = _read_json(_LIBER, {})
-    return liber.get("warsmith_brief", {
-        "mode": "enclenche",
-        "categorie_hint": None,
-        "target_hint": None,
-        "notes": None,
-    })
-
-
-def load_all() -> dict:
-    """Charge tout ce dont le TYRANT a besoin pour assembler son prompt."""
-    contracts = load_contracts()
-    warsmith_brief = load_warsmith_brief()
-
-    rules_count    = len(list(Path(os.path.join(_ARCHIVUM, "rules")).glob("*.md"))) if os.path.exists(os.path.join(_ARCHIVUM, "rules")) else 0
-    markets_count  = len(list(Path(os.path.join(_ARCHIVUM, "markets")).glob("*")))  if os.path.exists(os.path.join(_ARCHIVUM, "markets")) else 0
-    ledgers_count  = len(list(Path(os.path.join(_ARCHIVUM, "ledgers")).glob("*.json"))) if os.path.exists(os.path.join(_ARCHIVUM, "ledgers")) else 0
-
-    return {
-        **contracts,
-        "archivum_rules":   load_archivum_rules(),
-        "archivum_markets": load_archivum_markets(),
-        "archivum_ledgers": load_archivum_ledgers(),
-        "warsmith_brief":   warsmith_brief,
-        "meta": {
-            "monde_root":    _MONDE_ROOT,
-            "rules_count":   rules_count,
-            "markets_count": markets_count,
-            "ledgers_count": ledgers_count,
-        }
-    }
-
-
-if __name__ == "__main__":
-    data = load_all()
-    print(f"[CONTRACTS] system_prompt : {len(data['system_prompt'])} chars")
-    print(f"[CONTRACTS] tyrant_prompt : {len(data['tyrant_prompt'])} chars")
-    print(f"[ARCHIVUM]  rules         : {data['meta']['rules_count']} fichiers")
-    print(f"[ARCHIVUM]  markets       : {data['meta']['markets_count']} fichiers")
-    print(f"[ARCHIVUM]  ledgers       : {data['meta']['ledgers_count']} fichiers")
-    print(f"[LIBER]     warsmith_brief: {data['warsmith_brief']}")
+    return "\n".join(parts)

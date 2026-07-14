@@ -1,79 +1,38 @@
-# IW_CAMPAIGN_LOG — Monde-Forge API
+# IW_CAMPAIGN_LOG — MONDE-FORGE API
 
-## Journal de construction — à lire en premier si contexte perdu
+## [CONSTRUCTION] Phase 0 — Architecture
+- Structure PERTURABO : CORE/ + MONDES_FORGES/ (YOUTUBE + API)
+- Pattern frégate : --prepare → --iron → --finalize
+- ARCHIVUM couche froide (rules, markets) / chaude (targets, ledgers)
+- Liber = bus communication inter-frégates + état vivant du siège
+- FLEET_STATUS_FLOW : 9 états de pending_reconnaissance à complete
 
----
+## [CONSTRUCTION] Phase 1 — CONTRACTS
+- system_prompt.md : doctrine RapidAPI, stack autorisée, règles absolues
+- tyrant_prompt.md : 5 questions (territoire, démon, latence, wrappers, pricing)
+- iron_prompt.md : contrat exécuteur Oracle
+- anti_bullshit.md : 4 filtres (source, chiffres, patterns, seuils)
+- api_scoring_checklist.json : 4 dimensions pondérées + 20 types angles
 
-## [CONSTRUCTION] Session fondatrice — Doctrine complète
+## [CONSTRUCTION] Phase 2 — Orchestration centrale
+- liber_api.json : 9 états fleet_status, tyrant_report 5 dimensions
+- IW_CUSTOS.py : 6 modes reset/check-out/check-in/gate/validate/status
+- Flux complet : reset → check-out TYRANT → check-in → gate 1 → ...
 
-### Contexte projet
+## [CONSTRUCTION] Phase 3 — ai_gateway.py CORE
+- Routing par frégate : TYRANT→Sonnet, F02→DeepSeek, F04→Gemini
+- call_oracle(frigate, prompt) → str
+- call_oracle_batch(frigate, prompts, max_workers) → list[str]
+- Partagé entre tous les Mondes-Forges via CORE/
 
-PERTURABO = système de siège automatisé. CORE/ + MONDES_FORGES/ (YOUTUBE + API).
-Chaque Monde-Forge autonome : liber, ARCHIVUM, frégates, CONTRACTS.
+## [CONSTRUCTION] Phase 4 — TYRANT frégate
+- contracts_loader.py : charge couche froide (rules, markets) + chaude (targets, ledgers)
+- format_for_prompt() : assemble contexte injectabe dans le prompt
+- tyrant.py --prepare : iron_prompt.txt assemblé dans TYRANT/IN/
+- tyrant.py --iron : call_oracle("TYRANT", prompt) → tyrant_output.json
+- tyrant.py --finalize : valide schema, check-in IW_CUSTOS, affiche Gate 1
+- Différence clé vs YOUTUBE : appel Oracle entièrement automatisé
 
-### Doctrine API résumée
-
-- Input : "enclenche" → système trouve la cible seul
-- Output : 20 Iron Warriors (APIs FastAPI) en < 1 heure
-- Stack 100% gratuit : FastAPI + Railway/Render
-- Cash flow cible : 500$/mois à partir du mois 4-5
-
-### FLEET_STATUS_FLOW
-```
-pending_reconnaissance → tyrant_report_ready → intel_captured → target_scored
-→ ironwarriors_forged → listings_ready → market_mapped → deployed → complete
-```
-
-### Frégates et modèles
-
-TYRANT → claude-sonnet-4.6 | F01 → haiku-4.5 | F02 → deepseek-v4-flash
-F03/F05 → sonnet-4.6 | F04 → gemini-3.5-flash | F06 → haiku-4.5
-
-### Gates
-
-Gate 1 : après TYRANT (valider cible)
-Gate 2 : après F01/F02 (valider 20 angles)
-Gate 3 : après F03 (review code Iron Warriors)
-Gate 4 : après F04 (valider listings RapidAPI)
-
----
-
-## [CONSTRUCTION] Phases 0-3 — Structure + CONTRACTS + liber + IW_CUSTOS + ai_gateway.py
-
-Voir commits précédents.
-
----
-
-## [CONSTRUCTION] Phase 4 — TYRANT créé
-
-**Différence clé avec YOUTUBE** : pas de IRON manuel. `call_oracle("TYRANT", prompt)` direct.
-
-**contracts_loader.py** — charge :
-- CONTRACTS/ (system_prompt, tyrant_prompt, anti_bullshit, api_scoring_checklist)
-- ARCHIVUM/rules/ (patterns distillés — vide au premier siège)
-- ARCHIVUM/markets/ (cartographie RapidAPI — vide au premier siège)
-- ARCHIVUM/ledgers/ (résultats sieges passés — vide au premier siège)
-- warsmith_brief depuis liber_api.json
-
-**tyrant.py** — flux complet en une commande :
-1. `load_all()` — charge tout
-2. `assemble_prompt()` — prompt 5 questions + checklist + ARCHIVUM + brief
-3. `call_oracle("TYRANT", prompt)` — Oracle répond avec tyrant_assessment JSON
-4. `validate_output()` — vérifie champs obligatoires, recommandation, score
-5. `update_liber()` — écrit tyrant_report dans liber_api.json
-6. `check_in()` — IW_CUSTOS check-in → fleet_status: tyrant_report_ready
-7. `print_gate1_fiche()` — tableau de bord complet pour le Warsmith
-
-**Comportement premier siège** (ARCHIVUM vide) :
-- Si `categorie_hint` fourni → Oracle raisonne sur cette catégorie
-- Si aucun hint → Oracle identifie la meilleure cible selon la grille
-- Champs sans données réelles → `null` (anti_bullshit strictement respecté)
-
-**Fichier IN** : `warsmith_brief.example.json` — template pour le brief Warsmith
-
----
-
-## Prochaine étape
-
-**Phase 5** : F01 SENTINEL — scraping multi-source (RapidAPI + GitHub + web).
-Alimentera ARCHIVUM/targets/ avec les données réelles pour F02 BREACHER.
+## Prochaine étape : Phase 5 — F01 SENTINEL
+3 modules : sentinel_rapid (RapidAPI), sentinel_gh (GitHub API), sentinel_web (Jina)
+Output : ARCHIVUM/targets/[siege_id]/raw_intel.json
