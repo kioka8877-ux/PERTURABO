@@ -1,0 +1,90 @@
+{
+  "_comment": "Grille de scoring d'une cible API RapidAPI. Utilisée par F02 BREACHER.",
+  "_version": "1.0",
+  "scoring_formula": {
+    "description": "Score = popularite*0.35 + latence_faille*0.25 + wrappers_actifs*0.20 + frustration_pricing*0.20",
+    "max_score": 100,
+    "threshold_strong_target": 70
+  },
+  "dimensions": {
+    "popularite_rapidapi": {
+      "weight": 0.35,
+      "description": "Score de popularité RapidAPI (0-10). Mesure le volume de requêtes réelles.",
+      "scoring": {
+        "9.5_to_10": 100,
+        "9_to_9.5": 80,
+        "8_to_9": 60,
+        "7_to_8": 40,
+        "below_7": 20
+      },
+      "signal": "Score 9.5+ = trafic dominant par agents/bots — marché chaud"
+    },
+    "latence_faille": {
+      "weight": 0.25,
+      "description": "Latence moyenne du leader (ms). Plus elle est élevée, plus la faille est exploitable.",
+      "scoring": {
+        "above_5000ms": 100,
+        "3000_to_5000ms": 80,
+        "2000_to_3000ms": 60,
+        "1000_to_2000ms": 40,
+        "below_1000ms": 10
+      },
+      "signal": "FastAPI async bien implémenté descend sous 400ms — avantage structurel"
+    },
+    "wrappers_github_actifs": {
+      "weight": 0.2,
+      "description": "Nombre de repos GitHub qui importent cet API host. Mesure l'adoption réelle par les agents.",
+      "scoring": {
+        "above_100_repos": 100,
+        "50_to_100": 80,
+        "20_to_50": 60,
+        "5_to_20": 40,
+        "below_5": 20
+      },
+      "signal": "Wrappers actifs = les agents de codage (Cursor, Claude Code) le connaissent déjà"
+    },
+    "frustration_pricing": {
+      "weight": 0.2,
+      "description": "Niveau de frustration pricing dans les reviews RapidAPI.",
+      "scoring": {
+        "explicit_too_expensive_multiple_reviews": 100,
+        "implicit_price_mention_negative": 70,
+        "neutral_on_price": 40,
+        "positive_on_price": 10
+      },
+      "signal": "Frustration pricing = porte ouverte pour undercut agressif"
+    }
+  },
+  "angle_categories": {
+    "prix": [
+      "freemium (1k req/mois)",
+      "$2/mois 10k req",
+      "$5/mois 50k req",
+      "$10/mois 200k req",
+      "$25/mois 1M req"
+    ],
+    "endpoint_focus": "Découper l'API cible en micro-endpoints spécialisés",
+    "audience": [
+      "e-commerce",
+      "recrutement",
+      "sales automation",
+      "marketing",
+      "data science"
+    ],
+    "format_output": [
+      "JSON pur",
+      "JSON+CSV",
+      "JSON+résumé texte",
+      "JSON+markdown"
+    ],
+    "vitesse": [
+      "async ultra-rapide (< 400ms)",
+      "avec cache Redis (< 100ms repeat)"
+    ]
+  },
+  "disqualification_criteria": {
+    "popularite_below_7": "Marché trop petit ou inexistant",
+    "success_rate_leader_below_95": "Leader instable — guerre d'attrition risquée",
+    "categorie_requires_legal_compliance": "RGPD, CCPA etc. — complexité juridique hors scope"
+  }
+}

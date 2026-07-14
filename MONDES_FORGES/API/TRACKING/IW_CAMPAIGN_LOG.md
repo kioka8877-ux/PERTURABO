@@ -173,3 +173,12 @@ Tous les appels passent par `ai_gateway.py` — jamais directs dans les frégate
 ## Historique des opérations de production
 
 *(Généré automatiquement par IW_CUSTOS.py lors des sièges)*
+
+## [2026-07-14T01:00:00Z] CONSTRUCTION — Phase 1 CONTRACTS : 5 fichiers créés [MANUEL]
+
+- `CONTRACTS/system_prompt.md` : doctrine API complète (flux siège, 4 portes, contraintes absolues)
+- `CONTRACTS/tyrant_prompt.md` : 5 questions Oracle API (territoire/démon/faille/20 angles/chemin)
+- `CONTRACTS/iron_prompt.md` : règles production par frégate (F02/F03/F04/F05)
+- `CONTRACTS/anti_bullshit.md` : filtre patterns non prouvés adapté marché API
+- `CONTRACTS/api_scoring_checklist.json` : grille scoring complète (popularité×0.35 + latence×0.25 + wrappers×0.20 + frustration×0.20)
+- IW_CUSTOS validation: CONSTRUCTION_PASS
