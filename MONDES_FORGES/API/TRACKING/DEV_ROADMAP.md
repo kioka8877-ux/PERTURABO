@@ -30,8 +30,8 @@
 - [x] F04_HERALD/CODEBASE/herald.py (listings RapidAPI + README GitHub)
 
 ## Phase 8 — F05 GRAND COMPASS + F06 CAPTEURS frégates
-- [ ] F05_GRAND_COMPASS/CODEBASE/grand_compass.py (deploy automatique)
-- [ ] F06_CAPTEURS/CODEBASE/capteurs.py (monitoring post-siège)
+- [x] F05_GRAND_COMPASS/CODEBASE/grand_compass.py (deploy automatique)
+- [x] F06_CAPTEURS/CODEBASE/capteurs.py (monitoring post-siège)
 
 ## Phase 9 — ORCHESTRATOR + tests end-to-end
 - [ ] ORCHESTRATOR/CODEBASE/orchestrator.py

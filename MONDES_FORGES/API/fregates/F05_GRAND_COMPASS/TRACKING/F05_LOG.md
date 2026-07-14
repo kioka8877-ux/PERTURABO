@@ -1,31 +1,24 @@
-# F05_GRAND_COMPASS — Journal de Mission — Monde-Forge API
+# F05 GRAND COMPASS — TRACKING LOG
 
-> Le Compas — Validation blue ocean et cartographie marché
-> Pipeline : scored_target.json + Tavily (recherche web) → blue_ocean_report.json → ARCHIVUM/markets/
-
-| Champ | Valeur |
-|-------|--------|
-| Frégate | F05_GRAND_COMPASS |
-| Rôle | Le Compas — Validation blue ocean et cartographie marché |
-| Moteur | anthropic/claude-sonnet-4.6 via AI Gateway |
-| IA | IRON — analyse blue ocean + Tavily pour veille web |
+## Rôle
+Deploy automatique des Iron Warriors : création repos GitHub + push code + génération URLs Railway/Render.
 
 ## Workflow
-
 ```
-python grand_compass.py --prepare
-# IRON lit iron_prompt.txt → produit blue_ocean_report.json
-python grand_compass.py --finalize
+python grand_compass.py --prepare   -> compass_config.json (plan deploy)
+python grand_compass.py --iron      -> deploy_results.json (GitHub repos créés, fichiers pushés)
+python grand_compass.py --finalize  -> URLs dans liber_api.json, F06 CAPTEURS initialisé
 ```
 
-## Détail
+## Dépendances
+- F03_FORGEWARD/OUT/warriors.json
+- ARCHIVUM/targets/[siege_id]/ironwarriors/ (fichiers matérialisés par F03+F04)
+- GITHUB_TOKEN dans .env (push automatique)
 
-| Analyse | Source |
-|---------|--------|
-| Marchés adjacents | IRON + ARCHIVUM/rules/ |
-| Validation blue ocean | Tavily (recherche live) |
-| Cartographie catégories | ARCHIVUM/markets/ (couche froide) |
+## Output
+- deploy_results.json : warrior_id, github_url, railway_deploy_url, render_deploy_url
+- liber_api.json f05.deployed_urls mis à jour
 
-## Historique des missions
-
-*(Généré automatiquement par grand.py lors des sièges)*
+## Note
+Railway/Render deploy final nécessite un clic humain sur les URLs générées.
+Push GitHub entièrement automatique si GITHUB_TOKEN défini.

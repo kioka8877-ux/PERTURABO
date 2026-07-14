@@ -15,3 +15,14 @@
 ## Prochaine étape : Phase 8 — F05 GRAND COMPASS + F06 CAPTEURS
 - grand_compass.py : deploy Railway/GitHub en parallèle + capture URLs
 - capteurs.py : monitoring quotidien RapidAPI + GitHub + ledgers ARCHIVUM
+
+
+## [CONSTRUCTION] Phase 8 — F05 GRAND COMPASS + F06 CAPTEURS
+- grand_compass.py : --prepare / --iron (GitHub repos + push parallèle) / --finalize (URLs + F06 init)
+- Deploy automatique : crée repo GitHub via API, push api.py + openapi.json + README
+- GITHUB_TOKEN requis dans .env — URLs Railway/Render toujours générées même sans token
+- capteurs.py : --init (ledger siège) / --scan (métriques quotidiennes) / --report (survie + rules)
+- Seuils : vivant=3 abonnés, gagnant=10, mort=0 après 30j
+- Patterns gagnants alimentent ARCHIVUM/rules/patterns_gagnants.md (couche froide)
+- Métriques RapidAPI via --manual-update (Provider Dashboard non exposé publiquement)
+- Prochaine étape : Phase 9 — ORCHESTRATOR + test end-to-end

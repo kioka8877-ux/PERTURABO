@@ -1,31 +1,26 @@
-# F06_CAPTEURS — Journal de Mission — Monde-Forge API
+# F06 CAPTEURS — TRACKING LOG
 
-> Les Capteurs — Surveillance continue post-déploiement
-> Pipeline : deployed_urls.json + ARCHIVUM/ledgers/ → ARCHIVUM/ledgers/ mis à jour + ARCHIVUM/rules/ (patterns gagnants)
-
-| Champ | Valeur |
-|-------|--------|
-| Frégate | F06_CAPTEURS |
-| Rôle | Les Capteurs — Surveillance continue post-déploiement |
-| Moteur | anthropic/claude-haiku-4.5 via AI Gateway |
-| IA | IRON léger — analyse patterns de survie |
+## Rôle
+Surveillance post-siège quotidienne. Détecte patterns gagnants, alimente ARCHIVUM/rules/.
 
 ## Workflow
-
 ```
-python capteurs.py --daily-scan
-# Tournant via GitHub Actions — quotidien
-python capteurs.py --finalize
+python capteurs.py --init --siege-id API-001
+python capteurs.py --scan --siege-id API-001
+python capteurs.py --report --siege-id API-001
+python capteurs.py --scan --siege-id API-001 --manual-update '{"1":{"subscribers":15}}'
 ```
 
-## Détail
+## Seuils
+- deployed : état initial
+- vivant   : >= 3 abonnés RapidAPI
+- gagnant  : >= 10 abonnés RapidAPI
+- mort     : 0 abonné après 30 jours
 
-| Surveillance | Seuil d'alerte |
-|-------------|---------------|
-| Abonnés RapidAPI par Iron Warrior | >= 5 → pattern gagnant |
-| Stars GitHub | Croissance anormale → signal |
-| Nouveaux entrants catégorie | Détecté → alerte Warsmith |
+## Output
+- ledgers/[siege_id]_ledger.json
+- ARCHIVUM/rules/patterns_gagnants.md (couche froide enrichie)
+- OUT/[siege_id]_report.json
 
-## Historique des missions
-
-*(Généré automatiquement par capteurs.py lors des sièges)*
+## Note
+Métriques RapidAPI via --manual-update avec chiffres du Provider Dashboard.
