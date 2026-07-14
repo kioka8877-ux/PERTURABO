@@ -28,13 +28,13 @@
 - [x] TYRANT/CODEBASE/tyrant.py
 
 ## Phase 5 — F01 SENTINEL frégate
-- [ ] F01_SENTINEL/CODEBASE/sentinel_rapid.py (scrape RapidAPI listings)
-- [ ] F01_SENTINEL/CODEBASE/sentinel_gh.py (GitHub API wrappers)
-- [ ] F01_SENTINEL/CODEBASE/sentinel_web.py (Jina Reader)
-- [ ] F01_SENTINEL/CODEBASE/sentinel.py (orchestrateur F01)
+- [x] F01_SENTINEL/CODEBASE/sentinel_rapid.py
+- [x] F01_SENTINEL/CODEBASE/sentinel_gh.py
+- [x] F01_SENTINEL/CODEBASE/sentinel_web.py
+- [x] F01_SENTINEL/CODEBASE/sentinel.py
 
 ## Phase 6 — F02 BREACHER frégate
-- [ ] F02_BREACHER/CODEBASE/breacher.py (scoring + 20 angles)
+- [x] F02_BREACHER/CODEBASE/breacher.py (scoring + 20 angles)
 
 ## Phase 7 — F03 FORGEWARD + F04 HERALD frégates
 - [ ] F03_FORGEWARD/CODEBASE/forgeward.py (20 Iron Warriors en parallèle)
