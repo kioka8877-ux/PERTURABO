@@ -9,6 +9,19 @@
       "created_at": "2026-07-10T19:00:13Z",
       "videos_count": 1,
       "first_video": "Every Category Of Hurricane Explained in 5 minutes"
+    },
+    "golden_moment": {
+      "name": "Golden Moment",
+      "slug": "golden_moment",
+      "handle": "@goldenmoment",
+      "niche": "Micro-moments d'athlètes US élites — famille, vulnérabilité, humanité off-field",
+      "concept": "Compilation wholesome footage famille/perso (comptes Instagram/TikTok des familles des athlètes)",
+      "created_at": "2026-07-22T00:00:00Z",
+      "videos_count": 0,
+      "first_video": null,
+      "roster": ["LeBron+Bronny", "Travis Kelce", "Stephen Curry", "Patrick Mahomes", "Simone Biles", "Coco Gauff", "Messi", "Tiger+Charlie Woods"],
+      "tyrant_score": 7.25,
+      "breacher_score": 8.75
     }
   }
 }
