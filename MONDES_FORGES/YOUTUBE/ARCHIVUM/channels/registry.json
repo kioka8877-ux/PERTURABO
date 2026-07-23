@@ -19,7 +19,16 @@
       "created_at": "2026-07-22T00:00:00Z",
       "videos_count": 0,
       "first_video": null,
-      "roster": ["LeBron+Bronny", "Travis Kelce", "Stephen Curry", "Patrick Mahomes", "Simone Biles", "Coco Gauff", "Messi", "Tiger+Charlie Woods"],
+      "roster": [
+        "LeBron+Bronny",
+        "Travis Kelce",
+        "Stephen Curry",
+        "Patrick Mahomes",
+        "Simone Biles",
+        "Coco Gauff",
+        "Messi",
+        "Tiger+Charlie Woods"
+      ],
       "tyrant_score": 7.25,
       "breacher_score": 8.75
     },
@@ -32,10 +41,39 @@
       "created_at": "2026-07-23T00:00:00Z",
       "videos_count": 0,
       "first_video": null,
-      "archetypes": ["Camionneur", "Soudeur", "Agriculteur", "Pompier", "Pêcheur", "Électricien", "Mineur"],
+      "archetypes": [
+        "Camionneur",
+        "Soudeur",
+        "Agriculteur",
+        "Pompier",
+        "Pêcheur",
+        "Électricien",
+        "Mineur"
+      ],
       "demon": "Wishness @Wishness (spécimen: camionneur @franya910, 424K vues / 10j)",
       "tyrant_score": 8.1,
       "breacher_score": 8.75
+    },
+    "threshold_lab": {
+      "name": "Threshold Lab",
+      "slug": "threshold_lab",
+      "handle": "@thresholdlab",
+      "niche": "Curation clips extrêmes Douyin/TikTok — matériaux extrêmes, phénomènes physiques WOW, voix off US",
+      "concept": "Sourcer clips Douyin d'ingénieurs/labos chinois testant matériaux extrêmes → curater en Shorts YouTube US avec voix off. Volume 10x vs production solo.",
+      "created_at": "2026-07-23T03:00:00Z",
+      "videos_count": 0,
+      "first_video": null,
+      "categories": [
+        "Magnétisme",
+        "Matériaux",
+        "Chimie",
+        "Physique",
+        "Mécanique",
+        "Optique"
+      ],
+      "demon": "Action Lab Shorts (4.41M subs, 100% Shorts, US, production solo, aveugle sur Douyin)",
+      "tyrant_score": 7.75,
+      "breacher_score": 8.6
     }
   }
 }
