@@ -208,6 +208,7 @@ def cmd_status():
     print("IW_CUSTOS — ÉTAT DU FORGE CLIPPING")
     print("-" * 58)
     print(f"fleet_status    : {str(cms.get('fleet_status', 'pending'))}")
+    print(f"mode            : {str(cms.get('mode', 'whop'))}")
     print(f"siege_id        : {str(cms.get('siege_id', 'null'))}")
     print(f"campaign_status : {str(cms.get('campaign_status', 'null'))}")
     print(f"current_porte   : {str(cms.get('current_porte', 'null'))}")
@@ -241,14 +242,43 @@ def cmd_close_campaign():
     print(f"[IW_CUSTOS] Campagne fermée. siege_closed_at: {cms['siege_closed_at']}")
 
 
+def cmd_init_siege(profile: str):
+    """Initialise le siège et fige le profil actif (whop|logo).
+    Decide au debut du siege: tout le workflow se cale ensuite sur ce profil.
+    Un siege = un seul profil (pas de melting mid-campaign)."""
+    if profile not in ("whop", "logo"):
+        print(f"[IW_CUSTOS] profil inconnu: '{profile}' (attendu: whop|logo)")
+        return
+    cms = load_liber()
+    if cms.get("campaign_status") == "active":
+        print(f"[IW_CUSTOS] Siege deja actif ({cms.get('siege_id')}). "
+              f"Ferme-le avant d'en initier un nouveau.")
+        return
+    cms["mode"] = profile
+    cms["campaign_status"] = "active"
+    cms["current_porte"] = "init"
+    cms["fleet_status"] = "pending"
+    cms["siege_id"] = f"SIEGE-{profile.upper()}-{now_iso().replace(':', '').replace('-', '')[:15]}"
+    cms["siege_started_at"] = now_iso()
+    cms["siege_closed_at"] = None
+    cms["last_event"] = f"siege_init_mode_{profile}"
+    cms["iw_custos"]["last_validation"] = now_iso()
+    save_liber(cms)
+    log_campaign(f"siege_init — mode={profile} — siege_id={cms['siege_id']}")
+    print(f"[IW_CUSTOS] Siege initialise. mode: {profile} — "
+          f"siege_id: {cms['siege_id']}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="IW_CUSTOS — Gardien du forge CLIPPING")
     parser.add_argument("--mode", required=True,
                         choices=["check-out", "check-in", "validate", "status",
-                                 "close-campaign"])
+                                 "close-campaign", "init-siege"])
     parser.add_argument("--frigate", default=None)
     parser.add_argument("--output", default=None)
     parser.add_argument("--schema", default=LIBER_PATH)
+    parser.add_argument("--profile", default=None, choices=["whop", "logo"],
+                        help="Profil actif (pour --mode init-siege)")
     args = parser.parse_args()
 
     if args.mode == "check-out":
@@ -267,6 +297,11 @@ def main():
         cmd_status()
     elif args.mode == "close-campaign":
         cmd_close_campaign()
+    elif args.mode == "init-siege":
+        if not args.profile:
+            print("[IW_CUSTOS] --profile whop|logo requis pour --mode init-siege")
+            return
+        cmd_init_siege(args.profile)
 
 
 if __name__ == "__main__":

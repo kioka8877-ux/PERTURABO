@@ -4,6 +4,7 @@
   "campaign_status": "inactive",
   "current_porte": "init",
   "fleet_status": "pending",
+  "mode": "whop",
   "inputs_warsmith": {
     "directive_path": null,
     "reference_clip_path": null,

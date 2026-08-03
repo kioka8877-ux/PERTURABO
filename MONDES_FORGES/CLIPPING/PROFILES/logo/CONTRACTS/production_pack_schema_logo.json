@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "production_pack_schema_logo",
+  "_description": "Profil LOGO. Pack TEXTE ONLY produit par PERTURABO/CLIPPING. OMNIS_WATCH gere le rendu video + superposition logo. Pas de logo_placement ici (job OMNIS_WATCH).",
+  "_mode": "logo",
+  "_clip_source_provided_by": "warsmith",
+  "type": "object",
+  "required": ["pack_id", "siege_id", "mode", "clip_source_ref", "angles"],
+  "additionalProperties": false,
+  "properties": {
+    "pack_id": {"type": "string"},
+    "siege_id": {"type": "string"},
+    "mode": {"type": "string", "const": "logo"},
+    "clip_source_ref": {
+      "type": "object",
+      "_description": "Reference au clip source (fourni par le Warsmith). Perturaba ne fait que le referencer.",
+      "required": ["source_type", "reference"],
+      "additionalProperties": false,
+      "properties": {
+        "source_type": {"type": "string", "enum": ["youtube", "tiktok", "instagram", "custom_footage", "url"]},
+        "reference": {"type": "string", "_description": "URL ou fichier local"},
+        "celebrity_or_subject": {"type": "string"},
+        "niche": {"type": "string"},
+        "duration_sec": {"type": ["number", "null"]},
+        "timecodes": {"type": ["object", "null"]}
+      }
+    },
+    "angles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["angle_id", "genre", "title", "body", "on_screen_text", "seo_tags"],
+        "additionalProperties": false,
+        "properties": {
+          "angle_id": {"type": "string"},
+          "genre": {
+            "type": "string",
+            "enum": ["humoristique", "triste", "joyeux", "dramatique", "informatif"],
+            "_description": "Registre emotionnel du reframe. informatif = analyse SEO virale (titre + body explicatif)."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 220,
+            "_description": "Titre reframing 3-5 lignes, posi SEO virale."
+          },
+          "body": {
+            "type": "string",
+            "maxLength": 1200,
+            "_description": "Caption reframing OU body explicatif si genre=informatif."
+          },
+          "on_screen_text": {
+            "type": "string",
+            "maxLength": 120,
+            "_description": "TEXTE court a afficher dans le clip (keyframe) - texte only, Perturaba le fournit a OMNIS_WATCH."
+          },
+          "seo_tags": {
+            "type": "array",
+            "items": {"type": "string"},
+            "maxItems": 12
+          },
+          "reframe_type": {
+            "type": "string",
+            "enum": ["emotion-pivot", "context-shift", "stake-raiser", "factual-explainer", "outrage-reframe", "wholesome-twist"],
+            "_description": "Mecanique de reframe (a enrichir par le Warsmith)."
+          }
+        }
+      }
+    },
+    "checklist": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "factual_verified": {"type": "boolean"},
+        "no_defamation": {"type": "boolean"},
+        "no_fabricated_breaking": {"type": "boolean"},
+        "seo_optimized": {"type": "boolean"}
+      }
+    }
+  }
+}
