@@ -34,7 +34,7 @@ Cette livraison est **la trame stratégique**. Aucun code Python n'est écrit. L
 
 | Composant | Fichier TRACKING.md | Statut | Code Python |
 |---|---|---|---|
-| F01_SCOUT | `F01_SCOUT/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| F01_SCOUT | `F01_SCOUT/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — scout.py + libs recon/enrich/scribe |
 | F02_TYRANT_CAMP | `F02_TYRANT_CAMP/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
 | F03_SOURCE_HUNTER | `F03_SOURCE_HUNTER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
 | F04_COPYWRITER | `F04_COPYWRITER/CODEBASE/TRACKING.md` | ✅ rédigé (le plus détaillé — frégate lourde 4 phases) | ❌ à implémenter |

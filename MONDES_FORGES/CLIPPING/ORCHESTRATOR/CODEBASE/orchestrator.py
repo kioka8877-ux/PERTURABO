@@ -61,9 +61,9 @@ def now_iso() -> str:
 
 
 def banner(siege_id: str):
-    print(f"\n{'╔' + '═'*58 + '╗'}")
-    print(f"║  PERTURABO CLIPPING — SIÈGE {siege_id:<31}║")
-    print(f"{'╚' + '═'*58 + '╝'}\n")
+    print(f"\n{'' + ''*58 + ''}")
+    print(f"  PERTURABO CLIPPING — SIÈGE {siege_id:<31}")
+    print(f"{'' + ''*58 + ''}\n")
 
 
 def cmd_start_siege(args):
@@ -71,7 +71,7 @@ def cmd_start_siege(args):
     result = init.validate(args.directive, args.reference_clip,
                            args.platform, args.market, args.n_angles)
     if not result["valid"]:
-        print("[ORCH] ❌ Inputs invalides :")
+        print("[ORCH]  Inputs invalides :")
         for e in result["errors"]:
             print(f"  - {e}")
         sys.exit(1)
@@ -103,7 +103,7 @@ def cmd_start_siege(args):
     print("[ORCH] Commandé CAPTEURS recommandée AVANT Porte 1 (optionnel) :")
     print("  cd CAPTEURS/CODEBASE && python capteurs.py --scan "
           "--campaign CAPTEURS/IN/campaign_to_observe.json")
-    print("\n[ORCH] ⚠️ F01_SCOUT doit être activée :")
+    print("\n[ORCH]  F01_SCOUT doit être activée :")
     print("  cd F01_SCOUT/CODEBASE && python scout.py --prepare --directive ../ARCHIVUM/campaign/directive.md")
     print("  # L'IRON (Claude sandbox) analyse → OUT/source_specimen.json")
     print("  python scout.py --finalize")
@@ -120,7 +120,7 @@ def cmd_resume(args):
     data = lm.load()
     siege_id = data.get("siege_id")
     if not siege_id:
-        print("[ORCH] ❌ Aucun siège en cours. Lance : orchestrator.py --start-siege ...")
+        print("[ORCH]  Aucun siège en cours. Lance : orchestrator.py --start-siege ...")
         return
 
     banner(siege_id)
@@ -132,7 +132,7 @@ def cmd_resume(args):
     # Vérifier quels artefacts sont déjà présents par porte
     for gate in ["1", "2", "3", "4"]:
         ok, missing = validator.validate_porte(gate, n_angles=data.get("inputs_warsmith", {}).get("n_angles"))
-        status = "✅" if ok else f"⏳ manque: {', '.join(missing)}"
+        status = "" if ok else f" manque: {', '.join(missing)}"
         print(f"  Porte {gate} : {status}")
 
     print("\n[ORCH] Porte suivante à traiter :", _porte_a_traiter(data, validator))
@@ -152,7 +152,7 @@ def cmd_gate(args):
     lm = LedgerManager()
     data = lm.load()
     if data.get("campaign_status") != "active":
-        print("[ORCH] ❌ Pas de campagne active.")
+        print("[ORCH]  Pas de campagne active.")
         return
 
     gate_num = str(args.gate)
@@ -164,7 +164,7 @@ def cmd_gate(args):
         n_angles = data.get("inputs_warsmith", {}).get("n_angles")
         ok, missing = validator.validate_porte(gate_num, n_angles=n_angles)
         if not ok:
-            print(f"[ORCH] ❌ Porte {gate_num} : artefacts manquants — validation refusée :")
+            print(f"[ORCH]  Porte {gate_num} : artefacts manquants — validation refusée :")
             for m in missing:
                 print(f"  - {m}")
             return
@@ -176,10 +176,10 @@ def cmd_gate(args):
             try:
                 index = dist.distribute(data["siege_id"], n_angles)
                 lm.update(packs_expedies_count=len(index["packs"]))
-                print("[ORCH] 🏆 Porte 4 validée — packs expédiés vers OMNIS_WATCH.")
+                print("[ORCH]  Porte 4 validée — packs expédiés vers OMNIS_WATCH.")
                 print("[ORCH] F06_TRACKER prend le relais : python tracker.py --post ...")
             except FileNotFoundError as e:
-                print(f"[ORCH] ⚠️ {e}")
+                print(f"[ORCH]  {e}")
 
         # Transférer les artefacts vers les frégates suivantes
         _transfer_artefacts(gate_num, data)
@@ -187,7 +187,7 @@ def cmd_gate(args):
     elif decision == "rejete":
         rejeter_porte(gate_num, notes)
         lm.add_porte_validated(gate_num, "rejete", notes)
-        print(f"[ORCH] ⚠️ Porte {gate_num} rejetée. Notes : {notes}")
+        print(f"[ORCH]  Porte {gate_num} rejetée. Notes : {notes}")
         print(f"[ORCH] La frégate concernée doit être relancée avec les notes du Warsmith.")
 
     lm.append_event(f"gate_{gate_num}_{decision}")
@@ -212,19 +212,19 @@ def _transfer_artefacts(gate_num: str, data: dict):
 
 def _copy(src: str, dest: str):
     if not os.path.exists(src):
-        print(f"[ORCH] ⚠️ Artefact introuvable (transféré plus tard) : {src}")
+        print(f"[ORCH]  Artefact introuvable (transféré plus tard) : {src}")
         return
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     import shutil
     shutil.copy2(src, dest)
-    print(f"[ORCH] 📦 Transfert : {src} → {dest}")
+    print(f"[ORCH]  Transfert : {src} → {dest}")
 
 
 def cmd_close_siege(args):
     lm = LedgerManager()
     data = lm.load()
     if data.get("campaign_status") != "active":
-        print("[ORCH] ❌ Pas de campagne active à fermer.")
+        print("[ORCH]  Pas de campagne active à fermer.")
         return
 
     data["campaign_status"] = "closed"
@@ -236,7 +236,7 @@ def cmd_close_siege(args):
     lm.save()
     lm.append_event("campaign_closed")
 
-    print("[ORCH] ✅ Campagne fermée.")
+    print("[ORCH]  Campagne fermée.")
     print("[ORCH] F06_TRACKER agrège les learnings : python tracker.py --close-campaign")
     print("[ORCH] Le Warsmith peut lancer la campagne suivante (campaign/ est libéré).")
 

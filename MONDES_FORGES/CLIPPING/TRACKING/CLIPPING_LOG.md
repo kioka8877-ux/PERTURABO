@@ -106,6 +106,43 @@ CLIPPING/
 
 ---
 
+## [DEV-F01] F01_SCOUT implémentée — Reconnaissance de fer
+
+### Contexte
+Deuxième vague de code : la frégate d'acquisition est opérationnelle. Elle inventorie les assets de la campagne (strict-source, règle C1) et produit le `source_specimen.json` consommé par F02_TYRANT_CAMP (Porte 1) et F03_SOURCE_HUNTER (Porte 3).
+
+### Fichiers livrés
+```
+F01_SCOUT/CODEBASE/
+├── scout.py                  ← wrapper 3 phases (--prepare / --auto / --finalize)
+├── requirements_c01.txt
+└── libs/
+    ├── recon.py              ← parse directive.md (section assets, campaign_id, types)
+    ├── enrich.py             ← yt-dlp --dump-json + outlier_score (mode dry si absent)
+    └── scribe.py             ← transcription (youtube-transcript-api → yt-dlp → dry)
+```
+
+### Décisions d'implémentation
+- Mode `--prepare` : génère `IN/scout_prompt.json` pour l'IRON + pré-remplit le specimen.
+- Mode `--auto` : analyse locale sans IRON (enrichissement + transcription optionnelle) — les assets restent strictement ceux de `directive.md`.
+- Mode `--finalize` : valide cohérence (campaign_id, assets non vides, URLs valides), génère `scout_report.md`, check-in IW_CUSTOS (statut F01 = done).
+- `outlier_score = view_count / baseline` calculé dans enrich (aucun chiffre inventé).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | recon/enrich/scribe + scout.py |
+| F02_F06 + TYRANT + CAPTEURS + ANGLESMITH | ✅ | ❌ | Vagues suivantes |
+
+### Prochaines étapes
+1. Implémenter F02_TYRANT_CAMP + TYRANT (vague 3)
+2. Implémenter ANGLESMITH (vague 4)
+3. Implémenter F03_F06 + CAPTEURS
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |

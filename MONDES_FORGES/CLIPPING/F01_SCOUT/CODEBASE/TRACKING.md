@@ -123,12 +123,12 @@ Phase 3 : finalize
 |---|---|---|
 | Arborescence créée | ✅ | CODEBASE/libs + IN + OUT + TRACKING |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter par autre model, en suivant ce doc |
-| `scout.py` | ❌ | Wrapper orchestrateur (prévu) |
-| `recon.py` (libs/) | ❌ | Extraction URLs depuis directive.md |
-| `scribe.py` (libs/) | ❌ | Transcription des vidéos longues (yt-dlp + fallback) |
-| `enrich.py` (libs/) | ❌ | Enrichissement métadonnées yt-dlp --dump-json |
-| `requirements_c01.txt` | ❌ | Dépendances Python à figer |
+| Code Python implémenté | ✅ | v1 — voir `[DEV-F01]` dans `TRACKING/CLIPPING_LOG.md` |
+| `scout.py` | ✅ | Wrapper 3 phases (--prepare / --auto / --finalize) |
+| `recon.py` (libs/) | ✅ | Extraction URLs + assets depuis directive.md (section assets, règle C1) |
+| `scribe.py` (libs/) | ✅ | Transcription (youtube-transcript-api → yt-dlp subs → dry) |
+| `enrich.py` (libs/) | ✅ | Enrichissement yt-dlp --dump-json + outlier_score |
+| `requirements_c01.txt` | ✅ | yt-dlp + youtube-transcript-api |
 
 Le futur implémenteur doit s'inspirer de `MONDES_FORGES/YOUTUBE/F01_SENTINEL/CODEBASE/sentinel.py` comme squelette de référence (probablement 80% de réutilisation logique).
 

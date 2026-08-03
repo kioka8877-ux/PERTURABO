@@ -36,7 +36,7 @@ class Porte:
     def ouvrir(self):
         self.statut = "EN_ATTENTE"
         print(f"\n{'═' * 60}")
-        print(f"🚪 PORTE {self.gate_id} — {self.nom}")
+        print(f" PORTE {self.gate_id} — {self.nom}")
         print(f"{'═' * 60}")
         print(f"{self.description}")
         print(f"Frégates mobilisées : {', '.join(self.fregates)}")
@@ -47,14 +47,14 @@ class Porte:
         self.decision = "valide"
         self.notes = notes
         self.timestamp = now_iso()
-        print(f"[PORTE {self.gate_id}] ✅ Validée par le Warsmith")
+        print(f"[PORTE {self.gate_id}]  Validée par le Warsmith")
 
     def rejeter(self, notes: str = None):
         self.statut = "REJETEE"
         self.decision = "rejete"
         self.notes = notes
         self.timestamp = now_iso()
-        print(f"[PORTE {self.gate_id}] ❌ Rejetée par le Warsmith")
+        print(f"[PORTE {self.gate_id}]  Rejetée par le Warsmith")
         if notes:
             print(f"[PORTE {self.gate_id}] Notes: {notes}")
 

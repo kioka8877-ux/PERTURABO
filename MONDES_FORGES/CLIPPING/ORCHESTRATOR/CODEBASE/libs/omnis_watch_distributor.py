@@ -76,6 +76,6 @@ class OmnisWatchDistributor:
                                cwd=self.forge_root, capture_output=True, text=True)
                 print(f"[OMNIS_WATCH_DISTRIBUTOR] Tag {git_tag} poussé.")
             except Exception as e:
-                print(f"[OMNIS_WATCH_DISTRIBUTOR] ⚠️ Git tag échoué: {e}")
+                print(f"[OMNIS_WATCH_DISTRIBUTOR]  Git tag échoué: {e}")
 
         return index
