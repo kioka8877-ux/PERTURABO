@@ -71,6 +71,21 @@ Titres de clips qui ont percé — indexés titre (pas clip entier) :
 - `<clip_id>_title.md` — `{ url, title, platform, views, angle_observed }`
 - Index puise dans `ARCHIVUM/demons/`
 
+### 9. `transcripts/` — matière brute des cours copywriting
+
+Transcriptions complètes des vidéos/cours de copywriting scrapées par CAPTEURS
+(`--scrap-youtube --out ARCHIVUM/copywriting/transcripts`), organisées par
+chaîne : `<channel_slug>/<video_id>.json` (schéma core YOUTUBE : transcript +
+segments + vues/subs/outlier).
+
+Règle : ces transcripts sont la **source** ; les 8 sous-dossiers ci-dessus sont
+les **extractions structurées** (hooks, formules, cadences...) que F04_COPYWRITER
+consomme. Après analyse d'un transcript, le Warsmith (ou l'IRON) verse les
+patterns dans les sous-dossiers concernés.
+
+- [x] `transcripts/andr_dubois/zuidLUaG23w.json` — André Dubois, "Grand cours de
+      copywriting" (43 min, outlier 1.34, FR) — [DEV-KB-COPYWRITING]
+
 ---
 
 ## Liens avec copywriting_doctrine.md
@@ -91,5 +106,7 @@ Règle : si un sous-dossier est mis à jour, la doctrine peut être régénéré
 | `hashtags_research/` | squelettes |
 | `on_screen_text_patterns/` | squelettes |
 | `reference_clips_titles/` | squelettes |
+| `transcripts/` | 1 transcript (André Dubois) — source pour les 8 zones |
 
-Tous les sous-dossiers sont en attente du savoir du Warsmith. `.gitkeep` présent dans chacun.
+Les sous-dossiers 1-8 attendent le savoir du Warsmith (extractions structurées).
+`transcripts/` se remplit via CAPTEURS --scrap-youtube. `.gitkeep` présent dans chacun.
