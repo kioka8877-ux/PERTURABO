@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "_comment": "Schema canonique du production_pack.json - contrat d'interface entre PERTURABO (forge CLIPPING) et OMNIS_WATCH (execution video). Toute modification de ce schema doit etre coordonnee des deux cotes.",
   "title": "Production Pack Monde Forge CLIPPING",

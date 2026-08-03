@@ -1,4 +1,4 @@
-﻿{
+{
   "_comment": "Schema PUBLIC de reference pour CAPTEURS/IN/clipping_sites_to_scrap.json. A remplir par le Warsmith avec les sites clipping qu'il veut scanner. CAPTEURS ne scannera QUE ce qui est liste ici, en plus de Whop (toujours scanne par defaut).",
   "sites": [
     {

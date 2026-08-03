@@ -1,6 +1,6 @@
-﻿# ARCHIVUM/channels/ â€” Mes comptes de clipping
+# ARCHIVUM/channels/ — Mes comptes de clipping
 
-> *Un sous-dossier par compte. Tracke l'identitÃ© + la perf rÃ©el.*
+> *Un sous-dossier par compte. Tracke l'identité + la perf réel.*
 > *Lu par F06_TRACKER (warmup check, perf update) et F04_COPYWRITER (contexte).*
 
 ---
@@ -9,10 +9,10 @@
 
 ```
 channels/
-â”œâ”€â”€ <account_slug>/
-â”‚   â”œâ”€â”€ identity.json
-â”‚   â””â”€â”€ performance.json
-â””â”€â”€ README.md  (ce fichier)
+├── <account_slug>/
+│   ├── identity.json
+│   └── performance.json
+└── README.md  (ce fichier)
 ```
 
 ### `identity.json`
@@ -31,7 +31,7 @@ channels/
 }
 ```
 
-RÃ¨gle warmup : `warmup_status: "complete"` require `account_age_days >= 7` (voire 14 selon platform). Voir `CONTRACTS/clipping_rules.md` C5.
+Règle warmup : `warmup_status: "complete"` require `account_age_days >= 7` (voire 14 selon platform). Voir `CONTRACTS/clipping_rules.md` C5.
 
 ### `performance.json`
 
@@ -54,10 +54,10 @@ RÃ¨gle warmup : `warmup_status: "complete"` require `account_age_days >= 7` (v
 }
 ```
 
-Mis Ã  jour par F06_TRACKER Ã  chaque pack postÃ© + Ã  la fermeture de campagne.
+Mis à jour par F06_TRACKER à chaque pack posté + à la fermeture de campagne.
 
-## Ã€ remplit par le Warsmith
+## À remplit par le Warsmith
 
-- [ ] CrÃ©er un sous-dossier par compte de clipping
+- [ ] Créer un sous-dossier par compte de clipping
 - [ ] Remplir `identity.json` pour chaque
-- [ ] Laisser `performance.json` vide initialement â€” C06 le remplira au runtime
+- [ ] Laisser `performance.json` vide initialement — F06 le remplira au runtime

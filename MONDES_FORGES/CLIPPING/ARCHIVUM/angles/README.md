@@ -1,7 +1,7 @@
-﻿# ARCHIVUM/angles/ â€” BibliothÃ¨que d'angles d'attaque
+# ARCHIVUM/angles/ — Bibliothèque d'angles d'attaque
 
 > *Les patterns d'angle que ANGLESMITH peut combiner.*
-> *CouplÃ© Ã  `angle_performance.json` qui suit la perf rÃ©elle (poids nul si < 50 packs).*
+> *Couplé à `angle_performance.json` qui suit la perf réelle (poids nul si < 50 packs).*
 
 ---
 
@@ -13,19 +13,19 @@ Catalogue des patterns d'angle combinables. Chaque entry combine 4 axes :
 - `angle_family` : reframing | emotion | engagement | structural
 - `emotion_mode` : tension, joie, inspiration, outrage, admiration, ...
 - `engagement_type` : question | confirmation | assertion | cliffhanger
-- `reframe_dim` : la transformation de sens (highlight â†’ motivation, etc.)
+- `reframe_dim` : la transformation de sens (highlight → motivation, etc.)
 
 Chaque pattern a :
-- `angle_id` â€” slug unique
+- `angle_id` — slug unique
 - `angle_family`
 - `emotion_mode`
 - `engagement_type`
 - `reframe_dim`
-- `hook_style_fit` â€” types de hooks compatibles
-- `platforms_fit` â€” ["youtube", "tiktok", "instagram"]
-- `markets_fit` â€” ["us_young_english", ...]
-- `loop_tech` â€” callback_hook, visual_match_cut, cliffhanger, ...
-- `proof_examples` â€” rÃ©fÃ¨re Ã  des exemples dans `demons/`
+- `hook_style_fit` — types de hooks compatibles
+- `platforms_fit` — ["youtube", "tiktok", "instagram"]
+- `markets_fit` — ["us_young_english", ...]
+- `loop_tech` — callback_hook, visual_match_cut, cliffhanger, ...
+- `proof_examples` — réfère à des exemples dans `demons/`
 
 Exemple :
 ```json
@@ -45,7 +45,7 @@ Exemple :
 
 ### `angle_performance.json`
 
-Perf historique par angle Ã— plateforme Ã— marchÃ©. Au dÃ©but (0 pack exÃ©cutÃ©), vide. Au fil des campagnes closes (via F06_TRACKER), se remplit.
+Perf historique par angle × plateforme × marché. Au début (0 pack exécuté), vide. Au fil des campagnes closes (via F06_TRACKER), se remplit.
 
 Structure :
 ```json
@@ -56,9 +56,9 @@ Structure :
 }
 ```
 
-RÃ¨gle : `eligible_for_weighting` reste `false` tant que `cumulative_packs_executed < 50`. Ã€ 50+, passe Ã  `true` et ANGLESMITH utilise `weight` pour pondÃ©rer.
+Règle : `eligible_for_weighting` reste `false` tant que `cumulative_packs_executed < 50`. À 50+, passe à `true` et ANGLESMITH utilise `weight` pour pondérer.
 
-## Ã€ remplir par le Warsmith
+## À remplir par le Warsmith
 
-- [ ] `angle_patterns.json` â€” le catalogue initiale de patterns (peut partir des patterns de base listÃ©s dans F02_TYRANT_CAMP : contrarian, stat_choc, story, myth-busting, POV, rÃ©action, tuto... + combinatoires)
-- [ ] `angle_performance.json` â€” vide initialement (structure squelette)
+- [ ] `angle_patterns.json` — le catalogue initiale de patterns (peut partir des patterns de base listés dans F02_TYRANT_CAMP : contrarian, stat_choc, story, myth-busting, POV, réaction, tuto... + combinatoires)
+- [ ] `angle_performance.json` — vide initialement (structure squelette)

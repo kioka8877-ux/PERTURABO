@@ -1,20 +1,20 @@
-﻿# CAPTEURS â€” TRACKING.md
+# CAPTEURS — TRACKING.md
 
-> *"Les capteurs sont les yeux du siÃ¨ge. Ils voient avant que le fer ne frappe."*
-> *Scrap commanditÃ© par le Warsmith. Multi-sites. Pas d'auto-cron. Vision globale clipping = aucune info ne doit manquer pendant une campagne.*
+> *"Les capteurs sont les yeux du siège. Ils voient avant que le fer ne frappe."*
+> *Scrap commandité par le Warsmith. Multi-sites. Pas d'auto-cron. Vision globale clipping = aucune info ne doit manquer pendant une campagne.*
 
 ---
 
-## RÃ”LE
+## RÔLE
 
-`CAPTEURS/` est le **rÃ©seau de senseurs du forge CLIPPING**. Contrairement aux frÃ©gates d'exÃ©cution (C01-C06), CAPTEURS ne s'exÃ©coute pas automatiquement. Elle s'active **sur commande explicite du Warsmith**.
+`CAPTEURS/` est le **réseau de senseurs du forge CLIPPING**. Contrairement aux frégates d'exécution (F01-F06), CAPTEURS ne s'exécoute pas automatiquement. Elle s'active **sur commande explicite du Warsmith**.
 
-Objectif : produire une **cartographie complÃ¨te de l'Ã©cosystÃ¨me clipping** autour d'une campagne Whop spÃ©cifique ou d'une niche visÃ©e â€” de sorte que F02_TYRANT_CAMP ait toutes les infos nÃ©cessaires pour rendre son verdict GO/NO-GO + blue_ocean.
+Objectif : produire une **cartographie complète de l'écosystème clipping** autour d'une campagne Whop spécifique ou d'une niche visée — de sorte que F02_TYRANT_CAMP ait toutes les infos nécessaires pour rendre son verdict GO/NO-GO + blue_ocean.
 
-**Principe PERTURABO** : aucune information ne doit Ã©chapper au Warsmith pendant une campagne. CAPTEURS couvre :
+**Principe PERTURABO** : aucune information ne doit échapper au Warsmith pendant une campagne. CAPTEURS couvre :
 1. **Whop Discover** + la page de la campagne fournie
-2. **Tous les sites clipping que le Warsmith indique** (Clippa, Cliptic, ...) â€” pas limitÃ© Ã  Whop
-3. **La perception de la niche / campagne dans l'Ã©cosystÃ¨me clipping** (comment elle est perÃ§ue par les clippers, qui l'a dÃ©jÃ  clipÃ©e, quel angle marchÃ© chez les concurrents, quel payout rÃ©el observÃ©)
+2. **Tous les sites clipping que le Warsmith indique** (Clippa, Cliptic, ...) — pas limité à Whop
+3. **La perception de la niche / campagne dans l'écosystème clipping** (comment elle est perçue par les clippers, qui l'a déjà clipée, quel angle marché chez les concurrents, quel payout réel observé)
 
 ---
 
@@ -22,10 +22,10 @@ Objectif : produire une **cartographie complÃ¨te de l'Ã©cosystÃ¨me clippin
 
 | Input | Source | Format | Obligatoire |
 |---|---|---|---|
-| `IN/clipping_sites_to_scrap.json` | Warsmith | JSON | âœ… |
-| `IN/campaign_to_observe.json` | Warsmith (URL campagne + niche + questions spÃ©cifiques) | JSON | âœ… |
+| `IN/clipping_sites_to_scrap.json` | Warsmith | JSON | ✅ |
+| `IN/campaign_to_observe.json` | Warsmith (URL campagne + niche + questions spécifiques) | JSON | ✅ |
 
-`clipping_sites_to_scrap.json` est laissÃ© **vide** par dÃ©faut dans l'arborescence â€” c'est le Warsmith qui le peuple avec les sites qu'il veut scraper. Voir `CONTRACTS/clipping_sites_to_scrap.example.json` pour le schÃ©ma.
+`clipping_sites_to_scrap.json` est laissé **vide** par défaut dans l'arborescence — c'est le Warsmith qui le peuple avec les sites qu'il veut scraper. Voir `CONTRACTS/clipping_sites_to_scrap.example.json` pour le schéma.
 
 ---
 
@@ -70,84 +70,84 @@ Objectif : produire une **cartographie complÃ¨te de l'Ã©cosystÃ¨me clippin
 ```
 
 ### Autres
-- `OUT/cartographie.md` â€” synthÃ¨se lisible pour le Warsmith (ce que l'Ã©cosystÃ¨me dit de la campaigne, qui a clip quel angle, oÃ¹ sont les angles libres)
+- `OUT/cartographie.md` — synthèse lisible pour le Warsmith (ce que l'écosystème dit de la campaigne, qui a clip quel angle, où sont les angles libres)
 
 ---
 
-## MÃ‰CANIQUE DE SCRAP
+## MÉCANIQUE DE SCRAP
 
 4 modules distincts :
 
 ### `libs/whop_scanner.py`
-Scrape Whop Discover + page de la campagne donnÃ©e. Extraction : statut, budget restant, CPM attendu, guidelines, assets publiÃ©s.
+Scrape Whop Discover + page de la campagne donnée. Extraction : statut, budget restant, CPM attendu, guidelines, assets publiés.
 
 ### `libs/clipping_ecosystem_scanner.py`
-Scrap tous les sites du `clipping_sites_to_scrap.json`. Extraction : quelle campagnes Whop sont listÃ©es, hormis la campaigne ciblÃ©e â€” pour identifier des opportunitÃ©s futures. Aussi : outils IA mentionnÃ©s, payouts moyens observÃ©s.
+Scrap tous les sites du `clipping_sites_to_scrap.json`. Extraction : quelle campagnes Whop sont listées, hormis la campaigne ciblée — pour identifier des opportunités futures. Aussi : outils IA mentionnés, payouts moyens observés.
 
 ### `libs/campaign_context_scanner.py`
-Pour la campaigne observÃ©e : recherche sur les sites clipping + Twitter/X + Reddit + YouTube des discussions / contenu publiÃ© par des clippers. Extraction : qui l'a dÃ©jÃ  clipÃ©, avec quel angle, quel rÃ©sultat.
+Pour la campaigne observée : recherche sur les sites clipping + Twitter/X + Reddit + YouTube des discussions / contenu publié par des clippers. Extraction : qui l'a déjà clipé, avec quel angle, quel résultat.
 
 ### `libs/demon_scanner.py`
-Si demandÃ© : scanne le wild clipping (TikTok / Shorts / Reels) pour identifier des DÃ©mon dominants hors campagne. Output qui nourrit aussi `TYRANT prospectif` â†’ via `ARCHIVUM/demons/`.
+Si demandé : scanne le wild clipping (TikTok / Shorts / Reels) pour identifier des Démon dominants hors campagne. Output qui nourrit aussi `TYRANT prospectif` → via `ARCHIVUM/demons/`.
 
 ---
 
-## PATTERN D'EXÃ‰CUTION â€” COMMANDE WARSMITH UNIQUEMENT
+## PATTERN D'EXÉCUTION — COMMANDE WARSMITH UNIQUEMENT
 
 ```
 # Pas de cron. Pas d'auto. Warsmith appelle explicitement :
 python capteurs.py --scan --campaign IN/campaign_to_observe.json
-# â†’ Lance whop_scanner + ecosystem_scanner + campaign_context_scanner (en sÃ©rie)
-# â†’ Ã‰crit OUT/cartographie.json + .md
-# â†’ Check-in IW_CUSTOS.py
+# → Lance whop_scanner + ecosystem_scanner + campaign_context_scanner (en série)
+# → Écrit OUT/cartographie.json + .md
+# → Check-in IW_CUSTOS.py
 
-# Si demandÃ© :
+# Si demandé :
 python capteurs.py --scan-demons --scan-list IN/scan_list.json
-# â†’ Lance demon_scanner (renvoie vers TYRANT/ si analyse pÃ©lomÃ©trique nÃ©cessaire)
+# → Lance demon_scanner (renvoie vers TYRANT/ si analyse pélométrique nécessaire)
 ```
 
 ---
 
-## CONTRATS RÃ‰FÃ‰RENCÃ‰S
+## CONTRATS RÉFÉRENCÉS
 
-- `CONTRACTS/clipping_sites_to_scrap.example.json` â€” schÃ©ma des sites
-- `ARCHIVUM/knowledge_base/sites/` â€” sites connus, ressources
-- `ARCHIVUM/rules/whop_rules.md` â€” contexte Whop
+- `CONTRACTS/clipping_sites_to_scrap.example.json` — schéma des sites
+- `ARCHIVUM/knowledge_base/sites/` — sites connus, ressources
+- `ARCHIVUM/rules/whop_rules.md` — contexte Whop
 - `CONTRACTS/anti_bullshit.md` (liens core)
 
 ---
 
-## DÃ‰PENDANCES
+## DÉPENDANCES
 
 - **Amont** : Warsmith (site list + campaign_to_observe)
 - **Downstream** :
-  - F02_TYRANT_CAMP (consomme `cartographie.json` Ã  la Porte 1 â€” optionnel mais fortement recommandÃ©)
+  - F02_TYRANT_CAMP (consomme `cartographie.json` à la Porte 1 — optionnel mais fortement recommandé)
   - `ARCHIVUM/demons/` (si demon_scanner active)
   - TYRANT prospectif (peut utiliser demon_scanner)
 
 ---
 
-## HÃ‰RÃ‰SIES
+## HÉRÉSIES
 
-- âŒ Scrap automatique (CAPTEURS est commanditÃ© â€” pas de cron, pas d'auto-loop)
-- âŒ Lancer CAPTEURS sans Warsmith explicit call
-- âŒ Scrap des sites non-listÃ©s dans `clipping_sites_to_scrap.json` (sauf Whop, qui est toujours)
-- âŒ Continuer Ã  scraper aprÃ¨s fermeture de campaigne (le tracker ferme CAPTEURS Ã  `--close-campaign` de C06)
+- ❌ Scrap automatique (CAPTEURS est commandité — pas de cron, pas d'auto-loop)
+- ❌ Lancer CAPTEURS sans Warsmith explicit call
+- ❌ Scrap des sites non-listés dans `clipping_sites_to_scrap.json` (sauf Whop, qui est toujours)
+- ❌ Continuer à scraper après fermeture de campaigne (le tracker ferme CAPTEURS à `--close-campaign` de F06)
 
 ---
 
 ## STATUT
 
-| Phase | Ã‰tat | Notes |
+| Phase | État | Notes |
 |---|---|---|
-| Arborescence crÃ©Ã©e | âœ… | |
-| TRACKING.md rÃ©digÃ© | âœ… | Ce fichier |
-| Code Python implÃ©mentÃ© | âŒ | Ã€ implÃ©menter |
-| `capteurs.py` | âŒ | CLI commanditÃ© |
-| `libs/whop_scanner.py` | âŒ | Scrap Whop Discover + pages campagne |
-| `libs/clipping_ecosystem_scanner.py` | âŒ | Scrap sites clipping du Warsmith |
-| `libs/campaign_context_scanner.py` | âŒ | Perception campaigne dans l'Ã©cosystÃ¨me |
-| `libs/demon_scanner.py` | âŒ | DÃ©mon wild clipping |
-| `requirements_capteurs.txt` | âŒ | requests + BeautifulSoup4 + (selon sites, playwright ou selenium) |
+| Arborescence créée | ✅ | |
+| TRACKING.md rédigé | ✅ | Ce fichier |
+| Code Python implémenté | ❌ | À implémenter |
+| `capteurs.py` | ❌ | CLI commandité |
+| `libs/whop_scanner.py` | ❌ | Scrap Whop Discover + pages campagne |
+| `libs/clipping_ecosystem_scanner.py` | ❌ | Scrap sites clipping du Warsmith |
+| `libs/campaign_context_scanner.py` | ❌ | Perception campaigne dans l'écosystème |
+| `libs/demon_scanner.py` | ❌ | Démon wild clipping |
+| `requirements_capteurs.txt` | ❌ | requests + BeautifulSoup4 + (selon sites, playwright ou selenium) |
 
-*Fer au-dedans, Fer au-dehors. Rien n'Ã©chappe au siÃ¨ge.*
+*Fer au-dedans, Fer au-dehors. Rien n'échappe au siège.*

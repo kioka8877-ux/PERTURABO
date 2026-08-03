@@ -1,19 +1,19 @@
-﻿# F06_TRACKER â€” TRACKING.md
+# F06_TRACKER — TRACKING.md
 
-> *"Le siÃ¨ge n'est fin que lorsque la forteresse a rendu compte. Le tracker ne dort pas."*
-> *FrÃ©gate post-publication. Active, pas passive. Boucle le learnings.json et ferme la campagne.*
+> *"Le siège n'est fin que lorsque la forteresse a rendu compte. Le tracker ne dort pas."*
+> *Frégate post-publication. Active, pas passive. Boucle le learnings.json et ferme la campagne.*
 
 ---
 
-## RÃ”LE
+## RÔLE
 
-F06_TRACKER est la **frÃ©gate post-Pote 4**. Elle prend le relais aprÃ¨s que les N `production_pack.json` ont Ã©tÃ© expÃ©diÃ©s Ã  OMNIS_WATCH. Pour chaque pack postÃ© par le Warsmith, elle :
+F06_TRACKER est la **frégate post-Pote 4**. Elle prend le relais après que les N `production_pack.json` ont été expédiés à OMNIS_WATCH. Pour chaque pack posté par le Warsmith, elle :
 1. Active la `submission_checklist`
-2. Enregistre la soumission (<1h ou en retard â€” flag si en retard)
-3. Logge les vues Ã  1h + 24h (relevÃ©s saisis par le Warsmith ou via API si disponible en v2)
-4. Calcule le payout rÃ©el observÃ© vs seuil
+2. Enregistre la soumission (<1h ou en retard — flag si en retard)
+3. Logge les vues à 1h + 24h (relevés saisis par le Warsmith ou via API si disponible en v2)
+4. Calcule le payout réel observé vs seuil
 5. Nourrit `ARCHIVUM/learnings/learnings.json`
-6. Ã€ la fermeture de campagne (dÃ©clarÃ©e par le Warsmith), agrÃ¨ge les rÃ©sultats cumulÃ©s et active la pondÃ©ration future de ANGLESMITH (seuil 50 packs).
+6. À la fermeture de campagne (déclarée par le Warsmith), agrège les résultats cumulés et active la pondération future de ANGLESMITH (seuil 50 packs).
 
 ---
 
@@ -21,12 +21,12 @@ F06_TRACKER est la **frÃ©gate post-Pote 4**. Elle prend le relais aprÃ¨s que
 
 | Input | Source | Format | Obligatoire |
 |---|---|---|---|
-| `production_pack_<angle>.json` (N) | F05_PACKAGER (Porte 4) | JSON N | âœ… |
-| Noms de compte publiÃ©s | Warsmith (saisie manuelle au moment de poster) | string | âœ… |
-| Vues Ã  1h | Warsmith (saisie manuelle â€” API pas encore disponible en v1) | int | âœ… |
-| Vues Ã  24h | Warsmith | int | âœ… |
-| Payout rÃ©el | Warsmith (depuis dashboard Whop) | float | âœ… |
-| DÃ©claration "fin de campagne" | Warsmith | boolÃ©en | Pour clÃ´turer |
+| `production_pack_<angle>.json` (N) | F05_PACKAGER (Porte 4) | JSON N | ✅ |
+| Noms de compte publiés | Warsmith (saisie manuelle au moment de poster) | string | ✅ |
+| Vues à 1h | Warsmith (saisie manuelle — API pas encore disponible en v1) | int | ✅ |
+| Vues à 24h | Warsmith | int | ✅ |
+| Payout réel | Warsmith (depuis dashboard Whop) | float | ✅ |
+| Déclaration "fin de campagne" | Warsmith | booléen | Pour clôturer |
 
 ---
 
@@ -68,20 +68,20 @@ F06_TRACKER est la **frÃ©gate post-Pote 4**. Elle prend le relais aprÃ¨s que
 }
 ```
 
-### Ã€ la fermeture de campagne (Warsmith dÃ©clare "fin") :
+### À la fermeture de campagne (Warsmith déclare "fin") :
 
-- Ã‰crit dans `ARCHIVUM/learnings/learnings.json` (agrÃ©gÃ© cumulatif â€” prÃ©serve les campagnes prÃ©cÃ©dentes)
+- Écrit dans `ARCHIVUM/learnings/learnings.json` (agrégé cumulatif — préserve les campagnes précédentes)
 - Marque `campaign_status: "closed"` dans IW_CUSTOS + liber_clipping.json
-- GÃ©nÃ¨re `OUT/campaign_summary.md` â€” synthÃ¨se lisible de ce que la campagne a rapportÃ©
-- DÃ©clenche une rÃ©arme possible : le Warsmith peut lancer la campagne suivante (avec archivage/effacement de `ARCHIVUM/campaign/`)
+- Génère `OUT/campaign_summary.md` — synthèse lisible de ce que la campagne a rapporté
+- Déclenche une réarme possible : le Warsmith peut lancer la campagne suivante (avec archivage/effacement de `ARCHIVUM/campaign/`)
 
 ---
 
-## MÃ‰CANIQUE LEARNINGS â€” BOUCLÃ‰E
+## MÉCANIQUE LEARNINGS — BOUCLÉE
 
-### Seuil de pondÃ©ration
-- **`learnings.json` cumul < 50 packs exÃ©cutÃ©s** : poids nul. ANGLESMITH ne pondÃ¨re pas les angles (tous Ã©gaux, neutres).
-- **>= 50 packs cumulÃ©s** : activation progressive. Les angles avec meilleur CPM rÃ©el remontent dans la pondÃ©ration ; les perdants descendent.
+### Seuil de pondération
+- **`learnings.json` cumul < 50 packs exécutés** : poids nul. ANGLESMITH ne pondère pas les angles (tous égaux, neutres).
+- **>= 50 packs cumulés** : activation progressive. Les angles avec meilleur CPM réel remontent dans la pondération ; les perdants descendent.
 
 ### Structure learnings.json
 
@@ -110,65 +110,65 @@ F06_TRACKER est la **frÃ©gate post-Pote 4**. Elle prend le relais aprÃ¨s que
 }
 ```
 
-ANGLESMITH lit `angle_performance[*].weight` pour pondÃ©rer le sÃ©lection d'angles.
+ANGLESMITH lit `angle_performance[*].weight` pour pondérer le sélection d'angles.
 
 ---
 
-## PATTERN D'EXÃ‰CUTION
+## PATTERN D'EXÉCUTION
 
-C06 ne fait pas appel Ã  l'IRON ni au modÃ¨le premium. C'est une frÃ©gate purement dÃ©terministe qui:
-- Met Ã  jour `submission_log.json` sur saisies Warsmith
-- Calcule des agrÃ©gats (CPM, poids)
-- Ferme la campagne sur dÃ©claration Warsmith
+F06 ne fait pas appel à l'IRON ni au modèle premium. C'est une frégate purement déterministe qui:
+- Met à jour `submission_log.json` sur saisies Warsmith
+- Calcule des agrégats (CPM, poids)
+- Ferme la campagne sur déclaration Warsmith
 
 ```
-python tracker.py --post --angle <angle_id> --account <slug>   # Marque "postÃ©"
+python tracker.py --post --angle <angle_id> --account <slug>   # Marque "posté"
 python tracker.py --submit --angle <angle_id>                # Marque "soumis Whop"
 python tracker.py --views --angle <angle_id> --1h N --24h N  # Enregistre vues
 python tracker.py --payout --angle <angle_id> --amount N     # Enregistre payout
-python tracker.py --close-campaign                           # Ferme + agrÃ¨ge learnings
+python tracker.py --close-campaign                           # Ferme + agrège learnings
 ```
 
 ---
 
-## CONTRATS RÃ‰FÃ‰RENCÃ‰S
+## CONTRATS RÉFÉRENCÉS
 
-- `ARCHIVUM/rules/whop_rules.md` â€” deadline soumission 1h
-- `ARCHIVUM/rules/clipping_rules.md` â€” seuil low payout
-- `ARCHIVUM/channels/<account>/performance.json` â€” mis Ã  jour avec chaque pack postÃ©
+- `ARCHIVUM/rules/whop_rules.md` — deadline soumission 1h
+- `ARCHIVUM/rules/clipping_rules.md` — seuil low payout
+- `ARCHIVUM/channels/<account>/performance.json` — mis à jour avec chaque pack posté
 
 ---
 
-## DÃ‰PENDANCES
+## DÉPENDANCES
 
-- **Amont** : F05_PACKAGER (production packs avec submission_checklist imbriquÃ©e), Warsmith (saisies de vues/payouts)
+- **Amont** : F05_PACKAGER (production packs avec submission_checklist imbriquée), Warsmith (saisies de vues/payouts)
 - **Downstream** :
   - `ARCHIVUM/learnings/learnings.json` (nourri)
-  - ANGLESMITH (lit les poids pour pondÃ©ration â€” se dÃ©clenche seulement Ã  partir de 50 packs cumulÃ©s)
+  - ANGLESMITH (lit les poids pour pondération — se déclenche seulement à partir de 50 packs cumulés)
   - IW_CUSTOS.py (statut campagne = closed sur action Warsmith)
 
 ---
 
-## HÃ‰RÃ‰SIES
+## HÉRÉSIES
 
-- âŒ Auto-poster ou auto-submit (l'opÃ©rateur poste ; C06 logge seulement)
-- âŒ Invoquer l'IRON ou le premium (c'est pur mÃ©canique de log + calcul)
-- âŒ Activer la pondÃ©ration avant 50 packs cumulÃ©s
-- âŒ Omettre la fermeture de campagne (sans `--close-campaign`, la campaign/ reste "ongoing" et CAPTEURS continue Ã  scraper â€” ce qui n'est pas dÃ©sirÃ©)
+- ❌ Auto-poster ou auto-submit (l'opérateur poste ; F06 logge seulement)
+- ❌ Invoquer l'IRON ou le premium (c'est pur mécanique de log + calcul)
+- ❌ Activer la pondération avant 50 packs cumulés
+- ❌ Omettre la fermeture de campagne (sans `--close-campaign`, la campaign/ reste "ongoing" et CAPTEURS continue à scraper — ce qui n'est pas désiré)
 
 ---
 
 ## STATUT
 
-| Phase | Ã‰tat | Notes |
+| Phase | État | Notes |
 |---|---|---|
-| Arborescence crÃ©Ã©e | âœ… | |
-| TRACKING.md rÃ©digÃ© | âœ… | Ce fichier |
-| Code Python implÃ©mentÃ© | âŒ | Ã€ implÃ©menter |
-| `tracker.py` | âŒ | CLI multi-commandes (post/submit/views/payout/close) |
-| `libs/learnings_aggregator.py` | âŒ | Calcule poids (seuil 50) |
-| `libs/channel_performance_updater.py` | âŒ | Met Ã  jour `ARCHIVUM/channels/<slug>/performance.json` |
-| `libs/readings_validator.py` | âŒ | VÃ©rifie cohÃ©rence saisies Warsmith |
-| `requirements_c06.txt` | âŒ | Standard lib Python (json, datetime) â€” pas de SDK premium |
+| Arborescence créée | ✅ | |
+| TRACKING.md rédigé | ✅ | Ce fichier |
+| Code Python implémenté | ❌ | À implémenter |
+| `tracker.py` | ❌ | CLI multi-commandes (post/submit/views/payout/close) |
+| `libs/learnings_aggregator.py` | ❌ | Calcule poids (seuil 50) |
+| `libs/channel_performance_updater.py` | ❌ | Met à jour `ARCHIVUM/channels/<slug>/performance.json` |
+| `libs/readings_validator.py` | ❌ | Vérifie cohérence saisies Warsmith |
+| `requirements_c06.txt` | ❌ | Standard lib Python (json, datetime) — pas de SDK premium |
 
-*Fer au-dedans, Fer au-dehors. Le siÃ¨ge est fini quand le tracker a fermÃ© le ledger.*
+*Fer au-dedans, Fer au-dehors. Le siège est fini quand le tracker a fermé le ledger.*
