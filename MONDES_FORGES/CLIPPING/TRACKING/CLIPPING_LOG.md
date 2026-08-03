@@ -470,11 +470,68 @@ F06_TRACKER/CODEBASE/
 
 ---
 
+## [DEV-CAPTEURS] CAPTEURS implémentée — Les Yeux du Siège (avant Porte 1)
+
+### Contexte
+Neuvième et dernière vague de code. La frégate de veille est opérationnelle : elle produit la **cartographie** de l'écosystème (Whop + sites clipping commandités + perception niche) pour que F02 rende son verdict GO/NO-GO et son océan bleu en connaissance de cause. **Strictement commandité par le Warsmith** — aucun cron, aucune boucle auto.
+
+### Fichiers livrés
+```
+CAPTEURS/CODEBASE/
+├── capteurs.py                       ← CLI : --scan (cartographie) / --scan-demons (Démon wild)
+├── requirements_capteurs.txt         ← stdlib urllib requis ; requests/bs4/playwright/selenium optionnels
+└── libs/
+    ├── whop_scanner.py               ← page campagne (statut, budget, CPM, guidelines, assets) + Discover
+    ├── clipping_ecosystem_scanner.py ← sites commandités : titres, campagnes Whop référencées,
+    │                                    payouts observés, outils AI mentionnés
+    ├── campaign_context_scanner.py   ← perception campagne via sources de contexte (compétiteurs,
+    │                                    angles déjà utilisés, vues)
+    └── demon_scanner.py              ← Démon wild (sondes TikTok/Shorts/Reels commanditées,
+                                        archivées ARCHIVUM/demons/)
+```
+
+### Décisions d'implémentation
+- **Commandité strict** : aucun auto-cron ; un site non listé dans `clipping_sites_to_scrap.json` n'est JAMAIS touché ; Whop est toujours scanné (défaut système non listable).
+- **Hérésie gardée** : campagne fermée (liber `campaign_status == closed`) → CAPTEURS refuse tout scan (exit 1). Le siège est éteint.
+- **Best-effort mécanique + IRON** : extraction stdlib (urllib), tolérance 403/404/JS → chaque échec est flaggé `requires_vision` dans la cartographie avec le site/URL concerné, pour lecture IRON par le Warsmith.
+- **Perception niche honnête** : `dominant_emotion_in_niche` et angles saturés calculés sur les textes effectivement récupérés ; sinon `non_estime` + flag IRON — jamais de valeur inventée.
+- **Démon wild** : le Warsmith fournit les URLs de sonde explicites par plateforme (IN/scan_list.json) ; pages JS → `js_rendered` + chasse IRON ; résultats archivés `ARCHIVUM/demons/demon_wild_scan_<id>.json`.
+- **Check-in IW_CUSTOS** : fin de scan → `CAPTEURS` done, `fleet_status` → `capteurs_done` (transition déjà déclarée dans IW_CUSTOS).
+
+### Tests effectués (environnement mock TEST_CAPTEURS)
+- Scan complet avec serveur HTTP factice (127.0.0.1:8898) : page campagne (statut active, budget restant $250, CPM $0.10, guidelines, 5 assets), Discover (3 campagnes listées), site clippa (payouts $0.08/$0.05, outils Claude/GPT/Playwright/Premiere extraits), site cliptic 404 → `fetch_failed` + requires_vision, source X 403 → compétiteur `inconnu` + vision.
+- Perception niche : émotion `non_estime` + flag IRON (corpus factice insuffisant) — pas de faux positif.
+- Scan demons : page JS → `js_rendered` + vision ; sonde sans URL → `skipped` + vision ; 1 démon observé archivé.
+- Hérésie campagne fermée : liber `campaign_status=closed` → refus des deux commandes, exit 1.
+- Check-in IW_CUSTOS : CAPTEURS done + `fleet_status: capteurs_done` (vérifié via --mode status).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | |
+| F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict + océan bleu (Porte 1) |
+| ANGLESMITH (via F02) | ✅ (README/F02) | ✅ (v1) | N angles direct + blue ocean (Porte 2) |
+| TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
+| F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
+| F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
+| F05_PACKAGER | ✅ | ✅ (v1) | production_packs -> OMNIS_WATCH (Porte 4) |
+| F06_TRACKER | ✅ | ✅ (v1) | Checklist + vues/payout + learnings + close (post-Porte 4) |
+| CAPTEURS | ✅ | ✅ (v1) | Cartographie écosystème — commandité Warsmith (avant Porte 1) |
+
+### Prochaines étapes
+1. Premier siège réel : CAPTEURS → F01 → F05 bout en bout, puis F06 au fil des posts
+2. Le Warsmith : déclarer les seuils low_payout/low_views dans `CONTRACTS/clipping_rules.md` (règles C), doctrine F04 + `--init-systemprompt`, vision IRON du clip de référence
+3. Le Warsmith : peupler `IN/clipping_sites_to_scrap.json` + `IN/campaign_to_observe.json` au lancement du siège
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |
 |---|---|---|
-| Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | CAPTEURS a implementer |
+| Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | Code pret (attente siege reel) |
 | Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
 | Porte 2 | ANGLESMITH N angles forges | Code pret (attente siege reel) |
 | Porte 3 | F03 + F04 text_payloads prets | Code pret (attente siege reel) |

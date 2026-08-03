@@ -42,7 +42,7 @@ Cette livraison est **la trame stratégique**. Aucun code Python n'est écrit. L
 | F05_PACKAGER | `F05_PACKAGER/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — packager.py assemble/finalize + libs schema_validator/reference_style_extractor |
 | F06_TRACKER | `F06_TRACKER/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — tracker.py post/submit/views/payout/close + libs readings_validator/learnings_aggregator/channel_performance_updater (+ IW_CUSTOS close-campaign) |
 | TYRANT (prospectif) | `TYRANT/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — tyrant.py + libs outlier/emotion/blue_ocean/archivist |
-| CAPTEURS | `CAPTEURS/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| CAPTEURS | `CAPTEURS/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — capteurs.py scan/scan-demons commandités Warsmith + libs whop_scanner/clipping_ecosystem_scanner/campaign_context_scanner/demon_scanner |
 | ORCHESTRATOR | `ORCHESTRATOR/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — orchestrator.py + gates.py + 4 libs |
 
 ### 🧱 Fichiers runtime du nerf central (vague 1 implémentée)

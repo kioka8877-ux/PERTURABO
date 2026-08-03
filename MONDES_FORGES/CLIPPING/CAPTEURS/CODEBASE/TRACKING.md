@@ -142,12 +142,32 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter |
-| `capteurs.py` | ❌ | CLI commandité |
-| `libs/whop_scanner.py` | ❌ | Scrap Whop Discover + pages campagne |
-| `libs/clipping_ecosystem_scanner.py` | ❌ | Scrap sites clipping du Warsmith |
-| `libs/campaign_context_scanner.py` | ❌ | Perception campaigne dans l'écosystème |
-| `libs/demon_scanner.py` | ❌ | Démon wild clipping |
-| `requirements_capteurs.txt` | ❌ | requests + BeautifulSoup4 + (selon sites, playwright ou selenium) |
+| Code Python implémenté | ✅ | v1 (commit CAPTEURS) |
+| `capteurs.py` | ✅ | CLI commandité : `--scan` (cartographie complète) + `--scan-demons` (Démon wild) |
+| `libs/whop_scanner.py` | ✅ | Scrap Whop Discover + pages campagne (statut, budget, CPM, guidelines, assets) |
+| `libs/clipping_ecosystem_scanner.py` | ✅ | Scrap sites clipping du Warsmith (payouts, outils AI, campagnes référencées) |
+| `libs/campaign_context_scanner.py` | ✅ | Perception de la campagne dans l'écosystème (compétiteurs, angles déjà utilisés) |
+| `libs/demon_scanner.py` | ✅ | Démon wild clipping (sondes TikTok/Shorts/Reels, archivées ARCHIVUM/demons/) |
+| `requirements_capteurs.txt` | ✅ | Stdlib urllib requis ; requests/bs4/playwright/selenium optionnels selon sites |
+
+### Décisions v1
+
+- **Jamais de cron, jamais d'auto** : CAPTEURS ne tourne que commandité par le
+  Warsmith (précondition hérésie). Scrap post-fermeture de campagne refusé
+  (liber `campaign_status == closed` → exit 1).
+- **Périmètre strict** : seuls les sites listés dans
+  `IN/clipping_sites_to_scrap.json` sont touchés ; Whop est TOUJOURS scanné
+  (défaut système, non listable). Un site hors liste n'est jamais scanné.
+- **Best-effort mécanique + lecture IRON** : fetch stdlib (urllib, aucun binaire
+  requis). Ce qui n'est pas quantifiable mécaniquement (page JS, 403/404,
+  perception niche, budget non extrait) est flaggé `requires_vision` et remonté
+  au Warsmith pour lecture IRON (fichier cartographie.md).
+- **`requires_vision`** : liste explicite dans la cartographie de tout ce que
+  l'IRON doit confirmer avant que F02 rende le verdict GO/NO-GO.
+- **Démon wild** : sondes fournies explicitement par le Warsmith
+  (IN/scan_list.json, URLs de recherche par plateforme) ; résultat archivé dans
+  `ARCHIVUM/demons/demon_wild_scan_<id>.json`.
+- **Check-in IW_CUSTOS** : fin de scan → `CAPTEURS` done, `fleet_status`
+  → `capteurs_done`.
 
 *Fer au-dedans, Fer au-dehors. Rien n'échappe au siège.*
