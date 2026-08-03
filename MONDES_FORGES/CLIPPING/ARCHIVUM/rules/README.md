@@ -14,17 +14,26 @@
 | `platform_shorts.md` | Algo YouTube Shorts + swipe rate + loop + engaged views | squelette (à remplir) |
 | `platform_reels.md` | Algo Reels + partages DM + saves + audio trending | squelette (à remplir) |
 
-## Liens vers le core HERESIE
+## Liens vers le core PERTURABO (YOUTUBE)
 
-Les règles générales shorts sont dans le core PERTURABO :
-- `HERESIE/ARCHIVUM/rules/shorts_rules.md` — règles S1-S16 (MoneyBoyMaxx, Tim Danilov)
-- `HERESIE/ARCHIVUM/rules/tim_danilov_rules.md` — niche bending
+Les règles générales shorts vivent dans le core `MONDES_FORGES/YOUTUBE/ARCHIVUM/rules/`.
+Depuis [DEV-ARCHIVUM-YOUTUBE], le Warsmith a décidé de **copier** ces règles
+dans ce forge pour que les frégates CLIPPING les lisent localement (et que
+OMNIS_WATCH puisse les fetcher) :
 
-Ces fichiers ne sont **pas dupliqués** dans ce forge. Les frégates les lisent via path relatif `../../../HERESIE/ARCHIVUM/rules/` ou via URL raw si OMNIS_WATCH les fetch.
+- `youtube/shorts_rules.md` — règles S1-S16 (MoneyBoyMaxx, Tim Danilov) — copie locale
+- `youtube/tim_danilov_rules.md` — niche bending — copie locale
+
+La copie est **figée au moment du transfert** (le core YOUTUBE reste la
+source de vérité pour ses propres frégates ; si le core évolue, le Warsmith
+re-synchronise).
 
 ## Règle anti-duplication
 
-Le forge CLIPPING ne duplique JAMAIS le contenu du core. Il utilise des liens symboliques (paths relatifs) ou des URLs raw GitHub. Seules les règles spécifiques au clipping Whop sont créées ici (`whop_rules.md`, `clipping_rules.md`).
+Le forge CLIPPING ne duplique pas le contenu du core en dehors des copies
+explicites décidées par le Warsmith (voir `youtube/` ci-dessus). Seules les
+règles spécifiques au clipping Whop sont créées ici (`whop_rules.md`,
+`clipping_rules.md`).
 
 ---
 
@@ -40,7 +49,7 @@ Chaque rule suit la structure des rules core (esquisse) :
 **Sanction si violation :** ...
 ```
 
-Voir `HERESIE/ARCHIVUM/rules/shorts_rules.md` pour le pattern complet.
+Voir `youtube/shorts_rules.md` pour le pattern complet.
 
 ---
 

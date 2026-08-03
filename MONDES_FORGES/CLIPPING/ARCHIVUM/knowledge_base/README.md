@@ -31,20 +31,34 @@ Transcriptions des vidéos qui parlent de clipping :
 - YouTube long form sur le clipping
 - Podcasts sur le side hustle clipping
 - Interviews avec des top clippers
-- (déjà ~200 transcripts de YouTube dans `HERESIE/ARCHIVUM/transcripts/`MoneyBoyMaxx, Tim Danilov, vidIQ, Rom)
-- Ici, ajouter les transcripts **clippED spécifiquement sur le clipping Whop** (différents des chaînes YouTube générale)
+- Sous-dossier `youtube/` : **copie locale** des ~207 transcripts du core
+  `MONDES_FORGES/YOUTUBE/ARCHIVUM/transcripts/` (MoneyBoyMaxx, Tim Danilov,
+  vidIQ, Romayroh) — décision du Warsmith [DEV-ARCHIVUM-YOUTUBE] pour que
+  les frégates CLIPPING lisent localement (plateforme cible #1 = YouTube)
+- Ici, ajouter les transcripts **clippED spécifiquement sur le clipping Whop**
+  (différents des chaînes YouTube générale)
 
-## Différence vs core `HERESIE/ARCHIVUM/transcripts/`
+## Plateformes suivantes
 
-Le core YOUTUBE a des transcripts de chaînes spécialisées shorts en général. Ici, on spécialise sur :
+Structure dédiée par plateforme cible, dans l'ordre de priorité du siège :
+- `transcripts/youtube/` — rempli (copie core)
+- `transcripts/instagram/` — à remplir (prochaine cible, recherche Warsmith)
+- `transcripts/tiktok/` — à remplir
+
+## Différence vs core `MONDES_FORGES/YOUTUBE/ARCHIVUM/transcripts/`
+
+Le core YOUTUBE a des transcripts de chaînes spécialisées shorts en général.
+Ici, on spécialise sur :
 - Le clipping Whop spécifiquement
 - Le side hustle clipping
 - Le copywriting appliqué au clipping
 - Les guides opérationnels (warmup, volume, multi-plateforme)
 
-## Liens symboliques possibles
+## Copie locale youtube/
 
-Les transcripts déjà présents dans `HERESIE/ARCHIVUM/transcripts/` (moneyboymaxx, romayroh, vidiq, tim_danilov, threshold_lab, golden_moment, the_stormist, built_by_sacrifice) sont pertinents et **non dupliqués ici**. Les frégates les lisent via path relatif `../../../HERESIE/ARCHIVUM/transcripts/`.
+Depuis [DEV-ARCHIVUM-YOUTUBE], les transcripts du core sont copiés dans
+`transcripts/youtube/` (figés au moment du transfert). La copie est
+**synchronisée manuellement par le Warsmith** si le core évolue.
 
 ## À remplir par le Warsmith
 

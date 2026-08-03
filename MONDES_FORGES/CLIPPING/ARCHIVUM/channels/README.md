@@ -56,6 +56,18 @@ Règle warmup : `warmup_status: "complete"` require `account_age_days >= 7` (voi
 
 Mis à jour par F06_TRACKER à chaque pack posté + à la fermeture de campagne.
 
+## `youtube/` — Chaînes de contenu PERTURABO (hors tracking F06)
+
+Depuis [DEV-ARCHIVUM-YOUTUBE], sous-dossier `youtube/` : copie locale des
+chaînes de contenu du core `MONDES_FORGES/YOUTUBE/ARCHIVUM/channels/`
+(the_stormist, golden_moment, built_by_sacrifice, threshold_lab —
+identités + ADN + thumbnails + registry).
+
+⚠️ **Ces chaînes ne sont PAS des comptes de clipping** : F06_TRACKER les
+ignore (il ne lit que `channels/<slug>/` à la racine, pas `channels/youtube/`).
+Elles servent de référence ADN/niche pour F04_COPYWRITER (reference_style)
+et F02_TYRANT_CAMP (perception marché).
+
 ## À remplit par le Warsmith
 
 - [ ] Créer un sous-dossier par compte de clipping
