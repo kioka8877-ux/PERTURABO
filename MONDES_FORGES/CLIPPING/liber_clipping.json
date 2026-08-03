@@ -1,0 +1,47 @@
+{
+  "siege_id": null,
+  "campaign_id": null,
+  "campaign_status": "inactive",
+  "current_porte": "init",
+  "fleet_status": "pending",
+  "inputs_warsmith": {
+    "directive_path": null,
+    "reference_clip_path": null,
+    "platform_target": null,
+    "market_target": null,
+    "n_angles": null
+  },
+  "fregates_status": {
+    "f01_scout": "pending",
+    "f01_scout_output": null,
+    "f02_tyrant_camp": "pending",
+    "f02_tyrant_camp_output": null,
+    "anglesmith": "pending",
+    "anglesmith_output": null,
+    "f03_source_hunter": "pending",
+    "f03_source_hunter_output": null,
+    "f04_copywriter": "pending",
+    "f04_copywriter_output": null,
+    "f05_packager": "pending",
+    "f05_packager_output": null,
+    "f06_tracker": "pending",
+    "f06_tracker_output": null,
+    "tyrant": "pending",
+    "tyrant_output": null,
+    "capteurs": "pending",
+    "capteurs_output": null
+  },
+  "portes_validated": [],
+  "gate_decisions": {},
+  "packs_expedies_count": 0,
+  "packs_posted_count": 0,
+  "packs_submitted_whop_count": 0,
+  "last_event": "init",
+  "siege_started_at": null,
+  "siege_closed_at": null,
+  "log_event": [],
+  "iw_custos": {
+    "last_validation": null,
+    "errors": []
+  }
+}

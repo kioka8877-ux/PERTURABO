@@ -32,17 +32,27 @@ Cette livraison est **la trame stratégique**. Aucun code Python n'est écrit. L
 
 ### ⚔️ TRACKING.md des 9 composants
 
-| Composant | Fichier TRACKING.md | Statut |
+| Composant | Fichier TRACKING.md | Statut | Code Python |
+|---|---|---|---|
+| F01_SCOUT | `F01_SCOUT/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| F02_TYRANT_CAMP | `F02_TYRANT_CAMP/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| F03_SOURCE_HUNTER | `F03_SOURCE_HUNTER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| F04_COPYWRITER | `F04_COPYWRITER/CODEBASE/TRACKING.md` | ✅ rédigé (le plus détaillé — frégate lourde 4 phases) | ❌ à implémenter |
+| F05_PACKAGER | `F05_PACKAGER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| F06_TRACKER | `F06_TRACKER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| TYRANT (prospectif) | `TYRANT/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| CAPTEURS | `CAPTEURS/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| ORCHESTRATOR | `ORCHESTRATOR/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — orchestrator.py + gates.py + 4 libs |
+
+### 🧱 Fichiers runtime du nerf central (vague 1 implémentée)
+
+| Fichier | Statut | Rôle |
 |---|---|---|
-| F01_SCOUT | `F01_SCOUT/CODEBASE/TRACKING.md` | ✅ rédigé |
-| F02_TYRANT_CAMP | `F02_TYRANT_CAMP/CODEBASE/TRACKING.md` | ✅ rédigé |
-| F03_SOURCE_HUNTER | `F03_SOURCE_HUNTER/CODEBASE/TRACKING.md` | ✅ rédigé |
-| F04_COPYWRITER | `F04_COPYWRITER/CODEBASE/TRACKING.md` | ✅ rédigé (le plus détaillé — frégate lourde 4 phases) |
-| F05_PACKAGER | `F05_PACKAGER/CODEBASE/TRACKING.md` | ✅ rédigé |
-| F06_TRACKER | `F06_TRACKER/CODEBASE/TRACKING.md` | ✅ rédigé |
-| TYRANT (prospectif) | `TYRANT/CODEBASE/TRACKING.md` | ✅ rédigé |
-| CAPTEURS | `CAPTEURS/CODEBASE/TRACKING.md` | ✅ rédigé |
-| ORCHESTRATOR | `ORCHESTRATOR/CODEBASE/TRACKING.md` | ✅ rédigé |
+| `IW_CUSTOS.py` (racine forge) | ✅ implémenté | Gardien du ledger — check-out/check-in/validate/status |
+| `liber_clipping.json` (racine forge) | ✅ prêt | État inter-frégates (singulier, 1 siège max) |
+| `ORCHESTRATOR/CODEBASE/orchestrator.py` | ✅ implémenté | CLI start-siege/gate/resume/status/close-siege |
+| `ORCHESTRATOR/CODEBASE/gates.py` | ✅ implémenté | Les 4 Portes CLIPPING |
+| `ORCHESTRATOR/CODEBASE/libs/` (4 libs) | ✅ implémenté | ledger_manager, siege_initializer, gate_validator, omnis_watch_distributor |
 
 ### 📜 CONTRACTS/
 

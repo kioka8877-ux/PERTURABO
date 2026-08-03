@@ -63,6 +63,49 @@ Chaque frégate suit la structure `CODEBASE/` (code Python — pas rempli pour l
 
 ---
 
+## [DEV-ORCHESTRATOR] Nerf central implémenté — ORCHESTRATOR + IW_CUSTOS
+
+### Contexte
+Première vague de code Python du forge CLIPPING. Le nerf central est en place : le ledger (`liber_clipping.json`), le gardien (`IW_CUSTOS.py`) et l'Orchestrateur (4 Portes).
+
+### Fichiers livrés
+```
+CLIPPING/
+├── IW_CUSTOS.py                    ← gardien du ledger (check-out/check-in/validate/status)
+├── liber_clipping.json             ← état inter-frégates (singulier, 1 siège actif max)
+└── ORCHESTRATOR/CODEBASE/
+    ├── orchestrator.py             ← CLI : --start-siege / --gate N / --resume / --status / --close-siege
+    ├── gates.py                    ← les 4 Portes (verdict, angles, textes, packs)
+    ├── requirements_orchestrator.txt
+    └── libs/
+        ├── ledger_manager.py       ← CRUD liber_clipping.json + délégation IW_CUSTOS
+        ├── siege_initializer.py    ← validation des 4 inputs Warsmith (campaign/ singulier)
+        ├── gate_validator.py       ← vérifie les artefacts attendus avant validation de porte
+        └── omnis_watch_distributor.py ← génère packs_index.json + raw URLs OMNIS_WATCH
+```
+
+### Décisions d'implémentation
+- `gate_validator` refuse la validation d'une porte si les artefacts attendus sont absents (hérésie « passer une porte sans validation » impossible).
+- Le `--close-siege` est la seule voie de fermeture (seul le Warsmith déclare la fin).
+- F04 reste autonome : l'Orchestrateur ne pilote pas le dialogue premium direct (statut F04 = done via son propre check-in).
+- `gates.py` est calqué sur le pattern `YOUTUBE/ORCHESTRATOR/CODEBASE/gates.py` (réutilisation ~70%).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | 4 Portes, pattern hybride, ledger |
+| IW_CUSTOS | ✅ (racine) | ✅ (v1) | Gardien liber_clipping.json |
+| F01_F06 + TYRANT + CAPTEURS + ANGLESMITH | ✅ | ❌ | Prochaines vagues |
+
+### Prochaines étapes
+1. Implémenter F01_SCOUT (vague 2)
+2. Implémenter F02_TYRANT_CAMP + TYRANT (vague 3)
+3. Implémenter ANGLESMITH + F03_SOURCE_HUNTER + F04_COPYWRITER + F05_PACKAGER + F06_TRACKER + CAPTEURS
+4. Premier siège réel avec les inputs du Warsmith
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |

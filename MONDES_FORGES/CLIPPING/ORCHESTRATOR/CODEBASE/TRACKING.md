@@ -175,13 +175,14 @@ orchestrator.py --close-siege --final-payout-summary ...
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter |
-| `orchestrator.py` | ❌ | CLI multi-commandes (start/resume/gate/close) |
-| `libs/ledger_manager.py` | ❌ | Gère liber_clipping.json + IW_CUSTOS.py |
-| `libs/gate_validator.py` | ❌ | Vérifie que les outputs attendus sont présents avant validation de porte |
-| `libs/siege_initializer.py` | ❌ | Init liber_clipping.json |
-| `libs/omnis_watch_distributor.py` | ❌ | Push les packs vers raw URL / git tag pour OMNIS_WATCH |
-| `requirements_orchestrator.txt` | ❌ | |
+| Code Python implémenté | ✅ | v1 — voir `[DEV-ORCHESTRATOR]` dans `TRACKING/CLIPPING_LOG.md` |
+| `orchestrator.py` | ✅ | CLI multi-commandes (start-siege/resume/gate/close/status) |
+| `libs/ledger_manager.py` | ✅ | Gère liber_clipping.json + IW_CUSTOS.py |
+| `libs/gate_validator.py` | ✅ | Vérifie que les outputs attendus sont présents avant validation de porte |
+| `libs/siege_initializer.py` | ✅ | Valide les 4 inputs Warsmith + blocage si campagne active |
+| `libs/omnis_watch_distributor.py` | ✅ | packs_index.json + raw URLs pour OMNIS_WATCH |
+| `gates.py` | ✅ | Les 4 Portes du forge CLIPPING (verdict/angles/textes/packs) |
+| `requirements_orchestrator.txt` | ✅ | Standard lib — aucune dépendance externe |
 
 Référence d'implémentation : `HERESIE/ORCHESTRATOR/CODEBASE/orchestrator.py` dans le core (probable réutilisation à 60-70%, adaptation pour les 4 Portes du forge clipping et la spécificité de F04).
 
