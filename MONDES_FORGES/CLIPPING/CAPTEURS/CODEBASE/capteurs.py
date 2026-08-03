@@ -11,6 +11,7 @@ de cause.
 Commandes:
   python capteurs.py --scan --campaign IN/campaign_to_observe.json
   python capteurs.py --scan-demons --scan-list IN/scan_list.json
+  python capteurs.py --scrap-youtube --channel <url> [--max-videos 20]
 
 Hérésies gardées :
   - Scrap automatique (pas de cron, pas d'auto-loop)
@@ -36,6 +37,7 @@ from whop_scanner import WhopScanner
 from clipping_ecosystem_scanner import ClippingEcosystemScanner
 from campaign_context_scanner import CampaignContextScanner
 from demon_scanner import DemonScanner
+from youtube_channel_scraper import YoutubeChannelScraper
 
 OUT_DIR = os.path.join(_CAPTEURS_DIR, "OUT")
 IN_DIR = os.path.join(_CAPTEURS_DIR, "IN")
@@ -264,6 +266,42 @@ def cmd_scan_demons(args):
     print("[CAPTEURS] TYRANT prospectif peut poursuivre l'analyse (ARCHIVUM/demons/)")
 
 
+# ----------------------------------------------------------------------
+# Scrap de chaînes YouTube (base de savoir copywriting)
+# ----------------------------------------------------------------------
+def cmd_scrap_youtube(args):
+    guard_campaign_open()
+
+    channel_url = args.channel
+    if not channel_url and args.scan_list:
+        scan_list = load_json(args.scan_list)
+        channels = scan_list.get("channels", []) if scan_list else []
+        channel_url = channels[0] if channels else None
+    if not channel_url:
+        print("[CAPTEURS] --channel requis pour --scrap-youtube "
+              "(ou IN/scan_list.json -> {\"channels\": [...]})")
+        sys.exit(1)
+
+    kb_transcripts = os.path.join(ARCHIVUM_DIR, "knowledge_base", "transcripts")
+    out_dir = args.out or kb_transcripts
+    scraper = YoutubeChannelScraper(channel_url, out_dir,
+                                    max_videos=args.max_videos,
+                                    languages=(args.languages or
+                                               ["fr", "en", "en-US"]),
+                                    rate_limit_sec=args.rate_limit)
+    try:
+        result = scraper.scrape()
+    except RuntimeError as e:
+        print(f"[CAPTEURS] Scrap échoué: {e}")
+        sys.exit(1)
+
+    print(f"[CAPTEURS] Chaîne: {result.get('channel_name')} ({result.get('channel_slug')})")
+    print(f"[CAPTEURS] {len(result['captured'])} capturée(s), "
+          f"{len(result['skipped'])} déjà archivée(s), "
+          f"{len(result['failed'])} échec(s)")
+    print(f"[CAPTEURS] Archivé: {result['out_dir']}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="CAPTEURS — Les Yeux du Siège")
     parser.add_argument("--scan", action="store_true",
@@ -273,7 +311,19 @@ def main():
     parser.add_argument("--scan-demons", action="store_true",
                         help="Scan des Démon wild clipping (TikTok/Shorts/Reels)")
     parser.add_argument("--scan-list", default=None,
-                        help="Chemin vers IN/scan_list.json (queries demons)")
+                        help="Chemin vers IN/scan_list.json (queries demons ou chaînes)")
+    parser.add_argument("--scrap-youtube", action="store_true",
+                        help="Scrap d'une chaîne YouTube commanditée (transcripts + méta)")
+    parser.add_argument("--channel", default=None,
+                        help="URL de la chaîne YouTube à scraper")
+    parser.add_argument("--max-videos", type=int, default=20,
+                        help="Nombre max de vidéos par chaîne (défaut 20)")
+    parser.add_argument("--out", default=None,
+                        help="Dossier d'archivage (défaut ARCHIVUM/knowledge_base/transcripts)")
+    parser.add_argument("--languages", nargs="*", default=None,
+                        help="Langues de transcript préférées")
+    parser.add_argument("--rate-limit", type=float, default=1.0,
+                        help="Secondes entre deux captures (défaut 1.0)")
     args = parser.parse_args()
 
     if args.scan:
@@ -284,6 +334,8 @@ def main():
         if not args.scan_list:
             print("[CAPTEURS] --scan-list requis pour --scan-demons"); sys.exit(1)
         cmd_scan_demons(args)
+    elif args.scrap_youtube:
+        cmd_scrap_youtube(args)
     else:
         parser.print_help()
 

@@ -148,7 +148,8 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
 | `libs/clipping_ecosystem_scanner.py` | ✅ | Scrap sites clipping du Warsmith (payouts, outils AI, campagnes référencées) |
 | `libs/campaign_context_scanner.py` | ✅ | Perception de la campagne dans l'écosystème (compétiteurs, angles déjà utilisés) |
 | `libs/demon_scanner.py` | ✅ | Démon wild clipping (sondes TikTok/Shorts/Reels, archivées ARCHIVUM/demons/) |
-| `requirements_capteurs.txt` | ✅ | Stdlib urllib requis ; requests/bs4/playwright/selenium optionnels selon sites |
+| `libs/youtube_channel_scraper.py` | ✅ | Scrap de chaînes YouTube commandité (`--scrap-youtube`) — transcripts + méta dans knowledge_base/transcripts/ |
+| `requirements_capteurs.txt` | ✅ | Stdlib urllib requis + yt-dlp/youtube-transcript-api (--scrap-youtube) ; requests/bs4/playwright/selenium optionnels selon sites |
 
 ### Décisions v1
 
@@ -169,5 +170,14 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
   `ARCHIVUM/demons/demon_wild_scan_<id>.json`.
 - **Check-in IW_CUSTOS** : fin de scan → `CAPTEURS` done, `fleet_status`
   → `capteurs_done`.
+- **`--scrap-youtube`** (ajout v1.1, [DEV-CAPTEURS-SCRAP]) : scrape une chaîne
+  YouTube commanditée par le Warsmith (URL chaîne via `--channel` ou liste dans
+  IN/scan_list.json `{"channels": [...]}`). Listing `yt-dlp --flat-playlist`
+  (rapide), transcript `youtube-transcript-api` (fallback yt-dlp --write-subs),
+  méta `yt-dlp --dump-single-json` (vues, subs, outlier = vues/subs). Archivage
+  `ARCHIVUM/knowledge_base/transcripts/<slug>/<video_id>.json` — même schéma
+  que le core YOUTUBE. Reprise native : vidéo déjà archivée → sautée. Limite
+  par défaut 20 vidéos (`--max-videos`), rate-limit 1s (`--rate-limit`).
+  Doctrine inchangée : commandité (jamais de cron), éteint si campagne fermée.
 
 *Fer au-dedans, Fer au-dehors. Rien n'échappe au siège.*
