@@ -35,12 +35,12 @@ Cette livraison est **la trame stratégique**. Aucun code Python n'est écrit. L
 | Composant | Fichier TRACKING.md | Statut | Code Python |
 |---|---|---|---|
 | F01_SCOUT | `F01_SCOUT/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — scout.py + libs recon/enrich/scribe |
-| F02_TYRANT_CAMP | `F02_TYRANT_CAMP/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| F02_TYRANT_CAMP | `F02_TYRANT_CAMP/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — tyrant_camp.py + libs skeleton/blue_ocean/fit |
 | F03_SOURCE_HUNTER | `F03_SOURCE_HUNTER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
 | F04_COPYWRITER | `F04_COPYWRITER/CODEBASE/TRACKING.md` | ✅ rédigé (le plus détaillé — frégate lourde 4 phases) | ❌ à implémenter |
 | F05_PACKAGER | `F05_PACKAGER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
 | F06_TRACKER | `F06_TRACKER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
-| TYRANT (prospectif) | `TYRANT/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| TYRANT (prospectif) | `TYRANT/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — tyrant.py + libs outlier/emotion/blue_ocean/archivist |
 | CAPTEURS | `CAPTEURS/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
 | ORCHESTRATOR | `ORCHESTRATOR/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — orchestrator.py + gates.py + 4 libs |
 

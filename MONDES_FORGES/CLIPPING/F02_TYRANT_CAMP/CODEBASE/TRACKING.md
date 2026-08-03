@@ -169,12 +169,12 @@ Règles strictes :
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter |
-| `tyrant_camp.py` | ❌ | Wrapper orchestrateur (prévu) |
-| `libs/skeleton_extractor.py` | ❌ | Extraction squelette viral du clip ref |
-| `libs/blue_ocean_finder.py` | ❌ | Identification océans bleus depuis ARCHIVUM/demons/ |
-| `libs/fit_scorer.py` | ❌ | Score fit plateforme × marché × niche |
-| `requirements_c02.txt` | ❌ | Dépendances à figer |
+| Code Python implémenté | ✅ (v1) | |
+| `tyrant_camp.py` | ✅ (v1) | Wrapper 3 phases (--prepare / --auto / --finalize) |
+| `libs/skeleton_extractor.py` | ✅ (v1) | Pré-squelette viral (l'IRON affine) |
+| `libs/blue_ocean_finder.py` | ✅ (v1) | Océans bleus depuis ARCHIVUM/demons/ + saturation |
+| `libs/fit_scorer.py` | ✅ (v1) | Score fit plateforme × marché × niche (0-10) |
+| `requirements_c02.txt` | ✅ | Stdlib pure — rien à installer |
 
 Référence d'implémentation : `HERESIE/TYRANT/CODEBASE/tyrant.py` dans le core (squelette structurel probablement réutilisable).
 

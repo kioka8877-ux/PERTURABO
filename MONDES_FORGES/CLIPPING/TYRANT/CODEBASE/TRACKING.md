@@ -134,13 +134,13 @@ Phase 3 : finalize
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter |
-| `tyrant.py` | ❌ | Wrapper Oracle prospectif |
-| `libs/outlier_scorer.py` | ❌ | Calcul outlier_score > 3x |
-| `libs/emotion_classifier.py` | ❌ | Classification émotion dominante |
-| `libs/blue_ocean_mapper.py` | ❌ | Mapper territoires adjacents 1 couche |
-| `libs/demon_archivist.py` | ❌ | Écrit demon_id.json dans ARCHIVUM/demons/ |
-| `requirements_tyrant.txt` | ❌ | yt-dlp + youtube-transcript-api |
+| Code Python implémenté | ✅ (v1) | |
+| `tyrant.py` | ✅ (v1) | Wrapper 3 phases (--prepare / --auto / --finalize) |
+| `libs/outlier_scorer.py` | ✅ (v1) | Calcul outlier_score > 3x (views / baseline) |
+| `libs/emotion_classifier.py` | ✅ (v1) | Classification émotion dominante (keywords titre/transcript) |
+| `libs/blue_ocean_mapper.py` | ✅ (v1) | Mapper territoires adjacents 1 couche + clamp profondeur |
+| `libs/demon_archivist.py` | ✅ (v1) | Écrit demon_id.json dans ARCHIVUM/demons/ |
+| `requirements_tyrant.txt` | ✅ | yt-dlp + youtube-transcript-api (Warsmith/IRON Phase 2) |
 
 Référence d'implémentation : `HERESIE/TYRANT/CODEBASE/tyrant.py` dans le core (squelette structurel probablement réutilisable, mais adapter au prospectif clipping).
 

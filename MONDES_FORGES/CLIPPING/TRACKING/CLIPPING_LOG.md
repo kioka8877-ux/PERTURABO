@@ -143,14 +143,64 @@ F01_SCOUT/CODEBASE/
 
 ---
 
+## [DEV-F02-TYRANT] F02_TYRANT_CAMP + TYRANT implémentées — Verdict & Oracle
+
+### Contexte
+Troisième vague de code : la Porte 1 est couverte côté stratégie. F02_TYRANT_CAMP (mode réactif) rend le verdict GO/NO-GO + océan bleu pour chaque campagne ; TYRANT (mode prospectif) veille les Démons du wild clipping et nourrit `ARCHIVUM/demons/`.
+
+### Fichiers livrés
+```
+F02_TYRANT_CAMP/CODEBASE/
+├── tyrant_camp.py                ← wrapper 3 phases (--prepare / --auto / --finalize)
+├── requirements_c02.txt
+└── libs/
+    ├── skeleton_extractor.py     ← pré-squelette viral du clip ref (l'IRON affine)
+    ├── blue_ocean_finder.py      ← océans bleus depuis ARCHIVUM/demons/ + saturation low/medium eligible
+    └── fit_scorer.py             ← score fit plateforme x marche x niche (0-10, aucun chiffre invente)
+
+TYRANT/CODEBASE/
+├── tyrant.py                     ← wrapper 3 phases (--prepare / --auto / --finalize)
+├── requirements_tyrant.txt       ← yt-dlp + youtube-transcript-api (Warsmith/IRON)
+└── libs/
+    ├── outlier_scorer.py         ← outlier_score = views / baseline, seuil > 3x par defaut
+    ├── emotion_classifier.py     ← emotion dominante (drame/joie/outrage/...) depuis titre/transcript
+    ├── blue_ocean_mapper.py      ← territoires adjacents 1 couche max (clamp profondeur = heresie guard)
+    └── demon_archivist.py        ← ecrit ARCHIVUM/demons/<demon_id>.json
+```
+
+### Decisions d'implementation
+- Heresie guard au finalize : toute profondeur d'ocean bleu != 1 est clampee (jamais 2 couches).
+- Aucun Demon sans preuve quantitative : outlier_score calcule strictement (views / baseline), jamais invente.
+- F02 --auto : verdict GO si assets presents dans le specimen, sinon NO-GO (strict-source).
+- Les deux frégates font leur check-in IW_CUSTOS (statuts `tyrant_done` / `verdict_ready` via preconditions).
+- `TYRANT/IN/tyrant_config.json` : defaults (outlier_threshold_x=3, max_blue_ocean_depth=1) generes par --prepare.
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | |
+| F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict GO/NO-GO + ocean bleu (Porte 1) |
+| TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Demon -> ARCHIVUM/demons/ |
+| F03_F06 + CAPTEURS + ANGLESMITH | ✅ | ❌ | Vagues suivantes |
+
+### Prochaines etapes
+1. Implementer ANGLESMITH (vague 4 — forge les N angles sur verdict.json)
+2. Implementer F03_SOURCE_HUNTER + F04_COPYWRITER (vague 5)
+3. Implementer F05_PACKAGER + F06_TRACKER + CAPTEURS
+4. Premier siege reel avec les inputs du Warsmith
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |
 |---|---|---|
-| Avant Porte 1 | CAPTEURS scrap écosystème + niche | Non démarré |
-| Porte 1 | F02_TYRANT_CAMP verdict campagne | Non démarré |
-| Porte 2 | ANGLESMITH N angles forgés | Non démarré |
-| Porte 3 | F03 + F04 text_payloads prêts | Non démarré |
-| Porte 4 | F05 production packs expédiés → OMNIS_WATCH | Non démarré |
+| Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | Non demarre |
+| Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
+| Porte 2 | ANGLESMITH N angles forges | Non demarre |
+| Porte 3 | F03 + F04 text_payloads prets | Non demarre |
+| Porte 4 | F05 production packs expedies -> OMNIS_WATCH | Non demarre |
 
 *Fer au-dedans, Fer au-dehors.*

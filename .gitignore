@@ -1,1 +1,7 @@
-__pycache__/\n*.pyc\n.env\n/tmp/\n*.mp3\n*.wav\n*.mp4
+__pycache__/
+*.pyc
+.env
+/tmp/
+*.mp3
+*.wav
+*.mp4
