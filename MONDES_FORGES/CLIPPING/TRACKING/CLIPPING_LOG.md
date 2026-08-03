@@ -288,6 +288,74 @@ F03_SOURCE_HUNTER/CODEBASE/
 
 ---
 
+## [DEV-F04] F04_COPYWRITER implémentée — La Plume de la Forteresse (Porte 3)
+
+### Contexte
+Sixième vague de code. La frégate lourde de la Porte 3 est opérationnelle : elle forge le `text_payload` complet pour chaque angle (3 titres calibrés + paragraphe reframing + caption + hashtags 3 strates + on-screen text + CTA). **Singularité** : rupture du pattern 3 phases — la génération parle DIRECT au modèle premium (clé API dédiée), l'IRON ordonnance seulement.
+
+### Fichiers livrés
+```
+F04_COPYWRITER/CODEBASE/
+├── copywriter.py                    ← orchestrateur 4 phases + init one-time
+├── requirements_c04.txt             ← stdlib pure (client urllib, aucun SDK obligatoire)
+└── libs/
+    ├── context_builder.py           ← Phase A — rassemble TOUT l'ARCHIVUM pertinent
+    │                                  (8 sous-dossiers copywriting + rules + profiles +
+    │                                  angles + demons + knowledge_base + learnings +
+    │                                  doctrine + systemprompt), fichiers > 30k chars tronqués
+    ├── premium_client.py            ← Phase B — client modèle premium direct
+    │                                  (OpenAI-compatible via urllib, Anthropic supporté,
+    │                                  clé depuis env CLIPPING_PREMIUM_API_KEY,
+    │                                  config gitignored CONTRACTS/copywriter_secrets.json)
+    ├── iron_ordonnancer.py          ← Phase C — prompt IRON (validation + classement)
+    │                                  + mode --auto-ord local heuristique (rank titles,
+    │                                  reco paragraphe, auto-fix #ad)
+    ├── compliance_checker.py        ← garde-fous : FTC #ad, phrases interdites
+    │                                  (abonne-toi/like et partage/swipe up…), paragraphe
+    │                                  > 2 lignes, clickbait sans payoff, 3 titres/3 strates
+    └── md_renderer.py               ← Phase D — .md lisible opérateur (le Warsmith
+                                       lit le .md au moment de poster, pas le JSON)
+```
+
+### Décisions d'implémentation
+- Pattern 4 phases : `--setup-context` (A) → `--generate` (B) → `--ordonnance` (C) → `--finalize` (D). Phase B refusée tant que `copywriter_systemprompt.md` est le placeholder (sauf `--force`).
+- Init one-time : `--init-systemprompt` — le premium génère le system prompt figé depuis la doctrine + le musée copywriting (refus si déjà généré, `--force` pour refaire).
+- `--generate --dry-run` : écrit `IN/premium_call_<angle>.json` (system + user prompt) sans appel réseau — inspectable avant de dépenser la clé premium.
+- `--ordonnance` sans flag : prompt IRON (le Warsmith copie dans Claude sandbox) ; `--ordonnance --auto-ord` : classement local (rank = platform_fit + market_fit + bonus hook_type connu), reco paragraphe (use si ≤ 2 lignes / ≤ 220 chars), auto-fix FTC (`#ad` ajouté à la caption si absent).
+- Veto paragraphe 3 niveaux : `recommendation` (F04) → `override_omniswatch` (Oracle, null) → `final_operator` (Warsmith, null) — résolution : le dernier non-null gagne.
+- `--finalize` : hérésies critiques → refus (FORBIDDEN_PHRASE, FTC_AD_MISSING, PARAGRAPH_TOO_LONG) ; génère le `.md` ; check-in IW_CUSTOS F04 seulement quand TOUS les angles ont leur payload ordonnancé (fleet_status → `text_payloads_forged`).
+- Clé premium : jamais dans les fichiers — `copywriter_secrets.json` (gitignored) ne référence que la var d'env `CLIPPING_PREMIUM_API_KEY` + model_id/provider/base_url.
+
+### Tests effectués (environnement mock TEST_F04)
+- 3 angles (A01/A02/A03) : phases A→B→C→D complètes, `campaign_id` propagé depuis le contexte.
+- Classement titres : le titre au score le plus haut (9+8+1) passe rank 1 — vérifié sur sortie ordonnancée.
+- Garde FORBIDDEN_PHRASE : caption "abonne-toi…" → finalize refusé (corrigé après normalisation des traits d'union).
+- FTC auto-fix : caption sans #ad → `#ad` ajouté + hashtags.
+- Serveur mock OpenAI-compatible : `--generate` réel → POST /chat/completions OK (model + system prompt + schema envoyés), sortie brute parsée et sauvegardée.
+- `--init-systemprompt` sans clé → refus propre (message clair, exit 1, pas de traceback).
+- Robustesse : `load_json` en utf-8-sig (BOM PowerShell Windows).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | |
+| F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict + océan bleu (Porte 1) |
+| ANGLESMITH (via F02) | ✅ (README/F02) | ✅ (v1) | N angles direct + blue ocean (Porte 2) |
+| TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
+| F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
+| F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
+| F05_PACKAGER + F06_TRACKER + CAPTEURS | ✅ | ❌ | Vague 7-8 |
+
+### Prochaines étapes
+1. Le Warsmith : créer `CONTRACTS/copywriter_secrets.json` (gitignored) + `export CLIPPING_PREMIUM_API_KEY`
+2. Le Warsmith : remplir la doctrine (sections I-X) + le musée `ARCHIVUM/copywriting/` → puis `python copywriter.py --init-systemprompt` (one-time)
+3. Implémenter F05_PACKAGER (vague 7) + F06_TRACKER (vague 7) + CAPTEURS (vague 8)
+4. Premier siège réel avec les inputs du Warsmith
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |
@@ -295,7 +363,7 @@ F03_SOURCE_HUNTER/CODEBASE/
 | Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | Non demarre |
 | Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
 | Porte 2 | ANGLESMITH N angles forges | Code pret (attente siege reel) |
-| Porte 3 | F03 + F04 text_payloads prets | F03 code pret — F04 a implementer |
-| Porte 4 | F05 production packs expedies -> OMNIS_WATCH | Non demarre |
+| Porte 3 | F03 + F04 text_payloads prets | Code pret (attente siege reel) |
+| Porte 4 | F05 production packs expedies -> OMNIS_WATCH | F05 a implementer |
 
 *Fer au-dedans, Fer au-dehors.*

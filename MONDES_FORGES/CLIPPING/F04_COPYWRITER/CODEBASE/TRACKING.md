@@ -304,15 +304,21 @@ Règle de résolution : si `final_operator` est non-null, il gagne. Sinon, si `o
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter |
-| `copywriter.py` | ❌ | Orchestrator (4 phases distinguées — pas le même script que les autres frégates) |
-| `libs/context_builder.py` | ❌ | Phase A — assemble l'ARCHIVUM dans l'IN/context.json |
-| `libs/premium_client.py` | ❌ | Phase B — client SDK modèle premium (clé via env var) |
-| `libs/iron_ordonnancer.py` | ❌ | Phase C — appel IRON sandbox pour validation + classement |
-| `libs/md_renderer.py` | ❌ | Phase D — génère le `.md` lisible opérateur depuis le `.json` |
-| `libs/compliance_checker.py` | ❌ | Vérifie FTC + anti-bullshit |
-| `requirements_c04.txt` | ❌ | SDK modèle premium + sdk IRON + PyYAML si besoin |
-| `CONTRACTS/copywriting_doctrine.md` | squelette ✅, contenu ❌ | À remplir par le Warsmith (10 sections) |
-| `CONTRACTS/copywriter_systemprompt.md` | placeholder ✅, contenu ❌ | À générer par premium à l'init (one-time) |
+| Code Python implémenté | ✅ | v1 — commit bdd7012 (tests mock TEST_F04) |
+| `copywriter.py` | ✅ | Orchestrator 4 phases + `--init-systemprompt` (one-time) + `--dry-run` |
+| `libs/context_builder.py` | ✅ | Phase A — assemble l'ARCHIVUM dans l'IN/context.json (troncature 30k chars/fichier) |
+| `libs/premium_client.py` | ✅ | Phase B — client modèle premium direct (OpenAI-compatible urllib + Anthropic, clé via env var, jamais en clair) |
+| `libs/iron_ordonnancer.py` | ✅ | Phase C — prompt IRON + mode `--auto-ord` local (classement + reco + auto-fix #ad) |
+| `libs/md_renderer.py` | ✅ | Phase D — génère le `.md` lisible opérateur depuis le `.json` |
+| `libs/compliance_checker.py` | ✅ | FTC + anti-bullshit + paragraphe 2 lignes + structure minimale |
+| `requirements_c04.txt` | ✅ | stdlib pure (client urllib — SDK optionnels documentés) |
+| `CONTRACTS/copywriting_doctrine.md` | squelette ✅, contenu ❌ | À remplir par le Warsmith (10 sections — surtout VI subliminal) |
+| `CONTRACTS/copywriter_systemprompt.md` | placeholder ✅, contenu ❌ | À générer par premium à l'init : `python copywriter.py --init-systemprompt` (one-time, figé ensuite) |
+
+### Décisions v1 (résumé)
+- Check-in IW_CUSTOS F04 seulement quand TOUS les angles ont leur `text_payload_<angle>.json` ordonnancé (évite une transition prématurée de fleet_status).
+- Les fichiers > 30k chars de l'ARCHIVUM sont tronqués avec marqueur `[... TRONQUÉ ...]` — la frégate synthétise, elle ne régurgite pas.
+- `--generate` refusé tant que le system prompt est le placeholder (sauf `--force`) ; `--dry-run` écrit `IN/premium_call_<angle>.json` sans appel réseau.
+- `load_json` en utf-8-sig (robustesse BOM Windows PowerShell).
 
 *Fer au-dedans, Fer au-dehors. Le titre ouvre la brèche, le paragraphe la tient, le loop verrouille la victoire.*
