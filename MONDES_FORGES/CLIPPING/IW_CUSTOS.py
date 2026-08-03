@@ -8,6 +8,7 @@ Seul agent autorisé à modifier l'état des frégates dans liber_clipping.json.
 Usage:
   python IW_CUSTOS.py --mode check-out --frigate F01
   python IW_CUSTOS.py --mode check-in --frigate F01 --output F01_SCOUT/OUT/source_specimen.json
+  python IW_CUSTOS.py --mode close-campaign
   python IW_CUSTOS.py --mode validate --schema liber_clipping.json
   python IW_CUSTOS.py --mode status
 """
@@ -224,10 +225,27 @@ def cmd_status():
     print("=" * 58 + "\n")
 
 
+def cmd_close_campaign():
+    """Ferme la campagne dans le ledger — déclenché par F06_TRACKER au
+    --close-campaign. Seul IW_CUSTOS écrit liber_clipping.json."""
+    cms = load_liber()
+    if cms.get("campaign_status") == "closed":
+        print(f"[IW_CUSTOS] Campagne déjà fermée: {cms.get('campaign_id')}")
+        return
+    cms["campaign_status"] = "closed"
+    cms["siege_closed_at"] = now_iso()
+    cms["last_event"] = "campaign_closed"
+    cms["iw_custos"]["last_validation"] = now_iso()
+    save_liber(cms)
+    log_campaign(f"campaign_closed — {cms.get('campaign_id')} — siege_closed_at: {cms['siege_closed_at']}")
+    print(f"[IW_CUSTOS] Campagne fermée. siege_closed_at: {cms['siege_closed_at']}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="IW_CUSTOS — Gardien du forge CLIPPING")
     parser.add_argument("--mode", required=True,
-                        choices=["check-out", "check-in", "validate", "status"])
+                        choices=["check-out", "check-in", "validate", "status",
+                                 "close-campaign"])
     parser.add_argument("--frigate", default=None)
     parser.add_argument("--output", default=None)
     parser.add_argument("--schema", default=LIBER_PATH)
@@ -247,6 +265,8 @@ def main():
         cmd_validate(args.schema)
     elif args.mode == "status":
         cmd_status()
+    elif args.mode == "close-campaign":
+        cmd_close_campaign()
 
 
 if __name__ == "__main__":

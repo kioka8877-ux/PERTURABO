@@ -164,11 +164,19 @@ python tracker.py --close-campaign                           # Ferme + agrège l
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter |
-| `tracker.py` | ❌ | CLI multi-commandes (post/submit/views/payout/close) |
-| `libs/learnings_aggregator.py` | ❌ | Calcule poids (seuil 50) |
-| `libs/channel_performance_updater.py` | ❌ | Met à jour `ARCHIVUM/channels/<slug>/performance.json` |
-| `libs/readings_validator.py` | ❌ | Vérifie cohérence saisies Warsmith |
-| `requirements_c06.txt` | ❌ | Standard lib Python (json, datetime) — pas de SDK premium |
+| Code Python implémenté | ✅ | v1 — commit bdd7014 (tests mock TEST_F06) |
+| `tracker.py` | ✅ | CLI multi-commandes (post/submit/views/payout/close-campaign) |
+| `libs/learnings_aggregator.py` | ✅ | Agrégation par clé composite 6 axes, weight progressif clampé [0.5, 2.0] au-delà de 50 packs, historique préservé |
+| `libs/channel_performance_updater.py` | ✅ | `ARCHIVUM/channels/<slug>/performance.json` (packs + totaux) |
+| `libs/readings_validator.py` | ✅ | Cohérence saisies Warsmith (monotonie, doublons, négatifs refusés) |
+| `requirements_c06.txt` | ✅ | Standard lib Python (json, datetime, re) — pas de SDK premium |
+| `IW_CUSTOS.py` | ✅ (étendu) | Nouveau mode `--mode close-campaign` (campaign_status closed + siege_closed_at) |
+
+### Décisions v1 (résumé)
+- Axes d'angle copiés du pack F05 vers l'entrée du submission_log au `--post` (l'agrégation learnings en a besoin).
+- Seuils low_payout / low_views lus par regex dans clipping_rules.md — défaut 0 si non déclarés (flag inactif, jamais de faux positif).
+- `submission_within_1h` vs `deadline_min` du checklist (60 min par défaut) ; flag `submission_late` si dépassé.
+- Poids v1 : neutres (1.0) tant que cumulative < 50 ; activation progressive ensuite. Le flag `eligible_for_weighting` est la source de vérité lue par ANGLESMITH.
+- `--close-campaign` : learnings préservés (append/update) + aggregate_cpm + campaign_summary.md + check-in F06 (→ campaign_closed) + close-campaign IW_CUSTOS.
 
 *Fer au-dedans, Fer au-dehors. Le siège est fini quand le tracker a fermé le ledger.*

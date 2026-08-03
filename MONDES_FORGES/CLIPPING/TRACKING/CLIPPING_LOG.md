@@ -413,14 +413,72 @@ F05_PACKAGER/CODEBASE/
 
 ---
 
+## [DEV-F06] F06_TRACKER implémentée — Le Traqueur de la Forteresse (post-Porte 4)
+
+### Contexte
+Huitième vague de code. La frégate post-publication est opérationnelle : elle active la `submission_checklist` des packs F05, enregistre les saisies du Warsmith (post, soumission Whop, vues 1h/24h, payout), boucle le `learnings.json` à la fermeture de campagne et ferme le ledger via IW_CUSTOS. **F06 ne fait pas appel à l'IRON ni au premium** — pur mécanique de log + calcul.
+
+### Fichiers livrés
+```
+F06_TRACKER/CODEBASE/
+├── tracker.py                       ← CLI : --post / --submit / --views / --payout / --close-campaign
+├── requirements_c06.txt             ← stdlib pure
+└── libs/
+    ├── readings_validator.py        ← cohérence saisies Warsmith (monotonie vues, doublons,
+    │                                  négatifs refusés)
+    ├── learnings_aggregator.py      ← agrégation angle_performance (clé composite 6 axes),
+    │                                  weight progressif (seuil 50 packs), campaign_history préservée
+    └── channel_performance_updater.py ← ARCHIVUM/channels/<slug>/performance.json (packs + totaux)
++ IW_CUSTOS.py                       ← nouveau mode --close-campaign (campaign_status closed,
+                                        siege_closed_at) — seul agent autorisé à écrire liber
+```
+
+### Décisions d'implémentation
+- Les axes d'angle (family/emotion/engagement/reframe_dim) sont copiés du pack F05 vers l'entrée du submission_log au `--post` — sinon l'agrégation par clé composite serait vide.
+- Soumission : `submission_within_1h` = (soumis − posté) ≤ deadline du checklist (60 min par défaut) ; flag `submission_late` sinon.
+- Seuils low_payout / low_views lus par regex dans `clipping_rules.md` (CONTRACTS puis ARCHIVUM/rules) — si non déclarés par le Warsmith, défaut 0 (flag inactif, pas de faux positif).
+- Pondération v1 progressive : `weight = clamp(1 + 0.25 × (moy_grp/moy_glob − 1), 0.5, 2.0)` uniquement si `cumulative >= 50`, sinon 1.0 pour tous (hérésie sinon — ANGLESMITH lit ce flag).
+- `--close-campaign` : agrège learnings en PRÉSERVANT l'historique (append/update, jamais d'écrasement), calcule `aggregate_cpm`, écrit `campaign_summary.md`, check-in IW_CUSTOS F06 (fleet_status → campaign_closed) puis `--mode close-campaign` (campaign_status closed dans liber).
+- Validateur : refus des doublons (déjà posté, vues/payout déjà enregistrés), vues négatives, views_24h < views_1h, payout négatif.
+- Perfs par compte : `ARCHIVUM/channels/<slug>/performance.json` créé à la volée (le Warsmith ajoute ses comptes au fil du temps).
+
+### Tests effectués (environnement mock TEST_F06)
+- 3 packs postés/soumis/vues/payout → close-campaign : learnings agrégés par 6 axes (3 groupes), weight neutres (< 50), campaign_history 1 entrée, aggregate_cpm calculé, submission_log closed, IW_CUSTOS campaign_status closed + F06 done.
+- Validateur : views_24h < views_1h refusé ; vues/payout doublons refusés ; payout négatif refusé ; double --post refusé.
+- Channel perfs : clip_main (2 packs, totaux vues/payout) et clip_alt suivis séparément.
+- Boucle préservée : 2e campagne fermée → cumulative 3→4, history 1→2 entrées, groupe A03 fusionné (packs_count 1→2, moyennes recalculées).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | |
+| F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict + océan bleu (Porte 1) |
+| ANGLESMITH (via F02) | ✅ (README/F02) | ✅ (v1) | N angles direct + blue ocean (Porte 2) |
+| TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
+| F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
+| F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
+| F05_PACKAGER | ✅ | ✅ (v1) | production_packs -> OMNIS_WATCH (Porte 4) |
+| F06_TRACKER | ✅ | ✅ (v1) | Checklist + vues/payout + learnings + close (post-Porte 4) |
+| CAPTEURS | ✅ | ❌ | Vague 9 — commandité Warsmith |
+
+### Prochaines étapes
+1. Implémenter CAPTEURS (vague 9 — scrap commandité, avant Porte 1)
+2. Premier siège réel : F01 → F05 bout en bout, puis F06 au fil des posts
+3. Le Warsmith : déclarer les seuils low_payout/low_views dans `CONTRACTS/clipping_rules.md` (règles C), doctrine F04 + `--init-systemprompt`, vision IRON du clip de référence
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |
 |---|---|---|
-| Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | Non demarre |
+| Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | CAPTEURS a implementer |
 | Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
 | Porte 2 | ANGLESMITH N angles forges | Code pret (attente siege reel) |
 | Porte 3 | F03 + F04 text_payloads prets | Code pret (attente siege reel) |
 | Porte 4 | F05 production packs expedies -> OMNIS_WATCH | Code pret (attente siege reel) |
+| Post-Porte 4 | F06 tracker + learnings + close | Code pret (attente siege reel) |
 
 *Fer au-dedans, Fer au-dehors.*
