@@ -1,0 +1,188 @@
+# ORCHESTRATOR — TRACKING.md (Monde Forge CLIPPING)
+
+> *"L'Orchestrateur ne forge pas. Il conduit les frégates de porte en porte. Chaque porte validée = one step closer à la rupture de la forteresse."*
+> *Tient le ledger IW_CUSTOS + le liber_clipping.json. Synchronise les 4 portes.*
+
+---
+
+## RÔLE
+
+`ORCHESTRATOR/` est la **frégate-conductrice** du forge CLIPPING. Elle ne produit pas d'artefacts viraux elle-même — elle **synchronise** les C01-C06 + TYRANT + CAPTEURS et tient le **ledger central** (`IW_CUSTOS.py` dans le core PERTURABO + `liber_clipping.json` dans le forge).
+
+Orchestre les **4 Portes**. Le Warsmith valide chaque porte manuellement.
+
+---
+
+## LEDGER CENTRAL — IW_CUSTOS
+
+Aligné sur le pattern du core :
+- `IW_CUSTOS.py` — script registre central (Grand Company Ledger)
+- Copié dans le forge CLIPPING racine (`MONDES_FORGES/CLIPPING/IW_CUSTOS.py`)
+- Enregistre l'état du siège : campagne active, porte courante, statut de chaque frégate, soumissions, fermetures
+
+`liber_clipping.json` — état inter-frégates (partagé entre les frégates pour savoir où on en est dans le siège) :
+
+```json
+{
+  "siege_id": "...",
+  "campaign_id": "...",
+  "campaign_status": "active|closed",
+  "current_porte": "init|p1|p2|p3|p4|closed",
+  "inputs_warsmith": {
+    "directive_path": "...",
+    "reference_clip_path": "...",
+    "platform_target": "...",
+    "market_target": "...",
+    "n_angles": N
+  },
+  "fregates_status": {
+    "C01_SCOUT": "pending|done|blocked",
+    "C02_TYRANT_CAMP": "pending|done|blocked",
+    "F02_ANGLESMITH": "pending|done|blocked",
+    "C03_SOURCE_HUNTER": "pending|done|blocked",
+    "C04_COPYWRITER": "pending|done|blocked",
+    "C05_PACKAGER": "pending|done|blocked",
+    "C06_TRACKER": "pending|done|blocked"
+  },
+  "portes_validated": ["p1", "p2"],
+  "packs_expedies_count": N,
+  "packs_posted_count": N,
+  "packs_submitted_whop_count": N,
+  "last_event": "...",  
+  "siege_started_at": "<ISO8601>",
+  "siege_closed_at": "<ISO8601 ou null>"
+}
+```
+
+---
+
+## LES 4 PORTES
+
+### Porte 1 — Verdict campagne
+
+Frégates mobilisées : C01_SCOUT (alimentation) + C02_TYRANT_CAMP (verdict)
+
+Avant la Porte 1 (optionnel mais recommandé) : CAPTEURS scan écosystème + niche
+
+Le Warsmith valide le verdict GO/NO-GO. Si NO-GO → campaign pas poursuivie. Si GO → Porte 2.
+
+```
+orchestrator.py --gate 1 --decision valide|rejette
+```
+
+### Porte 2 — N angles forgés
+
+Frégates mobilisées : F02_ANGLESMITH (peut être porté par C02 ou dédié — voir implémentation future)
+
+L'Orchestrateur déclenche la forge des N angles. Le Warsmith voit les N angles (direct + océan bleu), valide ou tue 1+ angles (rereforge si kill).
+
+→ `OUT/angles.json` validé → Porte 3.
+
+```
+orchestrator.py --gate 2 --decision valide
+# Si angles rejetés :
+orchestrator.py --gate 2 --decision rejete --angle <angle_id> --reason "..."
+# → F02_ANGLESMITH re-forge un angle de remplacement
+```
+
+### Porte 3 — Source specimens + text payloads
+
+Frégates mobilisées : C03_SOURCE_HUNTER (source par angle) + C04_COPYWRITER (texte par angle)
+
+Pour chaque angle, C03 sélectionne l'asset + segments puis C04 forge le text_payload complet. Le Warsmith + l'IRON ordonnancement valident les N text_payloads.
+
+→ N `source_specimen_<angle>.json` + N `text_payload_<angle>.json` (et `.md` pour le Warsmith).
+
+```
+orchestrator.py --gate 3 --decision valide
+```
+
+### Porte 4 — N production packs expédiés → OMNIS_WATCH
+
+Frégate mobilisée : C05_PACKAGER
+
+Ces N `production_pack_<angle>.json` sont livrés à OMNIS_WATCH (par raw.githubusercontent.com URL — point d'intégration existant).
+
+C06_TRACKER prend le relais post-publication.
+
+```
+orchestrator.py --gate 4 --decision valide
+# → distribue packs_index.json vers OMNIS_WATCH (via git push ou raw URL)
+# → C06_TRACKER démarre
+```
+
+---
+
+## PATTERN D'EXÉCUTION — COMMANDES PRINCIPALES
+
+```
+# Démarrage d'un siège (campagne active)
+orchestrator.py --start-siege --directive ARCHIVUM/campaign/directive.md \
+   --reference-clip ARCHIVUM/campaign/reference_clip.json \
+   --platform youtube --market us_young_english \
+   --n-angles 10
+# → Initialise liber_clipping.json
+# → Statut = "init", en attente de CAPTEURS warpping et Porte 1
+
+# Après chaque porte :
+orchestrator.py --gate N --decision valide
+# → Avance current_porte à la suivante
+# → Active les frégates de la prochaine porte
+
+# Reprise après une pause :
+orchestrator.py --resume
+# → Lit liber_clipping.json, identifie la porte courante, indique 
+#   au Warsmith comment reprendre
+
+# Fermeture campaigne :
+orchestrator.py --close-siege --final-payout-summary ...
+# → Marque siehe comme closed, déclenche C06 agrégation learnings
+# → Libère la campaign/ pour la suivante (archivage optionnel)
+```
+
+---
+
+## CONTRATS RÉFÉRENCÉS
+
+- `HERESIE/CONTRACTS/iron_prompt.md` (core, lien) — pattern prepare/IRON/finalize
+- `HERESIE/CONTRACTS/system_prompt.md` (core, lien) — boussole système
+- `CONTRACTS/anti_bullshit.md` (core, lien)
+- Tous les `ARCHIVUM/rules/`
+
+---
+
+## DÉPENDANCES
+
+- **Amont** : Le Warsmith (4 inputs initiaux)
+- **Réseau interne** : toutes les frégates C01-C06, TYRANT, CAPTEURS
+- **Downstream** : OMNIS_WATCH (recoit les packs via Porte 4), `ARCHIVUM/learnings/learnings.json` (à la fermeture)
+
+---
+
+## HÉRÉSIES
+
+- ❌ Passer une porte sans validation Warsmith explicite
+- ❌ Sauter une porte (séquence Porte 1 → 2 → 3 → 4 obligatoire)
+- ❌ Auto-fermer une siège (seul le Warsmith déclare la fin)
+- ❌ Démarrer un nouveau siège sans fermer le précédent (campaign/ est singulier)
+- ❌ N'importe quelle frégate modifie directement `IW_CUSTOS.py` sans passer par l'Orchestrateur (chaque frégate appelle check-in mais c'est l'Orchestrateur qui tient la cohérence)
+
+---
+
+## STATUT
+
+| Phase | État | Notes |
+|---|---|---|
+| Arborescence créée | ✅ | |
+| TRACKING.md rédigé | ✅ | Ce fichier |
+| Code Python implémenté | ❌ | À implémenter |
+| `orchestrator.py` | ❌ | CLI multi-commandes (start/resume/gate/close) |
+| `libs/ledger_manager.py` | ❌ | Gère liber_clipping.json + IW_CUSTOS.py |
+| `libs/gate_validator.py` | ❌ | Vérifie que les outputs attendus sont présents avant validation de porte |
+| `libs/siege_initializer.py` | ❌ | Init liber_clipping.json |
+| `libs/omnis_watch_distributor.py` | ❌ | Push les packs vers raw URL / git tag pour OMNIS_WATCH |
+| `requirements_orchestrator.txt` | ❌ | |
+
+Référence d'implémentation : `HERESIE/ORCHESTRATOR/CODEBASE/orchestrator.py` dans le core (probable réutilisation à 60-70%, adaptation pour les 4 Portes du forge clipping et la spécificité de C04).
+
+*Fer au-dedans, Fer au-dehors. L'Orchestrateur ne ment pas — il conduit.*
