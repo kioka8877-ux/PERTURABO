@@ -136,11 +136,18 @@ Phase 3 : finalize
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python | ❌ | À implémenter |
-| `source_hunter.py` | ❌ | Wrapper orchestrateur |
-| `libs/transcript_loader.py` | ❌ | Charge transcripts depuis ARCHIVUM/campaign/ |
-| `libs/segment_matcher.py` | ❌ | Match angle ↔ segment transcript |
-| `libs/duration_guard.py` | ❌ | Vérification min/max par plateforme |
-| `requirements_c03.txt` | ❌ | |
+| Code Python | ✅ | v1 implémentée |
+| `source_hunter.py` | ✅ | Wrapper 3 phases (--prepare / --auto / --finalize) |
+| `libs/transcript_loader.py` | ✅ | Charge + indexe les transcripts depuis ARCHIVUM/campaign/transcripts/ |
+| `libs/segment_matcher.py` | ✅ | Match angle ↔ transcript (banques émotion/reframe), fenêtres clampées, extension au min de durée |
+| `libs/duration_guard.py` | ✅ | Fourchette min/max par plateforme (profil ARCHIVUM/platform_generator/, défauts déclarés sinon) |
+| `requirements_c03.txt` | ✅ | Stdlib pure (yt-dlp/transcript-api optionnels) |
+
+### Décisions d'implémentation (v1)
+- `--prepare` : génère `IN/source_hunter_prompt.json` (mission + angles + assets + fourchette plateforme + hérésies) pour l'IRON.
+- `--auto` : analyse locale sans IRON — meilleur asset par angle (score fenêtres transcript), segments dans la fourchette plateforme, `blue_ocean_reframe_applied` calé sur la zone de l'angle.
+- `--finalize` : gardes anti-hérésie (asset hors assets F01 = HERESIE, segments hors fourchette, incohérence océan bleu) + `OUT/source_summary.md` + check-in IW_CUSTOS (F03 → `specimens_selected`).
+- Le match auto est INDICATIF — chaque score est tracé dans la `rationale`, l'IRON affine en Phase 2.
+- La coupe n'est jamais faite par F03 : les segments sont des directives pour D-F02 d'OMNIS_WATCH.
 
 *Fer au-dedans, Fer au-dehors.*

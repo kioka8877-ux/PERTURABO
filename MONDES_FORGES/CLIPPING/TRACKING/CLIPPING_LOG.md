@@ -235,6 +235,59 @@ F02_TYRANT_CAMP/CODEBASE/
 
 ---
 
+## [DEV-F03] F03_SOURCE_HUNTER implémentée — La Sélection de la Seam (Porte 3)
+
+### Contexte
+Cinquième vague de code. La frégate de sélection est opérationnelle : à la Porte 3, elle prend les N angles forgés par ANGLESMITH (Porte 2) et identifie pour chaque angle la meilleure vidéo longue des assets de la campagne (strict-source, règle C1) + les segments pertinents (directives pour D-F02 d'OMNIS_WATCH). Elle produit un `source_specimen_<angle_id>.json` par angle, consommé par F04_COPYWRITER et F05_PACKAGER.
+
+### Fichiers livrés
+```
+F03_SOURCE_HUNTER/CODEBASE/
+├── source_hunter.py                ← wrapper 3 phases (--prepare / --auto / --finalize)
+├── requirements_c03.txt            ← stdlib pure (yt-dlp/transcript-api optionnels)
+└── libs/
+    ├── transcript_loader.py        ← charge + indexe les transcripts F01
+    │                                 (ARCHIVUM/campaign/transcripts/transcript_<id>.json)
+    ├── segment_matcher.py          ← score angle ↔ transcript (banques émotion/reframe),
+    │                                 fenêtres contiguës clampées [min,max],
+    │                                 extension au min de durée sur le transcript complet
+    └── duration_guard.py           ← fourchette min/max par plateforme
+                                      (profil ARCHIVUM/platform_generator/, défauts déclarés sinon)
+```
+
+### Décisions d'implémentation
+- `--prepare` : génère `IN/source_hunter_prompt.json` (mission + angles + assets + fourchette plateforme + hérésies) — l'IRON affine qualitativement.
+- `--auto` : analyse locale sans IRON — meilleur asset par angle (score fenêtres transcript), `blue_ocean_reframe_applied` calé sur la zone de l'angle, chaque score tracé dans la `rationale` (aucun chiffre inventé).
+- `--finalize` : gardes anti-hérésie (asset hors assets F01 = HERESIE, segments hors fourchette plateforme, incohérence océan bleu) + `OUT/source_summary.md` + check-in IW_CUSTOS (F03 → `specimens_selected`).
+- Les segments sont des directives, jamais des coupes (le cut reste à D-F02 d'OMNIS_WATCH).
+- Choix plateforme/marché : args CLI prioritaire, sinon `liber_clipping.json → inputs_warsmith`.
+
+### Tests effectués (environnement mock)
+- 4 angles (direct + océan bleu) sur 2 assets transcriptés : matchs corrects par banque, fenêtres dans la fourchette YouTube [15,45]s, océan bleu coché.
+- Garde HERESIE : asset hors assets campagne → finalize refuse.
+- Garde durée : segment > max plateforme → finalize refuse.
+- `--prepare` : fourchette plateforme injectée dans le prompt (tiktok = [15,30]s).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | |
+| F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict + océan bleu (Porte 1) |
+| ANGLESMITH (via F02) | ✅ (README/F02) | ✅ (v1) | N angles direct + blue ocean (Porte 2) |
+| TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
+| F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
+| F04_COPYWRITER | ✅ | ❌ | Vague 6 — frégate lourde premium |
+| F05_PACKAGER + F06_TRACKER + CAPTEURS | ✅ | ❌ | Vague 7-8 |
+
+### Prochaines étapes
+1. Implémenter F04_COPYWRITER (vague 6 — frégate lourde premium direct, 4 phases)
+2. Implémenter F05_PACKAGER (vague 7) + F06_TRACKER (vague 7) + CAPTEURS (vague 8)
+3. Premier siège réel avec les inputs du Warsmith
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |
@@ -242,7 +295,7 @@ F02_TYRANT_CAMP/CODEBASE/
 | Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | Non demarre |
 | Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
 | Porte 2 | ANGLESMITH N angles forges | Code pret (attente siege reel) |
-| Porte 3 | F03 + F04 text_payloads prets | Non demarre |
+| Porte 3 | F03 + F04 text_payloads prets | F03 code pret — F04 a implementer |
 | Porte 4 | F05 production packs expedies -> OMNIS_WATCH | Non demarre |
 
 *Fer au-dedans, Fer au-dehors.*
