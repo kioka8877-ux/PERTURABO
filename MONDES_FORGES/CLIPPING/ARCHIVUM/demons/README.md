@@ -1,19 +1,19 @@
-# ARCHIVUM/demons/ — Clips qui dominent
+﻿# ARCHIVUM/demons/ â€” Clips qui dominent
 
-> *Démon (campagne + veille). Cartographie par TYRANT prospectif.*
-> *Lu par C02_TYRANT_CAMP pour identifier les océans bleus sur les campagnes futures.*
+> *DÃ©mon (campagne + veille). Cartographie par TYRANT prospectif.*
+> *Lu par F02_TYRANT_CAMP pour identifier les ocÃ©ans bleus sur les campagnes futures.*
 
 ---
 
-## Deux types de Démon ici
+## Deux types de DÃ©mon ici
 
-### 1. Démon de campaigne
-Le clip de référence fourni par le Warsmith pour une campaigne spécifique. Stocké dans `ARCHIVUM/campaign/reference_clip.json` + `reference_skeleton.json`. **Pas dupliqué ici** — vit dans `campaign/`.
+### 1. DÃ©mon de campaigne
+Le clip de rÃ©fÃ©rence fourni par le Warsmith pour une campaigne spÃ©cifique. StockÃ© dans `ARCHIVUM/campaign/reference_clip.json` + `reference_skeleton.json`. **Pas dupliquÃ© ici** â€” vit dans `campaign/`.
 
-### 2. Démon de veille (ici, dans `demons/`)
-Identifié par `TYRANT/` (mode prospectif) hors campaigne. Le scanner (CAPTEURS) peut aussi contribuer via `demon_scanner.py`.
+### 2. DÃ©mon de veille (ici, dans `demons/`)
+IdentifiÃ© par `TYRANT/` (mode prospectif) hors campaigne. Le scanner (CAPTEURS) peut aussi contribuer via `demon_scanner.py`.
 
-Ces Démon veille sont la mémoire globale du territoire clipping — utilisés par C02_TYRANT_CAMP pour identifier des océans bleus sur les prochaines campagnes.
+Ces DÃ©mon veille sont la mÃ©moire globale du territoire clipping â€” utilisÃ©s par F02_TYRANT_CAMP pour identifier des ocÃ©ans bleus sur les prochaines campagnes.
 
 ---
 
@@ -25,7 +25,7 @@ Ces Démon veille sont la mémoire globale du territoire clipping — utilisés 
   "demon_url": "...",
   "platform": "youtube|tiktok|instagram",
   "views": N,
-  "outlier_score": <float>,    // > 3x = Démon
+  "outlier_score": <float>,    // > 3x = DÃ©mon
   "dominant_emotion": "drame|joie|outrage|inspiration|...",
   "dominant_engagement_type": "question|assertion|cliffhanger|...",
   "exploited_territories": ["drame"],
@@ -46,10 +46,10 @@ Ces Démon veille sont la mémoire globale du territoire clipping — utilisés 
 }
 ```
 
-## Règle 1-couche
+## RÃ¨gle 1-couche
 
-`blue_ocean_depth` est **TOUJOURS 1** dans cette ARCHIVUM. Le scanner TYRANT ne doit jamais proposer une profondeur 2 — cela serait hérésie (cf. `CONTRACTS/clipping_rules.md` et `TYRANT/CODEBASE/TRACKING.md`).
+`blue_ocean_depth` est **TOUJOURS 1** dans cette ARCHIVUM. Le scanner TYRANT ne doit jamais proposer une profondeur 2 â€” cela serait hÃ©rÃ©sie (cf. `CONTRACTS/clipping_rules.md` et `TYRANT/CODEBASE/TRACKING.md`).
 
-## À remplir
+## Ã€ remplir
 
-Ce dossier est nourri par `TYRANT prospectif` au runtime. À l'init, vide avec `.gitkeep`. Le Warsmith peut pré-peupler avec quelques Démon déjà connus s'il en a (optional — TYRANT les trouvera au scan).
+Ce dossier est nourri par `TYRANT prospectif` au runtime. Ã€ l'init, vide avec `.gitkeep`. Le Warsmith peut prÃ©-peupler avec quelques DÃ©mon dÃ©jÃ  connus s'il en a (optional â€” TYRANT les trouvera au scan).

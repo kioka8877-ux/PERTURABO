@@ -1,169 +1,169 @@
-# COPYWRITING DOCTRINE — Cadre de jugement pour C04_COPYWRITER
+﻿# COPYWRITING DOCTRINE â€” Cadre de jugement pour F04_COPYWRITER
 
 > *"Le titre est 90% du travail viral." (Ogilvy)*
-> *Ce document est le cadre de référence. Il dit à quoi doit ressembler un text_payload gagnant.*
-> *L'IRON premium (C04) lit ce document comme anti_bullshit.md est lu par le reste du système.*
-> *Ce n'est pas un contrat d'exécution — c'est un cadre de jugement.*
+> *Ce document est le cadre de rÃ©fÃ©rence. Il dit Ã  quoi doit ressembler un text_payload gagnant.*
+> *L'IRON premium (C04) lit ce document comme anti_bullshit.md est lu par le reste du systÃ¨me.*
+> *Ce n'est pas un contrat d'exÃ©cution â€” c'est un cadre de jugement.*
 > *
-> *STATUT : SQUELETTE — Le Warsmith doit remplir chaque section avec son savoir secret.*
-> *Le contenu doctrinal précis (formules, slang, subliminal) appartient au Warsmith.* 
+> *STATUT : SQUELETTE â€” Le Warsmith doit remplir chaque section avec son savoir secret.*
+> *Le contenu doctrinal prÃ©cis (formules, slang, subliminal) appartient au Warsmith.* 
 > *Ce fichier fournit la structure et les prompts-guides, pas le contenu.*
 
-Sources : ARCHIVUM/copywriting/ (8 sous-dossiers à remplir par le Warsmith), ARCHIVUM/knowledge_base/, recherche web 2025-2026.
+Sources : ARCHIVUM/copywriting/ (8 sous-dossiers Ã  remplir par le Warsmith), ARCHIVUM/knowledge_base/, recherche web 2025-2026.
 
 ---
 
-## SECTION I — DOCTRINE FONDATRICE
+## SECTION I â€” DOCTRINE FONDATRICE
 
-> * À REMPLIR PAR LE WARSMITH *
+> * Ã€ REMPLIR PAR LE WARSMITH *
 
-Référence : Ogilvy, "90% du travail dans le titre".
-Principe : une vidéo Whop ne monte pas sans bon texte.
-Le reframing par le titre transforme le sens de la source (highlight → motivation, etc.).
-Hiérarchie à respecter : titre 1 ligne > caption > paragraph 2 lignes > on-screen text > hashtags.
-Boussole : chaque décision de texte doit prouver un fit plateforme × marché × angle × source.
+RÃ©fÃ©rence : Ogilvy, "90% du travail dans le titre".
+Principe : une vidÃ©o Whop ne monte pas sans bon texte.
+Le reframing par le titre transforme le sens de la source (highlight â†’ motivation, etc.).
+HiÃ©rarchie Ã  respecter : titre 1 ligne > caption > paragraph 2 lignes > on-screen text > hashtags.
+Boussole : chaque dÃ©cision de texte doit prouver un fit plateforme Ã— marchÃ© Ã— angle Ã— source.
 
-**À remplir par le Warsmith** : développer les principes et anti-patternes de fondation.
+**Ã€ remplir par le Warsmith** : dÃ©velopper les principes et anti-patternes de fondation.
 
 ---
 
-## SECTION II — LOI DES 3 TITRES
+## SECTION II â€” LOI DES 3 TITRES
 
-> * À REMPLIR PAR LE WARSMITH *
+> * Ã€ REMPLIR PAR LE WARSMITH *
 
-Pourquoi 3 (pas 1, pas 5) : calibrage suffisant pour A/B/C, pas assez pour diluer l'attention opérateur.
-Chaque titre doit scorer sur 5 axes : curiosité, clarté, cible, émotion, agression-platform.
+Pourquoi 3 (pas 1, pas 5) : calibrage suffisant pour A/B/C, pas assez pour diluer l'attention opÃ©rateur.
+Chaque titre doit scorer sur 5 axes : curiositÃ©, clartÃ©, cible, Ã©motion, agression-platform.
 Anti-pattern catalogue : titres interchangeables = rejet.
-Variations inter-titres : au moins 2 axes différenciants (émotion / hook type / angle attaque).
+Variations inter-titres : au moins 2 axes diffÃ©renciants (Ã©motion / hook type / angle attaque).
 
-**À remplir par le Warsmith** : les 5 axes de scoring, les exemples annotés de 3-titres gagnants.
+**Ã€ remplir par le Warsmith** : les 5 axes de scoring, les exemples annotÃ©s de 3-titres gagnants.
 
 ---
 
-## SECTION III — HOOKS LIBRARY
+## SECTION III â€” HOOKS LIBRARY
 
-> * À REMPLIR PAR LE WARSMITH — voir aussi ARCHIVUM/copywriting/hooks_library.md *
+> * Ã€ REMPLIR PAR LE WARSMITH â€” voir aussi ARCHIVUM/copywriting/hooks_library.md *
 
 Taxonomie des hooks : question, declaration, stat choc, mystery, contradiction, cible-naming.
 Pour chaque plateforme : quel hook type dominant (TT vs YT Shorts vs Reels).
-Pour chaque marché : nuances culturelles (US jeune veut punch direct, etc.).
-Exemples annotés (puise dans `ARCHIVUM/demons/`).
+Pour chaque marchÃ© : nuances culturelles (US jeune veut punch direct, etc.).
+Exemples annotÃ©s (puise dans `ARCHIVUM/demons/`).
 
-**À remplir par le Warsmith** : la taxonomie complète, la dominance par plateforme, les nuances par marché.
+**Ã€ remplir par le Warsmith** : la taxonomie complÃ¨te, la dominance par plateforme, les nuances par marchÃ©.
 
 ---
 
-## SECTION IV — TITLE FORMULAS
+## SECTION IV â€” TITLE FORMULAS
 
-> * À REMPLIR PAR LE WARSMITH — voir aussi ARCHIVUM/copywriting/title_formulas.md *
+> * Ã€ REMPLIR PAR LE WARSMITH â€” voir aussi ARCHIVUM/copywriting/title_formulas.md *
 
-Formules type Hormozi : "N façons de X..." / "Si tu fais Y, voici Z..."
-Formules type Ogilvy : promesse + spécificité
+Formules type Hormozi : "N faÃ§ons de X..." / "Si tu fais Y, voici Z..."
+Formules type Ogilvy : promesse + spÃ©cificitÃ©
 Formules type Iman Gadzhi : aspiration overdelivery
 Formule reframing : teaser + transformation de sens
-Chaque formule : plateau applicable + marché applicable + risque de stérilité
+Chaque formule : plateau applicable + marchÃ© applicable + risque de stÃ©rilitÃ©
 
-**À remplir par le Warsmith** : le cataloguformules avec syntaxe, applicabilité, exemples.
+**Ã€ remplir par le Warsmith** : le cataloguformules avec syntaxe, applicabilitÃ©, exemples.
 
 ---
 
-## SECTION V — CAPTION FRAMEWORKS & PARAGRAPHE REFRAME
+## SECTION V â€” CAPTION FRAMEWORKS & PARAGRAPHE REFRAME
 
-> * À REMPLIR PAR LE WARSMITH — voir aussi ARCHIVUM/copywriting/caption_frameworks.md *
+> * Ã€ REMPLIR PAR LE WARSMITH â€” voir aussi ARCHIVUM/copywriting/caption_frameworks.md *
 
 Structure du paragraphe magique : accroche + densification + subtil cliffhanger
-Patterns de reframe : "highlight → motivation", "rires → dramatisation", "vulgaire → profound"
-Règle : 2 lignes maximum (la longueur-court-longue est morte — sauf cas précis)
+Patterns de reframe : "highlight â†’ motivation", "rires â†’ dramatisation", "vulgaire â†’ profound"
+RÃ¨gle : 2 lignes maximum (la longueur-court-longue est morte â€” sauf cas prÃ©cis)
 Caption : utilisation de virgule verticale + spacing + emoji timing
 
-**À remplir par le Warsmith** : les patterns de reframe, les structures de paragraphes, le timing.
+**Ã€ remplir par le Warsmith** : les patterns de reframe, les structures de paragraphes, le timing.
 
 ---
 
-## SECTION VI — SUBLIMINAL LANGUAGE
+## SECTION VI â€” SUBLIMINAL LANGUAGE
 
-> * À REMPLIR PAR LE WARSMITH — savoir secret — voir aussi ARCHIVUM/copywriting/subliminal_language.md *
+> * Ã€ REMPLIR PAR LE WARSMITH â€” savoir secret â€” voir aussi ARCHIVUM/copywriting/subliminal_language.md *
 
 Mots tests et constructions subliminales.
-Patterns phonétiques (allitération, répétition d'voyelle).
+Patterns phonÃ©tiques (allitÃ©ration, rÃ©pÃ©tition d'voyelle).
 Cadence du titre : 1-2 temps, 3 temps, creux-pic.
-Question rhétorique vs question engagement.
-Déclaration d'autorité vs humble observation.
+Question rhÃ©torique vs question engagement.
+DÃ©claration d'autoritÃ© vs humble observation.
 
-**À remplir par le Warsmith** : le savoir secret subliminal.
+**Ã€ remplir par le Warsmith** : le savoir secret subliminal.
 
 ---
 
-## SECTION VII — SLANG BY MARKET
+## SECTION VII â€” SLANG BY MARKET
 
-> * À REMPLIR PAR LE WARSMITH — voir aussi ARCHIVUM/copywriting/slang_by_market.md *
+> * Ã€ REMPLIR PAR LE WARSMITH â€” voir aussi ARCHIVUM/copywriting/slang_by_market.md *
 
 Slang US jeune 2026 (mots qui ont phase, mots morts).
-Codex argotique mis à jour annuellement voire trimestriellement.
+Codex argotique mis Ã  jour annuellement voire trimestriellement.
 Mots interdits par plateforme (TikTok shadowban terms list).
-Références culturelles à la mode (événements, créateurs phares, memes viables).
+RÃ©fÃ©rences culturelles Ã  la mode (Ã©vÃ©nements, crÃ©ateurs phares, memes viables).
 
-**À remplir par le Warsmith** : le codex slang complet par marché.
-
----
-
-## SECTION VIII — HASHTAGS RESEARCH
-
-> * À REMPLIR PAR LE WARSMITH — voir aussi ARCHIVUM/copywriting/hashtags_research.md *
-
-Loi des 3 strates : large #fitness + moyen #grindset + niche spécifique #disciplineculture
-Hashtags par plateforme TT vs YT Shorts vs Reels (différents algos)
-Hashtags bannis ou shadowbanned récents
-Rotation des hashtags par pack pour éviter SAT (Same-Hashtag Syndrome)
-
-**À remplir par le Warsmith** : la structure 3-strates, RBANs, RBANs récents, stratégie de rotation.
+**Ã€ remplir par le Warsmith** : le codex slang complet par marchÃ©.
 
 ---
 
-## SECTION IX — ON-SCREEN TEXT PATTERNS
+## SECTION VIII â€” HASHTAGS RESEARCH
 
-> * À REMPLIR PAR LE WARSMITH — voir aussi ARCHIVUM/copywriting/on_screen_text_patterns.md *
+> * Ã€ REMPLIR PAR LE WARSMITH â€” voir aussi ARCHIVUM/copywriting/hashtags_research.md *
 
-Texte affiché dans la vidéo à keyframe précise.
-Position (top, center, bottom), timing (0.5s, 1s après hook)
+Loi des 3 strates : large #fitness + moyen #grindset + niche spÃ©cifique #disciplineculture
+Hashtags par plateforme TT vs YT Shorts vs Reels (diffÃ©rents algos)
+Hashtags bannis ou shadowbanned rÃ©cents
+Rotation des hashtags par pack pour Ã©viter SAT (Same-Hashtag Syndrome)
+
+**Ã€ remplir par le Warsmith** : la structure 3-strates, RBANs, RBANs rÃ©cents, stratÃ©gie de rotation.
+
+---
+
+## SECTION IX â€” ON-SCREEN TEXT PATTERNS
+
+> * Ã€ REMPLIR PAR LE WARSMITH â€” voir aussi ARCHIVUM/copywriting/on_screen_text_patterns.md *
+
+Texte affichÃ© dans la vidÃ©o Ã  keyframe prÃ©cise.
+Position (top, center, bottom), timing (0.5s, 1s aprÃ¨s hook)
 Couleur / Readability sur la source
-Reframing on-screen : phrase qui transforme le sens quand elle apparaît
+Reframing on-screen : phrase qui transforme le sens quand elle apparaÃ®t
 Max 1 par clip (overdose = clutter)
 
-**À remplir par le Warsmith** : les patterns de keyframe, le vocabulaire visuel, les règles de timing.
+**Ã€ remplir par le Warsmith** : les patterns de keyframe, le vocabulaire visuel, les rÃ¨gles de timing.
 
 ---
 
-## SECTION X — GARDE-FOUS (couplé à `anti_bullshit.md` core)
+## SECTION X â€” GARDE-FOUS (couplÃ© Ã  `anti_bullshit.md` core)
 
 Interdits absolus :
-- "Abonne-toi" / "Like et partage" / "Swipe up" / "Part 1/Part 2" (sauf cas exceptionnel série architected)
+- "Abonne-toi" / "Like et partage" / "Swipe up" / "Part 1/Part 2" (sauf cas exceptionnel sÃ©rie architected)
 - FTC : #ad / #sponsored obligatoire, position dans caption
-- Anti-clickbait : titre doit livrer dans la vidéo, pas juste teaser
+- Anti-clickbait : titre doit livrer dans la vidÃ©o, pas juste teaser
 - Limite de reframing : ne pas transformer au point de mentir sur le contenu source
-- Déni d'émotion : on ne transforme pas une interview calme en "BEEF EXPLOSIF"
+- DÃ©ni d'Ã©motion : on ne transforme pas une interview calme en "BEEF EXPLOSIF"
 
-Référence couplage : `HERESIE/CONTRACTS/anti_bullshit.md` (core).
+RÃ©fÃ©rence couplage : `HERESIE/CONTRACTS/anti_bullshit.md` (core).
 
-**À remplir par le Warsmith** : les cas particuliers, les exceptions validées, les tolérances.
+**Ã€ remplir par le Warsmith** : les cas particuliers, les exceptions validÃ©es, les tolÃ©rances.
 
 ---
 
 ## STATUT DE REMPLISSAGE
 
-| Section | État |
+| Section | Ã‰tat |
 |---|---|
-| I — Doctrine fondatrice | ❌ squelette |
-| II — Loi des 3 titres | ❌ squelette |
-| III — Hooks library | ❌ squelette |
-| IV — Title formulas | ❌ squelette |
-| V — Caption frameworks | ❌ squelette |
-| VI — Subliminal language | ❌ squelette (savoir secret Warsmith) |
-| VII — Slang by market | ❌ squelette |
-| VIII — Hashtags research | ❌ squelette |
-| IX — On-screen text patterns | ❌ squelette |
-| X — Garde-fous | partiellement rempli (les interdits absolus sont déjà listés) |
+| I â€” Doctrine fondatrice | âŒ squelette |
+| II â€” Loi des 3 titres | âŒ squelette |
+| III â€” Hooks library | âŒ squelette |
+| IV â€” Title formulas | âŒ squelette |
+| V â€” Caption frameworks | âŒ squelette |
+| VI â€” Subliminal language | âŒ squelette (savoir secret Warsmith) |
+| VII â€” Slang by market | âŒ squelette |
+| VIII â€” Hashtags research | âŒ squelette |
+| IX â€” On-screen text patterns | âŒ squelette |
+| X â€” Garde-fous | partiellement rempli (les interdits absolus sont dÃ©jÃ  listÃ©s) |
 
-**Action requise** : Le Warsmith remplit chaque section avec son savoir. Ensuite, à la première initialisation, le modèle premium lit la doctrine complète et génère `copywriter_systemprompt.md` (figé ensuite).
+**Action requise** : Le Warsmith remplit chaque section avec son savoir. Ensuite, Ã  la premiÃ¨re initialisation, le modÃ¨le premium lit la doctrine complÃ¨te et gÃ©nÃ¨re `copywriter_systemprompt.md` (figÃ© ensuite).
 
 *Fer au-dedans, Fer au-dehors. Sans doctrine, le titre n'est que bruit.*

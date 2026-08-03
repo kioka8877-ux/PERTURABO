@@ -1,6 +1,6 @@
-# ARCHIVUM/learnings/ — Boucle rétro-active
+﻿# ARCHIVUM/learnings/ â€” Boucle rÃ©tro-active
 
-> *Mémoire cumulée des perf réelles par angle. Nourrit F02_ANGLESMITH pour pondération progressive.*
+> *MÃ©moire cumulÃ©e des perf rÃ©elles par angle. Nourrit ANGLESMITH pour pondÃ©ration progressive.*
 
 ---
 
@@ -17,11 +17,11 @@
 }
 ```
 
-## Mécanique
+## MÃ©canique
 
-### Seuil de pondération
-- `cumulative_packs_executed < 50` : `eligible_for_weighting = false`. F02_ANGLESMITH ne pondère pas — tous les angles sont neutral (weight = 1.0).
-- `cumulative_packs_executed >= 50` : `eligible_for_weighting = true`. F02_ANGLESMITH lit les `weight` et pondère les angles (gagnants montent, perdants descendent).
+### Seuil de pondÃ©ration
+- `cumulative_packs_executed < 50` : `eligible_for_weighting = false`. ANGLESMITH ne pondÃ¨re pas â€” tous les angles sont neutral (weight = 1.0).
+- `cumulative_packs_executed >= 50` : `eligible_for_weighting = true`. ANGLESMITH lit les `weight` et pondÃ¨re les angles (gagnants montent, perdants descendent).
 
 ### Structure de `angle_performance[]`
 
@@ -40,7 +40,7 @@
 }
 ```
 
-`weight` commence à 1.0 (neutre). Au fil du temps (> 50 packs), augmente/diminue selon la perf relative de l'angle vs médiane.
+`weight` commence Ã  1.0 (neutre). Au fil du temps (> 50 packs), augmente/diminue selon la perf relative de l'angle vs mÃ©diane.
 
 ### Structure de `campaign_history[]`
 
@@ -53,11 +53,11 @@
 }
 ```
 
-## Mise à jour
+## Mise Ã  jour
 
-- Nourri par C06_TRACKER à chaque fermeture de campaigne (`--close-campaign`)
-- Lu par F02_ANGLESMITH à la Porte 2 pour pondérer les angles forgés
+- Nourri par F06_TRACKER Ã  chaque fermeture de campaigne (`--close-campaign`)
+- Lu par ANGLESMITH Ã  la Porte 2 pour pondÃ©rer les angles forgÃ©s
 
 ## Statut initial
 
-`squelette.json` présent pour servir de démarrage. C06_TRACKER doit le charger au premier siège, l'enrichir, le sauvegarder.
+`squelette.json` prÃ©sent pour servir de dÃ©marrage. F06_TRACKER doit le charger au premier siÃ¨ge, l'enrichir, le sauvegarder.
