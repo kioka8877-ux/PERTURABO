@@ -356,6 +356,63 @@ F04_COPYWRITER/CODEBASE/
 
 ---
 
+## [DEV-F05] F05_PACKAGER implémentée — Le Ferrier de la Porte 4
+
+### Contexte
+Septième vague de code. La frégate d'assemblage final est opérationnelle : elle fusionne les artefacts F01 → F04 en N `production_pack.json` conformes au schéma canonique `CONTRACTS/production_pack_schema.json` (contrat d'interface OMNIS_WATCH). Un pack = 1 vidéo pour 1 plateforme pour 1 marché. **F05 ne fait pas appel à l'IRON** — enchaînement purement déterministe de fusion de JSONs.
+
+### Fichiers livrés
+```
+F05_PACKAGER/CODEBASE/
+├── packager.py                      ← --assemble (N packs) + --finalize (validation + expédition)
+├── requirements_c05.txt             ← stdlib pure (jsonschema optionnel)
+└── libs/
+    ├── schema_validator.py          ← validateur draft-07 maison, fidèle au schéma canonique
+    │                                  (type/required/enum/const/min-maxItems/contains/min-max)
+    └── reference_style_extractor.py ← ADN style du clip de référence (pacing, energy_level,
+                                        cut_density, color_palette, text_treatment) —
+                                        matière première brute, OMNIS_WATCH applique ses presets
+```
+
+### Décisions d'implémentation
+- Blocs du pack : `identite`, `cibles`, `source`, `angle`, `cut_directives`, `reference_style`, `text_payload`, `compliance`, `metadata` + `submission_checklist` (7 items pending, deadline 60 min Whop).
+- `hook_style_fit` dérivé des 3 hook_types classés par F04 ; `loop_tech` = open_loop si engagement cliffhanger, closed_loop sinon ; `anti_cannibal_diff.differentiated_axes` = axes qui diffèrent vs tous les autres angles (min 2).
+- `blue_ocean` : les clés `blue_ocean_depth`/`territory`/`rationale` ne sont émises que si l'angle est réellement océan bleu (pas de null dans le contrat).
+- `cut_directives` : fourchettes par plateforme (profil ARCHIVUM/platform_generator/, défauts déclarés sinon — aligné sur F03 duration_guard) + `forbidden` contient obligatoirement `silences > 3s` (contrainte `contains` du schéma).
+- `reference_style` : ordre de résolution = `ARCHIVUM/campaign/reference_style.json` (vision IRON) → bloc `reference_style` du `reference_clip.json` → défauts honnêtes `observed: false` + prompt de vision écrit dans `IN/reference_style_prompt.json`. Le champ `observed` est un flag additionnel (additionalProperties autorisé) — la `note` du schéma est une const figée.
+- Gardes hérésie : video_url hors assets F01 (règle C1) → assemble refuse ; `source_permission != campaign_provided` → finalize refuse ; text_payload sans bloc F04 requis → refuse ; pack non conforme au schéma → finalize refuse (exit 1, liste des erreurs).
+- `--finalize` : `packs_index.json` (index OMNIS_WATCH) + `packager_summary.md` ("N packs prêts à expédier → OMNIS_WATCH", flag style ADN par défaut) + check-in IW_CUSTOS (F05 → `packs_assembled`).
+- Robustesse Windows : lectures JSON en utf-8-sig (BOM PowerShell).
+
+### Tests effectués (environnement mock TEST_F05)
+- 3 angles (A01/A02/A03) : assemble + finalize, 3 packs validés contre le schéma canonique (0 erreur).
+- Contenu pack vérifié : 10 blocs, checklist 7 items, `forbidden` contient `silences > 3s`, metadata title_pattern = titre rank 1.
+- Garde HERESIE strict-source : video_url externe (hors assets F01) → assemble refuse.
+- Style ADN : sans `reference_style.json` → défauts `observed: false` + prompt vision ; avec le fichier → `observed: true` (pacing/energy/cut_density/color_palette pris en compte).
+- Validateur : pack avec `disclosure: #sponsored` → const violation détectée ; pack conforme → OK.
+- Check-in IW_CUSTOS : F05 done (fleet_status reste pending dans le mock — préconditions non remplies, comportement attendu).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | |
+| F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict + océan bleu (Porte 1) |
+| ANGLESMITH (via F02) | ✅ (README/F02) | ✅ (v1) | N angles direct + blue ocean (Porte 2) |
+| TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
+| F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
+| F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
+| F05_PACKAGER | ✅ | ✅ (v1) | production_packs -> OMNIS_WATCH (Porte 4) |
+| F06_TRACKER + CAPTEURS | ✅ | ❌ | Vague 8 |
+
+### Prochaines étapes
+1. Implémenter F06_TRACKER (vague 8 — checklist + learnings) puis CAPTEURS (vague 8, commandité)
+2. Premier siège réel avec les inputs du Warsmith (F01 → F05 bout en bout)
+3. Le Warsmith : doctrine + musée copywriting + `--init-systemprompt` F04 + vision IRON du clip de référence (`reference_style.json`)
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |
@@ -364,6 +421,6 @@ F04_COPYWRITER/CODEBASE/
 | Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
 | Porte 2 | ANGLESMITH N angles forges | Code pret (attente siege reel) |
 | Porte 3 | F03 + F04 text_payloads prets | Code pret (attente siege reel) |
-| Porte 4 | F05 production packs expedies -> OMNIS_WATCH | F05 a implementer |
+| Porte 4 | F05 production packs expedies -> OMNIS_WATCH | Code pret (attente siege reel) |
 
 *Fer au-dedans, Fer au-dehors.*

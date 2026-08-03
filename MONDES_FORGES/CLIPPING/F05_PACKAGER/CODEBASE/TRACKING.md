@@ -123,10 +123,17 @@ F05 ne fait **pas** appel à l'IRON — c'est un enchaînement purement détermi
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ❌ | À implémenter |
-| `packager.py` | ❌ | Assembler purement déterministe |
-| `libs/schema_validator.py` | ❌ | Valide pack contre `production_pack_schema.json` |
-| `libs/reference_style_extractor.py` | ❌ | Extraction style ADN (vision pixel + IRON interpretation) |
-| `requirements_c05.txt` | ❌ | PyYAML/Pydantic pour schema validation |
+| Code Python implémenté | ✅ | v1 — commit bdd7013 (tests mock TEST_F05) |
+| `packager.py` | ✅ | `--assemble` (N packs) + `--finalize` (validation + packs_index + summary + check-in IW_CUSTOS F05) |
+| `libs/schema_validator.py` | ✅ | Validateur draft-07 maison fidèle au schéma canonique (type/required/enum/const/min-maxItems/contains) |
+| `libs/reference_style_extractor.py` | ✅ | ADN style : `reference_style.json` campagne → bloc du reference_clip.json → défauts `observed: false` + prompt vision IRON |
+| `requirements_c05.txt` | ✅ | stdlib pure (jsonschema optionnel documenté) |
+
+### Décisions v1 (résumé)
+- F05 ne forge rien, il assemble : text_payload/blocs strictement copiés depuis F04, video_url strictement dans les assets F01 (règle C1) — hérésies refusées à `--assemble` comme à `--finalize`.
+- `blue_ocean` sans null : depth/territory/rationale émis uniquement pour les angles réellement océan bleu (schéma canonique intact, pas de coordination OMNIS_WATCH nécessaire).
+- `forbidden` contient obligatoirement `silences > 3s` (contrainte `contains` du schéma).
+- `reference_style.observed` (bool, champ additionnel) : distingue ADN réel de l'ADN par défaut — la `note` reste la const figée du contrat.
+- Fourchettes cut : profil `ARCHIVUM/platform_generator/{p}_profile.md` (regex `clip_min/max_duration`), défauts déclarés sinon — aligné sur F03 duration_guard.
 
 *Fer au-dedans, Fer au-dehors.*

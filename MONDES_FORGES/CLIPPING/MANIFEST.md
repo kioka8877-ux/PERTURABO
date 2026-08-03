@@ -39,7 +39,7 @@ Cette livraison est **la trame stratégique**. Aucun code Python n'est écrit. L
 | ANGLESMITH | portée par F02 (README.md) | ✅ rédigé (README mécanisme N angles) | ✅ **implémenté (v1)** — anglesmith.py + libs angle_forger/learnings_weight |
 | F03_SOURCE_HUNTER | `F03_SOURCE_HUNTER/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** - source_hunter.py + libs transcript_loader/segment_matcher/duration_guard |
 | F04_COPYWRITER | `F04_COPYWRITER/CODEBASE/TRACKING.md` | ✅ rédigé (le plus détaillé — frégate lourde 4 phases) | ✅ **implémenté (v1)** — copywriter.py 4 phases premium direct + libs context_builder/premium_client/iron_ordonnancer/compliance_checker/md_renderer |
-| F05_PACKAGER | `F05_PACKAGER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
+| F05_PACKAGER | `F05_PACKAGER/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — packager.py assemble/finalize + libs schema_validator/reference_style_extractor |
 | F06_TRACKER | `F06_TRACKER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
 | TYRANT (prospectif) | `TYRANT/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — tyrant.py + libs outlier/emotion/blue_ocean/archivist |
 | CAPTEURS | `CAPTEURS/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
