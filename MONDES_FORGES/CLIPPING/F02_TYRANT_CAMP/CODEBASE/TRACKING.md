@@ -175,6 +175,9 @@ Règles strictes :
 | `libs/blue_ocean_finder.py` | ✅ (v1) | Océans bleus depuis ARCHIVUM/demons/ + saturation |
 | `libs/fit_scorer.py` | ✅ (v1) | Score fit plateforme × marché × niche (0-10) |
 | `requirements_c02.txt` | ✅ | Stdlib pure — rien à installer |
+| `anglesmith.py` (ANGLESMITH porté) | ✅ (v1) | Porte 2 — forge des N angles (--prepare/--auto/--finalize) |
+| `libs/angle_forger.py` | ✅ (v1) | Combinatoire 4 axes + anti-cannibale (2 axes différenciants min) |
+| `libs/learnings_weight.py` | ✅ (v1) | Pondération (poids nul si < 50 packs, activation ensuite) |
 
 Référence d'implémentation : `HERESIE/TYRANT/CODEBASE/tyrant.py` dans le core (squelette structurel probablement réutilisable).
 

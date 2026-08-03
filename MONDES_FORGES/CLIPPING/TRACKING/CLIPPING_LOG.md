@@ -193,13 +193,55 @@ TYRANT/CODEBASE/
 
 ---
 
+## [DEV-ANGLESMITH] ANGLESMITH implémentée — La forge des N angles (Porte 2)
+
+### Contexte
+Quatrième vague de code. ANGLESMITH est portée par F02_TYRANT_CAMP (décision README/ORCHESTRATOR : "ANGLESMITH via F02 stratégie"). Elle forge les N angles d'attaque sur le verdict de la Porte 1 : X directs (territoire du Démon) + Y océan bleu (re-ciblage non saturé, MÊME source, 1 couche max).
+
+### Fichiers livrés
+```
+F02_TYRANT_CAMP/CODEBASE/
+├── anglesmith.py                  ← wrapper 3 phases (--prepare / --auto / --finalize)
+│                                    (--n-angles, sortie OUT/angles.json pour F03 + F04)
+└── libs/
+    ├── angle_forger.py            ← combinatoire 4 axes (family/emotion/engagement/reframe_dim)
+    │                                 + anti-cannibale (2 axes différenciants minimum)
+    └── learnings_weight.py        ← pondération (poids nul si < 50 packs exécutés)
+```
+
+### Décisions d'implémentation
+- Zones : `n_blue = min(len(blue_ocean_unlocked), n/3)` — le reste en direct. Chaque angle porte `zone`, `territory`, `blue_ocean_depth=1` (blue) et `blue_ocean_reframe_applied`.
+- Anti-cannibale vérifié au forge ET re-vérifié au finalize (2 axes différenciants min, sinon flag CANNIBALE).
+- Poids : `learnings.json.cumulative_packs_executed < 50` → tous les poids = 1.0 (neutre) ; éligible ensuite → poids par `angle_performance[*].weight`.
+- Hérésie guard au finalize : toute profondeur != 1 est clampée.
+- Check-in IW_CUSTOS `--frigate ANGLESMITH` (fleet_status → `angles_forged` quand la précondition verdict_ready est remplie).
+
+### Statut des composants
+
+| Composant | Docs Tracking | Code Python | Notes |
+|---|---|---|---|
+| ORCHESTRATOR | ✅ | ✅ (v1) | |
+| F01_SCOUT | ✅ | ✅ (v1) | |
+| F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict + océan bleu (Porte 1) |
+| ANGLESMITH (via F02) | ✅ (README/F02) | ✅ (v1) | N angles direct + blue ocean (Porte 2) |
+| TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
+| F03_F06 + CAPTEURS | ✅ | ❌ | Vagues suivantes |
+
+### Prochaines étapes
+1. Implémenter F03_SOURCE_HUNTER (vague 5)
+2. Implémenter F04_COPYWRITER (vague 6 — frégate lourde premium)
+3. Implémenter F05_PACKAGER + F06_TRACKER + CAPTEURS
+4. Premier siège réel avec les inputs du Warsmith
+
+---
+
 ## Portes — mapping des jalons futurs
 
 | Porte | Jalon attendu | Statut |
 |---|---|---|
 | Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | Non demarre |
 | Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
-| Porte 2 | ANGLESMITH N angles forges | Non demarre |
+| Porte 2 | ANGLESMITH N angles forges | Code pret (attente siege reel) |
 | Porte 3 | F03 + F04 text_payloads prets | Non demarre |
 | Porte 4 | F05 production packs expedies -> OMNIS_WATCH | Non demarre |
 

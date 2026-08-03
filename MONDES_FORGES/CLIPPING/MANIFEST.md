@@ -36,6 +36,7 @@ Cette livraison est **la trame stratégique**. Aucun code Python n'est écrit. L
 |---|---|---|---|
 | F01_SCOUT | `F01_SCOUT/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — scout.py + libs recon/enrich/scribe |
 | F02_TYRANT_CAMP | `F02_TYRANT_CAMP/CODEBASE/TRACKING.md` | ✅ rédigé | ✅ **implémenté (v1)** — tyrant_camp.py + libs skeleton/blue_ocean/fit |
+| ANGLESMITH | portée par F02 (README.md) | ✅ rédigé (README mécanisme N angles) | ✅ **implémenté (v1)** — anglesmith.py + libs angle_forger/learnings_weight |
 | F03_SOURCE_HUNTER | `F03_SOURCE_HUNTER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
 | F04_COPYWRITER | `F04_COPYWRITER/CODEBASE/TRACKING.md` | ✅ rédigé (le plus détaillé — frégate lourde 4 phases) | ❌ à implémenter |
 | F05_PACKAGER | `F05_PACKAGER/CODEBASE/TRACKING.md` | ✅ rédigé | ❌ à implémenter |
