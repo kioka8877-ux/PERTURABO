@@ -103,6 +103,42 @@ class ContextBuilder:
         }
 
     # ------------------------------------------------------------------
+    def build_logo(self, angle: dict, sub_mode: str, campaign: dict,
+                   verdict: dict, platform: str, market: str) -> dict:
+        """Contexte LOGO v2 : PAS de specimen F03 (le clip vient du Warsmith).
+
+        Rassemble le clip source + l'article (informatif) OU la blague (humour)
+        + le style du clip viral de référence + l'ARCHIVUM copywriting.
+        """
+        return {
+            "campaign_id": verdict.get("campaign_id"),
+            "angle_id": angle.get("angle_id"),
+            "sub_mode": sub_mode,
+            "angle": {
+                "angle_id": angle.get("angle_id"),
+                "genre": angle.get("genre"),
+                "title": angle.get("title"),
+                "body": angle.get("body"),
+                "on_screen_text": angle.get("on_screen_text"),
+                "seo_tags": angle.get("seo_tags"),
+                "angle_family": angle.get("angle_family"),
+                "emotion_mode": angle.get("emotion_mode"),
+                "engagement_type": angle.get("engagement_type"),
+                "reframe_dim": angle.get("reframe_dim"),
+                "zone": angle.get("zone"),
+            },
+            "clip_source_ref": campaign.get("reference_clip"),
+            "article_source": campaign.get("article_source"),
+            "joke_source": campaign.get("joke_source"),
+            "reference_clip_style": campaign.get("reference_clip_style"),
+            "verdict": verdict,
+            "platform_target": platform,
+            "market_target": market,
+            "archivum": self.collect_archivum(platform, market),
+            "contracts": self.collect_contracts(),
+        }
+
+    # ------------------------------------------------------------------
     def build(self, angle: dict, specimen: dict, verdict: dict,
               platform: str, market: str) -> dict:
         return {

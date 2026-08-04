@@ -37,6 +37,8 @@ Transcriptions des vidéos qui parlent de clipping :
   les frégates CLIPPING lisent localement (plateforme cible #1 = YouTube)
 - Ici, ajouter les transcripts **clippED spécifiquement sur le clipping Whop**
   (différents des chaînes YouTube générale)
+- `logo/clifster_logo_guidelines.md` — guidelines placement logo (profil LOGO) :
+  logo pré-placé, auto-snap 9:16, zéro rejet — ajouté le 2026-08-04
 
 ## Plateformes suivantes
 
@@ -67,4 +69,5 @@ Depuis [DEV-ARCHIVUM-YOUTUBE], les transcripts du core sont copiés dans
 - [ ] `docs/whop_content_rewards_guide.md` — si PDF obtenu
 - [ ] `docs/ftc_compliance.md` — doc FTC
 - [ ] `docs/warmup_guide.md` — guide warmup multi-plateforme
-- [ ] `transcripts/` — transcripts des vidéos clipping trouvées par le Warsmith
+- [x] `transcripts/logo/clifster_logo_guidelines.md` — guidelines placement logo (profil LOGO)
+- [ ] `transcripts/` — autres transcripts des vidéos clipping trouvées par le Warsmith

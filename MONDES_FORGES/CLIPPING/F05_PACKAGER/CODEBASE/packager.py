@@ -41,6 +41,10 @@ sys.path.insert(0, os.path.join(_SCRIPT_DIR, "libs"))
 from schema_validator import SchemaValidator
 from reference_style_extractor import ReferenceStyleExtractor
 
+# Profil actif (whop | logo) — lu depuis liber_clipping.json
+sys.path.insert(0, os.path.join(_FORGE_ROOT, "SHARED"))
+from profile_loader import load_profile
+
 OUT_DIR = os.path.join(_F05_DIR, "OUT")
 IN_DIR = os.path.join(_F05_DIR, "IN")
 CONTRACTS_DIR = os.path.join(_FORGE_ROOT, "CONTRACTS")
@@ -61,6 +65,181 @@ DURATION_DEFAULTS = {"youtube": (15, 45), "tiktok": (15, 30), "instagram": (15, 
 DURATION_RE = re.compile(r"clip_(min|max)_duration\D*(\d+)")
 
 FORBIDDEN_DEFAULTS = ["silences > 3s", "CTA abonne-toi", "fadeouts"]
+
+# --- Bloc LOGO v2 (profil logo) -------------------------------------------
+LOGO_LOGO_PLACEMENT = (
+    "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique "
+    "l'image transparente contenant le logo — placement campagne 1080x1920, "
+    "ne pas déplacer, ne pas redimensionner, ne pas recolorer."
+)
+FAIR_USE_NOTE = (
+    "Les vidéos et images utilisées dans cette création servent uniquement "
+    "d'illustration (fair use). Elles ne sont ni revendiquées ni monétisées "
+    "au-delà du format de clip autorisé."
+)
+
+
+def resolve_schema_path() -> str:
+    """Schéma du pack selon le profil actif (whop par défaut)."""
+    prof = load_profile()
+    if prof.mode == "logo":
+        return prof.resolve("pack_schema")
+    return SCHEMA_PATH
+
+
+def _load_campaign_file(name: str) -> dict:
+    path = os.path.join(ARCHIVUM_DIR, "campaign", name)
+    if os.path.exists(path):
+        try:
+            return load_json(path)
+        except Exception:
+            return {}
+    return {}
+
+
+def _clip_source_ref() -> dict:
+    ref = _load_campaign_file("reference_clip.json")
+    f01 = {}
+    try:
+        f01 = load_f01_specimen()
+    except SystemExit:
+        pass
+    selected = f01.get("asset_selected", {}) or {}
+    url = ref.get("url") or ref.get("reference") or selected.get("url") or ""
+    return {
+        "source_type": ref.get("source_type", "youtube"),
+        "reference": url,
+        "celebrity_or_subject": ref.get("celebrity_or_subject"),
+        "niche": ref.get("niche"),
+        "duration_sec": selected.get("duration_sec"),
+        "timecodes": None,
+    }
+
+
+def _resolve_cuts(sub_mode: str, angle_id: str, cuts: dict) -> dict:
+    entries = (cuts.get("cuts") if cuts else None) or []
+    entry = next((c for c in entries if c.get("angle_id") == angle_id), None)
+    if entry is None and len(entries) == 1:
+        entry = entries[0]
+    if entry is None:
+        return {
+            "start_sec": None, "end_sec": None, "duration_sec": None,
+            "cut_source": ("operator" if sub_mode == "humour"
+                            else "perturabo_proposed"),
+            "note": ("cuts à fournir par le Warsmith (mode humour)" if sub_mode == "humour"
+                      else "cuts proposés par PERTURABO — validation Warsmith requise"),
+        }
+    start = entry.get("start_sec")
+    end = entry.get("end_sec")
+    duration = entry.get("duration_sec")
+    if duration is None and start is not None and end is not None:
+        duration = round(float(end) - float(start), 1)
+    cut_source = entry.get("cut_source") or (
+        "operator" if sub_mode == "humour" else "perturabo_validated")
+    return {
+        "start_sec": start,
+        "end_sec": end,
+        "duration_sec": duration,
+        "cut_source": cut_source,
+        "note": entry.get("note"),
+    }
+
+
+def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
+                      cuts: dict, video_index: int) -> dict:
+    angle_id = angle.get("angle_id")
+    payload = payload or {}
+    title = payload.get("title") or angle.get("title")
+    viral_paragraph = (payload.get("viral_paragraph")
+                       or payload.get("body") or angle.get("body") or "")
+    metadata = payload.get("metadata") or {}
+    if not metadata:
+        description = viral_paragraph or ""
+        if description:
+            description = f"{description}\n\n{FAIR_USE_NOTE}"
+        else:
+            description = FAIR_USE_NOTE
+        metadata = {
+            "title": title or "",
+            "description": description,
+            "tags": (payload.get("tags") or angle.get("seo_tags") or []),
+        }
+    return {
+        "video_index": video_index,
+        "angle_id": angle_id,
+        "title": title or "",
+        "viral_paragraph": viral_paragraph,
+        "metadata": metadata,
+        "cut": _resolve_cuts(sub_mode, angle_id, cuts),
+        "logo_placement": LOGO_LOGO_PLACEMENT,
+        "on_screen_text": (payload.get("on_screen_text")
+                            or angle.get("on_screen_text")),
+    }
+
+
+_ANGLE_KEEP = ["angle_id", "genre", "title", "body", "on_screen_text",
+                "seo_tags", "reframe_type", "zone", "angle_family",
+                "emotion_mode", "engagement_type", "reframe_dim"]
+_ARTICLE_KEYS = ["reference", "subject", "celebrity_or_subject"]
+_JOKE_KEYS = ["text", "meme_type", "reference"]
+_STYLE_KEYS = ["source", "ratio", "blur", "editing_style", "rules", "ref"]
+
+
+def _sanitize_angle(angle: dict) -> dict:
+    """Ne garde que les clés déclarées dans le schéma angles[] (les angles
+    ANGLESMITH réels portent des champs supplémentaires non-schéma)."""
+    return {k: angle.get(k) for k in _ANGLE_KEEP if k in angle}
+
+
+def _pick(data: dict, keys: list) -> dict:
+    """Ne garde que les clés déclarées dans le schéma (inputs campagne
+    portent des champs méta _mode/_description à ne pas embarquer)."""
+    return {k: data.get(k) for k in keys if k in data}
+
+
+def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
+                       verdict: dict, siege_id: str = None) -> dict:
+    """Assemble le pack LOGO v2 : N videos (une par angle) + sources + style."""
+    cuts = campaign.get("cuts") or {}
+    article = _pick(campaign.get("article_source") or {}, _ARTICLE_KEYS)
+    joke = _pick(campaign.get("joke_source") or {}, _JOKE_KEYS)
+    style = _pick(campaign.get("reference_clip_style") or {}, _STYLE_KEYS)
+    f01_payloads = {}
+    for angle in angles:
+        angle_id = angle.get("angle_id")
+        p = os.path.join(F04_OUT, f"text_payload_{angle_id}.json")
+        if os.path.exists(p):
+            try:
+                f01_payloads[angle_id] = load_json(p)
+            except Exception:
+                f01_payloads[angle_id] = {}
+
+    videos = [
+        _logo_video_asset(angle, f01_payloads.get(angle.get("angle_id")),
+                          sub_mode, cuts, idx)
+        for idx, angle in enumerate(angles, start=1)
+    ]
+    campaign_id = verdict.get("campaign_id") or (angles[0].get("campaign_id") if angles else None)
+    pack_id = f"LOGO-{campaign_id or 'SIEGE'}-{siege_id or 'X'}"
+
+    return {
+        "pack_id": pack_id,
+        "siege_id": siege_id or "",
+        "mode": "logo",
+        "sub_mode": sub_mode,
+        "clip_source_ref": _clip_source_ref(),
+        "article_source": article or None if sub_mode == "informatif" else None,
+        "joke_source": joke or None if sub_mode == "humour" else None,
+        "reference_clip_style": style or None,
+        "angles": [_sanitize_angle(a) for a in angles],
+        "videos": videos,
+        "checklist": {
+            "factual_verified": False,
+            "no_defamation": False,
+            "no_fabricated_breaking": False,
+            "seo_optimized": True,
+        },
+    }
 
 
 def now_iso() -> str:
@@ -339,7 +518,36 @@ def assemble_pack(angle: dict, angles: list[dict], specimen: dict, payload: dict
 # ----------------------------------------------------------------------
 # Commandes
 # ----------------------------------------------------------------------
+def cmd_assemble_logo(args):
+    """Assemblage LOGO v2 : 1 pack, N videos (une par angle)."""
+    angles = angles_from_file(find_angles_path(args))
+    sub_mode = (args.sub_mode or "informatif").lower()
+    if sub_mode not in ("informatif", "humour"):
+        print(f"[F05:LOGO] sub_mode inconnu: {sub_mode} (attendu: informatif|humour)")
+        sys.exit(1)
+    verdict = find_verdict()
+    campaign = {
+        "article_source": _load_campaign_file("article_source.json"),
+        "joke_source": _load_campaign_file("joke_source.json"),
+        "cuts": _load_campaign_file("cuts.json"),
+        "reference_clip_style": _load_campaign_file("reference_clip_style.json"),
+    }
+    siege_id = None
+    if os.path.exists(LIBER_PATH):
+        siege_id = load_json(LIBER_PATH).get("siege_id")
+    pack = assemble_logo_pack(angles, sub_mode, campaign, verdict, siege_id)
+    out = os.path.join(OUT_DIR, "production_pack_logo.json")
+    save_json(out, pack)
+    n = len(pack.get("videos", []))
+    print(f"[F05:LOGO] Pack logo ({sub_mode}) : {n} videos, {len(angles)} angles "
+          f"-> {os.path.basename(out)}")
+    print("[F05] Lancer --finalize pour valider (schéma logo) + expédier")
+
+
 def cmd_assemble(args):
+    if load_profile().mode == "logo":
+        cmd_assemble_logo(args)
+        return
     angles = angles_from_file(find_angles_path(args))
     verdict = find_verdict()
     f01 = load_f01_specimen()
@@ -377,7 +585,70 @@ def _collect_packs() -> list[tuple[str, dict]]:
     return [(p, load_json(p)) for p in paths]
 
 
+def cmd_finalize_logo(args):
+    """Finalise le pack LOGO : validation schéma logo + index + summary + check-in."""
+    packs = _collect_packs()
+    validator = SchemaValidator(resolve_schema_path())
+    errors = []
+    for path, pack in packs:
+        errors += validator.validate(pack, root=os.path.basename(path))
+        if pack.get("mode") != "logo":
+            errors.append(f"{os.path.basename(path)}: mode != logo")
+    if errors:
+        print("[F05:LOGO] Packs invalides :")
+        for e in errors:
+            print(f"  - {e}")
+        sys.exit(1)
+
+    campaign_id = packs[0][1].get("pack_id")
+    sub_mode = packs[0][1].get("sub_mode", "?")
+    total_videos = sum(len(p.get("videos", [])) for _, p in packs)
+
+    index = {
+        "pack_id": campaign_id,
+        "sub_mode": sub_mode,
+        "video_count": total_videos,
+        "generated_at": now_iso(),
+        "packs": [{"file": os.path.basename(path)} for path, _ in packs],
+    }
+    save_json(os.path.join(OUT_DIR, "packs_index.json"), index)
+
+    lines = [
+        "# F05_PACKAGER — Synthèse des packs LOGO",
+        "",
+        f"- Pack : {campaign_id or 'N/A'}",
+        f"- Sous-mode : {sub_mode}",
+        f"- Videos : {total_videos}",
+        f"- Schéma : {resolve_schema_path()}",
+        "",
+        "| # | Angle | Titre | Cut | Logo |",
+        "|---|---|---|---|---|",
+    ]
+    for _, pack in packs:
+        for v in pack.get("videos", []):
+            cut = v.get("cut", {})
+            lines.append(
+                f"| {v.get('video_index')} | {v.get('angle_id')} "
+                f"| {(v.get('title') or '')[:40]} "
+                f"| {cut.get('start_sec')}-{cut.get('end_sec')}s "
+                f"({cut.get('cut_source')}) | image transparente campagne |")
+    lines += ["", f"**{total_videos} videos prêtes → OMNIS_WATCH**"]
+    summary_path = os.path.join(OUT_DIR, "packager_summary.md")
+    with open(summary_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+    custos = os.path.join(_FORGE_ROOT, "IW_CUSTOS.py")
+    if os.path.exists(custos):
+        subprocess.run([sys.executable, custos, "--mode", "check-in",
+                        "--frigate", "F05", "--output", summary_path],
+                       capture_output=True, text=True, timeout=30)
+    print(f"[F05:LOGO] Finalize : {total_videos} videos validées — {summary_path}")
+
+
 def cmd_finalize(args):
+    if load_profile().mode == "logo":
+        cmd_finalize_logo(args)
+        return
     packs = _collect_packs()
     validator = SchemaValidator(SCHEMA_PATH)
     f01 = load_f01_specimen()
@@ -479,6 +750,8 @@ def main():
     parser.add_argument("--angles", default=None, help="Chemin vers angles.json")
     parser.add_argument("--platform", default=None, help="Plateforme cible (override)")
     parser.add_argument("--market", default=None, help="Marché cible (override)")
+    parser.add_argument("--sub-mode", default=None,
+                        help="Mode LOGO: informatif (article+background) | humour (blague/meme)")
     args = parser.parse_args()
 
     if args.assemble:

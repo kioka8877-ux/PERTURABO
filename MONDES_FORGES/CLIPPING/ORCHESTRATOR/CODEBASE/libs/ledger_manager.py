@@ -124,14 +124,30 @@ class LedgerManager:
         self.save()
 
     def initialize(self, siege_id: str, directive_path: str, reference_clip_path: str,
-                   platform_target: str, market_target: str, n_angles: int):
-        """Réinitialise le ledger pour un nouveau siège (campagne singulière)."""
+                   platform_target: str, market_target: str, n_angles: int,
+                   mode: str = None):
+        """Réinitialise le ledger pour un nouveau siège (campagne singulière).
+
+        Le profil (mode whop|logo) est PRESERVÉ depuis le liber existant si non
+        fourni — fix: --start-siege ne doit plus écraser le profil fixé par
+        IW_CUSTOS --init-siege.
+        """
+        previous_mode = None
+        if os.path.exists(self.liber_path):
+            try:
+                with open(self.liber_path, "r", encoding="utf-8") as f:
+                    previous_mode = json.load(f).get("mode")
+            except Exception:
+                previous_mode = None
+        if mode is None:
+            mode = previous_mode
         self.data = {
             "siege_id": siege_id,
             "campaign_id": None,
             "campaign_status": "active",
             "current_porte": "init",
             "fleet_status": "pending",
+            "mode": mode,
             "inputs_warsmith": {
                 "directive_path": directive_path,
                 "reference_clip_path": reference_clip_path,

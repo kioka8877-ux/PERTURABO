@@ -48,7 +48,36 @@ class PremiumClientError(Exception):
 class PremiumClient:
     def __init__(self, forge_root: str):
         self._forge_root = forge_root
+        self._load_env_local()
         self.config = self._load_config()
+
+    def _load_env_local(self):
+        """Charge un .env.local (repo ou forge) si présent — stdlib, aucune
+        dépendance. Les variables déjà présentes dans os.environ priment.
+        (Freebuff injecte les clés API Keys via .env.local / env du workspace.)"""
+        candidates = []
+        base = self._forge_root
+        for _ in range(4):  # forge_root, MONDES_FORGES, repo root, +1
+            candidates.append(os.path.join(base, ".env.local"))
+            base = os.path.dirname(base)
+        seen = set()
+        for path in candidates:
+            if path in seen or not os.path.exists(path):
+                continue
+            seen.add(path)
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    for line in f:
+                        line = line.strip()
+                        if not line or line.startswith("#") or "=" not in line:
+                            continue
+                        key, _, val = line.partition("=")
+                        key = key.strip()
+                        val = val.strip().strip('"').strip("'")
+                        if key and not os.environ.get(key):
+                            os.environ[key] = val
+            except OSError:
+                continue
 
     # ------------------------------------------------------------------
     def _load_config(self) -> dict:

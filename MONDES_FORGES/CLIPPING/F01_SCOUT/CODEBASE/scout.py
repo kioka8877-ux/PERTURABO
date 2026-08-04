@@ -88,7 +88,10 @@ def cmd_prepare(args):
         directive_path = os.path.join(_FORGE_ROOT, directive_path)
 
     recon = parse_directive(directive_path)
-    reference = _reference_clip_meta(args.reference_clip)
+    ref_path = args.reference_clip
+    if not os.path.isabs(ref_path):
+        ref_path = os.path.join(_FORGE_ROOT, ref_path)
+    reference = _reference_clip_meta(ref_path)
 
     prompt = {
         "mission": "F01_SCOUT — Reconnaissance de la campagne (IRON sandbox). "
@@ -131,7 +134,10 @@ def cmd_auto(args):
         directive_path = os.path.join(_FORGE_ROOT, directive_path)
 
     recon = parse_directive(directive_path)
-    reference = _reference_clip_meta(args.reference_clip)
+    ref_path = args.reference_clip
+    if not os.path.isabs(ref_path):
+        ref_path = os.path.join(_FORGE_ROOT, ref_path)
+    reference = _reference_clip_meta(ref_path)
 
     ytdlp = yt_dlp_available()
     assets = []

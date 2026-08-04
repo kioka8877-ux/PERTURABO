@@ -40,6 +40,22 @@ from iron_ordonnancer import IronOrdonnancer
 from compliance_checker import ComplianceChecker
 from md_renderer import MdRenderer
 
+# Profil actif (whop | logo) — lu depuis liber_clipping.json
+sys.path.insert(0, os.path.join(_FORGE_ROOT, "SHARED"))
+from profile_loader import load_profile
+
+# --- Bloc LOGO v2 (profil logo) -----------------------------------------
+FAIR_USE_NOTE = (
+    "Copyright Disclaimer: Under Section 107 of the Copyright Act of 1976, "
+    "allowance is made for \"fair use\" for purposes such as criticism, comment, "
+    "news reporting, teaching, scholarship, and research. Fair use is a use "
+    "permitted by copyright statute that might otherwise be infringing. "
+    "Non-profit, educational or personal use tips the balance in favor of fair use."
+)
+LOGO_MAX_TITLE_WORDS = 6
+LOGO_MAX_PARAGRAPH_LINES = 4
+LOGO_MAX_PARAGRAPH_CHARS = 400
+
 OUT_DIR = os.path.join(_F04_DIR, "OUT")
 IN_DIR = os.path.join(_F04_DIR, "IN")
 CONTRACTS_DIR = os.path.join(_FORGE_ROOT, "CONTRACTS")
@@ -139,6 +155,99 @@ def warsmith_targets(args) -> tuple[str, str]:
 
 
 # ----------------------------------------------------------------------
+# LOGO v2 — helpers (profil logo)
+# ----------------------------------------------------------------------
+def is_logo() -> bool:
+    try:
+        return load_profile().mode == "logo"
+    except Exception:
+        return False
+
+
+def _logo_campaign_inputs() -> dict:
+    campaign = {}
+    for name in ("reference_clip.json", "article_source.json",
+                 "joke_source.json", "reference_clip_style.json"):
+        path = os.path.join(ARCHIVUM_DIR, "campaign", name)
+        if os.path.exists(path):
+            try:
+                campaign[name.replace(".json", "")] = load_json(path)
+            except Exception:
+                campaign[name.replace(".json", "")] = {}
+    return campaign
+
+
+def _detect_sub_mode(args) -> str:
+    sm = (getattr(args, "sub_mode", None) or "").lower()
+    if sm in ("informatif", "humour"):
+        return sm
+    campaign = _logo_campaign_inputs()
+    if campaign.get("joke_source"):
+        return "humour"
+    return "informatif"
+
+
+def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
+                     platform: str, market: str,
+                     campaign_id: str = None) -> tuple[dict, list[str]]:
+    notes = []
+    title = str(raw.get("title") or "").strip()
+    words = len(title.split())
+    if words > LOGO_MAX_TITLE_WORDS:
+        notes.append(f"titre {words} mots > {LOGO_MAX_TITLE_WORDS} — tronqué au "
+                     f"{LOGO_MAX_TITLE_WORDS}e mot")
+        title = " ".join(title.split()[:LOGO_MAX_TITLE_WORDS])
+
+    viral = str(raw.get("viral_paragraph") or "").strip()
+    lines = viral.count("\n") + 1 if viral else 0
+    if lines > LOGO_MAX_PARAGRAPH_LINES:
+        notes.append(f"paragraphe {lines} lignes > {LOGO_MAX_PARAGRAPH_LINES}")
+    if len(viral) > LOGO_MAX_PARAGRAPH_CHARS:
+        notes.append(f"paragraphe {len(viral)} chars > {LOGO_MAX_PARAGRAPH_CHARS}")
+
+    meta = raw.get("metadata") or {}
+    description = str(meta.get("description") or viral).strip()
+    if sub_mode == "informatif":
+        lower = description.lower()
+        if "fair use" not in lower and "illustration" not in lower:
+            description = f"{description}\n\n{FAIR_USE_NOTE}".strip()
+            notes.append("note fair use ajoutée à la description")
+    tags = [t.strip() for t in (meta.get("tags") or raw.get("tags") or [])
+            if isinstance(t, str) and t.strip()][:12]
+
+    payload = {
+        "campaign_id": raw.get("campaign_id") or campaign_id,
+        "angle_id": angle.get("angle_id"),
+        "sub_mode": sub_mode,
+        "title": title,
+        "viral_paragraph": viral,
+        "metadata": {
+            "title": str(meta.get("title") or title),
+            "description": description,
+            "tags": tags,
+        },
+        "on_screen_text": raw.get("on_screen_text")
+                          or angle.get("on_screen_text"),
+        "check_in_iw_custos": None,
+    }
+    return payload, notes
+
+
+def _render_logo_md(payload: dict) -> str:
+    meta = payload.get("metadata", {})
+    return (
+        f"# Pack texte LOGO — {payload.get('angle_id')}\n\n"
+        f"**Titre viral ({LOGO_MAX_TITLE_WORDS} mots max)** :\n{payload.get('title')}\n\n"
+        f"**Paragraphe viral ({LOGO_MAX_PARAGRAPH_LINES} lignes max)** :\n"
+        f"{payload.get('viral_paragraph')}\n\n"
+        f"**Metadata** :\n- Title : {meta.get('title')}\n"
+        f"- Description :\n{meta.get('description')}\n"
+        f"- Tags : {', '.join(meta.get('tags', []))}\n\n"
+        f"**On-screen** : {payload.get('on_screen_text') or '—'}\n"
+    )
+
+
+# ----------------------------------------------------------------------
 # INIT — système prompt (one-time, à ne pas refaire)
 # ----------------------------------------------------------------------
 def cmd_init_systemprompt(args):
@@ -182,6 +291,25 @@ def cmd_init_systemprompt(args):
     )
 
     client = PremiumClient(_FORGE_ROOT)
+    if not client._api_key():
+        # ---- MODE BACKUP ORACLE pour l'init systemprompt -------------------
+        if getattr(args, "oracle", False):
+            out = os.path.join(IN_DIR, "systemprompt_oracle_prompt.json")
+            save_json(out, {
+                "mode": "oracle — backup sans clé premium",
+                "model_id": client.config.get("model_id", "<model_premium_id>"),
+                "system_prompt": "Tu es l'architecte du system prompt de la frégate copywriting.",
+                "user_prompt": meta_prompt,
+            })
+            print(f"[F04] MODE ORACLE : prompt écrit dans {out}")
+            print("[F04] L'Oracle forge le system prompt markdown → "
+                  f"CONTRACTS/copywriter_systemprompt.md (en-tête inclus)")
+            sys.exit(1)
+        print("[F04] Clé premium absente — 2 options :")
+        print("  1) Définir la clé (API Keys) : env CLIPPING_PREMIUM_API_KEY")
+        print("  2) Mode backup : --init-systemprompt --oracle")
+        sys.exit(1)
+
     client.require_config()
     result = client.chat(
         system_prompt="Tu es l'architecte du system prompt de la frégate copywriting.",
@@ -307,6 +435,31 @@ def cmd_generate(args):
         print("[F04] Aucun appel premium effectué — vérifier le prompt, puis --generate")
         return
 
+    if not client._api_key():
+        # ---- MODE BACKUP ORACLE (profil whop) -------------------------------
+        if getattr(args, "oracle", False):
+            call = {
+                "mode": "oracle — backup sans clé premium",
+                "model_id": client.config.get("model_id", "<model_premium_id>"),
+                "system_prompt": system_prompt,
+                "user_prompt": user_prompt,
+            }
+            out = os.path.join(IN_DIR, f"premium_call_{args.angle}.json")
+            save_json(out, call)
+            raw_path = os.path.join(OUT_DIR, f"text_payload_raw_{args.angle}.json")
+            if os.path.exists(raw_path):
+                print(f"[F04] MODE ORACLE : raw déjà forgé ({os.path.basename(raw_path)}) "
+                      f"— lancer --ordonnance")
+                return
+            print(f"[F04] MODE ORACLE : prompt écrit dans {out}")
+            print(f"[F04] L'Oracle doit forger OUT/text_payload_raw_{args.angle}.json "
+                  "(schéma output_schema), puis relancer --generate --oracle")
+            sys.exit(1)
+        print("[F04] Clé premium absente — 2 options :")
+        print("  1) Définir la clé (API Keys) : env CLIPPING_PREMIUM_API_KEY")
+        print("  2) Mode backup : --generate --oracle (l'Oracle forge le texte)")
+        sys.exit(1)
+
     client.require_config()
     user_text = json.dumps(user_prompt, indent=2, ensure_ascii=False)
     result = client.chat(system_prompt=system_prompt, user_prompt=user_text)
@@ -428,6 +581,205 @@ def cmd_finalize(args):
     print("[F04] OUT prêt pour F05_PACKAGER (production_pack) et l'Oracle OMNIS_WATCH")
 
 
+# ----------------------------------------------------------------------
+# LOGO v2 — Phases (profil logo, PAS de F03 : le clip vient du Warsmith)
+# ----------------------------------------------------------------------
+def cmd_setup_context_logo(args):
+    angle = find_angle(args.angle)
+    sub_mode = _detect_sub_mode(args)
+    verdict = find_verdict()
+    platform, market = warsmith_targets(args)
+    campaign = _logo_campaign_inputs()
+
+    builder = ContextBuilder(_FORGE_ROOT)
+    context = builder.build_logo(angle, sub_mode, campaign, verdict,
+                                 platform, market)
+    out = os.path.join(IN_DIR, f"copywriter_context_{args.angle}.json")
+    save_json(out, context)
+    print(f"[F04:LOGO] Phase A : {out} ({os.path.getsize(out)//1024} KB)")
+    print(f"[F04:LOGO] Angle {args.angle} — sub_mode {sub_mode} — {platform} / {market}")
+    print("[F04:LOGO] Lancer --generate pour la Phase B (premium direct)")
+
+
+def cmd_generate_logo(args):
+    angle = find_angle(args.angle)
+    context = _load_context(args.angle)
+    sub_mode = context.get("sub_mode", "informatif")
+    platform = context.get("platform_target", "youtube")
+    market = context.get("market_target", "unknown")
+
+    system_prompt = (
+        "Tu es F04_COPYWRITER, frégate copywriting du forge CLIPPING — profil LOGO. "
+        "Le clip source est FOURNI par le Warsmith et ne sert que d'illustration "
+        "(aucun lien avec le sujet). Tu forges le pack texte d'une video virale. "
+        "Réponds en JSON strict conforme à l'output_schema. Contraintes: titre "
+        f"{LOGO_MAX_TITLE_WORDS} mots max, paragraphe {LOGO_MAX_PARAGRAPH_LINES} "
+        "lignes max, description en 2 paragraphes (résumé + note fair use) en mode "
+        "informatif, jamais de 'abonne-toi'."
+    )
+
+    if sub_mode == "humour":
+        mission = (
+            "Mode HUMOUR : corrige la blague fournie (grammaire + langue cible, "
+            "sans titre inventé), puis forge une variante pour CET angle (N blagues "
+            "similaires, une par angle). Chaque blague doit tenir en moins de 30 "
+            "secondes de lecture. Produis aussi les métadonnées de la video."
+        )
+    else:
+        mission = (
+            "Mode INFORMATIF : résume l'article de manière virale selon le registre "
+            "de viralité du copywriting. Titre viral 6 mots max + paragraphe viral "
+            "4 lignes max + métadonnées (description = 1 paragraphe résumé 2 lignes "
+            "+ 1 paragraphe fair use) + tags + on-screen text."
+        )
+
+    user_prompt = {
+        "mission": mission,
+        "campaign_id": context.get("campaign_id"),
+        "angle_id": args.angle,
+        "sub_mode": sub_mode,
+        "angle": context.get("angle"),
+        "clip_source_ref": context.get("clip_source_ref"),
+        "article_source": context.get("article_source"),
+        "joke_source": context.get("joke_source"),
+        "reference_clip_style": context.get("reference_clip_style"),
+        "platform_target": platform,
+        "market_target": market,
+        "archivum": context.get("archivum"),
+        "output_schema": {
+            "title": "titre viral (6 mots max)",
+            "viral_paragraph": "paragraphe viral (4 lignes max)",
+            "metadata": {
+                "title": "titre metadata",
+                "description": "résumé 2 lignes + paragraphe fair use",
+                "tags": ["tag1", "tag2"],
+            },
+            "on_screen_text": "texte court ou null",
+        },
+        "heresies_interdites": [
+            "Abonne-toi / Like et partage / Swipe up",
+            "Titre > 6 mots",
+            "Paragraphe > 4 lignes",
+            "Mentionner que le clip est un background (l'audience ne doit pas le voir)",
+            "Fabrication de faits absents de l'article",
+        ],
+    }
+
+    client = PremiumClient(_FORGE_ROOT)
+    if getattr(args, "dry_run", False):
+        call = {
+            "mode": "dry-run — aucun appel réseau",
+            "model_id": client.config.get("model_id", "<model_premium_id>"),
+            "system_prompt": system_prompt,
+            "user_prompt": user_prompt,
+        }
+        out = os.path.join(IN_DIR, f"premium_call_{args.angle}.json")
+        save_json(out, call)
+        print(f"[F04:LOGO] Phase B (dry-run) : {out}")
+        print("[F04:LOGO] Aucun appel premium — vérifier le prompt, puis --generate")
+        return
+
+    if not client._api_key():
+        # ---- MODE BACKUP ORACLE : pas de clé premium → l'Oracle forge -------
+        if getattr(args, "oracle", False):
+            call = {
+                "mode": "oracle — backup sans clé premium",
+                "model_id": client.config.get("model_id", "<model_premium_id>"),
+                "system_prompt": system_prompt,
+                "user_prompt": user_prompt,
+            }
+            out = os.path.join(IN_DIR, f"premium_call_{args.angle}.json")
+            save_json(out, call)
+            raw_path = os.path.join(OUT_DIR, f"text_payload_raw_{args.angle}.json")
+            if os.path.exists(raw_path):
+                print(f"[F04:LOGO] MODE ORACLE : raw déjà forgé par l'Oracle "
+                      f"({os.path.basename(raw_path)}) — lancer --ordonnance --auto-ord")
+                return
+            print(f"[F04:LOGO] MODE ORACLE : prompt écrit dans {out}")
+            print("[F04:LOGO] L'Oracle doit forger : "
+                  f"OUT/text_payload_raw_{args.angle}.json (schéma output_schema)")
+            print("[F04:LOGO] Puis relancer --generate --oracle (détecte le raw) ou --ordonnance")
+            sys.exit(1)
+        print("[F04:LOGO] Clé premium absente — 2 options :")
+        print("  1) Définir la clé (API Keys) : env CLIPPING_PREMIUM_API_KEY")
+        print("  2) Mode backup : --generate --oracle (l'Oracle forge le texte)")
+        sys.exit(1)
+
+    client.require_config()
+    result = client.chat(system_prompt=system_prompt,
+                         user_prompt=json.dumps(user_prompt, indent=2,
+                                                ensure_ascii=False))
+    if not result:
+        print("[F04:LOGO] Échec de la génération premium")
+        sys.exit(1)
+    try:
+        raw = json.loads(client.extract_json(result))
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f"[F04:LOGO] Sortie premium non-JSON: {e}")
+        sys.exit(1)
+    raw["campaign_id"] = context.get("campaign_id")
+    raw["angle_id"] = args.angle
+    save_json(os.path.join(OUT_DIR, f"text_payload_raw_{args.angle}.json"), raw)
+    print(f"[F04:LOGO] Phase B : OUT/text_payload_raw_{args.angle}.json")
+    print("[F04:LOGO] Lancer --ordonnance --auto-ord pour la Phase C")
+
+
+def cmd_ordonnance_logo(args):
+    angle = find_angle(args.angle)
+    raw = _load_raw(args.angle)
+    context = _load_context(args.angle)
+    sub_mode = context.get("sub_mode", "informatif")
+    platform = context.get("platform_target", "youtube")
+    market = context.get("market_target", "unknown")
+
+    payload, notes = _ordonnance_logo(
+        raw, angle, sub_mode, platform, market,
+        campaign_id=context.get("campaign_id"))
+    save_json(os.path.join(OUT_DIR, f"text_payload_{args.angle}.json"), payload)
+    print(f"[F04:LOGO] Phase C (auto) : OUT/text_payload_{args.angle}.json")
+    for note in notes:
+        print(f"  - {note}")
+
+
+def cmd_finalize_logo(args):
+    angle = find_angle(args.angle)
+    path = os.path.join(OUT_DIR, f"text_payload_{args.angle}.json")
+    if not os.path.exists(path):
+        print(f"[F04:LOGO] text_payload introuvable: {path}")
+        print("[F04:LOGO] Lancer --ordonnance d'abord (Phase C)")
+        sys.exit(1)
+
+    payload = load_json(path)
+    title_words = len(str(payload.get("title", "")).split())
+    if title_words > LOGO_MAX_TITLE_WORDS:
+        print(f"[F04:LOGO] HÉRÉSIE {args.angle} : titre {title_words} mots "
+              f"> {LOGO_MAX_TITLE_WORDS}")
+        sys.exit(1)
+    payload["check_in_iw_custos"] = now_iso()
+    save_json(path, payload)
+
+    md = _render_logo_md(payload)
+    md_path = os.path.join(OUT_DIR, f"text_payload_{args.angle}.md")
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write(md)
+    print(f"[F04:LOGO] Phase D : {md_path} (lisible opérateur)")
+
+    angles = load_angles()
+    all_done = all(
+        os.path.exists(os.path.join(OUT_DIR, f"text_payload_{a.get('angle_id')}.json"))
+        for a in angles
+    )
+    if all_done:
+        custos = os.path.join(_FORGE_ROOT, "IW_CUSTOS.py")
+        if os.path.exists(custos):
+            subprocess.run(
+                [sys.executable, custos, "--mode", "check-in",
+                 "--frigate", "F04", "--output", md_path],
+                capture_output=True, text=True, timeout=30)
+        print("[F04:LOGO] Check-in IW_CUSTOS — text_payloads_forged")
+    print("[F04:LOGO] OUT prêt pour F05_PACKAGER (pack logo v2)")
+
+
 def main():
     parser = argparse.ArgumentParser(description="F04_COPYWRITER — La Plume de la Forteresse")
     parser.add_argument("--init-systemprompt", action="store_true",
@@ -447,8 +799,13 @@ def main():
                         help="Phase C locale (sans IRON) : classement + compliance")
     parser.add_argument("--dry-run", action="store_true",
                         help="Phase B sans appel réseau (écrit IN/premium_call)")
+    parser.add_argument("--oracle", action="store_true",
+                        help="MODE BACKUP : sans clé premium, l'Oracle forge OUT/text_payload_raw_<angle>.json "
+                             "à partir du prompt IN/premium_call_<angle>.json (au lieu de planter)")
     parser.add_argument("--force", action="store_true",
                         help="Init system prompt malgré un fichier déjà figé / placeholder")
+    parser.add_argument("--sub-mode", default=None,
+                        help="Mode LOGO: informatif | humour (auto-détecté sinon)")
     args = parser.parse_args()
 
     try:
@@ -457,19 +814,19 @@ def main():
         elif args.setup_context:
             if not args.angle:
                 print("[F04] --angle requis pour --setup-context"); sys.exit(1)
-            cmd_setup_context(args)
+            (cmd_setup_context_logo if is_logo() else cmd_setup_context)(args)
         elif args.generate:
             if not args.angle:
                 print("[F04] --angle requis pour --generate"); sys.exit(1)
-            cmd_generate(args)
+            (cmd_generate_logo if is_logo() else cmd_generate)(args)
         elif args.ordonnance:
             if not args.angle:
                 print("[F04] --angle requis pour --ordonnance"); sys.exit(1)
-            cmd_ordonnance(args)
+            (cmd_ordonnance_logo if is_logo() else cmd_ordonnance)(args)
         elif args.finalize:
             if not args.angle:
                 print("[F04] --angle requis pour --finalize"); sys.exit(1)
-            cmd_finalize(args)
+            (cmd_finalize_logo if is_logo() else cmd_finalize)(args)
         else:
             parser.print_help()
     except PremiumClientError as e:

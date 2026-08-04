@@ -5,12 +5,14 @@ libs/schema_validator.py — validation pack contre le schéma canonique
 Valide un production_pack contre `CONTRACTS/production_pack_schema.json`
 (JSON Schema draft-07 — contrat d'interface avec OMNIS_WATCH).
 
-Implémentation stdlib du sous-ensemble utilisé par le schéma canonique :
+Implémentation stdlib du sous-ensemble utilisé par les schémas canoniques :
   - type (y compris union ["string","null"])
   - required / properties (récursif)
+  - additionalProperties: false (rejette les clés inconnues)
   - enum / const
   - minItems / maxItems / contains
   - minimum / maximum
+  - minLength / maxLength
 
 Renvoie une liste de {path, message}. Retour vide = pack conforme.
 Le schéma est figé des deux côtés (PERTURABO ↔ OMNIS_WATCH) : toute
@@ -45,7 +47,20 @@ class SchemaValidator:
         if "const" in schema and value != schema["const"]:
             issues.append(f"{path}: const '{schema['const']}' requis, "
                           f"reçu '{value}'")
+        if isinstance(value, str):
+            if "minLength" in schema and len(value) < schema["minLength"]:
+                issues.append(f"{path}: minLength {schema['minLength']} violé "
+                              f"({len(value)} chars)")
+            if "maxLength" in schema and len(value) > schema["maxLength"]:
+                issues.append(f"{path}: maxLength {schema['maxLength']} dépassé "
+                              f"({len(value)} chars)")
         if isinstance(value, dict):
+            if schema.get("additionalProperties") is False:
+                allowed = set(schema.get("properties", {}).keys())
+                for key in value:
+                    if key not in allowed:
+                        issues.append(f"{path}: propriété inconnue '{key}' "
+                                      f"(additionalProperties: false)")
             for req in schema.get("required", []):
                 if req not in value:
                     issues.append(f"{path}: propriété requise manquante '{req}'")

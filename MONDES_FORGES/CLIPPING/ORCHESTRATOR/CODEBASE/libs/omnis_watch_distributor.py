@@ -53,7 +53,13 @@ class OmnisWatchDistributor:
         for pack_path in packs:
             with open(pack_path, "r", encoding="utf-8") as f:
                 pack = json.load(f)
-            angle_id = pack.get("identite", {}).get("angle_id", os.path.basename(pack_path))
+            if pack.get("mode") == "logo":
+                # Pack logo v2 : les angles sont dans videos[].
+                angles = [v.get("angle_id") for v in pack.get("videos", [])
+                          if v.get("angle_id")]
+                angle_id = ",".join(angles) if angles else os.path.basename(pack_path)
+            else:
+                angle_id = pack.get("identite", {}).get("angle_id", os.path.basename(pack_path))
             index["packs"].append({
                 "angle_id": angle_id,
                 "file": os.path.basename(pack_path),

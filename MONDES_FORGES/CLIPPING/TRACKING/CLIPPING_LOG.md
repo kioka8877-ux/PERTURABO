@@ -539,3 +539,35 @@ CAPTEURS/CODEBASE/
 | Post-Porte 4 | F06 tracker + learnings + close | Code pret (attente siege reel) |
 
 *Fer au-dedans, Fer au-dehors.*
+
+## [2026-08-04T17:39:01Z] siege_init — mode=logo — siege_id=SIEGE-LOGO-20260804T173901
+
+## [2026-08-04T17:40:24Z] campaign_closed — None — siege_closed_at: 2026-08-04T17:40:24Z
+
+## [2026-08-04T17:41:53Z] campaign_closed — None — siege_closed_at: 2026-08-04T17:41:53Z
+
+## [2026-08-04T17:41:53Z] siege_init — mode=logo — siege_id=SIEGE-LOGO-20260804T174153
+
+## [2026-08-04T17:43:24Z] F01 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F01_SCOUT/OUT/source_specimen.json — md5: a3b3357e8576f6b552f7d85323f3d095 — status: done
+
+## [2026-08-04T17:45:16Z] F02 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/campaign_verdict.json — md5: 96c2786f3ed56652e774292eac63645a — status: done
+
+## [2026-08-04T19:39:41Z] ANGLESMITH — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json — md5: cd7706807870582eb93876be2737b285 — status: done
+
+## [2026-08-04T19:40:37Z] ANGLESMITH — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json — md5: d4e2c2b5a7f0afd0c081632c50ce6d91 — status: done
+
+## [2026-08-04T20:12:55Z] F04 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A01.md — md5: de104869b9e20a9e5cff14f221528ec1 — status: done
+
+## [2026-08-04T20:12:55Z] F04 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A02.md — md5: 524cb5a0564b8a52403e6bab007931a9 — status: done
+
+## [2026-08-04T20:12:55Z] F04 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A03.md — md5: 7b4f0c434cd8cf6cb040f9fac10d95c9 — status: done
+
+## [2026-08-04T20:12:55Z] F04 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A04.md — md5: 9858074d1e3d3dcf604bb5ab24b135b3 — status: done
+
+## [2026-08-04T20:12:55Z] F04 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: 3f24bcf8c219efa20f73efdba75934d0 — status: done
+
+## [2026-08-04T20:13:04Z] F04 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: 3f24bcf8c219efa20f73efdba75934d0 — status: done
+
+## [2026-08-04T20:14:23Z] F05 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 98d22d920ba6323ad8d5eb388c17a435 — status: done
+
+## [2026-08-04T21:23:00Z] F05 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 0451f5429555c6e94e2e6a2b79e12cae — status: done

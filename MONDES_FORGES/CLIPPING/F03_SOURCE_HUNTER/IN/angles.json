@@ -1,0 +1,71 @@
+{
+  "campaign_id": "TS01_SANDOVAL",
+  "n_angles": 5,
+  "anglesmith_status": "done",
+  "weighting_eligible": false,
+  "sub_mode": "informatif",
+  "source": "Article TMZ 2026-08-04 — Tom Sandoval vs Victoria Lee Robinson (déclaration tribunal, coup au bas-ventre, insultes, ordonnance restrictive)",
+  "angles": [
+    {
+      "angle_id": "A01",
+      "angle_family": "reframing",
+      "emotion_mode": "outrage",
+      "engagement_type": "question",
+      "reframe_dim": "victime_vers_survivant",
+      "zone": "direct",
+      "territory": "celebrity_breakup_scandal",
+      "hook": "He says she kicked him in the groin IN FRONT of his band — and the insult she screamed broke him more than the kick",
+      "pitch": "Tom Sandoval dépose une nouvelle déclaration dans son affaire d'ordonnance restrictive. Son ex l'aurait frappé au bas-ventre devant son groupe et ses fans, en hurlant des insultes. Pourquoi il n'est jamais parti ?",
+      "weight": 1.0
+    },
+    {
+      "angle_id": "A02",
+      "angle_family": "emotion",
+      "emotion_mode": "outrage",
+      "engagement_type": "assertion",
+      "reframe_dim": "cache_vers_revele",
+      "zone": "direct",
+      "territory": "vanderpump_rules_drama",
+      "hook": "The 4 words she screamed that he says left him 'frazzled' before his AGT performance",
+      "pitch": "Les mots exacts que Victoria aurait hurlés — et comment Tom dit avoir dû monter sur scène à America's Got Talent quelques jours plus tard, détruit. La déclaration complète.",
+      "weight": 1.0
+    },
+    {
+      "angle_id": "A03",
+      "angle_family": "engagement",
+      "emotion_mode": "tension",
+      "engagement_type": "cliffhanger",
+      "reframe_dim": "fait_vers_absurde",
+      "zone": "direct",
+      "territory": "restraining_order_case",
+      "hook": "She threatened to 'get the Ariana Madix treatment' — and Tom says that's why he stayed",
+      "pitch": "Victoria aurait menacé de détruire sa vie comme Ariana Madix l'a fait après son breakup. Tom explique pourquoi cette menace l'a piégé dans la relation. La suite au tribunal.",
+      "weight": 1.0
+    },
+    {
+      "angle_id": "A04",
+      "angle_family": "structural",
+      "emotion_mode": "inspiration",
+      "engagement_type": "question",
+      "reframe_dim": "anonyme_vers_incroyable",
+      "zone": "direct",
+      "territory": "celebrity_breakup_scandal",
+      "hook": "He got a restraining order against her AND her dad — here's why the judge said yes",
+      "pitch": "Fin juin, le juge a accordé à Tom une ordonnance restrictive temporaire contre Victoria ET son père Will Robinson. La tentative de Victoria d'en obtenir une contre Tom a été refusée. Décryptage.",
+      "weight": 1.0
+    },
+    {
+      "angle_id": "A05",
+      "angle_family": "reframing",
+      "emotion_mode": "joie",
+      "engagement_type": "confirmation",
+      "reframe_dim": "echec_vers_lecon",
+      "zone": "direct",
+      "territory": "celebrity_breakup_scandal",
+      "hook": "She has ONE sentence in response — and it completely changes the story",
+      "pitch": "Victoria répond : 'Je n'ai pas frappé Tom, je ne l'ai pas touché. J'avais pris un shot et je lui ai demandé de prendre soin de moi.' Deux versions, un seul tribunal. Que croire ?",
+      "weight": 1.0
+    }
+  ],
+  "check_in_iw_custos": "2026-08-04T19:40:37Z"
+}

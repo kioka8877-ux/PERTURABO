@@ -1,19 +1,24 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "production_pack_schema_logo",
-  "_description": "Profil LOGO. Pack TEXTE ONLY produit par PERTURABO/CLIPPING. OMNIS_WATCH gere le rendu video + superposition logo. Pas de logo_placement ici (job OMNIS_WATCH).",
+  "_description": "Profil LOGO v2. Pack TEXTE ONLY produit par PERTURABO/CLIPPING. Deux sous-modes : informatif (article + video background illustratif) et humour (blague/meme + cuts operateur). OMNIS_WATCH gere le rendu video + le logo (image transparente fournie par la campagne).",
   "_mode": "logo",
   "_clip_source_provided_by": "warsmith",
   "type": "object",
-  "required": ["pack_id", "siege_id", "mode", "clip_source_ref", "angles"],
+  "required": ["pack_id", "siege_id", "mode", "sub_mode", "clip_source_ref", "angles", "videos"],
   "additionalProperties": false,
   "properties": {
     "pack_id": {"type": "string"},
     "siege_id": {"type": "string"},
     "mode": {"type": "string", "const": "logo"},
+    "sub_mode": {
+      "type": "string",
+      "enum": ["informatif", "humour"],
+      "_description": "informatif = article + video background. humour = blague/meme + cuts operateur."
+    },
     "clip_source_ref": {
       "type": "object",
-      "_description": "Reference au clip source (fourni par le Warsmith). Perturaba ne fait que le referencer.",
+      "_description": "Reference au clip source (fourni par le Warsmith). Perturabo ne fait que le referencer.",
       "required": ["source_type", "reference"],
       "additionalProperties": false,
       "properties": {
@@ -25,46 +30,119 @@
         "timecodes": {"type": ["object", "null"]}
       }
     },
+    "article_source": {
+      "type": ["object", "null"],
+      "_description": "Mode informatif : l'article qui est le VRAI sujet de la video. Le clip source n'est qu'un background illustratif (aucun lien avec le sujet).",
+      "additionalProperties": false,
+      "properties": {
+        "reference": {"type": "string", "_description": "URL ou texte de l'article"},
+        "subject": {"type": "string"},
+        "celebrity_or_subject": {"type": "string"}
+      }
+    },
+    "joke_source": {
+      "type": ["object", "null"],
+      "_description": "Mode humour : la blague/citation + capture tweet/reddit. PERTURABO en sort N blagues (une par angle).",
+      "additionalProperties": false,
+      "properties": {
+        "text": {"type": "string"},
+        "meme_type": {"type": "string", "enum": ["tweet", "reddit", "citation", "texte"]},
+        "reference": {"type": "string"}
+      }
+    },
+    "reference_clip_style": {
+      "type": ["object", "null"],
+      "_description": "Analyse du top clip viral fourni par le Warsmith : style de montage, ratio, blur, regles, ref. Perturabo apprend les assets et sort N videos.",
+      "additionalProperties": false,
+      "properties": {
+        "source": {"type": "string", "_description": "URL du clip viral de reference"},
+        "ratio": {"type": "string", "_description": "ex: 9:16"},
+        "blur": {"type": "boolean", "_description": "blur background ou pas"},
+        "editing_style": {"type": "string"},
+        "rules": {"type": "array", "items": {"type": "string"}},
+        "ref": {"type": "array", "items": {"type": "string"}}
+      }
+    },
     "angles": {
       "type": "array",
       "minItems": 1,
+      "_description": "Les N angles d'attaque (conserve de la v1). Chaque angle = 1 video du pack.",
       "items": {
         "type": "object",
-        "required": ["angle_id", "genre", "title", "body", "on_screen_text", "seo_tags"],
+        "required": ["angle_id"],
         "additionalProperties": false,
         "properties": {
           "angle_id": {"type": "string"},
-          "genre": {
-            "type": "string",
-            "enum": ["humoristique", "triste", "joyeux", "dramatique", "informatif"],
-            "_description": "Registre emotionnel du reframe. informatif = analyse SEO virale (titre + body explicatif)."
-          },
+          "genre": {"type": "string", "enum": ["humoristique", "triste", "joyeux", "dramatique", "informatif"]},
+          "title": {"type": "string"},
+          "body": {"type": "string"},
+          "on_screen_text": {"type": "string"},
+          "seo_tags": {"type": "array", "items": {"type": "string"}, "maxItems": 12},
+          "reframe_type": {"type": "string", "enum": ["emotion-pivot", "context-shift", "stake-raiser", "factual-explainer", "outrage-reframe", "wholesome-twist"]},
+          "zone": {"type": "string"},
+          "angle_family": {"type": "string"},
+          "emotion_mode": {"type": "string"},
+          "engagement_type": {"type": "string"},
+          "reframe_dim": {"type": "string"}
+        }
+      }
+    },
+    "videos": {
+      "type": "array",
+      "minItems": 1,
+      "_description": "Les N assets finaux (un par angle) : titre viral, paragraphe, metadonnees, cuts precis, placement logo. OMNIS_WATCH consomme ce bloc.",
+      "items": {
+        "type": "object",
+        "required": ["video_index", "angle_id", "title", "metadata", "cut", "logo_placement"],
+        "additionalProperties": false,
+        "properties": {
+          "video_index": {"type": "integer", "minimum": 1},
+          "angle_id": {"type": "string"},
           "title": {
             "type": "string",
-            "minLength": 8,
-            "maxLength": 220,
-            "_description": "Titre reframing 3-5 lignes, posi SEO virale."
+            "minLength": 1,
+            "maxLength": 60,
+            "_description": "Titre viral : max 6 mots (~60 chars)."
           },
-          "body": {
+          "viral_paragraph": {
             "type": "string",
-            "maxLength": 1200,
-            "_description": "Caption reframing OU body explicatif si genre=informatif."
+            "maxLength": 400,
+            "_description": "Paragraphe viral : max 4 lignes, resume de l'article selon le registre de viralite du copywriting."
           },
-          "on_screen_text": {
+          "metadata": {
+            "type": "object",
+            "required": ["title", "description", "tags"],
+            "additionalProperties": false,
+            "properties": {
+              "title": {"type": "string", "_description": "Titre viral de la video creee"},
+              "description": {
+                "type": "string",
+                "_description": "2 paragraphes : 1) resume de l'article en 2 lignes 2) note fair use (videos/images utilisees seulement pour l'illustration)."
+              },
+              "tags": {"type": "array", "items": {"type": "string"}, "maxItems": 12}
+            }
+          },
+          "cut": {
+            "type": "object",
+            "required": ["start_sec", "end_sec", "duration_sec", "cut_source"],
+            "additionalProperties": false,
+            "properties": {
+              "start_sec": {"type": ["number", "null"], "minimum": 0},
+              "end_sec": {"type": ["number", "null"]},
+              "duration_sec": {"type": ["number", "null"], "minimum": 1},
+              "cut_source": {
+                "type": "string",
+                "enum": ["operator", "perturabo_proposed", "perturabo_validated"],
+                "_description": "humour = operator (cuts fournis par le Warsmith). informatif = perturabo_proposed -> validation Warsmith -> perturabo_validated."
+              },
+              "note": {"type": "string"}
+            }
+          },
+          "logo_placement": {
             "type": "string",
-            "maxLength": 120,
-            "_description": "TEXTE court a afficher dans le clip (keyframe) - texte only, Perturaba le fournit a OMNIS_WATCH."
+            "_description": "Le logo appartient a la campagne (image transparente). Perturabo instruit OMNIS_WATCH d'utiliser cette image transparente contenant le logo (placement campagne 1080x1920)."
           },
-          "seo_tags": {
-            "type": "array",
-            "items": {"type": "string"},
-            "maxItems": 12
-          },
-          "reframe_type": {
-            "type": "string",
-            "enum": ["emotion-pivot", "context-shift", "stake-raiser", "factual-explainer", "outrage-reframe", "wholesome-twist"],
-            "_description": "Mecanique de reframe (a enrichir par le Warsmith)."
-          }
+          "on_screen_text": {"type": ["string", "null"]}
         }
       }
     },

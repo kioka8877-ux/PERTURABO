@@ -40,6 +40,15 @@ class GateValidator:
         self.out_dirs = {k: os.path.join(forge_root, *v.replace(_FORGE_ROOT, "").strip(os.sep).split(os.sep))
                          if v else None for k, v in FREGATE_OUT.items()}
 
+    def _mode(self) -> str:
+        """Profil actif (whop | logo) — lu depuis liber_clipping.json."""
+        try:
+            path = os.path.join(self.forge_root, "liber_clipping.json")
+            with open(path, "r", encoding="utf-8") as f:
+                return (json.load(f).get("mode") or "whop").lower()
+        except (OSError, json.JSONDecodeError):
+            return "whop"
+
     def _resolve(self, rel: str) -> str:
         return os.path.join(self.forge_root, rel)
 
@@ -65,10 +74,13 @@ class GateValidator:
 
         elif gate_id == "3":
             n = n_angles or 0
-            for i in range(1, n + 1):
-                if not glob.glob(self._resolve("F03_SOURCE_HUNTER/OUT/source_specimen_*.json")):
-                    missing.append("F03_SOURCE_HUNTER/OUT/source_specimen_<angle>.json")
-                    break
+            # Mode LOGO : pas de F03 (le clip vient du Warsmith) — seuls les
+            # text_payloads F04 sont requis. Mode whop : F03 + F04 requis.
+            if self._mode() != "logo":
+                for i in range(1, n + 1):
+                    if not glob.glob(self._resolve("F03_SOURCE_HUNTER/OUT/source_specimen_*.json")):
+                        missing.append("F03_SOURCE_HUNTER/OUT/source_specimen_<angle>.json")
+                        break
             for i in range(1, n + 1):
                 if not glob.glob(self._resolve("F04_COPYWRITER/OUT/text_payload_*.json")):
                     missing.append("F04_COPYWRITER/OUT/text_payload_<angle>.json")
@@ -79,7 +91,12 @@ class GateValidator:
             if not packs:
                 missing.append("F05_PACKAGER/OUT/production_pack_<angle>.json")
             else:
-                schema_path = self._resolve("CONTRACTS/production_pack_schema.json")
+                # Mode LOGO : schéma logo ; sinon schéma whop canonique.
+                if self._mode() == "logo":
+                    schema_path = self._resolve(
+                        "PROFILES/logo/CONTRACTS/production_pack_schema_logo.json")
+                else:
+                    schema_path = self._resolve("CONTRACTS/production_pack_schema.json")
                 for pack in packs:
                     if not self._validate_pack_against_schema(pack, schema_path):
                         missing.append(f"{os.path.basename(pack)} — schéma invalide")
