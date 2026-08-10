@@ -573,3 +573,21 @@ CAPTEURS/CODEBASE/
 ## [2026-08-04T21:23:00Z] F05 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 0451f5429555c6e94e2e6a2b79e12cae — status: done
 
 ## [2026-08-10T20:50:37Z] campaign_closed — None — siege_closed_at: 2026-08-10T20:50:37Z
+
+## [2026-08-10T21:10:42Z] F01 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F01_SCOUT/OUT/source_specimen.json — md5: 01deedc305d6b732e0d5bfa23e610e8f — status: done
+
+## [2026-08-10T21:11:11Z] F02 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/campaign_verdict.json — md5: c50d9ffb18977cbde36cd2ba68358cda — status: done
+
+## [2026-08-10T21:14:11Z] ANGLESMITH — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json — md5: 5f4c45a460c34cc80916b0d0db43ee2e — status: done
+
+## [2026-08-10T21:29:06Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A01.md — md5: 8bd44bb58d649615216419ae5bcaef36 — status: done
+
+## [2026-08-10T21:29:07Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A02.md — md5: 79339e56db03b601d9722762ffb90d42 — status: done
+
+## [2026-08-10T21:29:07Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A03.md — md5: 125bcf6e98b6f5ce804189e5a3ae61df — status: done
+
+## [2026-08-10T21:29:07Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A04.md — md5: 49bec2c62ead47fb980e877327906a81 — status: done
+
+## [2026-08-10T21:29:07Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: cb24660d5e0ccaec5c701ce12a14de43 — status: done
+
+## [2026-08-10T21:29:38Z] F05 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 35b91cf46fee43ba5637412441426a2f — status: done

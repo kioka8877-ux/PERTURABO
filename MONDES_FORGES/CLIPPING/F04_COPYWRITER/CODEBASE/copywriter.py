@@ -187,6 +187,21 @@ def _detect_sub_mode(args) -> str:
     return "informatif"
 
 
+def _campaign_hashtags() -> list[str]:
+    """Hashtags campagne (directive.md, ligne 'Hashtags:'). Jamais inventés."""
+    path = os.path.join(ARCHIVUM_DIR, "campaign", "directive.md")
+    if not os.path.exists(path):
+        return []
+    try:
+        for line in read_text(path).splitlines():
+            if line.strip().lower().startswith("hashtags:"):
+                raw = line.split(":", 1)[1]
+                return [t.strip() for t in raw.split() if t.strip().startswith("#")]
+    except OSError:
+        pass
+    return []
+
+
 def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
                      platform: str, market: str,
                      campaign_id: str = None) -> tuple[dict, list[str]]:
@@ -214,6 +229,10 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
             notes.append("note fair use ajoutée à la description")
     tags = [t.strip() for t in (meta.get("tags") or raw.get("tags") or [])
             if isinstance(t, str) and t.strip()][:12]
+    for ht in _campaign_hashtags():
+        if ht not in tags:
+            tags.append(ht)
+    tags = tags[:12]
 
     payload = {
         "campaign_id": raw.get("campaign_id") or campaign_id,

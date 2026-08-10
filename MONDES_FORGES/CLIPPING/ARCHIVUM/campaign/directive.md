@@ -45,8 +45,8 @@ Hashtags: #betplayio #betplay.io #betplayspins.io
 
 ## Sources
 
+- https://www.youtube.com/watch?v=w8NCD14oIDA (vidéo background THR News — Brad Pitt, 93s)
 - Article TMZ : `ARCHIVUM/campaign/article_source.json`
-- Vidéo background : `ARCHIVUM/campaign/reference_clip.json` (THR News — w8NCD14oIDA)
 
 ## Références
 

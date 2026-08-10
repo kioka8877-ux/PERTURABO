@@ -61,7 +61,8 @@ class ContextBuilder:
         return result
 
     # ------------------------------------------------------------------
-    def collect_archivum(self, platform: str, market: str) -> dict:
+    def collect_archivum(self, platform: str, market: str,
+                         skip_transcripts: bool = False) -> dict:
         copywriting_root = os.path.join(self._archivum, "copywriting")
         rules_root = os.path.join(self._archivum, "rules")
         platform_profile = os.path.join(
@@ -72,6 +73,13 @@ class ContextBuilder:
         demons_dir = os.path.join(self._archivum, "demons")
         knowledge_root = os.path.join(self._archivum, "knowledge_base")
         learnings_path = os.path.join(self._archivum, "learnings", "learnings.json")
+
+        knowledge_base = self._walk(knowledge_root, "knowledge_base")
+        if skip_transcripts:
+            knowledge_base = {
+                k: v for k, v in knowledge_base.items()
+                if not k.split("/", 1)[0] == "transcripts"
+            }
 
         return {
             "copywriting_8_sous_dossiers": self._walk(copywriting_root, "copywriting"),
@@ -85,7 +93,7 @@ class ContextBuilder:
                     os.path.join(angles_dir, "angle_performance.json"), "angle_performance"),
             },
             "demons": self._walk(demons_dir, "demons"),
-            "knowledge_base": self._walk(knowledge_root, "knowledge_base"),
+            "knowledge_base": knowledge_base,
             "learnings": self._read(learnings_path, "learnings.json"),
         }
 
@@ -134,7 +142,7 @@ class ContextBuilder:
             "verdict": verdict,
             "platform_target": platform,
             "market_target": market,
-            "archivum": self.collect_archivum(platform, market),
+            "archivum": self.collect_archivum(platform, market, skip_transcripts=True),
             "contracts": self.collect_contracts(),
         }
 
