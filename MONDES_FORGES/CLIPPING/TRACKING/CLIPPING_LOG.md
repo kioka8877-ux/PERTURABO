@@ -591,3 +591,25 @@ CAPTEURS/CODEBASE/
 ## [2026-08-10T21:29:07Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: cb24660d5e0ccaec5c701ce12a14de43 — status: done
 
 ## [2026-08-10T21:29:38Z] F05 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 35b91cf46fee43ba5637412441426a2f — status: done
+
+## [2026-08-10T21:38:00Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A01.md — md5: aaee765a0a7af8c097d485bd2c4a0536 — status: done
+
+## [2026-08-10T21:38:00Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A02.md — md5: 0b86327166df6126155defdfd92bde4f — status: done
+
+## [2026-08-10T21:38:00Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A03.md — md5: a8b17f509638253524a1cb1691285fdc — status: done
+
+## [2026-08-10T21:38:00Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A04.md — md5: 9278adea2c3c7268acb9cc6c6312d77b — status: done
+
+## [2026-08-10T21:38:00Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: 2bb4b0f8e77baf011c37d96f36d4397e — status: done
+
+## [2026-08-10T21:38:15Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A01.md — md5: 5b09058f813d2e2f8a626195ae2622d7 — status: done
+
+## [2026-08-10T21:38:16Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A02.md — md5: 0b86327166df6126155defdfd92bde4f — status: done
+
+## [2026-08-10T21:38:16Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A03.md — md5: a8b17f509638253524a1cb1691285fdc — status: done
+
+## [2026-08-10T21:38:16Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A04.md — md5: 9278adea2c3c7268acb9cc6c6312d77b — status: done
+
+## [2026-08-10T21:38:16Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: ccc510f473aabdd49eafbebea570697a — status: done
+
+## [2026-08-10T21:38:19Z] F05 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 617d34b4d3931225e280a9b46eb66068 — status: done

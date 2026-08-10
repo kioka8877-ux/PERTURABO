@@ -218,7 +218,9 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
     if lines > LOGO_MAX_PARAGRAPH_LINES:
         notes.append(f"paragraphe {lines} lignes > {LOGO_MAX_PARAGRAPH_LINES}")
     if len(viral) > LOGO_MAX_PARAGRAPH_CHARS:
-        notes.append(f"paragraphe {len(viral)} chars > {LOGO_MAX_PARAGRAPH_CHARS}")
+        notes.append(f"paragraphe {len(viral)} chars > {LOGO_MAX_PARAGRAPH_CHARS} — "
+                     f"tronqué à {LOGO_MAX_PARAGRAPH_CHARS}")
+        viral = viral[:LOGO_MAX_PARAGRAPH_CHARS].rstrip()
 
     meta = raw.get("metadata") or {}
     description = str(meta.get("description") or viral).strip()
@@ -635,6 +637,8 @@ def cmd_generate_logo(args):
         f"{LOGO_MAX_TITLE_WORDS} mots max, paragraphe {LOGO_MAX_PARAGRAPH_LINES} "
         "lignes max, description en 2 paragraphes (résumé + note fair use) en mode "
         "informatif, jamais de 'abonne-toi'."
+        " IMPORTANT: Écris TOUT (titres, paragraphe, description, tags, on-screen) "
+        "en ANGLAIS, même si l'article source est dans une autre langue."
     )
 
     if sub_mode == "humour":
