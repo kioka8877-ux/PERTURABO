@@ -571,3 +571,5 @@ CAPTEURS/CODEBASE/
 ## [2026-08-04T20:14:23Z] F05 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 98d22d920ba6323ad8d5eb388c17a435 — status: done
 
 ## [2026-08-04T21:23:00Z] F05 — check-in — output: /home/daytona/codebase/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 0451f5429555c6e94e2e6a2b79e12cae — status: done
+
+## [2026-08-10T20:50:37Z] campaign_closed — None — siege_closed_at: 2026-08-10T20:50:37Z
