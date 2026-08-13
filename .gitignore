@@ -5,3 +5,7 @@ __pycache__/
 *.mp3
 *.wav
 *.mp4
+CONTRACTS/youtube_secrets.json
+CONTRACTS/youtube_secrets.local.json
+**/CONTRACTS/youtube_secrets.json
+**/CONTRACTS/youtube_secrets.local.json
