@@ -38,12 +38,12 @@ from clipping_ecosystem_scanner import ClippingEcosystemScanner
 from campaign_context_scanner import CampaignContextScanner
 from demon_scanner import DemonScanner
 from youtube_channel_scraper import YoutubeChannelScraper
-from rss_ingestor import scan as rss_scan
-from trends_ingestor import scan as trends_scan
-from youtube_ingestor import scan as youtube_scan
-from suggestions_ingestor import scan as suggestions_scan
-from virality_scorer import score_subject
-from premium_synth import synthesize as premium_synthesize
+from f00_rss_ingestor import scan as rss_scan
+from f00_trends_ingestor import scan as trends_scan
+from f00_youtube_ingestor import scan as youtube_scan
+from f00_suggestions_ingestor import scan as suggestions_scan
+from f00_virality_scorer import score_subject
+from f00_premium_synth import synthesize as premium_synthesize
 
 OUT_DIR = os.path.join(_CAPTEURS_DIR, "OUT")
 IN_DIR = os.path.join(_CAPTEURS_DIR, "IN")
@@ -335,7 +335,7 @@ def _derive_keywords(niche: str) -> list[str]:
 
 def _hot_keywords() -> list[str]:
     """En mode --hot, prend les requêtes montantes du RSS Trends comme mots-clés."""
-    from trends_ingestor import scan_global_trending
+    from f00_trends_ingestor import scan_global_trending
     top = scan_global_trending(max_items=6)
     queries = [t["query"] for t in top.get("trending", []) or []]
     return queries[:6] or ["trending"]
@@ -419,10 +419,20 @@ def cmd_scan_subjects(args):
     print(f"[F00_CAPTEURS] Proposition écrite: {out_json}")
     print(f"[F00_CAPTEURS] Tableau bilingue: {md_path}")
 
+    export_dir = os.path.join(_FORGE_ROOT, "EXPORT")
+    os.makedirs(export_dir, exist_ok=True)
+    for fname, fpath in (("subjects_proposal.json", out_json),
+                         ("subjects_proposal.md", md_path)):
+        export_path = os.path.join(export_dir, fname)
+        with open(fpath, "r", encoding="utf-8") as fsrc, \
+                open(export_path, "w", encoding="utf-8") as fdst:
+            fdst.write(fsrc.read())
+    print(f"[F00_CAPTEURS] Exporté dans {export_dir} (checkable sur GitHub)")
+
     custos = os.path.join(_FORGE_ROOT, "IW_CUSTOS.py")
     if os.path.exists(custos):
         subprocess.run([sys.executable, custos, "--mode", "check-in",
-                        "--frigate", "F00_CAPTEURS", "--output", md_path],
+                        "--frigate", "CAPTEURS", "--output", md_path],
                        capture_output=True, text=True, timeout=30)
     print("[F00_CAPTEURS] check-in IW_CUSTOS — le Warsmith choisit le sujet.")
 

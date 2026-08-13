@@ -3,7 +3,7 @@
   "campaign_id": null,
   "campaign_status": "active",
   "current_porte": "closed",
-  "fleet_status": "pending",
+  "fleet_status": "capteurs_done",
   "mode": "logo",
   "inputs_warsmith": {
     "directive_path": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
@@ -29,8 +29,8 @@
     "f06_tracker_output": null,
     "tyrant": "pending",
     "tyrant_output": null,
-    "capteurs": "pending",
-    "capteurs_output": null
+    "capteurs": "done",
+    "capteurs_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CAPTEURS/OUT/subjects_proposal.md"
   },
   "portes_validated": [
     "1",
@@ -99,7 +99,7 @@
     }
   ],
   "iw_custos": {
-    "last_validation": "2026-08-10T21:38:19Z",
+    "last_validation": "2026-08-13T23:31:56Z",
     "errors": []
   }
 }

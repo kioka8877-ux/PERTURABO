@@ -613,3 +613,7 @@ CAPTEURS/CODEBASE/
 ## [2026-08-10T21:38:16Z] F04 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: ccc510f473aabdd49eafbebea570697a — status: done
 
 ## [2026-08-10T21:38:19Z] F05 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 617d34b4d3931225e280a9b46eb66068 — status: done
+
+## [2026-08-13T23:29:22Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CAPTEURS/OUT/subjects_proposal.md — md5: 59b7b8327c27b9ead52f8f62c15d8044 — status: done
+
+## [2026-08-13T23:31:56Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CAPTEURS/OUT/subjects_proposal.md — md5: 2796c049a7685f023ad45ffec702d570 — status: done
