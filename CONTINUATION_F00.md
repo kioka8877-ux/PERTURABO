@@ -56,6 +56,15 @@
 > `reference_clip.json`. Ledger mis à jour (`campaign_id`, `inputs_warsmith`).
 > Prochaine étape : **F01_SCOUT --prepare / --auto** sur cette directive.
 
+> ✅ **MAJ 2026-08-14 (fin de chaîne)** : siège `NBA_WESTBROOK` exécuté de
+> bout en bout : F01 (specimen) → F02 (verdict GO) → ANGLESMITH (5 angles)
+> → F03 (5 specimens) → F04 (5 text_payloads, premium GLM + 2 forgés Oracle
+> A04/A05 en backup suite rate-limit NVIDIA) → F05 (5 production_packs validés).
+> Packs exportés dans `EXPORT/production_pack_logo.json` + `packs_index.json`.
+> Ledger réinitialisé pour le siège NBA_WESTBROOK (portes vidées).
+> ⚠️ Pièges du sandbox : YouTube bloque les transcripts (IP cloud) → F03
+> sélectionne sans segments ; NVIDIA rate-limit 429 fréquent → backup Oracle.
+
 ### 4.0 ERREURS CONSTATÉES (à traiter en premier dans le nouveau sandbox)
 
 1. **Synthèse GLM timeout** : `premium_client.py:195` hardcode
@@ -135,10 +144,12 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
    → **FAIT** : `--deliver-subject <index>` opérationnel (voir §4 MAJ).
 3. **Enchaîner sur F01** : lancer `F01_SCOUT --prepare/--auto` puis
    F02→ANGLESMITH→F03→F04→F05→F06 sur la directive `NBA_WESTBROOK`.
+   → **FAIT** : chaîne complète F01→F05, packs dans `EXPORT/`.
 4. Optionnel : générer une proposition en mode `--hot` (sans niche) et en
    mode `--mode humour` pour valider les 2 sous-modes.
 5. Intégration chaîne existante : le sujet choisi doit ensuite alimenter
    F01→F02→ANGLESMITH→F03→F04→F05→F06 (chaîne intacte).
+   → **FAIT** (F06_TRACKER reste à faire : posts, vues, payout).
 
 ## 5. Commandes de vérification rapide
 

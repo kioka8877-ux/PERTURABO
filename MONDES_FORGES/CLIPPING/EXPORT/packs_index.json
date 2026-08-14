@@ -1,0 +1,11 @@
+{
+  "pack_id": "LOGO-NBA_WESTBROOK-siege_20260810_205150",
+  "sub_mode": "informatif",
+  "video_count": 5,
+  "generated_at": "2026-08-14T16:43:22Z",
+  "packs": [
+    {
+      "file": "production_pack_logo.json"
+    }
+  ]
+}

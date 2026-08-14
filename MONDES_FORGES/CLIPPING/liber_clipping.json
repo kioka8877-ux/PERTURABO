@@ -2,7 +2,7 @@
   "siege_id": "siege_20260810_205150",
   "campaign_id": "NBA_WESTBROOK",
   "campaign_status": "active",
-  "current_porte": "closed",
+  "current_porte": "init",
   "fleet_status": "capteurs_done",
   "mode": "logo",
   "inputs_warsmith": {
@@ -13,93 +13,36 @@
     "n_angles": 5
   },
   "fregates_status": {
-    "f01_scout": "done",
-    "f01_scout_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F01_SCOUT/OUT/source_specimen.json",
-    "f02_tyrant_camp": "done",
-    "f02_tyrant_camp_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/campaign_verdict.json",
-    "anglesmith": "done",
-    "anglesmith_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json",
+    "f01_scout": "pending",
+    "f01_scout_output": "pending",
+    "f02_tyrant_camp": "pending",
+    "f02_tyrant_camp_output": "pending",
+    "anglesmith": "pending",
+    "anglesmith_output": "pending",
     "f03_source_hunter": "pending",
-    "f03_source_hunter_output": null,
-    "f04_copywriter": "done",
-    "f04_copywriter_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md",
-    "f05_packager": "done",
-    "f05_packager_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md",
+    "f03_source_hunter_output": "pending",
+    "f04_copywriter": "pending",
+    "f04_copywriter_output": "pending",
+    "f05_packager": "pending",
+    "f05_packager_output": "pending",
     "f06_tracker": "pending",
-    "f06_tracker_output": null,
+    "f06_tracker_output": "pending",
     "tyrant": "pending",
-    "tyrant_output": null,
+    "tyrant_output": "pending",
     "capteurs": "done",
     "capteurs_output": "/workspace/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md"
   },
-  "portes_validated": [
-    "1",
-    "2",
-    "3",
-    "4"
-  ],
-  "gate_decisions": {
-    "gate_1": {
-      "validated": true,
-      "notes": "verdict GO conforme directive Spin&WIN",
-      "timestamp": "2026-08-10T21:13:13Z"
-    },
-    "gate_2": {
-      "validated": true,
-      "notes": "5 angles forgés, hooks viraux, anti-cannibale OK",
-      "timestamp": "2026-08-10T21:18:04Z"
-    },
-    "gate_3": {
-      "validated": true,
-      "notes": "5 text_payloads GLM 5.2, hashtags campagne injectés, fair use OK, anti-cannibale OK",
-      "timestamp": "2026-08-10T21:29:21Z"
-    },
-    "gate_4": {
-      "validated": true,
-      "notes": "5 production_pack_logo.json assemblés, schéma logo validé, prêt OMNIS_WATCH",
-      "timestamp": "2026-08-10T21:29:44Z"
-    }
-  },
-  "packs_expedies_count": 1,
+  "portes_validated": [],
+  "gate_decisions": {},
+  "packs_expedies_count": 0,
   "packs_posted_count": 0,
   "packs_submitted_whop_count": 0,
   "last_event": "deliver_subject_1_campaign_NBA_WESTBROOK",
   "siege_started_at": "2026-08-10T20:51:50Z",
   "siege_closed_at": null,
-  "log_event": [
-    {
-      "at": "2026-08-10T20:51:50Z",
-      "event": "siege_started",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-10T20:51:50Z",
-      "event": "siege_started",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-10T21:13:13Z",
-      "event": "gate_1_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-10T21:18:04Z",
-      "event": "gate_2_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-10T21:29:21Z",
-      "event": "gate_3_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-10T21:29:44Z",
-      "event": "gate_4_valide",
-      "angle_id": null
-    }
-  ],
+  "log_event": [],
   "iw_custos": {
-    "last_validation": "2026-08-14T16:14:40Z",
+    "last_validation": "2026-08-14T16:43:22Z",
     "errors": []
   }
 }

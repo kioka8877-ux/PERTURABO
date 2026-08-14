@@ -663,3 +663,33 @@ F00_CAPTEURS/CODEBASE/capteurs.py
 3. F05_PACKAGER (Porte 4) → F06_TRACKER (post-Porte 4)
 
 ## [2026-08-14T16:14:40Z] CAPTEURS — check-in — output: /workspace/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md — md5: e91e331cc7ba96c2a2039503ae73531f — status: done
+
+## [2026-08-14T16:21:33Z] F01 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F01_SCOUT/OUT/source_specimen.json — md5: 0740832c6e88a600406b1e0b4032224a — status: done
+
+## [2026-08-14T16:22:07Z] F02 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/campaign_verdict.json — md5: 24d7f11d87bc45563a597e12afc72c33 — status: done
+
+## [2026-08-14T16:22:24Z] ANGLESMITH — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json — md5: d8d00056e4e432b5df1a4bca80716be6 — status: done
+
+## [2026-08-14T16:23:07Z] F03 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F03_SOURCE_HUNTER/OUT/source_summary.md — md5: 565c5b0548683631124273edfb19c184 — status: done
+
+## [2026-08-14T16:25:25Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A01.md — md5: 6e7942193a76723dad3f8bfbad78e955 — status: done
+
+## [2026-08-14T16:25:25Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A02.md — md5: 133d73156096c595fe3572c4465095d9 — status: done
+
+## [2026-08-14T16:25:29Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A03.md — md5: 6a40d5ba4ae7fd988b37c6b700bf5b93 — status: done
+
+## [2026-08-14T16:25:29Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A04.md — md5: da5a2d6af7dcdb9c1036b6d467e33d6d — status: done
+
+## [2026-08-14T16:25:29Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: dc8e49d25c8622b5274460e1e2e46de9 — status: done
+
+## [2026-08-14T16:26:05Z] F05 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 55281af1d20fb59aa7edfeade8fffede — status: done
+
+## [2026-08-14T16:30:52Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A02.md — md5: 1fc722a6406bbdb6212f2538e81180a2 — status: done
+
+## [2026-08-14T16:31:08Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A03.md — md5: 1d45d3f7fb31046cea7cc8fec55a9065 — status: done
+
+## [2026-08-14T16:42:52Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A04.md — md5: 689751b0449199ea39284c753533d226 — status: done
+
+## [2026-08-14T16:43:07Z] F04 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: a607df09d7d7398bd646ae0a585efa2c — status: done
+
+## [2026-08-14T16:43:22Z] F05 — check-in — output: /workspace/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: e1512720b9b0df3efc13d6fea7b9158b — status: done
