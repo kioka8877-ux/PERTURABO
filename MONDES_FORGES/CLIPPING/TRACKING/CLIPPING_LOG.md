@@ -619,3 +619,7 @@ F00_CAPTEURS/CODEBASE/
 ## [2026-08-13T23:31:56Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: 2796c049a7685f023ad45ffec702d570 — status: done
 
 ## [2026-08-14T07:00:22Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: 1a3fb914f0b66f0ef324a36e36164e24 — status: done
+
+## [2026-08-14T07:46:47Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: fb35b9fd0eaf47b77943b3459eed3a5b — status: done
+
+## [2026-08-14T07:52:21Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: 1b5c9ffdc00885d2a06695fa63088ad3 — status: done

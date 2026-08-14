@@ -94,6 +94,16 @@ def _build_user_prompt(niche: str | None, hot: bool, mode: str,
     parts.append("=== RÉSUMÉ DES OBSERVATIONS RÉELLES (payload capteurs) ===")
     parts.append(json.dumps(payload, ensure_ascii=False, indent=1,
                             default=str)[:60000])
+    baseline = payload.get("baseline")
+    if baseline and baseline.get("scans_count", 0) > 0:
+        parts.append("=== BASELINE HISTORIQUE (scans passés de F00) ===")
+        parts.append(
+            "Ces chiffres indiquent ce qui est NORMAL dans nos scans récents. "
+            "Sers-t-en pour calibrer tes scores : un sujet au-dessus de la "
+            "médiane d'une métrique mérite un score plus haut, en-dessous "
+            "plus bas. N'invente JAMAIS une valeur : compare aux observations "
+            "du payload actuel.")
+        parts.append(json.dumps(baseline, ensure_ascii=False, indent=1))
     return "\n".join(parts)
 
 

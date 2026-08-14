@@ -63,6 +63,44 @@ BASE_WEIGHTS = {
 }
 
 
+def normalize_metrics(metrics: dict, window_hours: int = 5) -> dict:
+    """Transforme les métriques brutes d'un sujet en signaux normalisés 0..1.
+
+    La normalisation est déterministe (jamais d'avis) :
+      vues_youtube : échelle log — 0 vue -> 0, 1M vues -> 1.0
+      tendance     : growth 7j — 1.0 -> 0.17, 2.0 -> 1.0
+      fraicheur    : 1 - (heures / fenêtre)
+      demande      : demand_score / 100
+      couverture   : domaines distincts / 5 (plafonné à 1)
+    """
+    sig = {}
+    views = metrics.get("top_video_views")
+    if views:
+        import math
+        sig["vues_youtube"] = min(1.0, (math.log10(views) / 6.0)) if views else 0.0
+    growth = metrics.get("trend_growth_7d")
+    if growth:
+        sig["tendance"] = min(1.0, max(0.0, (float(growth) - 0.8) / 1.2))
+    hours = metrics.get("freshness_hours")
+    if hours is not None:
+        sig["fraicheur"] = max(0.0, min(1.0, 1.0 - (float(hours) / window_hours)))
+    demand = metrics.get("demand_score")
+    if demand:
+        sig["demande"] = float(demand) / 100.0
+    coverage = metrics.get("coverage_media_count")
+    if coverage:
+        sig["couverture"] = min(1.0, float(coverage) / 5.0)
+    return sig
+
+
+def score_subject_from_metrics(metrics: dict, window_hours: int = 5) -> dict:
+    """Score mécanique complet (0-100) directement depuis les métriques brutes
+    d'un sujet : normalisation déterministe + pondération 5 signaux.
+    Retourne {score, detail, missing, note}."""
+    sig = normalize_metrics(metrics, window_hours=window_hours)
+    return score_subject(sig)
+
+
 def score_subject(signals: dict) -> dict:
     """Signaux normalisés 0..1 par clé. Retourne score + détail.
 

@@ -1,6 +1,6 @@
 {
-  "scan_id": "F00-e55a8dbf",
-  "scanned_at": "2026-08-14T07:00:21Z",
+  "scan_id": "F00-5581179c",
+  "scanned_at": "2026-08-14T07:52:21Z",
   "config": {
     "niche": "NBA",
     "hot": false,
@@ -31,77 +31,95 @@
         "keywords": [
           "NBA"
         ],
-        "fetched_articles": 111,
+        "fetched_articles": 113,
         "fresh_articles": [
           {
-            "title": "Top rookie matchups to watch in the 2026-27 NBA season - nba.com",
-            "source": "nba.com",
+            "title": "Top rookie matchups to watch in the 2026-27 NBA season - NBA.com",
+            "source": "NBA.com",
             "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1rb21vRkpvSlotbkVQUGVyVkRadjNsLU9NdElPb0NhSGlqUlA2VVJqdFNOUHJjNmdKUUE2WElXcktWRDZuc1lxdnpjZ3JCcjJseHR6TlNGa2VwNzdyN3g4dTh2TWJCSnlEWmU0?oc=5",
-            "age_hours": 2.5
+            "age_hours": 3.3
           },
           {
-            "title": "“He Became the Blame of a Lot”: NBA Champion Reveals the Harsh Truth About Russell Westbrook’s Career After His Retirement - Yahoo Sports",
-            "source": "Yahoo Sports",
-            "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxObE1LYmFySDRUQVR5ZkxGVE5KdW9SakRrNm9vOUJYY0NLcnNlSkd0R05oVVpRS2gwbUE2Rm92Xzg2c3pUenFmTENhVzVrZ2l1QkcxOVJNV0t6Yi1DazlvVFcwc1QxaTlpVUIwbDI5dk5CRUY0aEQ3cEcyaWFQS3ROeVhDZGQ?oc=5",
-            "age_hours": 2.4
-          },
-          {
-            "title": "NBA adds more broadcast TV games in second year of rights deal - Sports Media Watch",
-            "source": "Sports Media Watch",
-            "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORDUwbGlRNVl3Zk50cjZSOHJkZ05tNFp5YVNwUzhnOHpDY2ZDV2R4UTZxcjhwdGR0MjZybVpHU2tJeHNSdURLV3czZUg0RVZXa093YmVKeGxmYzd3b05CcDFha19maFFHRmtMU0hGaUJVc09EeUhMRDRUcXBHNmpDTC1vb2xSYjVLQmdDQ21YZVRiUnRRZTljLVNPNHVXVUIwcjRkUHBxY0k5QzhOQW9SempGNA?oc=5",
+            "title": "Most anticipated matchups on 2026-27 NBA schedule - nbcsports.com",
+            "source": "nbcsports.com",
+            "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQWlNvU2I0V2RpcnVVcUI4NDE3bXh4MnJsNm9xNXdlUWJ3cUxQY0FHM0pKeER3QzlVc2xhci1wWXNwX095Y2V1WHotZWtjbEYwZG1XVVE5dTJqQTZGUWlsc2ZRaVpDQmRfVXJsbHhGSDFHNkRWUkNWYkx5RS1fRy10RXRLNkZEa3gwSlVWQUI2a1BNYlpWeXMyWkI5RUVJZEloc0psdWtsMA?oc=5",
             "age_hours": 4.0
-          },
-          {
-            "title": "The NBA's Sonics story takes twists along I-5, with turns in Portland, Los Angeles - KOMO",
-            "source": "KOMO",
-            "link": "https://news.google.com/rss/articles/CBMijwJBVV95cUxPUFdNZVpOWFhUSVhoUTA4Zm5ZeFItVW5sYUNXUWdDQU5sWE9QR2pjZzM1dWdabDZzNUhrNzJxd1VTZUVIX0s0dXBpc1BmdzJEZ0wwZDBUUWtReGo0Qkh2ZjJ1YXVRUmRYbzlZeXU3ei1QTUYwc3k3YmhBRVNnRVd5TlNqRWt3bUo2OVZwbmRQT3QwS0NLM2ZtMDJubFdDQncxR2t4dWh5bVZ6MEtKUUNJbkpRS095a0YwWmlYNjh2bUNJakxKZHUtRmZHR2JiQjNDbEhKUEJBNTRBd0pBYkIxRDNRRmhwWVpoM1RueEs0eUVrT1FEN1pQX1JsQ2FxVWtFSENGZ2l3a1BVY2pNQXBV?oc=5",
-            "age_hours": 1.9
-          },
-          {
-            "title": "NBA schedule release: Pelicans and Spurs will fly the most miles in 2026-27 season, Knicks will travel the least - Yahoo Sports",
-            "source": "Yahoo Sports",
-            "link": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOY2NCVUNrNXNDNWRHSU1iX3Y5RXRyU1JEbzF4UWFVOEZyeDc2MU1XYnJRbkwtanhMdUs2ZmJmWXpQMGJRbG9UdDI0c3FVcnNFVDN4YktoQ2gyM3hwTHlRVXREeE1kUjVwUmF4ZGpQbzNNXzczejVfbS1vMjZJaDkzYkJSaDFkOEt4V0o2U2lWWXJCeWo0VnhHM1ByaTY1X2RKUGUzN1NhMVJ1dDh1NlFiZmRsRGVZREttYkZoRzM3cFFDT3ExVVg5RXlOSmFnLUpZRzdnUmJWcXcxQ2NsNTc2ejZmYlpLRFZaNS1LcXRuSUphMFVC?oc=5",
-            "age_hours": 4.7
           },
           {
             "title": "LeBron James Drops Relocation Hint to 76ers Fans After NBA Reveals 2026–27 Schedule - Yahoo Sports",
             "source": "Yahoo Sports",
             "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPU0pKRFpNWDYyaGdZUlowVXp6cEtyQ20xQUQzRjV3SlNNMVQxY21YeEd0UWZkVk9rTllNRFBKQjhGMGVfRDZsZWNfSkw0eXZhLUUzQV9OQjY4bng4U2Z3Ym9oaGtpcFhFQ1RhbmN4N3IweVNVSm1yVGwxLU9SYzVqQW4zZ29ZalZ0UmhV?oc=5",
-            "age_hours": 3.0
+            "age_hours": 3.8
           },
           {
             "title": "‘I don’t get it’ – NBA fans can’t believe Los Angeles Clippers gave Bradley Beal new $13 million deal - Yahoo Sports",
             "source": "Yahoo Sports",
             "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5DZV9RM05DdDF1RV9oYmV1cmpXbmlKZzhsb0JnUXQwY2hZV3p0SjR5WkUzdTN5THVRRVpjbEFpcGs5bm9CX0VEVTZKeDlULXdnZ0J0RlA4T3UzWnhrWUJkeDJaSk5iRERZTXY3MHB6cTVXNjg?oc=5",
-            "age_hours": 1.4
+            "age_hours": 2.2
+          },
+          {
+            "title": "‘Deserved Better,’ ‘Delete This’ — NBA World Enraged Over Lakers’ Retirement Tribute for Russell Westbrook - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdS00bVpKVTNsaHQ4dU1XcTNyblJHejJMWklMSC16Z3N5M3NDdFJhRzVfNWdQOFZ0Zi1yRXAwVWtqVTFHNXh5RWJwQUNUQWR0OFZyY0tidDRySXIyNkxIZ29ZckYwakdmUVFXOG1yYjYxS25iLTdNQ3RxX0hGMUVNNGZYbXIwS1Q5?oc=5",
+            "age_hours": 2.0
+          },
+          {
+            "title": "NBA adds more broadcast TV games in second year of rights deal - Sports Media Watch",
+            "source": "Sports Media Watch",
+            "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORDUwbGlRNVl3Zk50cjZSOHJkZ05tNFp5YVNwUzhnOHpDY2ZDV2R4UTZxcjhwdGR0MjZybVpHU2tJeHNSdURLV3czZUg0RVZXa093YmVKeGxmYzd3b05CcDFha19maFFHRmtMU0hGaUJVc09EeUhMRDRUcXBHNmpDTC1vb2xSYjVLQmdDQ21YZVRiUnRRZTljLVNPNHVXVUIwcjRkUHBxY0k5QzhOQW9SempGNA?oc=5",
+            "age_hours": 4.8
+          },
+          {
+            "title": "The NBA's Sonics story takes twists along I-5, with turns in Portland, Los Angeles - KOMO",
+            "source": "KOMO",
+            "link": "https://news.google.com/rss/articles/CBMijwJBVV95cUxPUFdNZVpOWFhUSVhoUTA4Zm5ZeFItVW5sYUNXUWdDQU5sWE9QR2pjZzM1dWdabDZzNUhrNzJxd1VTZUVIX0s0dXBpc1BmdzJEZ0wwZDBUUWtReGo0Qkh2ZjJ1YXVRUmRYbzlZeXU3ei1QTUYwc3k3YmhBRVNnRVd5TlNqRWt3bUo2OVZwbmRQT3QwS0NLM2ZtMDJubFdDQncxR2t4dWh5bVZ6MEtKUUNJbkpRS095a0YwWmlYNjh2bUNJakxKZHUtRmZHR2JiQjNDbEhKUEJBNTRBd0pBYkIxRDNRRmhwWVpoM1RueEs0eUVrT1FEN1pQX1JsQ2FxVWtFSENGZ2l3a1BVY2pNQXBV?oc=5",
+            "age_hours": 2.6
+          },
+          {
+            "title": "“He Became the Blame of a Lot”: NBA Champion Reveals the Harsh Truth About Russell Westbrook’s Career After His Retirement - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxObE1LYmFySDRUQVR5ZkxGVE5KdW9SakRrNm9vOUJYY0NLcnNlSkd0R05oVVpRS2gwbUE2Rm92Xzg2c3pUenFmTENhVzVrZ2l1QkcxOVJNV0t6Yi1DazlvVFcwc1QxaTlpVUIwbDI5dk5CRUY0aEQ3cEcyaWFQS3ROeVhDZGQ?oc=5",
+            "age_hours": 3.3
           },
           {
             "title": "76ers 2026-27 NBA season predictions after schedule release - Yahoo Sports",
             "source": "Yahoo Sports",
             "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE15MEFhcUlTdTNuR0lxZkxhelo2d3VYS2thaTBXSktmQ0xNejVCa2tJS1NoWE5TeV8yem1faTQ2REFjZ3lwQ3lxVHBGOTF6NWJMRjdPS2xreXNMRlk5M1ZITHN5X0NKUzc1Y2FOVzdWeGpGa0wwa1V2bTB2TXhrdw?oc=5",
-            "age_hours": 3.7
+            "age_hours": 4.6
           },
           {
             "title": "Clippers Bring Back 3x NBA All-Star - Yahoo Sports",
             "source": "Yahoo Sports",
             "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPbC1sNklnOTNRZTMwOElXQWFtN1E2MkhvMGxTRWFVZ1YxT0F0S0hjcC1EY25UaHZpUHdqS0FHb3VIci1PNEY0eVI1X2xvdlJTdjZ2dUlHZ3FvS0dJc05sODU0QlZVSlBfRFhPMjh6Q0RMWUs5MGc3WDkwdEJ3VjZnUA?oc=5",
-            "age_hours": 3.6
-          },
-          {
-            "title": "Most anticipated matchups on 2026-27 NBA schedule - Yahoo Sports",
-            "source": "Yahoo Sports",
-            "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNTm84bXkzdUNUSlJaTTNwY3Zqd282VEU2b2oyM0JzTjczaVdPVXkzOFJaQ0JyTzktZEJELUJzZjFhZy0xZTU2dVA2WVZlbVVtSE5sLWVhYzNyYnd4dm1XQnl1NjVKbVRDZ01xenR1Y1BCeWdta0k2WDlicGhNM0hrWGZnbDdjQWc?oc=5",
-            "age_hours": 4.7
+            "age_hours": 4.4
           }
         ],
         "coverage": {
           "top rookie matchups watch 2026 27": {
             "count": 1,
             "sources": [
-              "nba.com"
+              "NBA.com"
             ]
           },
-          "he became blame lot nba champion": {
+          "most anticipated matchups 2026 27 nba": {
+            "count": 1,
+            "sources": [
+              "nbcsports.com"
+            ]
+          },
+          "lebron james drops relocation hint 76ers": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
+            ]
+          },
+          "i don t get it nba": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
+            ]
+          },
+          "deserved better delete this nba world": {
             "count": 1,
             "sources": [
               "Yahoo Sports"
@@ -119,19 +137,7 @@
               "KOMO"
             ]
           },
-          "nba schedule release pelicans spurs will": {
-            "count": 1,
-            "sources": [
-              "Yahoo Sports"
-            ]
-          },
-          "lebron james drops relocation hint 76ers": {
-            "count": 1,
-            "sources": [
-              "Yahoo Sports"
-            ]
-          },
-          "i don t get it nba": {
+          "he became blame lot nba champion": {
             "count": 1,
             "sources": [
               "Yahoo Sports"
@@ -148,12 +154,6 @@
             "sources": [
               "Yahoo Sports"
             ]
-          },
-          "most anticipated matchups 2026 27 nba": {
-            "count": 1,
-            "sources": [
-              "Yahoo Sports"
-            ]
           }
         },
         "status": "ok",
@@ -166,6 +166,21 @@
         "status": "ok",
         "error": null,
         "trending": [
+          {
+            "query": "pokemon 30th anniversary",
+            "approx_traffic": 10000,
+            "approx_traffic_raw": "10000+"
+          },
+          {
+            "query": "darren anthony robinson",
+            "approx_traffic": 1000,
+            "approx_traffic_raw": "1000+"
+          },
+          {
+            "query": "30th anniversary pokemon",
+            "approx_traffic": 200,
+            "approx_traffic_raw": "200+"
+          },
           {
             "query": "daycare center",
             "approx_traffic": 10000,
@@ -187,9 +202,9 @@
             "approx_traffic_raw": "500+"
           },
           {
-            "query": "selena gomez wondermind lawsuit",
-            "approx_traffic": 5000,
-            "approx_traffic_raw": "5000+"
+            "query": "bubble",
+            "approx_traffic": 1000,
+            "approx_traffic_raw": "1000+"
           },
           {
             "query": "brewers",
@@ -197,24 +212,9 @@
             "approx_traffic_raw": "5000+"
           },
           {
-            "query": "bubble",
-            "approx_traffic": 1000,
-            "approx_traffic_raw": "1000+"
-          },
-          {
             "query": "dodgers game today",
-            "approx_traffic": 2000,
-            "approx_traffic_raw": "2000+"
-          },
-          {
-            "query": "trevor megill",
-            "approx_traffic": 500,
-            "approx_traffic_raw": "500+"
-          },
-          {
-            "query": "paul mescal",
-            "approx_traffic": 200,
-            "approx_traffic_raw": "200+"
+            "approx_traffic": 5000,
+            "approx_traffic_raw": "5000+"
           }
         ]
       },
@@ -224,26 +224,26 @@
         "keywords": {
           "NBA": {
             "is_trending": false,
-            "growth_multiplier": 1.19,
-            "first": 42,
-            "last": 50,
+            "growth_multiplier": 1.15,
+            "first": 40,
+            "last": 46,
             "series_sample": [
-              42,
-              43,
-              77,
-              39,
-              72,
-              41,
-              59,
-              66,
-              42,
-              90,
               40,
-              77,
               45,
-              52,
-              87,
+              77,
+              41,
+              74,
+              40,
+              59,
+              55,
               43,
+              85,
+              50,
+              82,
+              43,
+              51,
+              87,
+              44,
               88
             ],
             "note": null
@@ -253,10 +253,164 @@
     },
     "signal_vues_youtube": {
       "signal": "vues_youtube",
-      "status": "no_youtube_key",
-      "error": "clé absente: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CONTRACTS/youtube_secrets.json",
-      "search": {},
-      "trending": {}
+      "status": "ok",
+      "search": {
+        "status": "ok",
+        "error": null,
+        "query": "NBA",
+        "videos": [
+          {
+            "video_id": "vn4-vZWwm1E",
+            "title": "FANS INTENTAN VOLCARLA EN TRAMPOLIN👀 #nba #baloncesto #basketball",
+            "channel": "Frankie Basket",
+            "published_at": "2026-08-13T13:34:04Z",
+            "view_count": 722960,
+            "like_count": 17400,
+            "comment_count": 42
+          },
+          {
+            "video_id": "Gx3-zXmN1pU",
+            "title": "Are These 6 Historic NBA Records Completely Unbreakable?🏀🤯 #shorts #nba",
+            "channel": "NBA mem",
+            "published_at": "2026-08-13T08:00:23Z",
+            "view_count": 396369,
+            "like_count": 701,
+            "comment_count": 171
+          },
+          {
+            "video_id": "EKNW1u3dh54",
+            "title": "Lefties Losing It: CNN accused of bigotry after axing trans NBA interview",
+            "channel": "News24",
+            "published_at": "2026-08-13T10:25:36Z",
+            "view_count": 211467,
+            "like_count": 2972,
+            "comment_count": 762
+          },
+          {
+            "video_id": "N-RTLPRoXpQ",
+            "title": "The NBA’s GOAT Defender Rankings! 🏀👀",
+            "channel": "The Deep 3",
+            "published_at": "2026-08-13T17:53:12Z",
+            "view_count": 180812,
+            "like_count": 11199,
+            "comment_count": 154
+          },
+          {
+            "video_id": "5XJUyMct2eQ",
+            "title": "Why Did Russell Westbrook Always Play So Aggressive? #russelwestbrook #nba #nbabasketball #sports",
+            "channel": "Phenom",
+            "published_at": "2026-08-13T08:27:45Z",
+            "view_count": 161044,
+            "like_count": 6516,
+            "comment_count": 40
+          },
+          {
+            "video_id": "-0P2YtSoeq0",
+            "title": "Who Knows The Most NBA Memes! 👀🏀",
+            "channel": "The Deep 3",
+            "published_at": "2026-08-14T00:24:29Z",
+            "view_count": 122508,
+            "like_count": 8684,
+            "comment_count": 63
+          },
+          {
+            "video_id": "uhSRF-HF_sg",
+            "title": "JUGADAS DE IQ EN EL BASQUET🧠🏀 #nba #baloncesto #basketball",
+            "channel": "Frankie Basket",
+            "published_at": "2026-08-13T21:17:28Z",
+            "view_count": 114964,
+            "like_count": 6654,
+            "comment_count": 23
+          },
+          {
+            "video_id": "-DdNPT6xsg4",
+            "title": "🔴LIVE - FUNNYMIKE x NBA YOUNGBOY x RAKAI 🔴 STREAMER PROM 🔴 NO ADS",
+            "channel": "Dutchplant",
+            "published_at": "2026-08-13T08:59:04Z",
+            "view_count": 94356,
+            "like_count": 788,
+            "comment_count": 0
+          }
+        ]
+      },
+      "trending": {
+        "status": "ok",
+        "error": null,
+        "videos": [
+          {
+            "video_id": "DgFemuNxBrk",
+            "title": "KATSEYE - That Way (Official Lyric Video)",
+            "channel": "KATSEYE",
+            "published_at": "2026-08-14T04:00:18Z",
+            "view_count": 308059,
+            "like_count": 49765,
+            "comment_count": 9225
+          },
+          {
+            "video_id": "5dXuZXpSOTY",
+            "title": "Battlefield 6 x Top Gun: Carrier Strike Cinematic Trailer",
+            "channel": "Battlefield",
+            "published_at": "2026-08-13T15:00:10Z",
+            "view_count": 346977,
+            "like_count": 32270,
+            "comment_count": 2763
+          },
+          {
+            "video_id": "bZdSEenE23I",
+            "title": "We Played The Game You Never Asked For...",
+            "channel": "SMii7Y",
+            "published_at": "2026-08-13T19:43:12Z",
+            "view_count": 1077086,
+            "like_count": 53862,
+            "comment_count": 2086
+          },
+          {
+            "video_id": "4cn_lCSN0xY",
+            "title": "La Mas Doll - Vaca Muerta ( Tiradera A La Perversa ) Video Oficial",
+            "channel": "La Mas Doll",
+            "published_at": "2026-08-13T16:00:06Z",
+            "view_count": 349738,
+            "like_count": 39873,
+            "comment_count": 4335
+          },
+          {
+            "video_id": "YH9VdFvHiO8",
+            "title": "Total War: WARHAMMER III - Lords of The End Times - Cinematic trailer",
+            "channel": "Total War",
+            "published_at": "2026-08-13T13:58:40Z",
+            "view_count": 458659,
+            "like_count": 29155,
+            "comment_count": 2226
+          },
+          {
+            "video_id": "V9HzAdwgf-I",
+            "title": "I Created Minecraft's Greatest Military",
+            "channel": "Spoke",
+            "published_at": "2026-08-13T12:53:33Z",
+            "view_count": 1894774,
+            "like_count": 109855,
+            "comment_count": 27361
+          },
+          {
+            "video_id": "mFA1P8ZzoLw",
+            "title": "Troye Sivan - She’s the Best (Official Music Video)",
+            "channel": "TroyeSivanVEVO",
+            "published_at": "2026-08-14T04:00:07Z",
+            "view_count": 104333,
+            "like_count": 19493,
+            "comment_count": 1387
+          },
+          {
+            "video_id": "VylsOZBYxQA",
+            "title": "Tyler Perry’s Why Did I Get Married Again? | Official Trailer | Netflix",
+            "channel": "Netflix",
+            "published_at": "2026-08-13T14:00:00Z",
+            "view_count": 103819,
+            "like_count": 4432,
+            "comment_count": 231
+          }
+        ]
+      }
     },
     "signal_demande": {
       "signal": "demande",
@@ -283,6 +437,9 @@
         }
       ]
     },
+    "baseline": {
+      "scans_count": 0
+    },
     "scoring_method": {
       "weights": {
         "vues_youtube": 0.3,
@@ -294,35 +451,44 @@
       "note": "GLM 5.2 synthétise à partir de ces seules observations"
     }
   },
+  "baseline": {
+    "scans_count": 0
+  },
   "subjects": [
     {
-      "subject_en": "LeBron relocation hint to Philly fans",
-      "notes_fr": "LeBron James lâche un indice de relocalisation aux fans des 76ers juste après la publication du calendrier 2026-27. Contexte brûlant : la release du schedule NBA est l'événement du jour, et LeBron ajoute une couche de drama. Angle : pourquoi cette tease maintenant, qu'est-ce que ça signifie pour l'avenir de LeBron. C'est un sujet qui génère débat et spéculations, parfait pour un clip informatif rapide.",
-      "signal": "Article Yahoo Sports frais (3h), mention explicite d'un 'relocation hint' de LeBron aux fans des 76ers. Coïncide avec la sortie du calendrier 2026-27. Tendance Google 'NBA' en croissance (multiplier 1.19).",
+      "subject_en": "Russell Westbrook Retirement Tribute Backlash Explained",
+      "notes_fr": "La retraite de Russell Westbrook a été annoncée récemment et la réaction des fans est extrêmement polarisée. Yahoo Sports rapporte que le monde de la NBA est 'enragé' contre le tribute de retraite des Lakers, avec des fans qui disent 'Deserved Better' et 'Delete This'. En parallèle, un champion NBA révèle la vérité dure sur sa carrière, disant qu'il est devenu 'le bouc émissaire de beaucoup de gens'. C'est un sujet brûlant (2h de fraîcheur) avec un fort potentiel de débat et d'émotion. Une vidéo YouTube sur son style de jeu agressif a déjà cumulé 161 044 vues.",
+      "signal": "RSS fraîcheur (2.0h), couverture médiatique multiple sur Yahoo Sports, vues YouTube confirmant l'intérêt pour Westbrook (161 044 vues), tendance Google sur Kyrie Irving (200+ trafic) montrant un intérêt pour les joueurs NBA hors des statistiques pures.",
       "score_10": 9,
-      "score_rationale_fr": "LeBron + rumeur de transfert/relocalisation = cocktail viral maximal. Fraîcheur excellente (3h), star la plus identifiable de la ligue, déclencheur conversationnel énorme. Un point en moins car c'est une 'hint' et non un fait confirmé.",
+      "score_rationale_fr": "Sujet ultra-frais (2h), très émotionnel (backlash, bouc émissaire), personne très identifiable (Westbrook), fort déclencheur conversationnel. Manque un peu de données de tendance macro pour atteindre 10.",
       "metrics": {
-        "top_video_views": null,
-        "yt_search_views": null,
-        "trend_growth_7d": 1.19,
+        "top_video_views": 161044,
+        "yt_search_views": 722960,
+        "trend_growth_7d": null,
         "trending_rss_traffic": null,
         "demand_score": 100,
-        "freshness_hours": 3.0,
-        "coverage_media_count": 1,
+        "freshness_hours": 2.0,
+        "coverage_media_count": 2,
         "signal_missing": [
-          "vues_youtube (clé absente)",
-          "traffic RSS trending pour ce sujet précis"
+          "trend_growth_7d",
+          "trending_rss_traffic"
         ]
       },
       "sources": [
-        "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPU0pKRFpNWDYyaGdZUlowVXp6cEtyQ20xQUQzRjV3SlNNMVQxY21YeEd0UWZkVk9rTllNRFBKQjhGMGVfRDZsZWNfSkw0eXZhLUUzQV9OQjY4bng4U2Z3Ym9oaGtpcFhFQ1RhbmN4N3IweVNVSm1yVGwxLU9SYzVqQW4zZ29ZalZ0UmhV?oc=5"
+        "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdS00bVpKVTNsaHQ4dU1XcTNyblJHejJMWklMSC16Z3N5M3NDdFJhRzVfNWdQOFZ0Zi1yRXAwVWtqVTFHNXh5RWJwQUNUQWR0OFZyY0tidDRySXIyNkxIZ29ZckYwakdmUVFXOG1yYjYxS25iLTdNQ3RxX0hGMUVNNGZYbXIwS1Q5?oc=5",
+        "https://news.google.com/rss/articles/CBMihAFBVV95cUxObE1LYmFySDRUQVR5ZkxGVE5KdW9SakRrNm9vOUJYY0NLcnNlSkd0R05oVVpRS2gwbUE2Rm92Xzg2c3pUenFmTENhVzVrZ2l1QkcxOVJNV0t6Yi1DazlvVFcwc1QxaTlpVUIwbDI5dk5CRUY0aEQ3cEcyaWFQS3ROeVhDZGQ?oc=5",
+        "https://www.youtube.com/watch?v=5XJUyMct2eQ"
       ],
-      "angle_propose_fr": "LeBron vient de teaser un possible avenir à Philadelphie. Est-ce un mind game, un vrai plan, ou juste pour faire le buzz ? Décryptage en 90s de ce que cette 'hint' cache vraiment.",
+      "angle_propose_fr": "Pourquoi la retraite de Westbrook divise tant : on analyse le backlash des fans contre les Lakers et la vérité dure d'un champion NBA sur son rôle de bouc émissaire.",
       "sous_mode": "informatif",
       "clip_background_candidates": [
         {
-          "desc_fr": "Clip de LeBron faisant des remarques ambiguës devant des fans ou en conférence de presse, réaction des fans des 76ers",
-          "source_hint": "Yahoo Sports / NBA clips récents"
+          "desc_fr": "Extraits des moments les plus agressifs et controversés de Westbrook en carrière",
+          "source_hint": "https://www.youtube.com/watch?v=5XJUyMct2eQ"
+        },
+        {
+          "desc_fr": "Capture des réactions et tweets de fans 'enragés' suite à l'annonce",
+          "source_hint": "Yahoo Sports"
         }
       ],
       "checklist_viabilite_ok": true,
@@ -339,36 +505,304 @@
         "partageable": true,
         "pas_de_barriere": true
       },
-      "scan_id": "F00-e55a8dbf"
+      "scan_id": "F00-5581179c",
+      "score_mecanique": 76.0,
+      "score_mecanique_detail": {
+        "score": 76.0,
+        "detail": {
+          "vues_youtube": {
+            "value": 0.87,
+            "weight": 0.4,
+            "contribution": 0.347
+          },
+          "fraicheur": {
+            "value": 0.6,
+            "weight": 0.27,
+            "contribution": 0.16
+          },
+          "demande": {
+            "value": 1.0,
+            "weight": 0.2,
+            "contribution": 0.2
+          },
+          "couverture": {
+            "value": 0.4,
+            "weight": 0.13,
+            "contribution": 0.053
+          }
+        },
+        "missing": [
+          "tendance"
+        ],
+        "note": null
+      },
+      "source_domains": [
+        "google.com",
+        "youtube.com"
+      ],
+      "source_diversity": 2,
+      "coverage_media_count": 2,
+      "metric_proof": {
+        "top_video_views": {
+          "value": 161044,
+          "capteur": "youtube (vues réelles)"
+        },
+        "yt_search_views": {
+          "value": 722960,
+          "capteur": "youtube (search par vues)"
+        },
+        "demand_score": {
+          "value": 100,
+          "capteur": "google suggest (demand_score)"
+        },
+        "freshness_hours": {
+          "value": 2.0,
+          "capteur": "rss (horodatage article)"
+        },
+        "coverage_media_count": {
+          "value": 2,
+          "capteur": "rss (comptage médias)"
+        }
+      }
     },
     {
-      "subject_en": "Clippers gave Bradley Beal $13M fans shocked",
-      "notes_fr": "Les Clippers ont offert un contrat de 13 millions de dollars à Bradley Beal, et les fans NBA ne comprennent pas pourquoi. Réactions d'incompréhension générale. Angle informatif : pourquoi ce deal choque, analyse rapide de la valeur de Beal vs le contrat, contexte salarial. Sujet parfait pour un public qui aime débattre des décisions des GM.",
-      "signal": "Article Yahoo Sports frais (1.4h) avec citation 'I don't get it' des fans. Croissance tendance NBA 1.19x. Demand score NBA à 100.",
-      "score_10": 9,
-      "score_rationale_fr": "Fraîcheur exceptionnelle (1.4h), émotion forte (incompréhension/indignation des fans), sujet de débat instantané sur la gestion salariale. Bradley Beal est identifiable, le montant 13M est un hook numérique parfait.",
+      "subject_en": "LeBron James 76ers Relocation Hint Shocks NBA",
+      "notes_fr": "LeBron James a lâché un indice sur une 'relocation' vers les 76ers juste après la révélation du calendrier 2026-27 de la NBA. C'est un sujet de transfert/ragot ultra-frais (3.8h) qui touche directement la superstar la plus suivie de la ligue. Le calendrier 2026-27 vient tout juste de sortir, ce qui génère un volume énorme d'articles (au moins 4 articles dans le flux RSS concernent ce calendrier et ses matchups).",
+      "signal": "RSS fraîcheur (3.8h), article spécifique sur LeBron et les 76ers, contexte de sortie du calendrier 2026-27 (4+ articles), demande YouTube maximale pour la NBA (score 100).",
+      "score_10": 10,
+      "score_rationale_fr": "LeBron + rumeur de transfert = combo viral maximal. Fraîcheur de 3.8h sur une actualité de calendrier qui fait l'objet de multiples articles. Personne identifiable au plus haut niveau, déclencheur conversationnel garanti.",
       "metrics": {
-        "top_video_views": null,
-        "yt_search_views": null,
-        "trend_growth_7d": 1.19,
+        "top_video_views": 722960,
+        "yt_search_views": 722960,
+        "trend_growth_7d": null,
         "trending_rss_traffic": null,
         "demand_score": 100,
-        "freshness_hours": 1.4,
+        "freshness_hours": 3.8,
         "coverage_media_count": 1,
         "signal_missing": [
-          "vues_youtube (clé absente)",
-          "traffic RSS trending pour Bradley Beal"
+          "trend_growth_7d",
+          "trending_rss_traffic"
+        ]
+      },
+      "sources": [
+        "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPU0pKRFpNWDYyaGdZUlowVXp6cEtyQ20xQUQzRjV3SlNNMVQxY21YeEd0UWZkVk9rTllNRFBKQjhGMGVfRDZsZWNfSkw0eXZhLUUzQV9OQjY4bng4U2Z3Ym9oaGtpcFhFQ1RhbmN4N3IweVNVSm1yVGwxLU9SYzVqQW4zZ29ZalZ0UmhV?oc=5",
+        "https://news.google.com/rss/articles/CBMipwFBVV95cUxQWlNvU2I0V2RpcnVVcUI4NDE3bXh4MnJsNm9xNXdlUWJ3cUxQY0FHM0pKeER3QzlVc2xhci1wWXNwX095Y2V1WHotZWtjbEYwZG1XVVE5dTJqQTZGUWlsc2ZRaVpDQmRfVXJsbHhGSDFHNkRWUkNWYkx5RS1fRy10RXRLNkZEa3gwSlVWQUI2a1BNYlpWeXMyWkI5RUVJZEloc0psdWtsMA?oc=5"
+      ],
+      "angle_propose_fr": "LeBron vers les 76ers ? Décryptage de son indice crypté et pourquoi le nouveau calendrier NBA 2026-27 ajoute du fuel au feu.",
+      "sous_mode": "informatif",
+      "clip_background_candidates": [
+        {
+          "desc_fr": "Clip de l'interview ou du post social de LeBron lâchant l'indice",
+          "source_hint": "Yahoo Sports"
+        },
+        {
+          "desc_fr": "Images des matchups les plus attendus du calendrier 2026-27",
+          "source_hint": "nbcsports.com"
+        }
+      ],
+      "checklist_viabilite_ok": true,
+      "checklist_viralite_ok": true,
+      "viral_checks": {
+        "accroche_3s": true,
+        "emotion_forte": true,
+        "personne_identifiable": true,
+        "declencheur_conversationnel": true,
+        "micro_sujet": true,
+        "visuel_fort": true,
+        "boucle_de_clic": true,
+        "reference_culturelle": true,
+        "partageable": true,
+        "pas_de_barriere": true
+      },
+      "scan_id": "F00-5581179c",
+      "score_mecanique": 68.1,
+      "score_mecanique_detail": {
+        "score": 68.1,
+        "detail": {
+          "vues_youtube": {
+            "value": 0.98,
+            "weight": 0.4,
+            "contribution": 0.391
+          },
+          "fraicheur": {
+            "value": 0.24,
+            "weight": 0.27,
+            "contribution": 0.064
+          },
+          "demande": {
+            "value": 1.0,
+            "weight": 0.2,
+            "contribution": 0.2
+          },
+          "couverture": {
+            "value": 0.2,
+            "weight": 0.13,
+            "contribution": 0.027
+          }
+        },
+        "missing": [
+          "tendance"
+        ],
+        "note": null
+      },
+      "source_domains": [
+        "google.com"
+      ],
+      "source_diversity": 1,
+      "coverage_media_count": 1,
+      "metric_proof": {
+        "top_video_views": {
+          "value": 722960,
+          "capteur": "youtube (vues réelles)"
+        },
+        "yt_search_views": {
+          "value": 722960,
+          "capteur": "youtube (search par vues)"
+        },
+        "demand_score": {
+          "value": 100,
+          "capteur": "google suggest (demand_score)"
+        },
+        "freshness_hours": {
+          "value": 3.8,
+          "capteur": "rss (horodatage article)"
+        },
+        "coverage_media_count": {
+          "value": 1,
+          "capteur": "rss (comptage médias)"
+        }
+      }
+    },
+    {
+      "subject_en": "Clippers Sign Bradley Beal $13M Fans Outraged",
+      "notes_fr": "Les Clippers ont offert un contrat de 13 millions de dollars à Bradley Beal, et les fans de la NBA ne comprennent pas ce move. L'article Yahoo Sports cite des fans disant 'I don't get it'. C'est un sujet de 'hot take' parfait pour générer du débat sur la gestion financière de la NBA. Fraîcheur de 2.2h.",
+      "signal": "RSS fraîcheur (2.2h), réaction de fans documentée ('I don't get it'), sujet de transaction financière qui polarise.",
+      "score_10": 8,
+      "score_rationale_fr": "Sujet frais et basé sur l'indignation des fans, parfait pour l'engagement. Moins de preuve virale macro (tendances, vues YouTube spécifiques) que Westbrook ou LeBron, mais excellent micro-sujet de débat.",
+      "metrics": {
+        "top_video_views": null,
+        "yt_search_views": 722960,
+        "trend_growth_7d": null,
+        "trending_rss_traffic": null,
+        "demand_score": 100,
+        "freshness_hours": 2.2,
+        "coverage_media_count": 1,
+        "signal_missing": [
+          "top_video_views",
+          "trend_growth_7d",
+          "trending_rss_traffic"
         ]
       },
       "sources": [
         "https://news.google.com/rss/articles/CBMic0FVX3lxTE5DZV9RM05DdDF1RV9oYmV1cmpXbmlKZzhsb0JnUXQwY2hZV3p0SjR5WkUzdTN5THVRRVpjbEFpcGs5bm9CX0VEVTZKeDlULXdnZ0J0RlA4T3UzWnhrWUJkeDJaSk5iRERZTXY3MHB6cTVXNjg?oc=5"
       ],
-      "angle_propose_fr": "13 millions à Bradley Beal ? Les fans sont en état de choc. On t'explique pourquoi ce deal fait polémique et si les Clippers ont perdu la tête.",
+      "angle_propose_fr": "Pourquoi les fans sont outrés du contrat de 13M$ de Bradley Beal aux Clippers : analyse de l'opération la plus contestée du moment.",
       "sous_mode": "informatif",
       "clip_background_candidates": [
         {
-          "desc_fr": "Highlights/moments clés de Bradley Beal récents, montage des réactions de fans en ligne",
-          "source_hint": "Yahoo Sports / Twitter reactions"
+          "desc_fr": "Extraits des highlights récents de Bradley Beal montrant son niveau actuel",
+          "source_hint": "YouTube Search NBA"
+        },
+        {
+          "desc_fr": "Captures d'écran des réactions de fans sur les réseaux sociaux",
+          "source_hint": "Yahoo Sports"
+        }
+      ],
+      "checklist_viabilite_ok": true,
+      "checklist_viralite_ok": true,
+      "viral_checks": {
+        "accroche_3s": true,
+        "emotion_forte": true,
+        "personne_identifiable": true,
+        "declencheur_conversationnel": true,
+        "micro_sujet": true,
+        "visuel_fort": false,
+        "boucle_de_clic": true,
+        "reference_culturelle": true,
+        "partageable": true,
+        "pas_de_barriere": true
+      },
+      "scan_id": "F00-5581179c",
+      "score_mecanique": 62.7,
+      "score_mecanique_detail": {
+        "score": 62.7,
+        "detail": {
+          "fraicheur": {
+            "value": 0.56,
+            "weight": 0.44,
+            "contribution": 0.249
+          },
+          "demande": {
+            "value": 1.0,
+            "weight": 0.33,
+            "contribution": 0.333
+          },
+          "couverture": {
+            "value": 0.2,
+            "weight": 0.22,
+            "contribution": 0.044
+          }
+        },
+        "missing": [
+          "vues_youtube",
+          "tendance"
+        ],
+        "note": null
+      },
+      "source_domains": [
+        "google.com"
+      ],
+      "source_diversity": 1,
+      "coverage_media_count": 1,
+      "metric_proof": {
+        "yt_search_views": {
+          "value": 722960,
+          "capteur": "youtube (search par vues)"
+        },
+        "demand_score": {
+          "value": 100,
+          "capteur": "google suggest (demand_score)"
+        },
+        "freshness_hours": {
+          "value": 2.2,
+          "capteur": "rss (horodatage article)"
+        },
+        "coverage_media_count": {
+          "value": 1,
+          "capteur": "rss (comptage médias)"
+        }
+      }
+    },
+    {
+      "subject_en": "Are These 6 NBA Records Truly Unbreakable",
+      "notes_fr": "Une vidéo YouTube récente de la chaîne 'NBA mem' pose la question des records NBA impossibles à battre. Elle a déjà cumulé 396 369 vues en moins de 24h (publiée le 13 août). C'est un format classique, très performant en shorts/clip, qui s'appuie sur la nostalgie et l'admiration des stats.",
+      "signal": "Vues YouTube confirmées (396 369 vues), forte interaction (like/comment ratio), demande générale pour la NBA maximale (score 100).",
+      "score_10": 8,
+      "score_rationale_fr": "Preuve de concept YouTube très forte avec près de 400k vues rapidement. Le sujet des 'records imbattables' est un format éprouvé. Score un peu en retrait car ce n'est pas une actualité brûlante (news) mais un sujet de fond viral.",
+      "metrics": {
+        "top_video_views": 396369,
+        "yt_search_views": 396369,
+        "trend_growth_7d": null,
+        "trending_rss_traffic": null,
+        "demand_score": 100,
+        "freshness_hours": 24.0,
+        "coverage_media_count": null,
+        "signal_missing": [
+          "freshness_hours_rss",
+          "trend_growth_7d",
+          "trending_rss_traffic",
+          "coverage_media_count"
+        ]
+      },
+      "sources": [
+        "https://www.youtube.com/watch?v=Gx3-zXmN1pU"
+      ],
+      "angle_propose_fr": "On passe en revue les 6 records de la NBA que personne ne battra jamais, et on explique pourquoi ils sont mathématiquement impossibles à égaler.",
+      "sous_mode": "informatif",
+      "clip_background_candidates": [
+        {
+          "desc_fr": "Extraits d'archives des joueurs ayant établi ces records (Wilt Chamberlain, etc.)",
+          "source_hint": "https://www.youtube.com/watch?v=Gx3-zXmN1pU"
         }
       ],
       "checklist_viabilite_ok": true,
@@ -385,36 +819,83 @@
         "partageable": true,
         "pas_de_barriere": true
       },
-      "scan_id": "F00-e55a8dbf"
+      "scan_id": "F00-5581179c",
+      "score_mecanique": 95.5,
+      "score_mecanique_detail": {
+        "score": 95.5,
+        "detail": {
+          "vues_youtube": {
+            "value": 0.93,
+            "weight": 0.67,
+            "contribution": 0.622
+          },
+          "demande": {
+            "value": 1.0,
+            "weight": 0.33,
+            "contribution": 0.333
+          }
+        },
+        "missing": [
+          "tendance",
+          "fraicheur",
+          "couverture"
+        ],
+        "note": null
+      },
+      "source_domains": [
+        "youtube.com"
+      ],
+      "source_diversity": 1,
+      "coverage_media_count": 1,
+      "metric_proof": {
+        "top_video_views": {
+          "value": 396369,
+          "capteur": "youtube (vues réelles)"
+        },
+        "yt_search_views": {
+          "value": 396369,
+          "capteur": "youtube (search par vues)"
+        },
+        "demand_score": {
+          "value": 100,
+          "capteur": "google suggest (demand_score)"
+        },
+        "freshness_hours": {
+          "value": 24.0,
+          "capteur": "rss (horodatage article)"
+        }
+      }
     },
     {
-      "subject_en": "Pelicans Spurs fly most miles Knicks least",
-      "notes_fr": "Le calendrier NBA 2026-27 est sorti et révèle une injustice de kilométrage : Pelicans et Spurs vont voler le plus de miles, tandis que les Knicks voyageront le moins. Angle : visualisation de cette injustice, impact sur la fatigue et les performances, comparaison visuelle des distances. Format informatif avec data visualization.",
-      "signal": "Article Yahoo Sports frais (4.7h) sur le schedule release. Tendance NBA en hausse (1.19x). Sujet de couverture multiple car lié à la release du calendrier.",
-      "score_10": 8,
-      "score_rationale_fr": "Sujet data-driven très visuel et partageable. L'angle 'injustice des miles' est un angle original qui sort des habituels matchs attendus. Fraîcheur bonne (4.7h). Un point de moins car moins émotionnel que LeBron ou Beal.",
+      "subject_en": "Fans Try To Flip Trampoline Dunk Gone Wrong",
+      "notes_fr": "Une vidéo de la chaîne 'Frankie Basket' montre des fans essayant de dunker sur un trampoline et ratant spectaculairement. Publiée le 13 août, elle a déjà explosé avec 722 960 vues. C'est un contenu humoristique parfait pour un clip court, capitalisant sur la culture basket de rue et les fails.",
+      "signal": "Vues YouTube massives (722 960 vues), taux d'engagement élevé (17 400 likes), publiée il y a moins de 24h.",
+      "score_10": 9,
+      "score_rationale_fr": "Le signal de vues est le plus fort de tout le payload (722k). Le fail physique et la culture basket sont des déclencheurs viraux universels. Le seul léger manque est la connexion avec l'actualité RSS brûlante.",
       "metrics": {
-        "top_video_views": null,
-        "yt_search_views": null,
-        "trend_growth_7d": 1.19,
+        "top_video_views": 722960,
+        "yt_search_views": 722960,
+        "trend_growth_7d": null,
         "trending_rss_traffic": null,
         "demand_score": 100,
-        "freshness_hours": 4.7,
-        "coverage_media_count": 1,
+        "freshness_hours": 24.0,
+        "coverage_media_count": null,
         "signal_missing": [
-          "vues_youtube (clé absente)",
-          "traffic RSS trending pour ce sujet précis"
+          "freshness_hours_rss",
+          "trend_growth_7d",
+          "trending_rss_traffic",
+          "coverage_media_count"
         ]
       },
       "sources": [
-        "https://news.google.com/rss/articles/CBMi9AFBV95cUxOY2NCVUNrNXNDNWRHSU1iX3Y5RXRyU1JEbzF4UWFVOEZyeDc2MU1XYnJRbkwtanhMdUs2ZmJmWXpQMGJRbG9UdDI0c3FVcnNFVDN4YktoQ2gyM3hwTHlRVXREeE1kUjVwUmF4ZGpQbzNNXzczejVfbS1vMjZJaDkzYkJSaDFkOEt4V0o2U2lWWXJCeWo0VnhHM1ByaTY1X2RKUGUzN1NhMVJ1dDh1NlFiZmRsRGVZREttYkZoRzM3cFFDT3ExVVg5RXlOSmFnLUpZRzdnUmJWcXcxQ2NsNTc2ejZmYlpLRFZaNS1LcXRuSUphMFVC?oc=5"
+        "https://www.youtube.com/watch?v=vn4-vZWwm1E"
       ],
-      "angle_propose_fr": "Les Pelicans et Spurs vont parcourir l'équivalent de 3 fois le tour de la Terre cette saison, pendant que les Knicks dorment chez eux. Voici pourquoi le calendrier NBA est injuste.",
-      "sous_mode": "informatif",
+      "angle_propose_fr": "Les pires (et meilleurs) tentatives de dunk sur trampoline par des fans : compilation des fails qui font mal mais font rire.",
+      "sous_mode": "humour",
       "clip_background_candidates": [
         {
-          "desc_fr": "Carte des États-Unis avec tracé des vols Pelicans/Spurs vs Knicks, images d'avions d'équipes NBA",
-          "source_hint": "Yahoo Sports / données de calendrier NBA"
+          "desc_fr": "Montage des meilleures ratées de la vidéo originale",
+          "source_hint": "https://www.youtube.com/watch?v=vn4-vZWwm1E"
         }
       ],
       "checklist_viabilite_ok": true,
@@ -431,99 +912,52 @@
         "partageable": true,
         "pas_de_barriere": true
       },
-      "scan_id": "F00-e55a8dbf"
-    },
-    {
-      "subject_en": "NBA champion harsh truth on Westbrook retirement",
-      "notes_fr": "Un champion NBA révèle une vérité brutale sur la carrière de Russell Westbrook après sa retraite. Citation 'He became the blame of a lot'. Angle : rétrospective de la carrière de Westbrook, pourquoi il a été le bouc émissaire, analyse de son héritage. Sujet émotionnel pour les fans qui ont suivi son parcours.",
-      "signal": "Article Yahoo Sports frais (2.4h). Tendance NBA en croissance (1.19x). Kyrie Irving apparaît dans les tendances Google (200+ traffic), suggérant un contexte de discussions sur les joueurs polémiques/retirés.",
-      "score_10": 8,
-      "score_rationale_fr": "Russell Westbrook est l'un des joueurs les plus polarisants de la NBA, sa retraite (ou fin de parcours) génère beaucoup d'émotion. L'angle 'bouc émissaire' est puissant et déclencheur de débats. Fraîcheur bonne (2.4h).",
-      "metrics": {
-        "top_video_views": null,
-        "yt_search_views": null,
-        "trend_growth_7d": 1.19,
-        "trending_rss_traffic": 200,
-        "demand_score": 100,
-        "freshness_hours": 2.4,
-        "coverage_media_count": 1,
-        "signal_missing": [
-          "vues_youtube (clé absente)",
-          "traffic RSS trending pour Westbrook précisément"
-        ]
+      "scan_id": "F00-5581179c",
+      "score_mecanique": 98.4,
+      "score_mecanique_detail": {
+        "score": 98.4,
+        "detail": {
+          "vues_youtube": {
+            "value": 0.98,
+            "weight": 0.67,
+            "contribution": 0.651
+          },
+          "demande": {
+            "value": 1.0,
+            "weight": 0.33,
+            "contribution": 0.333
+          }
+        },
+        "missing": [
+          "tendance",
+          "fraicheur",
+          "couverture"
+        ],
+        "note": null
       },
-      "sources": [
-        "https://news.google.com/rss/articles/CBMihAFBVV95cUxObE1LYmFySDRUQVR5ZkxGVE5KdW9SakRrNm9vOUJYY0NLcnNlSkd0R05oVVpRS2gwbUE2Rm92Xzg2c3pUenFmTENhVzVrZ2l1QkcxOVJNV0t6Yi1DazlvVFcwc1QxaTlpVUIwbDI5dk5CRUY0aEQ3cEcyaWFQS3ROeVhDZGQ?oc=5"
+      "source_domains": [
+        "youtube.com"
       ],
-      "angle_propose_fr": "Russell Westbrook a pris sa retraite et un champion NBA lâche une vérité qui fait mal : il est devenu le bouc émissaire de tout. Retour sur la carrière la plus injustement détestée de la NBA.",
-      "sous_mode": "informatif",
-      "clip_background_candidates": [
-        {
-          "desc_fr": "Montage des moments highs et lows de Westbrook, de son MVP à ses dernières saisons difficiles, réactions de fans",
-          "source_hint": "Yahoo Sports / NBA archives"
+      "source_diversity": 1,
+      "coverage_media_count": 1,
+      "metric_proof": {
+        "top_video_views": {
+          "value": 722960,
+          "capteur": "youtube (vues réelles)"
+        },
+        "yt_search_views": {
+          "value": 722960,
+          "capteur": "youtube (search par vues)"
+        },
+        "demand_score": {
+          "value": 100,
+          "capteur": "google suggest (demand_score)"
+        },
+        "freshness_hours": {
+          "value": 24.0,
+          "capteur": "rss (horodatage article)"
         }
-      ],
-      "checklist_viabilite_ok": true,
-      "checklist_viralite_ok": true,
-      "viral_checks": {
-        "accroche_3s": true,
-        "emotion_forte": true,
-        "personne_identifiable": true,
-        "declencheur_conversationnel": true,
-        "micro_sujet": true,
-        "visuel_fort": true,
-        "boucle_de_clic": true,
-        "reference_culturelle": true,
-        "partageable": true,
-        "pas_de_barriere": true
-      },
-      "scan_id": "F00-e55a8dbf"
-    },
-    {
-      "subject_en": "Sonics return story twists Portland LA",
-      "notes_fr": "L'histoire du retour des Seattle SuperSonics prend des tournures inattendues, avec des rebondissements impliquant Portland et Los Angeles. Angle : où en est le retour des Sonics, pourquoi Portland et LA sont impliqués, décryptage des manœuvres géopolitiques de la NBA. Sujet parfait pour les fans passionnés de l'histoire de la ligue.",
-      "signal": "Article KOMO frais (1.9h). Croissance tendance NBA (1.19x). Sujet de niche mais avec une base de fans ultra-passionnée (Seattle).",
-      "score_10": 7,
-      "score_rationale_fr": "Le retour des Sonics est un sujet culte pour les fans NBA. L'implication de Portland et LA ajoute du mystère. Fraîcheur excellente (1.9h). Score légèrement plus bas car c'est un sujet plus niche que LeBron ou Beal, mais très fort en engagement pour l'audience ciblée.",
-      "metrics": {
-        "top_video_views": null,
-        "yt_search_views": null,
-        "trend_growth_7d": 1.19,
-        "trending_rss_traffic": null,
-        "demand_score": 100,
-        "freshness_hours": 1.9,
-        "coverage_media_count": 1,
-        "signal_missing": [
-          "vues_youtube (clé absente)",
-          "traffic RSS trending pour Sonics"
-        ]
-      },
-      "sources": [
-        "https://news.google.com/rss/articles/CBMijwJBVV95cUxPUFdNZVpOWFhUSVhoUTA4Zm5ZeFItVW5sYUNXUWdDQU5sWE9QR2pjZzM1dWdabDZzNUhrNzJxd1VTZUVIX0s0dXBpc1BmdzJEZ0wwZDBUUWtReGo0Qkh2ZjJ1YXVRUmRYbzlZeXU3ei1QTUYwc3k3YmhBRVNnRVd5TlNqRWt3bUo2OVZwbmRQT3QwS0NLM2ZtMDJubFdDQncxR2t4dWh5bVZ6MEtKUUNJbkpRS095a0YwWmlYNjh2bUNJakxKZHUtRmZHR2JiQjNDbEhKUEJBNTRBd0pBYkIxRDNRRmhwWVpoM1RueEs0eUVrT1FEN1pQX1JsQ2FxVWtFSENGZ2l3a1BVY2pNQXBV?oc=5"
-      ],
-      "angle_propose_fr": "Le retour des Sonics à Seattle ? Pas si simple. Portland et Los Angeles s'invitent dans la partie. Voici les coulisses du feuilleton le plus fou de la NBA.",
-      "sous_mode": "informatif",
-      "clip_background_candidates": [
-        {
-          "desc_fr": "Archives des Sonics à Seattle, images récentes de Portland et LA, scènes de fans de Seattle réclamant le retour de l'équipe",
-          "source_hint": "KOMO / archives NBA"
-        }
-      ],
-      "checklist_viabilite_ok": true,
-      "checklist_viralite_ok": true,
-      "viral_checks": {
-        "accroche_3s": true,
-        "emotion_forte": true,
-        "personne_identifiable": false,
-        "declencheur_conversationnel": true,
-        "micro_sujet": true,
-        "visuel_fort": true,
-        "boucle_de_clic": true,
-        "reference_culturelle": true,
-        "partageable": true,
-        "pas_de_barriere": true
-      },
-      "scan_id": "F00-e55a8dbf"
+      }
     }
   ],
   "premium_model": "z-ai/glm-5.2",

@@ -91,6 +91,28 @@
 - Renommage dossier `F00_CAPTEURS/` + `PROFILES/logo/F00_CAPTEURS_IN/`.
 - CLI vérifié : `--help`, `premium_client.require_config()` OK.
 
+### 4.0.3 AMÉLIORATIONS "vision globale" implémentées (2026-08-14)
+
+Ajout du "Perturabo lit toutes les cartes" au scan de sujets :
+
+1. **Score mécanique** : chaque sujet porte `score_mecanique` (0-100, calcul
+   déterministe dans `f00_virality_scorer.normalize_metrics` + `score_subject`)
+   à côté du `score_10` GLM. Le tableau MD montre les DEUX scores.
+2. **Baseline historique** : `TRACKING/f00_baseline.json` archive les 20
+   derniers scans (par sujet : score, fraîcheur, vues, demande, tendance,
+   couverture, diversité). Un résumé statistique (médiane/min/max par métrique)
+   est injecté dans le prompt GLM (`=== BASELINE HISTORIQUE ===`) pour calibrer
+   les notes — le scoreur a enfin une vision globale.
+3. **Diversité de sources** : `source_diversity` = domaines distincts des URLs
+   (ex: google.com, youtube.com), affiché dans le tableau.
+4. **Traçabilité** : `metric_proof` mappe chaque métrique au capteur qui l'a
+   produite (vues -> youtube, demande -> suggest, fraîcheur -> rss…).
+
+Scan de validation : `F00-5581179c` (NBA, 5 sujets, score GLM ET mécanique OK).
+⚠️ À noter : les sujets purement YouTube (vidéo existante à fort vues, sans
+article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
+(ex: "Trampoline dunk" MECA 98.4) — comportement voulu du re-norm, à surveiller.
+
 ## 4. Ce qui reste à faire (travail suivant)
 
 1. **Choisir le sujet** : le Warsmith choisit UN des 5 sujets de

@@ -42,7 +42,7 @@ from f00_rss_ingestor import scan as rss_scan
 from f00_trends_ingestor import scan as trends_scan
 from f00_youtube_ingestor import scan as youtube_scan
 from f00_suggestions_ingestor import scan as suggestions_scan
-from f00_virality_scorer import score_subject
+from f00_virality_scorer import score_subject, score_subject_from_metrics
 from f00_premium_synth import synthesize as premium_synthesize
 
 OUT_DIR = os.path.join(_CAPTEURS_DIR, "OUT")
@@ -381,6 +381,7 @@ def cmd_scan_subjects(args):
         "signal_tendance": trends,
         "signal_vues_youtube": yt,
         "signal_demande": sugg,
+        "baseline": _load_baseline_summary(),
         "scoring_method": {
             "weights": {"vues_youtube": 0.30, "tendance": 0.25,
                         "fraicheur": 0.20, "demande": 0.15,
@@ -398,14 +399,17 @@ def cmd_scan_subjects(args):
         sys.exit(1)
 
     subjects = synth["subjects"]
+    window_hours = FRESHNESS_WINDOWS[freshness]
     for s in subjects:
         s["scan_id"] = scan_id
+        _enrich_subject(s, window_hours)
 
     proposal = {
         "scan_id": scan_id,
         "scanned_at": now_iso(),
         "config": payload["config"],
         "signal_payload": payload,
+        "baseline": _load_baseline_summary(),
         "subjects": subjects,
         "premium_model": "z-ai/glm-5.2",
         "gate": "warsmith_chooses",
@@ -414,6 +418,7 @@ def cmd_scan_subjects(args):
     }
     out_json = os.path.join(OUT_DIR, "subjects_proposal.json")
     save_json(out_json, proposal)
+    _update_baseline(scan_id, subjects, window_hours)
 
     md_path = _write_subjects_proposal_md(proposal, out_json)
     print(f"[F00_CAPTEURS] Proposition écrite: {out_json}")
@@ -437,6 +442,111 @@ def cmd_scan_subjects(args):
     print("[F00_CAPTEURS] check-in IW_CUSTOS — le Warsmith choisit le sujet.")
 
 
+def _enrich_subject(s: dict, window_hours: int) -> None:
+    """Ajoute au sujet : score mécanique (0-100), diversité de sources,
+    et la preuve (module capteur) de chaque métrique."""
+    m = s.get("metrics") or {}
+    mech = score_subject_from_metrics(m, window_hours=window_hours)
+    s["score_mecanique"] = mech["score"]
+    s["score_mecanique_detail"] = mech
+    sources = [u for u in (s.get("sources") or []) if u]
+    domains = sorted({_url_domain(u) for u in sources if _url_domain(u)})
+    s["source_domains"] = domains
+    s["source_diversity"] = len(domains)
+    if s.get("coverage_media_count") is None:
+        s["coverage_media_count"] = len(domains)
+    s["metric_proof"] = _metric_proof(m)
+
+
+def _url_domain(url: str) -> str | None:
+    try:
+        from urllib.parse import urlparse
+        host = urlparse(url).netloc or ""
+        return host.split(".")[-2] + "." + host.split(".")[-1] \
+            if len(host.split(".")) >= 2 else None
+    except Exception:
+        return None
+
+
+def _metric_proof(m: dict) -> dict:
+    """Pour chaque métrique renseignée, indique le capteur qui l'a produite."""
+    proof = {}
+    mapping = {
+        "top_video_views": "youtube (vues réelles)",
+        "yt_search_views": "youtube (search par vues)",
+        "trend_growth_7d": "google trends (courbe 7j)",
+        "trending_rss_traffic": "rss trending",
+        "demand_score": "google suggest (demand_score)",
+        "freshness_hours": "rss (horodatage article)",
+        "coverage_media_count": "rss (comptage médias)",
+    }
+    for k, v in m.items():
+        if v is not None and v != "" and k != "signal_missing":
+            proof[k] = {"value": v, "capteur": mapping.get(k, "inconnu")}
+    return proof
+
+
+# ----------------------------------------------------------------------
+# Baseline historique (vision globale du scoreur)
+# ----------------------------------------------------------------------
+_BASELINE_KEY = "f00_baseline"
+_BASELINE_MAX_SCANS = 20
+
+
+def _baseline_path() -> str:
+    return os.path.join(_FORGE_ROOT, "TRACKING", "f00_baseline.json")
+
+
+def _load_baseline() -> list:
+    return load_json(_baseline_path(), []) or []
+
+
+def _load_baseline_summary() -> dict:
+    """Résumé statistique de la baseline pour le prompt GLM (vision globale)."""
+    baseline = _load_baseline()
+    metrics = ["freshness_hours", "top_video_views", "demand_score",
+               "trend_growth_7d", "coverage_media_count"]
+    summary = {"scans_count": len(baseline)}
+    for key in metrics:
+        vals = [s.get(key) for scan in baseline
+                for s in scan.get("subjects", []) if s.get(key) is not None]
+        if not vals:
+            continue
+        vals = sorted(float(v) for v in vals)
+        n = len(vals)
+        median = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+        summary[key] = {
+            "median": round(median, 2),
+            "min": round(vals[0], 2),
+            "max": round(vals[-1], 2),
+            "samples": n,
+        }
+    return summary
+
+
+def _update_baseline(scan_id: str, subjects: list, window_hours: int) -> None:
+    """Archive une ligne par sujet dans la baseline (20 derniers scans)."""
+    baseline = _load_baseline()
+    entry = {
+        "scan_id": scan_id,
+        "scanned_at": now_iso(),
+        "subjects": [
+            {"subject_en": s.get("subject_en"),
+             "score_10": s.get("score_10"),
+             "score_mecanique": s.get("score_mecanique"),
+             "freshness_hours": (s.get("metrics") or {}).get("freshness_hours"),
+             "top_video_views": (s.get("metrics") or {}).get("top_video_views"),
+             "demand_score": (s.get("metrics") or {}).get("demand_score"),
+             "trend_growth_7d": (s.get("metrics") or {}).get("trend_growth_7d"),
+             "coverage_media_count": s.get("coverage_media_count"),
+             "source_diversity": s.get("source_diversity")}
+            for s in subjects],
+    }
+    baseline.append(entry)
+    baseline = baseline[-_BASELINE_MAX_SCANS:]
+    save_json(_baseline_path(), baseline)
+
+
 def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
     cfg = proposal["config"]
     lines = [
@@ -449,12 +559,14 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
         f"({cfg.get('window_hours')}h)",
         f"- Modèle : {proposal['premium_model']} (synthèse — stats observées)",
         "",
-        "## Tableau des 5 sujets (score /10, métriques réelles)",
+        "## Tableau des 5 sujets (score GLM /10 + score mécanique /100, "
+        "métriques réelles)",
         "",
-        "| # | Sujet (EN) | Score | Vues YT top | Recherche | Tendance 7j | "
-        "Demande | Fraîcheur | Couverture | Sous-mode |",
-        "|---|------------|-------|-------------|-----------|-------------|"
-        "---------|-----------|------------|-----------|",
+        "| # | Sujet (EN) | GLM | Méca | Vues YT top | Recherche | "
+        "Tendance 7j | Demande | Fraîcheur | Couverture | Diversité | "
+        "Sous-mode |",
+        "|---|------------|-----|------|-------------|-----------|-----------"
+        "---|---------|-----------|------------|-----------|-----------|",
     ]
     for i, s in enumerate(proposal["subjects"], 1):
         m = s.get("metrics") or {}
@@ -463,16 +575,22 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
             return "—" if v is None else str(v)
         lines.append(
             f"| {i} | {s.get('subject_en','')} | **{s.get('score_10')}** | "
+            f"**{s.get('score_mecanique')}** | "
             f"{fmt('top_video_views')} | {fmt('yt_search_views')} | "
             f"{fmt('trend_growth_7d')} | {fmt('demand_score')} | "
             f"{fmt('freshness_hours')}h | {fmt('coverage_media_count')} | "
+            f"{s.get('source_diversity')} | "
             f"{s.get('sous_mode','')} |")
     lines += ["", "## Détail par sujet", ""]
     for i, s in enumerate(proposal["subjects"], 1):
         m = s.get("metrics") or {}
         missing = m.get("signal_missing") or []
+        mech = s.get("score_mecanique_detail") or {}
+        detail_parts = [f"{k}: {v.get('value')} (x{v.get('weight')})"
+                        for k, v in (mech.get("detail") or {}).items()]
         lines += [
-            f"### {i}. {s.get('subject_en','')} — score {s.get('score_10')}/10",
+            f"### {i}. {s.get('subject_en','')} — GLM {s.get('score_10')}/10 | "
+            f"mécanique {s.get('score_mecanique')}/100",
             "",
             f"**Notes (FR)** : {s.get('notes_fr','')}",
             "",
@@ -482,7 +600,11 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
             f"recherche {m.get('yt_search_views')} | tendance "
             f"{m.get('trend_growth_7d')} | demande {m.get('demand_score')} | "
             f"fraîcheur {m.get('freshness_hours')}h | couverture "
-            f"{m.get('coverage_media_count')} médias",
+            f"{m.get('coverage_media_count')} médias | "
+            f"diversité {s.get('source_diversity')} domaine(s) "
+            f"({', '.join(s.get('source_domains', []) or [])})",
+            "",
+            f"**Score mécanique détail** : {' ; '.join(detail_parts) or 'aucun'}",
             "",
             f"**Signaux manquants** : {', '.join(missing) or 'aucun'}",
             "",
