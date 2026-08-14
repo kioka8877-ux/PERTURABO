@@ -7,7 +7,7 @@
 
 ## RÔLE
 
-`ORCHESTRATOR/` est la **frégate-conductrice** du forge CLIPPING. Elle ne produit pas d'artefacts viraux elle-même — elle **synchronise** les F01-F06 + TYRANT + CAPTEURS et tient le **ledger central** (`IW_CUSTOS.py` dans le core PERTURABO + `liber_clipping.json` dans le forge).
+`ORCHESTRATOR/` est la **frégate-conductrice** du forge CLIPPING. Elle ne produit pas d'artefacts viraux elle-même — elle **synchronise** les F01-F06 + TYRANT + F00_CAPTEURS et tient le **ledger central** (`IW_CUSTOS.py` dans le core PERTURABO + `liber_clipping.json` dans le forge).
 
 Orchestre les **4 Portes**. Le Warsmith valide chaque porte manuellement.
 
@@ -62,7 +62,7 @@ Aligné sur le pattern du core :
 
 Frégates mobilisées : F01_SCOUT (alimentation) + F02_TYRANT_CAMP (verdict)
 
-Avant la Porte 1 (optionnel mais recommandé) : CAPTEURS scan écosystème + niche
+Avant la Porte 1 (optionnel mais recommandé) : F00_CAPTEURS scan écosystème + niche
 
 Le Warsmith valide le verdict GO/NO-GO. Si NO-GO → campaign pas poursuivie. Si GO → Porte 2.
 
@@ -122,7 +122,7 @@ orchestrator.py --start-siege --directive ARCHIVUM/campaign/directive.md \
    --platform youtube --market us_young_english \
    --n-angles 10
 # → Initialise liber_clipping.json
-# → Statut = "init", en attente de CAPTEURS warpping et Porte 1
+# → Statut = "init", en attente de F00_CAPTEURS warpping et Porte 1
 
 # Après chaque porte :
 orchestrator.py --gate N --decision valide
@@ -154,7 +154,7 @@ orchestrator.py --close-siege --final-payout-summary ...
 ## DÉPENDANCES
 
 - **Amont** : Le Warsmith (4 inputs initiaux)
-- **Réseau interne** : toutes les frégates F01-F06, TYRANT, CAPTEURS
+- **Réseau interne** : toutes les frégates F01-F06, TYRANT, F00_CAPTEURS
 - **Downstream** : OMNIS_WATCH (recoit les packs via Porte 4), `ARCHIVUM/learnings/learnings.json` (à la fermeture)
 
 ---

@@ -15,7 +15,7 @@
 ## 2. Ce qui est déjà fait (à ne PAS refaire)
 
 - Modules F00 (nommage canonique `f00_*`) dans
-  `MONDES_FORGES/CLIPPING/CAPTEURS/CODEBASE/libs/` :
+  `MONDES_FORGES/CLIPPING/F00_CAPTEURS/CODEBASE/libs/` :
   `f00_rss_ingestor.py` (fraîcheur 5h/24h + couverture médias)
   `f00_trends_ingestor.py` (pytrends courbe 7j + RSS trending global)
   `f00_youtube_ingestor.py` (YouTube Data API v3 : stats, search par vues, trending)
@@ -63,7 +63,7 @@
 
 ```bash
 # Depuis la racine du repo clone (ex: /tmp/opencode/perturabo)
-cd MONDES_FORGES/CLIPPING/CAPTEURS/CODEBASE
+cd MONDES_FORGES/CLIPPING/F00_CAPTEURS/CODEBASE
 python3 capteurs.py --scan-subjects --niche "Lakers basketball" --mode informatif --freshness brulant
 # -> capture les signaux, appelle GLM 5.2, écrit OUT/ + EXPORT/, check-in ledger
 ```

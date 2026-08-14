@@ -1,7 +1,7 @@
 """
 profile_loader.py — Resolution du profil CLIPPING actif (whop ou logo)
 ======================================================================
-Lu par les fregates qui dependent du profil (CAPTEURS sites config, F05
+Lu par les fregates qui dependent du profil (F00_CAPTEURS sites config, F05
 schema_validator, F02 criteres verdict, F04 doctrine/systemprompt).
 
 Le profil actif est decide au demarrage du siege (IW_CUSTOS --init-siege

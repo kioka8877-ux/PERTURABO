@@ -73,7 +73,7 @@ Titres de clips qui ont percé — indexés titre (pas clip entier) :
 
 ### 9. `transcripts/` — matière brute des cours copywriting
 
-Transcriptions complètes des vidéos/cours de copywriting scrapées par CAPTEURS
+Transcriptions complètes des vidéos/cours de copywriting scrapées par F00_CAPTEURS
 (`--scrap-youtube --out ARCHIVUM/copywriting/transcripts`), organisées par
 chaîne : `<channel_slug>/<video_id>.json` (schéma core YOUTUBE : transcript +
 segments + vues/subs/outlier).
@@ -109,4 +109,4 @@ Règle : si un sous-dossier est mis à jour, la doctrine peut être régénéré
 | `transcripts/` | 1 transcript (André Dubois) — source pour les 8 zones |
 
 Les sous-dossiers 1-8 attendent le savoir du Warsmith (extractions structurées).
-`transcripts/` se remplit via CAPTEURS --scrap-youtube. `.gitkeep` présent dans chacun.
+`transcripts/` se remplit via F00_CAPTEURS --scrap-youtube. `.gitkeep` présent dans chacun.

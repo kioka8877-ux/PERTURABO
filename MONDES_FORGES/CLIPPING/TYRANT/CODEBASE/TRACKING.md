@@ -116,7 +116,7 @@ Phase 3 : finalize
 
 - **Amont** : Warsmith (scan_list)
 - **Downstream** : `ARCHIVUM/demons/` (nourri) → F02_TYRANT_CAMP (lit)
-- **Auxiliaire** : peut utiliser `CAPTEURS/` pour scrap les métriques des Démon
+- **Auxiliaire** : peut utiliser `F00_CAPTEURS/` pour scrap les métriques des Démon
 
 ---
 

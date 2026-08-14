@@ -7,7 +7,7 @@ Le forge CLIPPING supporte **deux business distincts** via un système de **prof
 - **Whop Content Rewards** : campagnes Whop, deadline 1h, FTC strict, asset imposé, pack = script complet + caption + titre. Marque paie via Content Rewards.
 - **Clipping Logo** : clip de célébrité/foot/anime + **logo de marque en superposition** (casino...). Contenu libre, marque paie au **CPM** (tracker type Shortimiz). Pack = **genre + titre reframing + body + on_screen_text + seo_tags**, `n_angles` commandés.
 
-Ce sont deux doctrines, schémas, compliance et critères de verdict différents. Le code des frégates communes (F01, F03, ANGLESMITH, F04, F05, F06, CAPTEURS, IW_CUSTOS) reste **partagé** ; seul ce qui dépend du profil (CONTRACTS, CAPTEURS sites, F05 schema, F04 doctrine/prompt, F02 critères) est lu via `SHARED/profile_loader.py`.
+Ce sont deux doctrines, schémas, compliance et critères de verdict différents. Le code des frégates communes (F01, F03, ANGLESMITH, F04, F05, F06, F00_CAPTEURS, IW_CUSTOS) reste **partagé** ; seul ce qui dépend du profil (CONTRACTS, F00_CAPTEURS sites, F05 schema, F04 doctrine/prompt, F02 critères) est lu via `SHARED/profile_loader.py`.
 
 ## Frontière Perturaba vs OMNIS_WATCH (inchangée dans les deux profils)
 
@@ -33,7 +33,7 @@ PROFILES/
     │   ├── casino_rules.md                    ← règles marques casino (squelette)
     │   ├── copywriting_doctrine_logo.md       ← doctrine copywriter logo (squelette)
     │   └── copywriter_systemprompt_logo.md    ← system prompt F04 logo (squelette)
-    ├── CAPTEURS_IN/
+    ├── F00_CAPTEURS_IN/
     │   └── clipping_sites_to_scrap_logo.example.json  ← sites de deals casino + trackers CPM
     └── ARCHIVUM/docs/                              ← knowledge spécifique logo (à remplir)
 ```
@@ -46,7 +46,7 @@ PROFILES/
 - `Profile.rules_paths()` → liste des fichiers de règles
 - `Profile.pack_shape` / `pack_nature` — métadonnées du pack
 
-Les frégates différenciées (CAPTEURS, F05 schema_validator, F02 critères, F04 doctrine/prompt) importent `load_profile` pour résoudre leurs fichiers.
+Les frégates différenciées (F00_CAPTEURS, F05 schema_validator, F02 critères, F04 doctrine/prompt) importent `load_profile` pour résoudre leurs fichiers.
 
 ## Statut
 

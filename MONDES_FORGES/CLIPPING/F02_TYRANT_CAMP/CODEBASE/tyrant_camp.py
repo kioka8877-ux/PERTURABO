@@ -83,7 +83,7 @@ def cmd_prepare(args):
     # Fit indicatif
     platform = args.platform or "youtube"
     market = args.market or "us_young_english"
-    cartographie_path = os.path.join(_FORGE_ROOT, "CAPTEURS", "OUT", "cartographie.json")
+    cartographie_path = os.path.join(_FORGE_ROOT, "F00_CAPTEURS", "OUT", "cartographie.json")
     cartographie = None
     if os.path.exists(cartographie_path):
         cartographie = load_json(cartographie_path)

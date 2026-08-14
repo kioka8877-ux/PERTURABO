@@ -26,7 +26,7 @@
 | Composant | Fichier | Rôle |
 |---|---|---|
 | `TYRANT` | `../TYRANT/CODEBASE/TRACKING.md` | 2 modes (réactif + prospectif océan bleu) |
-| `CAPTEURS` | `../CAPTEURS/CODEBASE/TRACKING.md` | Commandité Warsmith, multi-sites clipping |
+| `F00_CAPTEURS` | `../F00_CAPTEURS/CODEBASE/TRACKING.md` | Commandité Warsmith, multi-sites clipping |
 | `ORCHESTRATOR` | `../ORCHESTRATOR/CODEBASE/TRACKING.md` | 4 Portes, pattern hybride, ledger IW_CUSTOS |
 
 ## Docs doctrinales (CONTRACTS/)

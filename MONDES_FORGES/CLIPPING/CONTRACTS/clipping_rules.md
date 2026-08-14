@@ -86,7 +86,7 @@ Ce document est le **garde-fous fondamental** du forge CLIPPING. Toutes les fré
 - ❌ Variation directe du clip de référence (le clip ref = matière première brute, pas modèle à cloner — décision Warsmith)
 - ❌ Re-ciblage océan bleu au-delà de 1 couche de profondeur
 - ❌ Auto-posting / auto-submitting (le Warsmith poster — pas le système)
-- ❌ Scraper CAPTEURS en automatique (commandité uniquement)
+- ❌ Scraper F00_CAPTEURS en automatique (commandité uniquement)
 - ❌ "Abonne-toi" / "Like et partage" / "Swipe up" / fadeouts / silences > 3s
 
 ---

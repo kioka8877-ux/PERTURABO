@@ -11,7 +11,7 @@
 Le clip de référence fourni par le Warsmith pour une campaigne spécifique. Stocké dans `ARCHIVUM/campaign/reference_clip.json` + `reference_skeleton.json`. **Pas dupliqué ici** — vit dans `campaign/`.
 
 ### 2. Démon de veille (ici, dans `demons/`)
-Identifié par `TYRANT/` (mode prospectif) hors campaigne. Le scanner (CAPTEURS) peut aussi contribuer via `demon_scanner.py`.
+Identifié par `TYRANT/` (mode prospectif) hors campaigne. Le scanner (F00_CAPTEURS) peut aussi contribuer via `demon_scanner.py`.
 
 Ces Démon veille sont la mémoire globale du territoire clipping — utilisés par F02_TYRANT_CAMP pour identifier des océans bleus sur les prochaines campagnes.
 

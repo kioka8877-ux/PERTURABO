@@ -154,7 +154,7 @@ python tracker.py --close-campaign                           # Ferme + agrège l
 - ❌ Auto-poster ou auto-submit (l'opérateur poste ; F06 logge seulement)
 - ❌ Invoquer l'IRON ou le premium (c'est pur mécanique de log + calcul)
 - ❌ Activer la pondération avant 50 packs cumulés
-- ❌ Omettre la fermeture de campagne (sans `--close-campaign`, la campaign/ reste "ongoing" et CAPTEURS continue à scraper — ce qui n'est pas désiré)
+- ❌ Omettre la fermeture de campagne (sans `--close-campaign`, la campaign/ reste "ongoing" et F00_CAPTEURS continue à scraper — ce qui n'est pas désiré)
 
 ---
 

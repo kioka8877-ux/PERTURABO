@@ -1,5 +1,5 @@
 {
-  "_comment": "Schema PUBLIC pour PROFILES/logo/CAPTEURS_IN/clipping_sites_to_scrap.json. Sites de deals casino + trackers CPM. Whop n'est pas concerné en profil logo.",
+  "_comment": "Schema PUBLIC pour PROFILES/logo/F00_CAPTEURS_IN/clipping_sites_to_scrap.json. Sites de deals casino + trackers CPM. Whop n'est pas concerné en profil logo.",
   "sites": [
     {
       "name": "ex_shortimiz",

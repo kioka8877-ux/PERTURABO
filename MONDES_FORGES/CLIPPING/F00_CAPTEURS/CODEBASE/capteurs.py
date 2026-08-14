@@ -1,5 +1,5 @@
 """
-capteurs.py — CAPTEURS : Les Yeux du Siège (forge CLIPPING)
+capteurs.py — F00_CAPTEURS : Les Yeux du Siège (forge CLIPPING)
 ===========================================================
 
 Réseau de senseurs de l'écosystème clipping. COMMANDITÉ par le
@@ -77,7 +77,7 @@ def save_json(path: str, data: dict):
 def guard_campaign_open():
     liber = load_json(LIBER_PATH)
     if liber and liber.get("campaign_status") == "closed":
-        print("[CAPTEURS] HÉRÉSIE: campagne fermée — CAPTEURS est éteint "
+        print("[F00_CAPTEURS] HÉRÉSIE: campagne fermée — CAPTEURS est éteint "
               "(F06 --close-campaign a scellé le siège). Réarme via un nouveau siège.")
         sys.exit(1)
 
@@ -87,7 +87,7 @@ def guard_sites_list(sites: list[dict], config: dict) -> list[dict]:
     scannable = [s for s in sites if s.get("name") in allowed]
     rejected = [s.get("name") for s in sites if s.get("name") not in allowed]
     for name in rejected:
-        print(f"[CAPTEURS] Site '{name}' non listé dans clipping_sites_to_scrap.json "
+        print(f"[F00_CAPTEURS] Site '{name}' non listé dans clipping_sites_to_scrap.json "
               f"— HÉRÉSIE, ignoré")
     return scannable
 
@@ -100,7 +100,7 @@ def cmd_scan(args):
 
     campaign = load_json(args.campaign)
     if not campaign:
-        print(f"[CAPTEURS] campaign_to_observe introuvable: {args.campaign}")
+        print(f"[F00_CAPTEURS] campaign_to_observe introuvable: {args.campaign}")
         sys.exit(1)
 
     sites_config = load_json(
@@ -109,7 +109,7 @@ def cmd_scan(args):
     campaign_url = campaign.get("campaign_url") or ""
     niche = campaign.get("niche") or "unknown"
     if not campaign_url:
-        print("[CAPTEURS] campaign_url manquant dans campaign_to_observe.json")
+        print("[F00_CAPTEURS] campaign_url manquant dans campaign_to_observe.json")
         sys.exit(1)
 
     scan_id = f"SCAN-{uuid.uuid4().hex[:8]}"
@@ -158,8 +158,8 @@ def cmd_scan(args):
         subprocess.run([sys.executable, custos, "--mode", "check-in",
                         "--frigate", "CAPTEURS", "--output", md_path],
                        capture_output=True, text=True, timeout=30)
-    print(f"[CAPTEURS] Scan {scan_id} terminé — {out}")
-    print(f"[CAPTEURS] {md_path} — check-in IW_CUSTOS (fleet_status -> capteurs_done)")
+    print(f"[F00_CAPTEURS] Scan {scan_id} terminé — {out}")
+    print(f"[F00_CAPTEURS] {md_path} — check-in IW_CUSTOS (fleet_status -> capteurs_done)")
 
 
 def _niche_perception(niche: str, ecosystem: dict, context_result: dict) -> dict:
@@ -196,7 +196,7 @@ def _write_cartographie_md(carto: dict, scan_id: str) -> str:
     niche = carto.get("niche_perception") or {}
 
     lines = [
-        "# CAPTEURS — Cartographie du siège",
+        "# F00_CAPTEURS — Cartographie du siège",
         "",
         f"- Scan : {scan_id}",
         f"- Date : {carto.get('scanned_at')}",
@@ -257,7 +257,7 @@ def cmd_scan_demons(args):
     guard_campaign_open()
     scan_list = load_json(args.scan_list)
     if not scan_list or not scan_list.get("queries"):
-        print(f"[CAPTEURS] scan_list.json introuvable ou vide: {args.scan_list}")
+        print(f"[F00_CAPTEURS] scan_list.json introuvable ou vide: {args.scan_list}")
         sys.exit(1)
 
     scanner = DemonScanner(scan_list.get("queries", []) or [])
@@ -266,10 +266,10 @@ def cmd_scan_demons(args):
     scan_id = f"DEMON-{uuid.uuid4().hex[:8]}"
     out = os.path.join(DEMONS_DIR, f"demon_wild_scan_{scan_id}.json")
     save_json(out, result)
-    print(f"[CAPTEURS] Scan demons {scan_id} — {out}")
-    print(f"[CAPTEURS] {len(result.get('demons_observed', []))} démon(s) observé(s), "
+    print(f"[F00_CAPTEURS] Scan demons {scan_id} — {out}")
+    print(f"[F00_CAPTEURS] {len(result.get('demons_observed', []))} démon(s) observé(s), "
           f"{len(result.get('requires_vision', []))} sonde(s) à lire par l'IRON")
-    print("[CAPTEURS] TYRANT prospectif peut poursuivre l'analyse (ARCHIVUM/demons/)")
+    print("[F00_CAPTEURS] TYRANT prospectif peut poursuivre l'analyse (ARCHIVUM/demons/)")
 
 
 # ----------------------------------------------------------------------
@@ -284,7 +284,7 @@ def cmd_scrap_youtube(args):
         channels = scan_list.get("channels", []) if scan_list else []
         channel_url = channels[0] if channels else None
     if not channel_url:
-        print("[CAPTEURS] --channel requis pour --scrap-youtube "
+        print("[F00_CAPTEURS] --channel requis pour --scrap-youtube "
               "(ou IN/scan_list.json -> {\"channels\": [...]})")
         sys.exit(1)
 
@@ -298,14 +298,14 @@ def cmd_scrap_youtube(args):
     try:
         result = scraper.scrape()
     except RuntimeError as e:
-        print(f"[CAPTEURS] Scrap échoué: {e}")
+        print(f"[F00_CAPTEURS] Scrap échoué: {e}")
         sys.exit(1)
 
-    print(f"[CAPTEURS] Chaîne: {result.get('channel_name')} ({result.get('channel_slug')})")
-    print(f"[CAPTEURS] {len(result['captured'])} capturée(s), "
+    print(f"[F00_CAPTEURS] Chaîne: {result.get('channel_name')} ({result.get('channel_slug')})")
+    print(f"[F00_CAPTEURS] {len(result['captured'])} capturée(s), "
           f"{len(result['skipped'])} déjà archivée(s), "
           f"{len(result['failed'])} échec(s)")
-    print(f"[CAPTEURS] Archivé: {result['out_dir']}")
+    print(f"[F00_CAPTEURS] Archivé: {result['out_dir']}")
 
 
 # ----------------------------------------------------------------------
@@ -512,7 +512,7 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CAPTEURS — Les Yeux du Siège")
+    parser = argparse.ArgumentParser(description="F00_CAPTEURS — Les Yeux du Siège")
     parser.add_argument("--scan", action="store_true",
                         help="Cartographie complète (Whop + sites + contexte)")
     parser.add_argument("--campaign", default=None,
@@ -550,11 +550,11 @@ def main():
 
     if args.scan:
         if not args.campaign:
-            print("[CAPTEURS] --campaign requis pour --scan"); sys.exit(1)
+            print("[F00_CAPTEURS] --campaign requis pour --scan"); sys.exit(1)
         cmd_scan(args)
     elif args.scan_demons:
         if not args.scan_list:
-            print("[CAPTEURS] --scan-list requis pour --scan-demons"); sys.exit(1)
+            print("[F00_CAPTEURS] --scan-list requis pour --scan-demons"); sys.exit(1)
         cmd_scan_demons(args)
     elif args.scrap_youtube:
         cmd_scrap_youtube(args)

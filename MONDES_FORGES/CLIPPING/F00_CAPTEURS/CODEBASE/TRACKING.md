@@ -1,4 +1,4 @@
-# CAPTEURS — TRACKING.md
+# F00_CAPTEURS — TRACKING.md
 
 > *"Les capteurs sont les yeux du siège. Ils voient avant que le fer ne frappe."*
 > *Scrap commandité par le Warsmith. Multi-sites. Pas d'auto-cron. Vision globale clipping = aucune info ne doit manquer pendant une campagne.*
@@ -7,11 +7,11 @@
 
 ## RÔLE
 
-`CAPTEURS/` est le **réseau de senseurs du forge CLIPPING**. Contrairement aux frégates d'exécution (F01-F06), CAPTEURS ne s'exécoute pas automatiquement. Elle s'active **sur commande explicite du Warsmith**.
+`F00_CAPTEURS/` est le **réseau de senseurs du forge CLIPPING**. Contrairement aux frégates d'exécution (F01-F06), F00_CAPTEURS ne s'exécoute pas automatiquement. Elle s'active **sur commande explicite du Warsmith**.
 
 Objectif : produire une **cartographie complète de l'écosystème clipping** autour d'une campagne Whop spécifique ou d'une niche visée — de sorte que F02_TYRANT_CAMP ait toutes les infos nécessaires pour rendre son verdict GO/NO-GO + blue_ocean.
 
-**Principe PERTURABO** : aucune information ne doit échapper au Warsmith pendant une campagne. CAPTEURS couvre :
+**Principe PERTURABO** : aucune information ne doit échapper au Warsmith pendant une campagne. F00_CAPTEURS couvre :
 1. **Whop Discover** + la page de la campagne fournie
 2. **Tous les sites clipping que le Warsmith indique** (Clippa, Cliptic, ...) — pas limité à Whop
 3. **La perception de la niche / campagne dans l'écosystème clipping** (comment elle est perçue par les clippers, qui l'a déjà clipée, quel angle marché chez les concurrents, quel payout réel observé)
@@ -129,10 +129,10 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
 
 ## HÉRÉSIES
 
-- ❌ Scrap automatique (CAPTEURS est commandité — pas de cron, pas d'auto-loop)
-- ❌ Lancer CAPTEURS sans Warsmith explicit call
+- ❌ Scrap automatique (F00_CAPTEURS est commandité — pas de cron, pas d'auto-loop)
+- ❌ Lancer F00_CAPTEURS sans Warsmith explicit call
 - ❌ Scrap des sites non-listés dans `clipping_sites_to_scrap.json` (sauf Whop, qui est toujours)
-- ❌ Continuer à scraper après fermeture de campaigne (le tracker ferme CAPTEURS à `--close-campaign` de F06)
+- ❌ Continuer à scraper après fermeture de campaigne (le tracker ferme F00_CAPTEURS à `--close-campaign` de F06)
 
 ---
 
@@ -142,7 +142,7 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
 |---|---|---|
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
-| Code Python implémenté | ✅ | v1 (commit CAPTEURS) |
+| Code Python implémenté | ✅ | v1 (commit F00_CAPTEURS) |
 | `capteurs.py` | ✅ | CLI commandité : `--scan` (cartographie complète) + `--scan-demons` (Démon wild) |
 | `libs/whop_scanner.py` | ✅ | Scrap Whop Discover + pages campagne (statut, budget, CPM, guidelines, assets) |
 | `libs/clipping_ecosystem_scanner.py` | ✅ | Scrap sites clipping du Warsmith (payouts, outils AI, campagnes référencées) |
@@ -153,7 +153,7 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
 
 ### Décisions v1
 
-- **Jamais de cron, jamais d'auto** : CAPTEURS ne tourne que commandité par le
+- **Jamais de cron, jamais d'auto** : F00_CAPTEURS ne tourne que commandité par le
   Warsmith (précondition hérésie). Scrap post-fermeture de campagne refusé
   (liber `campaign_status == closed` → exit 1).
 - **Périmètre strict** : seuls les sites listés dans
@@ -170,7 +170,7 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
   `ARCHIVUM/demons/demon_wild_scan_<id>.json`.
 - **Check-in IW_CUSTOS** : fin de scan → `CAPTEURS` done, `fleet_status`
   → `capteurs_done`.
-- **`--scrap-youtube`** (ajout v1.1, [DEV-CAPTEURS-SCRAP]) : scrape une chaîne
+- **`--scrap-youtube`** (ajout v1.1, [DEV-F00_CAPTEURS-SCRAP]) : scrape une chaîne
   YouTube commanditée par le Warsmith (URL chaîne via `--channel` ou liste dans
   IN/scan_list.json `{"channels": [...]}`). Listing `yt-dlp --flat-playlist`
   (rapide), transcript `youtube-transcript-api` (fallback yt-dlp --write-subs),

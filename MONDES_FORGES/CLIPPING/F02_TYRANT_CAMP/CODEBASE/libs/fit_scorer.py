@@ -4,7 +4,7 @@ libs/fit_scorer.py — Score fit plateforme × marché × niche (F02_TYRANT_CAMP
 
 Score sur 0-10 le fit campagne/plateforme et campagne/marché, à partir
 des profils disponibles dans ARCHIVUM/platform_generator/ et
-ARCHIVUM/market_generator/ (fichiers .md) + cartographie CAPTEURS si présente.
+ARCHIVUM/market_generator/ (fichiers .md) + cartographie F00_CAPTEURS si présente.
 
 Le scoring en mode auto est indicatif — l'IRON affinera en Phase 2.
 Chaque assertion doit rester tracée (aucun chiffre inventé, hérésie "verdict sans preuve").

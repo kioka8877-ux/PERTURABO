@@ -3,7 +3,7 @@ orchestrator.py — L'Orchestrateur du Forge CLIPPING
 ====================================================
 
 Frégate-conductrice. Ne forge rien elle-même — elle synchronise F01-F06 +
-TYRANT + CAPTEURS + ANGLESMITH à travers les 4 Portes, et tient le ledger
+TYRANT + F00_CAPTEURS + ANGLESMITH à travers les 4 Portes, et tient le ledger
 (liber_clipping.json + IW_CUSTOS.py).
 
 Usage:
@@ -46,7 +46,7 @@ from libs.omnis_watch_distributor import OmnisWatchDistributor
 
 FREGATES = {
     "TYRANT": os.path.join(_FORGE_ROOT, "TYRANT"),
-    "CAPTEURS": os.path.join(_FORGE_ROOT, "CAPTEURS"),
+    "CAPTEURS": os.path.join(_FORGE_ROOT, "F00_CAPTEURS"),
     "F01": os.path.join(_FORGE_ROOT, "F01_SCOUT"),
     "F02": os.path.join(_FORGE_ROOT, "F02_TYRANT_CAMP"),
     "F03": os.path.join(_FORGE_ROOT, "F03_SOURCE_HUNTER"),
@@ -100,9 +100,9 @@ def cmd_start_siege(args):
         }, f, indent=2, ensure_ascii=False)
 
     print(f"[ORCH] Ledger initialisé : {siege_id}")
-    print("[ORCH] Commandé CAPTEURS recommandée AVANT Porte 1 (optionnel) :")
-    print("  cd CAPTEURS/CODEBASE && python capteurs.py --scan "
-          "--campaign CAPTEURS/IN/campaign_to_observe.json")
+    print("[ORCH] Commandé F00_CAPTEURS recommandée AVANT Porte 1 (optionnel) :")
+    print("  cd F00_CAPTEURS/CODEBASE && python capteurs.py --scan "
+          "--campaign F00_CAPTEURS/IN/campaign_to_observe.json")
     print("\n[ORCH]  F01_SCOUT doit être activée :")
     print("  cd F01_SCOUT/CODEBASE && python scout.py --prepare --directive ../ARCHIVUM/campaign/directive.md")
     print("  # L'IRON (Claude sandbox) analyse → OUT/source_specimen.json")

@@ -113,7 +113,7 @@ Phase 3 : finalize
 - ❌ Chercher des vidéos hors des assets de la campagne
 - ❌ Extension du territoire de chasse "en adjacence"
 - ❌ Modification/coupe/montage des vidéos sources (cela est boulot d'OMNIS_WATCH)
-- ❌ Aucun scrape de concurrents — CAPTEURS s'en charge, pas F01
+- ❌ Aucun scrape de concurrents — F00_CAPTEURS s'en charge, pas F01
 
 ---
 

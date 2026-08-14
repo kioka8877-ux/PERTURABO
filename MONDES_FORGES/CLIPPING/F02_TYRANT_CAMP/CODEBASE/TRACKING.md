@@ -21,7 +21,7 @@ Elle prose aussi le squelette viral du clip de référence (preuve de ce qui mar
 | `directive.md` | `ARCHIVUM/campaign/directive.md` | Markdown | ✅ |
 | `platform_target` | Warsmith (input 3 du Warsmith) | string | ✅ |
 | `market_target` | Warsmith (input 4) | string | ✅ |
-| `cartographie_écosystème` | CAPTEURS (si exécuté avant Porte 1) | JSON | Optionnel mais recommandé |
+| `cartographie_écosystème` | F00_CAPTEURS (si exécuté avant Porte 1) | JSON | Optionnel mais recommandé |
 
 ---
 
@@ -147,7 +147,7 @@ Règles strictes :
 
 ## DÉPENDANCES
 
-- **Amont** : F01_SCOUT (`source_specimen.json`), CAPTEURS (`cartographie_écosystème` — optionnel mais recommandé), TYRANT prospectif (`ARCHIVUM/demons/`)
+- **Amont** : F01_SCOUT (`source_specimen.json`), F00_CAPTEURS (`cartographie_écosystème` — optionnel mais recommandé), TYRANT prospectif (`ARCHIVUM/demons/`)
 - **Downstream** :
   - ANGLESMITH (consomme `verdict.json` pour la Porte 2 — forge les N angles sur `direct_analysis` + `blue_ocean_unlocked`)
   - F04_COPYWRITER (consomme `reference_skeleton` pour calibrer hooks)

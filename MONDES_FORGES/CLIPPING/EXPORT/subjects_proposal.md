@@ -117,6 +117,6 @@
 ---
 
 
-JSON complet : `/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CAPTEURS/OUT/subjects_proposal.json`
+JSON complet : `/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.json`
 
 *Le Warsmith choisit — aucun top-1 automatique.*

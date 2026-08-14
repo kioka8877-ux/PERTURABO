@@ -52,7 +52,7 @@ Chaque pack = **1 vidéo pour 1 plateforme pour 1 marché**. Pas de multi-platef
 | 3 | F03_SOURCE_HUNTER + F04_COPYWRITER | `source_specimen.json` + `text_payload.json` + `.md` | Warsmith + IRON ordonnancement |
 | 4 | F05_PACKAGER | N `production_pack.json` → OMNIS_WATCH | Warsmith |
 
-`F01_SCOUT` alimente les portes 1-2 (assets campagne). `F06_TRACKER` active la checklist après Porte 4 et nourrit `learnings.json`. `CAPTEURS` s'exécute **avant** Porte 1 sur commande Warsmith uniquement.
+`F01_SCOUT` alimente les portes 1-2 (assets campagne). `F06_TRACKER` active la checklist après Porte 4 et nourrit `learnings.json`. `F00_CAPTEURS` s'exécute **avant** Porte 1 sur commande Warsmith uniquement.
 
 ---
 
@@ -71,7 +71,7 @@ Composants annexes :
 | Code | Rôle |
 |---|---|
 | TYRANT | Deux modes : réactif (analyse campagne) + prospectif (océan bleu sur même source que le Démon) |
-| CAPTEURS | **Commandité Warsmith** (pas auto). Multi-sites (Whop + Clippa/Cliptic/...). Cartographie écosystème + niche + payouts réels |
+| F00_CAPTEURS | **Commandité Warsmith** (pas auto). Multi-sites (Whop + Clippa/Cliptic/...). Cartographie écosystème + niche + payouts réels |
 | ORCHESTRATOR | 4 Portes, pattern hybride (sauf F04 qui dialog direct premium) |
 
 ---
@@ -156,7 +156,7 @@ Fermeture campagne :
    → learnings.json enrichi (cumul)
    → si learnings > 50 packs cumulés → ANGLESMITH commence
      à pondérer les angles selon leur perf réelle
-   → CAPTEURS arrête de scraper (campagne close = plus de veille)
+   → F00_CAPTEURS arrête de scraper (campagne close = plus de veille)
    → le Warsmith peut lancer la campagne suivante
      (archive/efface campaign/ et repart vierge)
 ```
@@ -190,7 +190,7 @@ Le forge CLIPPING **ne fait jamais** :
 - ❌ Chasse externe aux sources (assets campagne seulement — hérésie sinon)
 - ❌ Variation directe du clip de référence (il sert de matière première brute, pas de modèle à cloner)
 - ❌ Re-ciblage océan bleu au-delà de 1 couche (rester collé à la source)
-- ❌ Scrap auto CAPTEURS (commandité Warsmith seulement)
+- ❌ Scrap auto F00_CAPTEURS (commandité Warsmith seulement)
 - ❌ Décider du style visuel final (OMNIS_WATCH applique ses presets coloring — PERTURABO transmet l'ADN observé seulement)
 - ❌ "Abonne-toi" / "Like et partage" / sons fadeouts / silences > 3s
 

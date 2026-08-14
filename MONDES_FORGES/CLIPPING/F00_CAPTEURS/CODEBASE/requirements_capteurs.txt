@@ -1,4 +1,4 @@
-# CAPTEURS — requirements
+# F00_CAPTEURS — requirements
 # Stdlib requis (urllib) : fetch de base sans dépendance, zéro installation.
 # Requis pour --scrap-youtube (scrap de chaînes YouTube commandité) :
 yt-dlp>=2024.1.0

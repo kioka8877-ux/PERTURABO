@@ -27,7 +27,7 @@ MONDES_FORGES/CLIPPING/
 ├── F05_PACKAGER/              ← CODEBASE/ + IN/ + OUT/ + TRACKING/
 ├── F06_TRACKER/               ← CODEBASE/ + IN/ + OUT/ + TRACKING/
 ├── TYRANT/                    ← CODEBASE/ + IN/ + OUT/ + TRACKING/
-├── CAPTEURS/                  ← CODEBASE/ + IN/ + OUT/ + TRACKING/
+├── F00_CAPTEURS/              ← CODEBASE/ + IN/ + OUT/ + TRACKING/
 ├── ORCHESTRATOR/              ← CODEBASE/ + IN/ + OUT/ + TRACKING/
 ├── TRACKING/                  ← ce dossier
 └── MANIFEST.md                ← manifeste de livraison (fichiers + statuts)
@@ -47,7 +47,7 @@ Chaque frégate suit la structure `CODEBASE/` (code Python — pas rempli pour l
 | F05_PACKAGER | ✅ | ✅ | ❌ | À implémenter |
 | F06_TRACKER | ✅ | ✅ | ❌ | À implémenter |
 | TYRANT | ✅ | ✅ | ❌ | 2 modes (réactif + prospectif) |
-| CAPTEURS | ✅ | ✅ | ❌ | Commandité Warsmith, pas auto |
+| F00_CAPTEURS | ✅ | ✅ | ❌ | Commandité Warsmith, pas auto |
 | ORCHESTRATOR | ✅ | ✅ | ❌ | 4 Portes, pattern hybride |
 | CONTRACTS | ✅ | ✅ (squelettes) | n/a | copywriting_doctrine à remplir par le Warsmith |
 | ARCHIVUM (10 zones) | ✅ | ✅ (squelettes) | n/a | Contenu secret à remplir par le Warsmith |
@@ -96,12 +96,12 @@ CLIPPING/
 |---|---|---|---|
 | ORCHESTRATOR | ✅ | ✅ (v1) | 4 Portes, pattern hybride, ledger |
 | IW_CUSTOS | ✅ (racine) | ✅ (v1) | Gardien liber_clipping.json |
-| F01_F06 + TYRANT + CAPTEURS + ANGLESMITH | ✅ | ❌ | Prochaines vagues |
+| F01_F06 + TYRANT + F00_CAPTEURS + ANGLESMITH | ✅ | ❌ | Prochaines vagues |
 
 ### Prochaines étapes
 1. Implémenter F01_SCOUT (vague 2)
 2. Implémenter F02_TYRANT_CAMP + TYRANT (vague 3)
-3. Implémenter ANGLESMITH + F03_SOURCE_HUNTER + F04_COPYWRITER + F05_PACKAGER + F06_TRACKER + CAPTEURS
+3. Implémenter ANGLESMITH + F03_SOURCE_HUNTER + F04_COPYWRITER + F05_PACKAGER + F06_TRACKER + F00_CAPTEURS
 4. Premier siège réel avec les inputs du Warsmith
 
 ---
@@ -134,12 +134,12 @@ F01_SCOUT/CODEBASE/
 |---|---|---|---|
 | ORCHESTRATOR | ✅ | ✅ (v1) | |
 | F01_SCOUT | ✅ | ✅ (v1) | recon/enrich/scribe + scout.py |
-| F02_F06 + TYRANT + CAPTEURS + ANGLESMITH | ✅ | ❌ | Vagues suivantes |
+| F02_F06 + TYRANT + F00_CAPTEURS + ANGLESMITH | ✅ | ❌ | Vagues suivantes |
 
 ### Prochaines étapes
 1. Implémenter F02_TYRANT_CAMP + TYRANT (vague 3)
 2. Implémenter ANGLESMITH (vague 4)
-3. Implémenter F03_F06 + CAPTEURS
+3. Implémenter F03_F06 + F00_CAPTEURS
 
 ---
 
@@ -183,12 +183,12 @@ TYRANT/CODEBASE/
 | F01_SCOUT | ✅ | ✅ (v1) | |
 | F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict GO/NO-GO + ocean bleu (Porte 1) |
 | TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Demon -> ARCHIVUM/demons/ |
-| F03_F06 + CAPTEURS + ANGLESMITH | ✅ | ❌ | Vagues suivantes |
+| F03_F06 + F00_CAPTEURS + ANGLESMITH | ✅ | ❌ | Vagues suivantes |
 
 ### Prochaines etapes
 1. Implementer ANGLESMITH (vague 4 — forge les N angles sur verdict.json)
 2. Implementer F03_SOURCE_HUNTER + F04_COPYWRITER (vague 5)
-3. Implementer F05_PACKAGER + F06_TRACKER + CAPTEURS
+3. Implementer F05_PACKAGER + F06_TRACKER + F00_CAPTEURS
 4. Premier siege reel avec les inputs du Warsmith
 
 ---
@@ -225,12 +225,12 @@ F02_TYRANT_CAMP/CODEBASE/
 | F02_TYRANT_CAMP | ✅ | ✅ (v1) | Verdict + océan bleu (Porte 1) |
 | ANGLESMITH (via F02) | ✅ (README/F02) | ✅ (v1) | N angles direct + blue ocean (Porte 2) |
 | TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
-| F03_F06 + CAPTEURS | ✅ | ❌ | Vagues suivantes |
+| F03_F06 + F00_CAPTEURS | ✅ | ❌ | Vagues suivantes |
 
 ### Prochaines étapes
 1. Implémenter F03_SOURCE_HUNTER (vague 5)
 2. Implémenter F04_COPYWRITER (vague 6 — frégate lourde premium)
-3. Implémenter F05_PACKAGER + F06_TRACKER + CAPTEURS
+3. Implémenter F05_PACKAGER + F06_TRACKER + F00_CAPTEURS
 4. Premier siège réel avec les inputs du Warsmith
 
 ---
@@ -279,11 +279,11 @@ F03_SOURCE_HUNTER/CODEBASE/
 | TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
 | F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
 | F04_COPYWRITER | ✅ | ❌ | Vague 6 — frégate lourde premium |
-| F05_PACKAGER + F06_TRACKER + CAPTEURS | ✅ | ❌ | Vague 7-8 |
+| F05_PACKAGER + F06_TRACKER + F00_CAPTEURS | ✅ | ❌ | Vague 7-8 |
 
 ### Prochaines étapes
 1. Implémenter F04_COPYWRITER (vague 6 — frégate lourde premium direct, 4 phases)
-2. Implémenter F05_PACKAGER (vague 7) + F06_TRACKER (vague 7) + CAPTEURS (vague 8)
+2. Implémenter F05_PACKAGER (vague 7) + F06_TRACKER (vague 7) + F00_CAPTEURS (vague 8)
 3. Premier siège réel avec les inputs du Warsmith
 
 ---
@@ -346,12 +346,12 @@ F04_COPYWRITER/CODEBASE/
 | TYRANT (prospectif) | ✅ | ✅ (v1) | Veille Démon -> ARCHIVUM/demons/ |
 | F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
 | F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
-| F05_PACKAGER + F06_TRACKER + CAPTEURS | ✅ | ❌ | Vague 7-8 |
+| F05_PACKAGER + F06_TRACKER + F00_CAPTEURS | ✅ | ❌ | Vague 7-8 |
 
 ### Prochaines étapes
 1. Le Warsmith : créer `CONTRACTS/copywriter_secrets.json` (gitignored) + `export CLIPPING_PREMIUM_API_KEY`
 2. Le Warsmith : remplir la doctrine (sections I-X) + le musée `ARCHIVUM/copywriting/` → puis `python copywriter.py --init-systemprompt` (one-time)
-3. Implémenter F05_PACKAGER (vague 7) + F06_TRACKER (vague 7) + CAPTEURS (vague 8)
+3. Implémenter F05_PACKAGER (vague 7) + F06_TRACKER (vague 7) + F00_CAPTEURS (vague 8)
 4. Premier siège réel avec les inputs du Warsmith
 
 ---
@@ -404,10 +404,10 @@ F05_PACKAGER/CODEBASE/
 | F03_SOURCE_HUNTER | ✅ | ✅ (v1) | Sélection asset + segments (Porte 3) |
 | F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
 | F05_PACKAGER | ✅ | ✅ (v1) | production_packs -> OMNIS_WATCH (Porte 4) |
-| F06_TRACKER + CAPTEURS | ✅ | ❌ | Vague 8 |
+| F06_TRACKER + F00_CAPTEURS | ✅ | ❌ | Vague 8 |
 
 ### Prochaines étapes
-1. Implémenter F06_TRACKER (vague 8 — checklist + learnings) puis CAPTEURS (vague 8, commandité)
+1. Implémenter F06_TRACKER (vague 8 — checklist + learnings) puis F00_CAPTEURS (vague 8, commandité)
 2. Premier siège réel avec les inputs du Warsmith (F01 → F05 bout en bout)
 3. Le Warsmith : doctrine + musée copywriting + `--init-systemprompt` F04 + vision IRON du clip de référence (`reference_style.json`)
 
@@ -461,23 +461,23 @@ F06_TRACKER/CODEBASE/
 | F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
 | F05_PACKAGER | ✅ | ✅ (v1) | production_packs -> OMNIS_WATCH (Porte 4) |
 | F06_TRACKER | ✅ | ✅ (v1) | Checklist + vues/payout + learnings + close (post-Porte 4) |
-| CAPTEURS | ✅ | ❌ | Vague 9 — commandité Warsmith |
+| F00_CAPTEURS | ✅ | ❌ | Vague 9 — commandité Warsmith |
 
 ### Prochaines étapes
-1. Implémenter CAPTEURS (vague 9 — scrap commandité, avant Porte 1)
+1. Implémenter F00_CAPTEURS (vague 9 — scrap commandité, avant Porte 1)
 2. Premier siège réel : F01 → F05 bout en bout, puis F06 au fil des posts
 3. Le Warsmith : déclarer les seuils low_payout/low_views dans `CONTRACTS/clipping_rules.md` (règles C), doctrine F04 + `--init-systemprompt`, vision IRON du clip de référence
 
 ---
 
-## [DEV-CAPTEURS] CAPTEURS implémentée — Les Yeux du Siège (avant Porte 1)
+## [DEV-F00_CAPTEURS] F00_CAPTEURS implémentée — Les Yeux du Siège (avant Porte 1)
 
 ### Contexte
 Neuvième et dernière vague de code. La frégate de veille est opérationnelle : elle produit la **cartographie** de l'écosystème (Whop + sites clipping commandités + perception niche) pour que F02 rende son verdict GO/NO-GO et son océan bleu en connaissance de cause. **Strictement commandité par le Warsmith** — aucun cron, aucune boucle auto.
 
 ### Fichiers livrés
 ```
-CAPTEURS/CODEBASE/
+F00_CAPTEURS/CODEBASE/
 ├── capteurs.py                       ← CLI : --scan (cartographie) / --scan-demons (Démon wild)
 ├── requirements_capteurs.txt         ← stdlib urllib requis ; requests/bs4/playwright/selenium optionnels
 └── libs/
@@ -492,13 +492,13 @@ CAPTEURS/CODEBASE/
 
 ### Décisions d'implémentation
 - **Commandité strict** : aucun auto-cron ; un site non listé dans `clipping_sites_to_scrap.json` n'est JAMAIS touché ; Whop est toujours scanné (défaut système non listable).
-- **Hérésie gardée** : campagne fermée (liber `campaign_status == closed`) → CAPTEURS refuse tout scan (exit 1). Le siège est éteint.
+- **Hérésie gardée** : campagne fermée (liber `campaign_status == closed`) → F00_CAPTEURS refuse tout scan (exit 1). Le siège est éteint.
 - **Best-effort mécanique + IRON** : extraction stdlib (urllib), tolérance 403/404/JS → chaque échec est flaggé `requires_vision` dans la cartographie avec le site/URL concerné, pour lecture IRON par le Warsmith.
 - **Perception niche honnête** : `dominant_emotion_in_niche` et angles saturés calculés sur les textes effectivement récupérés ; sinon `non_estime` + flag IRON — jamais de valeur inventée.
 - **Démon wild** : le Warsmith fournit les URLs de sonde explicites par plateforme (IN/scan_list.json) ; pages JS → `js_rendered` + chasse IRON ; résultats archivés `ARCHIVUM/demons/demon_wild_scan_<id>.json`.
 - **Check-in IW_CUSTOS** : fin de scan → `CAPTEURS` done, `fleet_status` → `capteurs_done` (transition déjà déclarée dans IW_CUSTOS).
 
-### Tests effectués (environnement mock TEST_CAPTEURS)
+### Tests effectués (environnement mock TEST_F00_CAPTEURS)
 - Scan complet avec serveur HTTP factice (127.0.0.1:8898) : page campagne (statut active, budget restant $250, CPM $0.10, guidelines, 5 assets), Discover (3 campagnes listées), site clippa (payouts $0.08/$0.05, outils Claude/GPT/Playwright/Premiere extraits), site cliptic 404 → `fetch_failed` + requires_vision, source X 403 → compétiteur `inconnu` + vision.
 - Perception niche : émotion `non_estime` + flag IRON (corpus factice insuffisant) — pas de faux positif.
 - Scan demons : page JS → `js_rendered` + vision ; sonde sans URL → `skipped` + vision ; 1 démon observé archivé.
@@ -518,10 +518,10 @@ CAPTEURS/CODEBASE/
 | F04_COPYWRITER | ✅ | ✅ (v1) | text_payloads — 4 phases premium direct (Porte 3) |
 | F05_PACKAGER | ✅ | ✅ (v1) | production_packs -> OMNIS_WATCH (Porte 4) |
 | F06_TRACKER | ✅ | ✅ (v1) | Checklist + vues/payout + learnings + close (post-Porte 4) |
-| CAPTEURS | ✅ | ✅ (v1) | Cartographie écosystème — commandité Warsmith (avant Porte 1) |
+| F00_CAPTEURS | ✅ | ✅ (v1) | Cartographie écosystème — commandité Warsmith (avant Porte 1) |
 
 ### Prochaines étapes
-1. Premier siège réel : CAPTEURS → F01 → F05 bout en bout, puis F06 au fil des posts
+1. Premier siège réel : F00_CAPTEURS → F01 → F05 bout en bout, puis F06 au fil des posts
 2. Le Warsmith : déclarer les seuils low_payout/low_views dans `CONTRACTS/clipping_rules.md` (règles C), doctrine F04 + `--init-systemprompt`, vision IRON du clip de référence
 3. Le Warsmith : peupler `IN/clipping_sites_to_scrap.json` + `IN/campaign_to_observe.json` au lancement du siège
 
@@ -531,7 +531,7 @@ CAPTEURS/CODEBASE/
 
 | Porte | Jalon attendu | Statut |
 |---|---|---|
-| Avant Porte 1 | CAPTEURS scrap ecosysteme + niche | Code pret (attente siege reel) |
+| Avant Porte 1 | F00_CAPTEURS scrap ecosysteme + niche | Code pret (attente siege reel) |
 | Porte 1 | F02_TYRANT_CAMP verdict campagne | Code pret (attente siege reel) |
 | Porte 2 | ANGLESMITH N angles forges | Code pret (attente siege reel) |
 | Porte 3 | F03 + F04 text_payloads prets | Code pret (attente siege reel) |
@@ -614,6 +614,6 @@ CAPTEURS/CODEBASE/
 
 ## [2026-08-10T21:38:19Z] F05 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 617d34b4d3931225e280a9b46eb66068 — status: done
 
-## [2026-08-13T23:29:22Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CAPTEURS/OUT/subjects_proposal.md — md5: 59b7b8327c27b9ead52f8f62c15d8044 — status: done
+## [2026-08-13T23:29:22Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: 59b7b8327c27b9ead52f8f62c15d8044 — status: done
 
-## [2026-08-13T23:31:56Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CAPTEURS/OUT/subjects_proposal.md — md5: 2796c049a7685f023ad45ffec702d570 — status: done
+## [2026-08-13T23:31:56Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: 2796c049a7685f023ad45ffec702d570 — status: done

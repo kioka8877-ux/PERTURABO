@@ -43,7 +43,7 @@ Règle de nommage : `NN_MODE_<PROFIL>_<SOUS_MODE>.md` (NN = ordre, 2 chiffres).
 ## 🏗️ Rappel de l'architecture (en bref)
 
 ```
-CAPTEURS (scrap écosystème) ── avant Gate 1
+F00_CAPTEURS (scrap écosystème) ── avant Gate 1
 F01 SCOUT        → capture le specimen (source)
 F02 TYRANT CAMP  → verdict GO/NO-GO (Gate 1)
 ANGLESMITH (F02) → forge les angles (Gate 2)
