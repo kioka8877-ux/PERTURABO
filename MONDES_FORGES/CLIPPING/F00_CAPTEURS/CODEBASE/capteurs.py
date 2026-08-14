@@ -736,7 +736,8 @@ def _build_reference_clip(subject: dict, proposal: dict) -> dict:
     return clip
 
 
-def _write_directive_md(subject: dict, proposal: dict, campaign_id: str) -> str:
+def _write_directive_md(subject: dict, proposal: dict, campaign_id: str,
+                        spin_humour: str | None = None) -> str:
     """directive.md — parseable par F01 (Campaign ID + section Sources)."""
     cfg = proposal.get("config", {})
     tag = _derive_tag(subject.get("subject_en", ""))
@@ -760,6 +761,18 @@ def _write_directive_md(subject: dict, proposal: dict, campaign_id: str) -> str:
         f"- **Tag** : `{tag}`",
         f"- **Sous-mode** : {subject.get('sous_mode', cfg.get('mode', ''))}",
         "",
+    ]
+    if spin_humour:
+        lines += [
+            "## Sens humouristique (opérateur)",
+            "",
+            f"- **Spin humour** : {spin_humour}",
+            "",
+            "> Le Warsmith a choisi ce sujet ET proposé la direction humouristique.",
+            "> ANGLESMITH forge les 5 angles AUTOUR de ce sens humour.",
+            "",
+        ]
+    lines += [
         "## Sources",
         "",
     ]
@@ -823,11 +836,13 @@ def cmd_deliver_subject(args):
 
     article = _build_article_source(subject, proposal)
     ref_clip = _build_reference_clip(subject, proposal)
+    spin_humour = getattr(args, "spin_humour", None)
 
     os.makedirs(_CAMPAIGN_DIR, exist_ok=True)
     save_json(os.path.join(_CAMPAIGN_DIR, "article_source.json"), article)
     save_json(os.path.join(_CAMPAIGN_DIR, "reference_clip.json"), ref_clip)
-    directive_path = _write_directive_md(subject, proposal, campaign_id)
+    directive_path = _write_directive_md(subject, proposal, campaign_id,
+                                         spin_humour=spin_humour)
 
     # Mise à jour du ledger (inputs_warsmith + campaign_id)
     liber = load_json(LIBER_PATH) or {}
@@ -837,6 +852,8 @@ def cmd_deliver_subject(args):
         _CAMPAIGN_DIR, "directive.md")
     liber["inputs_warsmith"]["reference_clip_path"] = os.path.join(
         _CAMPAIGN_DIR, "reference_clip.json")
+    if spin_humour:
+        liber["inputs_warsmith"]["spin_humour"] = spin_humour
     liber["last_event"] = f"deliver_subject_{index}_campaign_{campaign_id}"
     save_json(LIBER_PATH, liber)
 
@@ -849,6 +866,8 @@ def cmd_deliver_subject(args):
     print(f"  - directive.md ({campaign_id})")
     print("  - article_source.json")
     print("  - reference_clip.json")
+    if spin_humour:
+        print(f"[F00_CAPTEURS] Spin humour enregistré: {spin_humour}")
     print("[F00_CAPTEURS] Ledger mis à jour. Prochaine étape : "
           "F01_SCOUT --prepare/--auto sur la directive.")
 
@@ -892,6 +911,10 @@ def main():
                         help="Livrer le sujet n°index choisi (1-based) dans "
                              "ARCHIVUM/campaign/ (directive.md + article_source.json "
                              "+ reference_clip.json)")
+    parser.add_argument("--spin-humour", default=None,
+                        help="Sens humouristique proposé par le Warsmith pour le "
+                             "sujet livré (écrit dans directive.md + ledger, "
+                             "injecté dans ANGLESMITH pour forger les angles)")
     parser.add_argument("--proposal", default=None,
                         help="Chemin vers la proposition (défaut EXPORT/subjects_proposal.json)")
     parser.add_argument("--campaign-id", default=None,

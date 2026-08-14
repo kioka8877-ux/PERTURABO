@@ -60,6 +60,20 @@ def save_json(path: str, data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
+def load_humour_spin() -> str | None:
+    """Récupère le sens humouristique proposé par le Warsmith au --deliver-subject.
+    Source de vérité : liber_clipping.json -> inputs_warsmith.spin_humour.
+    """
+    liber_path = os.path.join(_FORGE_ROOT, "liber_clipping.json")
+    if not os.path.exists(liber_path):
+        return None
+    try:
+        liber = load_json(liber_path)
+        return liber.get("inputs_warsmith", {}).get("spin_humour") or None
+    except Exception:
+        return None
+
+
 def load_verdict() -> dict:
     path = os.path.join(CAMPAIGN_DIR, "verdict.json")
     if not os.path.exists(path):
@@ -78,6 +92,7 @@ def _apply_weights(angles: list[dict], lw: LearningsWeight):
 def cmd_prepare(args):
     verdict = load_verdict()
     n = int(args.n_angles)
+    spin = load_humour_spin()
     prompt = {
         "mission": "ANGLESMITH (Porte 2) — Forge les N angles d'attaque sur "
                    "le verdict de la Porte 1. Zones : direct (territoire du Demon) "
@@ -99,16 +114,29 @@ def cmd_prepare(args):
         ],
         "output_attendu": "OUT/angles.json (schema : README.md mecanisme des N angles)",
     }
+    if spin:
+        prompt["spin_humour_operateur"] = spin
+        prompt["regles"] = prompt["regles"] + [
+            "SENS HUMOURISTIQUE (Warsmith) : forger les angles AUTOUR de ce sens. "
+            "Chaque angle doit decliner la direction humour dans un registre "
+            "compatible (parodie, absurde, ironie, jeux de mots) sans quitter "
+            "le sujet reel. emotion_mode doit rester credible (joie/tension "
+            "humoristique), jamais de moquerie defamatoire."
+        ]
     save_json(os.path.join(IN_DIR, "anglesmith_prompt.json"), prompt)
     print(f"[ANGLESMITH] Prompt IRON : {os.path.join(IN_DIR, 'anglesmith_prompt.json')}")
+    if spin:
+        print(f"[ANGLESMITH] Spin humour operateur injecte dans le prompt: {spin}")
     print("[ANGLESMITH] Copier le prompt dans Claude sandbox -> OUT/angles.json, puis --finalize")
 
 
 def cmd_auto(args):
     verdict = load_verdict()
     n = int(args.n_angles)
+    spin = load_humour_spin()
     forger = AngleForger()
-    angles = forger.forge(n=n, campaign_id=verdict.get("campaign_id"), verdict=verdict)
+    angles = forger.forge(n=n, campaign_id=verdict.get("campaign_id"),
+                          verdict=verdict, spin_humour=spin)
     lw = LearningsWeight(_FORGE_ROOT)
     angles = _apply_weights(angles, lw)
 
@@ -117,6 +145,7 @@ def cmd_auto(args):
         "n_angles": len(angles),
         "anglesmith_status": "done",
         "weighting_eligible": lw.eligible(),
+        "spin_humour_operateur": spin,
         "angles": angles,
         "check_in_iw_custos": None,
     }
@@ -125,6 +154,8 @@ def cmd_auto(args):
     blue = [a for a in angles if a["zone"] == "blue_ocean"]
     print(f"[ANGLESMITH] --auto : {len(angles)} angles forges "
           f"({len(direct)} direct / {len(blue)} ocean bleu), weight_eligible={lw.eligible()}")
+    if spin:
+        print(f"[ANGLESMITH] Spin humour operateur applique: {spin}")
 
 
 def cmd_finalize(args):

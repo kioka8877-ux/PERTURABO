@@ -16,6 +16,8 @@ Usage:
   from angle_forger import AngleForger
   forger = AngleForger()
   angles = forger.forge(n=10, campaign_id=..., verdict=...)
+  angles = forger.forge(n=5, campaign_id=..., verdict=...,
+                        spin_humour="<sens humour operateur>")
 """
 
 _AXES = {
@@ -34,6 +36,10 @@ _AXES = {
     ],
 }
 
+# Registre humour-compatible quand un spin humour operateur est fourni
+_HUMOUR_EMOTIONS = ["joie", "tension"]
+_HUMOUR_REFRAMES = ["fait_vers_absurde", "banal_vers_suspect"]
+
 _MIN_DIFFERENT_AXES = 2
 
 
@@ -51,12 +57,20 @@ class AngleForger:
                 return False
         return True
 
-    def forge(self, n: int, campaign_id: str, verdict: dict = None) -> list[dict]:
-        """Forge N angles uniques (anti-cannibale) avec zones direct/ocean bleu."""
+    def forge(self, n: int, campaign_id: str, verdict: dict = None,
+              spin_humour: str = None) -> list[dict]:
+        """Forge N angles uniques (anti-cannibale) avec zones direct/ocean bleu.
+        spin_humour : si fourni, les angles sont declines dans un registre
+        humour-compatible (joie/tension, absurde/suspect) et portent le champ
+        humour_spin pour tracabilite."""
         verdict = verdict or {}
         demon = verdict.get("demon_analysis", {})
         oceans = demon.get("blue_ocean_unlocked", [])
         oceans = [o for o in oceans if str(o.get("blue_ocean_depth", 1)) == "1"]
+
+        humour = bool(spin_humour)
+        emotions = _HUMOUR_EMOTIONS if humour else _AXES["emotion_mode"]
+        reframes = _HUMOUR_REFRAMES if humour else _AXES["reframe_dim"]
 
         n_blue = min(len(oceans), max(0, n // 3)) if oceans else 0
         n_direct = n - n_blue
@@ -66,9 +80,9 @@ class AngleForger:
 
         # Zone direct : territoire dominant du Demon
         for family in _AXES["angle_family"]:
-            for emotion in _AXES["emotion_mode"]:
+            for emotion in emotions:
                 for engagement in _AXES["engagement_type"]:
-                    for reframe in _AXES["reframe_dim"]:
+                    for reframe in reframes:
                         if idx > n_direct:
                             break
                         candidate = {
@@ -83,6 +97,8 @@ class AngleForger:
                             "territory": demon.get("dominant_emotion"),
                             "weight": 1.0,
                         }
+                        if humour:
+                            candidate["humour_spin"] = spin_humour
                         if self._anti_cannibale(angles, candidate):
                             angles.append(candidate)
                             idx += 1
@@ -110,7 +126,8 @@ class AngleForger:
                     candidate = {
                         "angle_id": f"A{idx:02d}",
                         "angle_family": family,
-                        "emotion_mode": demon.get("dominant_emotion") or "tension",
+                        "emotion_mode": (demon.get("dominant_emotion") or
+                                         ("joie" if humour else "tension")),
                         "engagement_type": engagement,
                         "reframe_dim": "banal_vers_suspect",
                         "zone": "blue_ocean",
@@ -120,6 +137,8 @@ class AngleForger:
                         "territory_rationale": territory.get("rationale"),
                         "weight": 1.0,
                     }
+                    if humour:
+                        candidate["humour_spin"] = spin_humour
                     if self._anti_cannibale(angles, candidate):
                         angles.append(candidate)
                         idx += 1
