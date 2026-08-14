@@ -1,13 +1,13 @@
 {
   "siege_id": "siege_20260810_205150",
-  "campaign_id": null,
+  "campaign_id": "NBA_WESTBROOK",
   "campaign_status": "active",
   "current_porte": "closed",
   "fleet_status": "capteurs_done",
   "mode": "logo",
   "inputs_warsmith": {
-    "directive_path": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
-    "reference_clip_path": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
+    "directive_path": "/workspace/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
+    "reference_clip_path": "/workspace/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
     "platform_target": "youtube",
     "market_target": "us_young_english",
     "n_angles": 5
@@ -30,7 +30,7 @@
     "tyrant": "pending",
     "tyrant_output": null,
     "capteurs": "done",
-    "capteurs_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md"
+    "capteurs_output": "/workspace/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md"
   },
   "portes_validated": [
     "1",
@@ -63,7 +63,7 @@
   "packs_expedies_count": 1,
   "packs_posted_count": 0,
   "packs_submitted_whop_count": 0,
-  "last_event": "2026-08-10T21:29:44Z",
+  "last_event": "deliver_subject_1_campaign_NBA_WESTBROOK",
   "siege_started_at": "2026-08-10T20:51:50Z",
   "siege_closed_at": null,
   "log_event": [
@@ -99,7 +99,7 @@
     }
   ],
   "iw_custos": {
-    "last_validation": "2026-08-14T07:52:21Z",
+    "last_validation": "2026-08-14T16:14:40Z",
     "errors": []
   }
 }

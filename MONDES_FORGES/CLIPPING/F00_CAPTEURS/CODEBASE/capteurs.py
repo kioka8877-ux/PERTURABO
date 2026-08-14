@@ -12,6 +12,8 @@ Commandes:
   python capteurs.py --scan --campaign IN/campaign_to_observe.json
   python capteurs.py --scan-demons --scan-list IN/scan_list.json
   python capteurs.py --scrap-youtube --channel <url> [--max-videos 20]
+  python capteurs.py --scan-subjects --niche <nom> [--hot] [--mode ...]
+  python capteurs.py --deliver-subject <index> [--proposal EXPORT/subjects_proposal.json]
 
 Hérésies gardées :
   - Scrap automatique (pas de cron, pas d'auto-loop)
@@ -23,6 +25,7 @@ Hérésies gardées :
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import uuid
@@ -633,6 +636,223 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
     return path
 
 
+# ----------------------------------------------------------------------
+# Livraison du sujet choisi (Porte du Warsmith)
+# ----------------------------------------------------------------------
+_CAMPAIGN_DIR = os.path.join(ARCHIVUM_DIR, "campaign")
+_EXPORT_DIR = os.path.join(_FORGE_ROOT, "EXPORT")
+
+
+def _derive_tag(subject_en: str) -> str:
+    """Dérive un tag court depuis le sujet (ex: 'westbrook').
+
+    Pattern nom+prénom dans les 2-3 premiers mots capitalisés :
+    'Russell Westbrook Retirement...' -> 'westbrook' (2e mot)."""
+    stopwords = {"a", "an", "the", "of", "for", "and", "to", "in", "on",
+                 "is", "are", "be", "explained", "revealed", "shocks",
+                 "signed", "nba"}
+    words = re.findall(r"[A-Za-z]+", subject_en or "")
+    first_proper = None
+    second = None
+    for w in words:
+        if w[:1].isupper() and len(w) > 2 and w.lower() not in stopwords:
+            if first_proper is None:
+                first_proper = w
+            elif second is None:
+                second = w
+                break
+        elif second is not None:
+            break
+    if second:
+        return second.lower()
+    if first_proper:
+        return first_proper.lower()
+    return words[0].lower() if words else "subject"
+
+
+def _build_article_source(subject: dict, proposal: dict) -> dict:
+    """Article source (le VRAI sujet de la vidéo). Fidèle au sujet choisi."""
+    cfg = proposal.get("config", {})
+    tag = _derive_tag(subject.get("subject_en", ""))
+    key_facts = [f.strip(" .") for f in
+                 str(subject.get("notes_fr", "")).split(". ")
+                 if len(f.strip()) > 30][:6]
+    return {
+        "_mode": cfg.get("mode", "informatif"),
+        "_sub_mode": subject.get("sous_mode", "informatif"),
+        "_description": "L'article est le VRAI sujet de la vidéo. Le clip "
+                        "source (video background) n'est qu'une illustration, "
+                        "aucun lien avec le sujet.",
+        "reference": subject.get("subject_en", ""),
+        "subject": subject.get("notes_fr", ""),
+        "celebrity_or_subject": tag.capitalize(),
+        "tag": tag,
+        "key_facts": key_facts,
+        "scan_id": subject.get("scan_id"),
+        "gate": "warsmith_chooses",
+    }
+
+
+def _build_reference_clip(subject: dict, proposal: dict) -> dict:
+    """Clip de fond (illustration). URL réelle, vues réelles, jamais inventé."""
+    cfg = proposal.get("config", {})
+    tag = _derive_tag(subject.get("subject_en", ""))
+    sources = [u for u in (subject.get("sources") or []) if u]
+    candidates = subject.get("clip_background_candidates") or []
+    clip_url = None
+    for c in candidates:
+        hint = c.get("source_hint", "")
+        if hint and "youtube" in hint:
+            clip_url = hint
+            break
+    if not clip_url:
+        for u in sources:
+            if "youtube" in u:
+                clip_url = u
+                break
+    metrics = subject.get("metrics") or {}
+    clip = {
+        "source_type": "youtube",
+        "url": clip_url,
+        "video_url": clip_url,
+        "reference": clip_url,
+        "title": subject.get("subject_en", ""),
+        "platform": "youtube",
+        "celebrity_or_subject": tag.capitalize(),
+        "niche": cfg.get("niche", "unknown"),
+        "duration_sec": None,
+        "view_count": metrics.get("top_video_views"),
+        "timecodes": {"t": 0},
+        "context_article": {
+            "source": "F00_CAPTEURS --deliver-subject",
+            "published": subject.get("scan_id"),
+            "title": subject.get("subject_en", ""),
+            "summary": subject.get("notes_fr", ""),
+            "key_facts": subject.get("score_rationale_fr", ""),
+        },
+        "scan_id": subject.get("scan_id"),
+        "gate": "warsmith_chooses",
+    }
+    return clip
+
+
+def _write_directive_md(subject: dict, proposal: dict, campaign_id: str) -> str:
+    """directive.md — parseable par F01 (Campaign ID + section Sources)."""
+    cfg = proposal.get("config", {})
+    tag = _derive_tag(subject.get("subject_en", ""))
+    sources = [u for u in (subject.get("sources") or []) if u]
+    metrics = subject.get("metrics") or {}
+
+    lines = [
+        f"# Directive — {subject.get('subject_en', '')}",
+        "",
+        f"Campaign ID: {campaign_id}",
+        "",
+        f"> Déposée par F00_CAPTEURS --deliver-subject le {now_iso()}.",
+        f"> Sujet n°{subject.get('scan_id', '?')} — choix du Warsmith "
+        f"(gate: warsmith_chooses).",
+        "",
+        "## Sujet du siège",
+        "",
+        f"- **Article** : {subject.get('subject_en', '')}",
+        f"- **Notes (FR)** : {subject.get('notes_fr', '')}",
+        f"- **Angle 90s (FR)** : {subject.get('angle_propose_fr', '')}",
+        f"- **Tag** : `{tag}`",
+        f"- **Sous-mode** : {subject.get('sous_mode', cfg.get('mode', ''))}",
+        "",
+        "## Sources",
+        "",
+    ]
+    for u in sources:
+        lines.append(f"- {u}")
+    lines += [
+        "",
+        "## Contraintes siège",
+        "",
+        f"- Niche : {cfg.get('niche', 'unknown')}",
+        f"- Fraîcheur : {cfg.get('freshness', 'brulant')} "
+        f"({cfg.get('window_hours', 5)}h)",
+        f"- Vues YT top : {metrics.get('top_video_views', '—')}",
+        f"- Demande : {metrics.get('demand_score', '—')}",
+        f"- Couverture médias : {metrics.get('coverage_media_count', '—')}",
+        f"- Diversité sources : {subject.get('source_diversity', '—')}",
+        "",
+        "## Références",
+        "",
+        "- Article source : `ARCHIVUM/campaign/article_source.json`",
+        "- Clip de fond : `ARCHIVUM/campaign/reference_clip.json`",
+        "",
+        "*Fer au-dedans, Fer au-dehors.*",
+        "",
+    ]
+    path = os.path.join(_CAMPAIGN_DIR, "directive.md")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    return path
+
+
+def cmd_deliver_subject(args):
+    """Livraison du sujet choisi par le Warsmith dans ARCHIVUM/campaign/.
+    Écrit directive.md + article_source.json + reference_clip.json, puis
+    met à jour le ledger (campaign_id + inputs_warsmith)."""
+    guard_campaign_open()
+
+    proposal_path = args.proposal
+    if not proposal_path:
+        candidate = os.path.join(_EXPORT_DIR, "subjects_proposal.json")
+        proposal_path = candidate if os.path.exists(candidate) else \
+            os.path.join(OUT_DIR, "subjects_proposal.json")
+    proposal = load_json(proposal_path)
+    if not proposal or not proposal.get("subjects"):
+        print(f"[F00_CAPTEURS] Proposition introuvable/vide: {proposal_path}")
+        sys.exit(1)
+
+    index = args.deliver_subject
+    subjects = proposal["subjects"]
+    if index < 1 or index > len(subjects):
+        print(f"[F00_CAPTEURS] Index hors bornes: {index} (attendu 1..{len(subjects)})")
+        sys.exit(1)
+    subject = subjects[index - 1]
+
+    cfg = proposal.get("config", {})
+    niche = cfg.get("niche", "unknown")
+    tag = _derive_tag(subject.get("subject_en", ""))
+    campaign_id = f"{niche}_{tag}".upper().replace(" ", "_")
+    if args.campaign_id:
+        campaign_id = args.campaign_id
+
+    article = _build_article_source(subject, proposal)
+    ref_clip = _build_reference_clip(subject, proposal)
+
+    os.makedirs(_CAMPAIGN_DIR, exist_ok=True)
+    save_json(os.path.join(_CAMPAIGN_DIR, "article_source.json"), article)
+    save_json(os.path.join(_CAMPAIGN_DIR, "reference_clip.json"), ref_clip)
+    directive_path = _write_directive_md(subject, proposal, campaign_id)
+
+    # Mise à jour du ledger (inputs_warsmith + campaign_id)
+    liber = load_json(LIBER_PATH) or {}
+    liber["campaign_id"] = campaign_id
+    liber.setdefault("inputs_warsmith", {})
+    liber["inputs_warsmith"]["directive_path"] = os.path.join(
+        _CAMPAIGN_DIR, "directive.md")
+    liber["inputs_warsmith"]["reference_clip_path"] = os.path.join(
+        _CAMPAIGN_DIR, "reference_clip.json")
+    liber["last_event"] = f"deliver_subject_{index}_campaign_{campaign_id}"
+    save_json(LIBER_PATH, liber)
+
+    custos = os.path.join(_FORGE_ROOT, "IW_CUSTOS.py")
+    if os.path.exists(custos):
+        subprocess.run([sys.executable, custos, "--mode", "check-in",
+                        "--frigate", "CAPTEURS", "--output", directive_path],
+                       capture_output=True, text=True, timeout=30)
+    print(f"[F00_CAPTEURS] Sujet n°{index} livré dans {_CAMPAIGN_DIR}:")
+    print(f"  - directive.md ({campaign_id})")
+    print("  - article_source.json")
+    print("  - reference_clip.json")
+    print("[F00_CAPTEURS] Ledger mis à jour. Prochaine étape : "
+          "F01_SCOUT --prepare/--auto sur la directive.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="F00_CAPTEURS — Les Yeux du Siège")
     parser.add_argument("--scan", action="store_true",
@@ -668,6 +888,14 @@ def main():
                         help="Fenêtre de fraîcheur (défaut brulant=5h)")
     parser.add_argument("--max-items", type=int, default=10,
                         help="Articles RSS max par scan (défaut 10)")
+    parser.add_argument("--deliver-subject", type=int, default=None,
+                        help="Livrer le sujet n°index choisi (1-based) dans "
+                             "ARCHIVUM/campaign/ (directive.md + article_source.json "
+                             "+ reference_clip.json)")
+    parser.add_argument("--proposal", default=None,
+                        help="Chemin vers la proposition (défaut EXPORT/subjects_proposal.json)")
+    parser.add_argument("--campaign-id", default=None,
+                        help="Campaign ID explicite (défaut: NICHE_TAG dérivé)")
     args = parser.parse_args()
 
     if args.scan:
@@ -682,6 +910,8 @@ def main():
         cmd_scrap_youtube(args)
     elif args.scan_subjects:
         cmd_scan_subjects(args)
+    elif args.deliver_subject:
+        cmd_deliver_subject(args)
     else:
         parser.print_help()
 

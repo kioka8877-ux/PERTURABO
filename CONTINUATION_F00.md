@@ -49,6 +49,13 @@
 > poussé (commit `bd05444`). Nom canonique IW_CUSTOS inchangé = `CAPTEURS`.
 > CI-DESSOUS : erreurs constatées lors du test `--scan-subjects --niche NBA`.
 
+> ✅ **MAJ 2026-08-14 (suite)** : `--deliver-subject <index>` implémenté
+> (commit à venir). Sujet n°1 du scan `F00-5581179c` (Westbrook tribute
+> backlash) livré dans `ARCHIVUM/campaign/` :
+> `directive.md` (Campaign ID `NBA_WESTBROOK`) + `article_source.json` +
+> `reference_clip.json`. Ledger mis à jour (`campaign_id`, `inputs_warsmith`).
+> Prochaine étape : **F01_SCOUT --prepare / --auto** sur cette directive.
+
 ### 4.0 ERREURS CONSTATÉES (à traiter en premier dans le nouveau sandbox)
 
 1. **Synthèse GLM timeout** : `premium_client.py:195` hardcode
@@ -117,6 +124,7 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 
 1. **Choisir le sujet** : le Warsmith choisit UN des 5 sujets de
    `EXPORT/subjects_proposal.json` (pas de top-1 automatique — porte dédiée).
+   → **FAIT** : sujet n°1 (Westbrook) livré via `--deliver-subject 1`.
 2. **Commande de livraison du sujet choisi** : implémenter une nouvelle
    commande (ex. `capteurs.py --deliver-subject <index>`) qui écrit dans
    `ARCHIVUM/campaign/` :
@@ -124,9 +132,12 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
    - `article_source.json`
    - `reference_clip.json`
    (puis push GitHub + mise à jour ledger).
-3. Optionnel : générer une proposition en mode `--hot` (sans niche) et en
+   → **FAIT** : `--deliver-subject <index>` opérationnel (voir §4 MAJ).
+3. **Enchaîner sur F01** : lancer `F01_SCOUT --prepare/--auto` puis
+   F02→ANGLESMITH→F03→F04→F05→F06 sur la directive `NBA_WESTBROOK`.
+4. Optionnel : générer une proposition en mode `--hot` (sans niche) et en
    mode `--mode humour` pour valider les 2 sous-modes.
-4. Intégration chaîne existante : le sujet choisi doit ensuite alimenter
+5. Intégration chaîne existante : le sujet choisi doit ensuite alimenter
    F01→F02→ANGLESMITH→F03→F04→F05→F06 (chaîne intacte).
 
 ## 5. Commandes de vérification rapide

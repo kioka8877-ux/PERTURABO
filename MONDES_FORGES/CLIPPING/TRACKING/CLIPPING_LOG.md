@@ -623,3 +623,43 @@ F00_CAPTEURS/CODEBASE/
 ## [2026-08-14T07:46:47Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: fb35b9fd0eaf47b77943b3459eed3a5b — status: done
 
 ## [2026-08-14T07:52:21Z] CAPTEURS — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/subjects_proposal.md — md5: 1b5c9ffdc00885d2a06695fa63088ad3 — status: done
+
+---
+
+## [DELIVER-SUBJECT] Commande `--deliver-subject <index>` + livraison NBA_WESTBROOK
+
+### Contexte
+La porte `warsmith_chooses` est automatisée : le Warsmith choisit un sujet de
+`EXPORT/subjects_proposal.json` (scan `F00-5581179c`, niche NBA) et la nouvelle
+commande livre le sujet choisi dans `ARCHIVUM/campaign/` pour démarrer le siège.
+
+### Fichiers livrés
+```
+F00_CAPTEURS/CODEBASE/capteurs.py
+└── cmd_deliver_subject() + _derive_tag() + _build_article_source() +
+    _build_reference_clip() + _write_directive_md() + args CLI
+```
+
+### Décisions d'implémentation
+- `--deliver-subject <index>` (1-based) lit la proposition (défaut
+  `EXPORT/subjects_proposal.json`), prend le sujet choisi et écrit dans
+  `ARCHIVUM/campaign/` : `directive.md` (Campaign ID `NICHE_TAG` dérivé,
+  parseable F01), `article_source.json`, `reference_clip.json`.
+- Le clip de fond est la VRAIE URL YouTube (preuve : candidat clip du sujet),
+  les vues réelles de la métrique `top_video_views` — aucun chiffre inventé.
+- Ledger : `campaign_id` + `inputs_warsmith.directive_path/reference_clip_path`
+  mis à jour + check-in IW_CUSTOS CAPTEURS.
+- Tag dérivé du sujet (pattern nom+prénom : 'Russell Westbrook…' -> westbrook).
+
+### Livraison réalisée (2026-08-14)
+- Sujet n°1 : **Westbrook tribute backlash** (GLM 9/10, méca 76.0/100).
+- Campaign ID : `NBA_WESTBROOK`.
+- Fichiers écrits dans `ARCHIVUM/campaign/` (directive.md, article_source.json,
+  reference_clip.json) — vérifiés parseables par F01 (3 assets extraits).
+
+### Prochaines étapes
+1. F01_SCOUT `--prepare` / `--auto` sur `ARCHIVUM/campaign/directive.md`
+2. F02_TYRANT_CAMP (Porte 1) → ANGLESMITH (Porte 2) → F03/F04 (Porte 3)
+3. F05_PACKAGER (Porte 4) → F06_TRACKER (post-Porte 4)
+
+## [2026-08-14T16:14:40Z] CAPTEURS — check-in — output: /workspace/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md — md5: e91e331cc7ba96c2a2039503ae73531f — status: done
