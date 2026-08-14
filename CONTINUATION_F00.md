@@ -45,6 +45,42 @@
 
 ## 4. Ce qui reste à faire (travail suivant)
 
+> ⚠️ **MAJ 2026-08-14** : renommage `CAPTEURS` → `F00_CAPTEURS` fait et
+> poussé (commit `bd05444`). Nom canonique IW_CUSTOS inchangé = `CAPTEURS`.
+> CI-DESSOUS : erreurs constatées lors du test `--scan-subjects --niche NBA`.
+
+### 4.0 ERREURS CONSTATÉES (à traiter en premier dans le nouveau sandbox)
+
+1. **Synthèse GLM timeout** : `premium_client.py:195` hardcode
+   `urlopen(..., timeout=120)`. La synthèse 5 sujets dépasse 120s sur
+   NVIDIA/GLM-5.2 → `TimeoutError: The read operation timed out`. L'API
+   NVIDIA répond pourtant en ~0.2s (test `GET /v1/models` = 200).
+   → Corriger : timeout configurable (ex. 240s) dans `_fetch`.
+2. **pytrends absent** : `ModuleNotFoundError: No module named 'pytrends'`
+   (signaux Trends dégradés en `pytrends_absent`). Installer
+   `pytrends` + `urllib3==1.26.20` (piège connu, cf. §6).
+3. **Clé YouTube absente** : `CONTRACTS/youtube_secrets.json` manquant dans
+   ce sandbox → signal "vues réelles" YouTube skippé. Ré-injecter la clé.
+4. **Clé NVIDIA à re-injecter** : `CLIPPING_PREMIUM_API_KEY` dans `.env.local`
+   (gitignored). Présente dans l'historique du chat.
+   La config réelle `CONTRACTS/copywriter_secrets.json` (gitignored) :
+   `model_id=z-ai/glm-5.2`, `provider=other`,
+   `base_url=https://integrate.api.nvidia.com/v1`.
+
+### 4.0.1 État du test NBA (2026-08-14)
+
+- `--scan-subjects --niche NBA --mode informatif --freshness brulant`
+  → signaux RSS + Suggest captés (`F00-e2fda737`), **échec synthèse GLM**
+  (timeout 120s). Pas d'export produit.
+- Rien n'a été committé pour ce test (working tree propre).
+
+### 4.0.2 Autres refs déjà faites (ne pas refaire)
+
+- Renommage dossier `F00_CAPTEURS/` + `PROFILES/logo/F00_CAPTEURS_IN/`.
+- CLI vérifié : `--help`, `premium_client.require_config()` OK.
+
+## 4. Ce qui reste à faire (travail suivant)
+
 1. **Choisir le sujet** : le Warsmith choisit UN des 5 sujets de
    `EXPORT/subjects_proposal.json` (pas de top-1 automatique — porte dédiée).
 2. **Commande de livraison du sujet choisi** : implémenter une nouvelle
