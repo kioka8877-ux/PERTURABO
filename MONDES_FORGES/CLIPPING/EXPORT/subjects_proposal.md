@@ -1,8 +1,8 @@
 # F00_CAPTEURS — Proposition de sujets viraux
 
-- Scan : F00-a6fa824c
-- Date : 2026-08-13T23:31:56Z
-- Niche : Lakers basketball
+- Scan : F00-e55a8dbf
+- Date : 2026-08-14T07:00:21Z
+- Niche : NBA
 - Mode : informatif | Fraîcheur : brulant (5h)
 - Modèle : z-ai/glm-5.2 (synthèse — stats observées)
 
@@ -10,107 +10,104 @@
 
 | # | Sujet (EN) | Score | Vues YT top | Recherche | Tendance 7j | Demande | Fraîcheur | Couverture | Sous-mode |
 |---|------------|-------|-------------|-----------|-------------|---------|-----------|------------|-----------|
-| 1 | $12.5B Lakers Sale Shocks NBA | **10** | 23079 | 118294 | 1.79 | 100 | 2.5h | 2 | informatif |
-| 2 | Lakers Still Run The NBA TV | **8** | — | — | — | 100 | 2.5h | 1 | informatif |
-| 3 | Shaq vs LeBron: Lakers Mountaintop Debate | **8** | 17547 | 17547 | 1.79 | 100 | 12.0h | 1 | informatif |
-| 4 | Westbrook Retires: Lakers Fans React | **7** | 118294 | 118294 | 1.79 | 100 | 15.0h | — | humour |
-| 5 | FBI Forced Lakers Sale? Conspiracy Explained | **7** | 23079 | 23079 | 1.79 | 100 | 18.0h | — | humour |
+| 1 | LeBron relocation hint to Philly fans | **9** | — | — | 1.19 | 100 | 3.0h | 1 | informatif |
+| 2 | Clippers gave Bradley Beal $13M fans shocked | **9** | — | — | 1.19 | 100 | 1.4h | 1 | informatif |
+| 3 | Pelicans Spurs fly most miles Knicks least | **8** | — | — | 1.19 | 100 | 4.7h | 1 | informatif |
+| 4 | NBA champion harsh truth on Westbrook retirement | **8** | — | — | 1.19 | 100 | 2.4h | 1 | informatif |
+| 5 | Sonics return story twists Portland LA | **7** | — | — | 1.19 | 100 | 1.9h | 1 | informatif |
 
 ## Détail par sujet
 
-### 1. $12.5B Lakers Sale Shocks NBA — score 10/10
+### 1. LeBron relocation hint to Philly fans — score 9/10
 
-**Notes (FR)** : La vente des Lakers pour 12,5 milliards de dollars à Josh Kushner et Bob Iger est l'événement le plus brûlant. C'est un record absolu pour une franchise sportive. L'angle : comment une transaction de cette ampleur a pu se faire en un seul week-end. Le côté 'histoire de l'argent' fascine au-delà des fans de basket.
+**Notes (FR)** : LeBron James lâche un indice de relocalisation aux fans des 76ers juste après la publication du calendrier 2026-27. Contexte brûlant : la release du schedule NBA est l'événement du jour, et LeBron ajoute une couche de drama. Angle : pourquoi cette tease maintenant, qu'est-ce que ça signifie pour l'avenir de LeBron. C'est un sujet qui génère débat et spéculations, parfait pour un clip informatif rapide.
 
-**Angle 90s (FR)** : 90s : On explique comment Bob Iger (Disney) et Josh Kushner ont réussi à racheter LA franchise mythique en un week-end pour 12,5 milliards. Comparaison avec d'autres ventes historiques. Pourquoi les Buss ont vendu maintenant. Le futur des Lakers sous Iger/Kushner.
+**Angle 90s (FR)** : LeBron vient de teaser un possible avenir à Philadelphie. Est-ce un mind game, un vrai plan, ou juste pour faire le buzz ? Décryptage en 90s de ce que cette 'hint' cache vraiment.
 
-**Métriques** : vues YT 23079 | recherche 118294 | tendance 1.79 | demande 100 | fraîcheur 2.5h | couverture 2 médias
+**Métriques** : vues YT None | recherche None | tendance 1.19 | demande 100 | fraîcheur 3.0h | couverture 1 médias
 
-**Signaux manquants** : trending_rss_traffic (pas de trending Google direct sur Lakers)
+**Signaux manquants** : vues_youtube (clé absente), traffic RSS trending pour ce sujet précis
 
-**Sources** : https://news.google.com/rss/articles/CBMiakFVX3lxTE5QMWkzeU9RUTBCbXh1RUhGU19KQ3gxSk9SSTIzR0RSdnc1eVNpbnR3VUlzZDNmR3k4czc5N29GekpQYklIeS1zd1doUVBVRGowWUdTdU12azBXb3IyUUxHQ1pzSlZrTW5QSVE?oc=5 ; https://www.youtube.com/watch?v=XKrKUPygpuI ; https://www.youtube.com/watch?v=n64cB3FWLys ; https://www.youtube.com/watch?v=gg13feyrw20
+**Sources** : https://news.google.com/rss/articles/CBMiiwFBVV95cUxPU0pKRFpNWDYyaGdZUlowVXp6cEtyQ20xQUQzRjV3SlNNMVQxY21YeEd0UWZkVk9rTllNRFBKQjhGMGVfRDZsZWNfSkw0eXZhLUUzQV9OQjY4bng4U2Z3Ym9oaGtpcFhFQ1RhbmN4N3IweVNVSm1yVGwxLU9SYzVqQW4zZ29ZalZ0UmhV?oc=5
 
 **Clips background candidats** :
-- B-roll du siège des Lakers ou de Crypto.com Arena avec overlay du montant $12.5B (BBC / Bleacher Report)
-- Photos de Josh Kushner et Bob Iger en overlay sur des highlights Lakers (CTV News)
+- Clip de LeBron faisant des remarques ambiguës devant des fans ou en conférence de presse, réaction des fans des 76ers (Yahoo Sports / NBA clips récents)
 
 **Checklists** : viabilité ✅ | viralité ✅ (10/10)
 
 ---
 
-### 2. Lakers Still Run The NBA TV — score 8/10
+### 2. Clippers gave Bradley Beal $13M fans shocked — score 9/10
 
-**Notes (FR)** : Yahoo Sports révèle que malgré la vente, les Lakers restent la franchise la plus exposée en TV nationale. L'angle : la NBA favorise-t-elle les Lakers au détriment de la compétition ? Débat enflamme les fans des autres équipes.
+**Notes (FR)** : Les Clippers ont offert un contrat de 13 millions de dollars à Bradley Beal, et les fans NBA ne comprennent pas pourquoi. Réactions d'incompréhension générale. Angle informatif : pourquoi ce deal choque, analyse rapide de la valeur de Beal vs le contrat, contexte salarial. Sujet parfait pour un public qui aime débattre des décisions des GM.
 
-**Angle 90s (FR)** : 90s : On analyse pourquoi les Lakers dominent encore le calendrier TV national NBA malgré une équipe en reconstruction. Comparaison du nombre de matchs TV vs petits marchés. La NBA est-elle devenue une ligue à deux vitesses ?
+**Angle 90s (FR)** : 13 millions à Bradley Beal ? Les fans sont en état de choc. On t'explique pourquoi ce deal fait polémique et si les Clippers ont perdu la tête.
 
-**Métriques** : vues YT None | recherche None | tendance None | demande 100 | fraîcheur 2.5h | couverture 1 médias
+**Métriques** : vues YT None | recherche None | tendance 1.19 | demande 100 | fraîcheur 1.4h | couverture 1 médias
 
-**Signaux manquants** : yt_search_views, top_video_views, trend_growth_7d, trending_rss_traffic
+**Signaux manquants** : vues_youtube (clé absente), traffic RSS trending pour Bradley Beal
 
-**Sources** : https://news.google.com/rss/articles/CBMihgFBVV95cUxNZHhNZTlHMkN3aW1iR2F2RGNmN1phTWdxcDZvbG1haDlOSk9seXB4bnFZOXJubXdxR1E2TEF5elBXd19WTHRQU2hXeWs1blJNSXdpcGl2QmkyY1R3NHB5M3M1VDlqWktCY3QxSnlrWWhaNHJBVHViZUdRZzhXMGNCVUh1S2ZjQQ?oc=5
+**Sources** : https://news.google.com/rss/articles/CBMic0FVX3lxTE5DZV9RM05DdDF1RV9oYmV1cmpXbmlKZzhsb0JnUXQwY2hZV3p0SjR5WkUzdTN5THVRRVpjbEFpcGs5bm9CX0VEVTZKeDlULXdnZ0J0RlA4T3UzWnhrWUJkeDJaSk5iRERZTXY3MHB6cTVXNjg?oc=5
 
 **Clips background candidats** :
-- Montage des calendriers TV NBA avec un compteur géant comparant Lakers vs autres équipes (Yahoo Sports)
+- Highlights/moments clés de Bradley Beal récents, montage des réactions de fans en ligne (Yahoo Sports / Twitter reactions)
+
+**Checklists** : viabilité ✅ | viralité ✅ (10/10)
+
+---
+
+### 3. Pelicans Spurs fly most miles Knicks least — score 8/10
+
+**Notes (FR)** : Le calendrier NBA 2026-27 est sorti et révèle une injustice de kilométrage : Pelicans et Spurs vont voler le plus de miles, tandis que les Knicks voyageront le moins. Angle : visualisation de cette injustice, impact sur la fatigue et les performances, comparaison visuelle des distances. Format informatif avec data visualization.
+
+**Angle 90s (FR)** : Les Pelicans et Spurs vont parcourir l'équivalent de 3 fois le tour de la Terre cette saison, pendant que les Knicks dorment chez eux. Voici pourquoi le calendrier NBA est injuste.
+
+**Métriques** : vues YT None | recherche None | tendance 1.19 | demande 100 | fraîcheur 4.7h | couverture 1 médias
+
+**Signaux manquants** : vues_youtube (clé absente), traffic RSS trending pour ce sujet précis
+
+**Sources** : https://news.google.com/rss/articles/CBMi9AFBV95cUxOY2NCVUNrNXNDNWRHSU1iX3Y5RXRyU1JEbzF4UWFVOEZyeDc2MU1XYnJRbkwtanhMdUs2ZmJmWXpQMGJRbG9UdDI0c3FVcnNFVDN4YktoQ2gyM3hwTHlRVXREeE1kUjVwUmF4ZGpQbzNNXzczejVfbS1vMjZJaDkzYkJSaDFkOEt4V0o2U2lWWXJCeWo0VnhHM1ByaTY1X2RKUGUzN1NhMVJ1dDh1NlFiZmRsRGVZREttYkZoRzM3cFFDT3ExVVg5RXlOSmFnLUpZRzdnUmJWcXcxQ2NsNTc2ejZmYlpLRFZaNS1LcXRuSUphMFVC?oc=5
+
+**Clips background candidats** :
+- Carte des États-Unis avec tracé des vols Pelicans/Spurs vs Knicks, images d'avions d'équipes NBA (Yahoo Sports / données de calendrier NBA)
 
 **Checklists** : viabilité ✅ | viralité ✅ (9/10)
 
 ---
 
-### 3. Shaq vs LeBron: Lakers Mountaintop Debate — score 8/10
+### 4. NBA champion harsh truth on Westbrook retirement — score 8/10
 
-**Notes (FR)** : Shaquille O'Neal déclare que LeBron est 'à la fête' mais pas au sommet de l'histoire des Lakers. C'est un micro-sujet parfait qui crée un débat instantané parmi les fans. Shaq reste une personnalité ultra-identifiable.
+**Notes (FR)** : Un champion NBA révèle une vérité brutale sur la carrière de Russell Westbrook après sa retraite. Citation 'He became the blame of a lot'. Angle : rétrospective de la carrière de Westbrook, pourquoi il a été le bouc émissaire, analyse de son héritage. Sujet émotionnel pour les fans qui ont suivi son parcours.
 
-**Angle 90s (FR)** : 90s : On décortique la déclaration de Shaq. LeBron a-t-il vraiment sa place au sommet des Lakers avec Magic, Kobe et Shaq lui-même ? On compare les titres, les stats et l'impact culturel. Le débat tranché en 90 secondes.
+**Angle 90s (FR)** : Russell Westbrook a pris sa retraite et un champion NBA lâche une vérité qui fait mal : il est devenu le bouc émissaire de tout. Retour sur la carrière la plus injustement détestée de la NBA.
 
-**Métriques** : vues YT 17547 | recherche 17547 | tendance 1.79 | demande 100 | fraîcheur 12.0h | couverture 1 médias
+**Métriques** : vues YT None | recherche None | tendance 1.19 | demande 100 | fraîcheur 2.4h | couverture 1 médias
 
-**Signaux manquants** : trending_rss_traffic, coverage_media_count exact
+**Signaux manquants** : vues_youtube (clé absente), traffic RSS trending pour Westbrook précisément
 
-**Sources** : https://www.youtube.com/watch?v=A_b05eyOENU
+**Sources** : https://news.google.com/rss/articles/CBMihAFBVV95cUxObE1LYmFySDRUQVR5ZkxGVE5KdW9SakRrNm9vOUJYY0NLcnNlSkd0R05oVVpRS2gwbUE2Rm92Xzg2c3pUenFmTENhVzVrZ2l1QkcxOVJNV0t6Yi1DazlvVFcwc1QxaTlpVUIwbDI5dk5CRUY0aEQ3cEcyaWFQS3ROeVhDZGQ?oc=5
 
 **Clips background candidats** :
-- Clip de Shaq sur NBA on TNT avec sous-titre de sa citation sur LeBron (TrendNova / TNT)
-- Split screen LeBron en jersey Lakers vs Shaq/Kobe/Magic en highlight (TrendNova)
+- Montage des moments highs et lows de Westbrook, de son MVP à ses dernières saisons difficiles, réactions de fans (Yahoo Sports / NBA archives)
 
 **Checklists** : viabilité ✅ | viralité ✅ (10/10)
 
 ---
 
-### 4. Westbrook Retires: Lakers Fans React — score 7/10
+### 5. Sonics return story twists Portland LA — score 7/10
 
-**Notes (FR)** : Russell Westbrook prend sa retraite, et les fans Lakers ont encore frais le souvenir de son passage chaotique. Une vidéo philippine sur le sujet a déjà 118k vues. Angle humour : repasser les moments les plus 'Westbrook' sous le maillot Lakers.
+**Notes (FR)** : L'histoire du retour des Seattle SuperSonics prend des tournures inattendues, avec des rebondissements impliquant Portland et Los Angeles. Angle : où en est le retour des Sonics, pourquoi Portland et LA sont impliqués, décryptage des manœuvres géopolitiques de la NBA. Sujet parfait pour les fans passionnés de l'histoire de la ligue.
 
-**Angle 90s (FR)** : 90s : Bilan du passage de Westbrook aux Lakers maintenant qu'il prend sa retraite. On reprend les pires airballs et les meilleures dunks. Est-ce le pire trade de l'histoire des Lakers ou y avait-il du bon ?
+**Angle 90s (FR)** : Le retour des Sonics à Seattle ? Pas si simple. Portland et Los Angeles s'invitent dans la partie. Voici les coulisses du feuilleton le plus fou de la NBA.
 
-**Métriques** : vues YT 118294 | recherche 118294 | tendance 1.79 | demande 100 | fraîcheur 15.0h | couverture None médias
+**Métriques** : vues YT None | recherche None | tendance 1.19 | demande 100 | fraîcheur 1.9h | couverture 1 médias
 
-**Signaux manquants** : trending_rss_traffic, coverage_media_count
+**Signaux manquants** : vues_youtube (clé absente), traffic RSS trending pour Sonics
 
-**Sources** : https://www.youtube.com/watch?v=UDESWO5F2Rw ; https://www.youtube.com/watch?v=atW6mFwm54E
-
-**Clips background candidats** :
-- Compilation des pires moments de Westbrook sous le maillot Lakers (airballs, passes perdues) (Bleacher Report / 3B Hoops)
-- La fameuse action 'This Russ shot vs Lakers in the 2012 playoffs' (https://www.youtube.com/watch?v=atW6mFwm54E)
-
-**Checklists** : viabilité ✅ | viralité ✅ (10/10)
-
----
-
-### 5. FBI Forced Lakers Sale? Conspiracy Explained — score 7/10
-
-**Notes (FR)** : Une vidéo YouTube de TheFlightMike (23k vues) suggère que le FBI aurait forcé la vente des Lakers. C'est un angle 'théorie/conspiracy' parfait pour générer des commentaires et du bouche-à-oreille. À traiter avec humour ou esprit critique.
-
-**Angle 90s (FR)** : 90s : On explore la rumeur folle selon laquelle le FBI aurait poussé les Buss à vendre les Lakers. Quels faits réels (proximité Kushner, enquêtes) ont pu nourrir cette théorie ? On sépare le vrai du faux avec un ton informatif mais léger.
-
-**Métriques** : vues YT 23079 | recherche 23079 | tendance 1.79 | demande 100 | fraîcheur 18.0h | couverture None médias
-
-**Signaux manquants** : trending_rss_traffic, coverage_media_count
-
-**Sources** : https://www.youtube.com/watch?v=gg13feyrw20
+**Sources** : https://news.google.com/rss/articles/CBMijwJBVV95cUxPUFdNZVpOWFhUSVhoUTA4Zm5ZeFItVW5sYUNXUWdDQU5sWE9QR2pjZzM1dWdabDZzNUhrNzJxd1VTZUVIX0s0dXBpc1BmdzJEZ0wwZDBUUWtReGo0Qkh2ZjJ1YXVRUmRYbzlZeXU3ei1QTUYwc3k3YmhBRVNnRVd5TlNqRWt3bUo2OVZwbmRQT3QwS0NLM2ZtMDJubFdDQncxR2t4dWh5bVZ6MEtKUUNJbkpRS095a0YwWmlYNjh2bUNJakxKZHUtRmZHR2JiQjNDbEhKUEJBNTRBd0pBYkIxRDNRRmhwWVpoM1RueEs0eUVrT1FEN1pQX1JsQ2FxVWtFSENGZ2l3a1BVY2pNQXBV?oc=5
 
 **Clips background candidats** :
-- Extrait de la vidéo TheFlightMike avec mise en contexte et gros titres 'FBI' clignotants (https://www.youtube.com/watch?v=gg13feyrw20)
+- Archives des Sonics à Seattle, images récentes de Portland et LA, scènes de fans de Seattle réclamant le retour de l'équipe (KOMO / archives NBA)
 
 **Checklists** : viabilité ✅ | viralité ✅ (9/10)
 

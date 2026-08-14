@@ -1,68 +1,158 @@
 {
-  "scan_id": "F00-a6fa824c",
-  "scanned_at": "2026-08-13T23:31:56Z",
+  "scan_id": "F00-e55a8dbf",
+  "scanned_at": "2026-08-14T07:00:21Z",
   "config": {
-    "niche": "Lakers basketball",
+    "niche": "NBA",
     "hot": false,
     "mode": "informatif",
     "freshness": "brulant",
     "window_hours": 5,
     "keywords": [
-      "Lakers basketball",
-      "Lakers",
-      "basketball"
+      "NBA"
     ]
   },
   "signal_payload": {
     "config": {
-      "niche": "Lakers basketball",
+      "niche": "NBA",
       "hot": false,
       "mode": "informatif",
       "freshness": "brulant",
       "window_hours": 5,
       "keywords": [
-        "Lakers basketball",
-        "Lakers",
-        "basketball"
+        "NBA"
       ]
     },
     "signal_rss_fraicheur": {
       "module": "rss",
-      "keyword": "Lakers basketball",
+      "keyword": "NBA",
       "result": {
         "signal": "fraicheur_et_couverture",
         "window_hours": 5,
         "keywords": [
-          "Lakers basketball",
-          "Lakers",
-          "basketball"
+          "NBA"
         ],
-        "fetched_articles": 100,
+        "fetched_articles": 111,
         "fresh_articles": [
           {
-            "title": "‘Lakers Still Run the League,’ ‘Fumble by the NBA’ — Basketball World Reacts to the Teams With the Most National-TV Games - Yahoo Sports",
-            "source": "Yahoo Sports",
-            "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNZHhNZTlHMkN3aW1iR2F2RGNmN1phTWdxcDZvbG1haDlOSk9seXB4bnFZOXJubXdxR1E2TEF5elBXd19WTHRQU2hXeWs1blJNSXdpcGl2QmkyY1R3NHB5M3M1VDlqWktCY3QxSnlrWWhaNHJBVHViZUdRZzhXMGNCVUh1S2ZjQQ?oc=5",
+            "title": "Top rookie matchups to watch in the 2026-27 NBA season - nba.com",
+            "source": "nba.com",
+            "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1rb21vRkpvSlotbkVQUGVyVkRadjNsLU9NdElPb0NhSGlqUlA2VVJqdFNOUHJjNmdKUUE2WElXcktWRDZuc1lxdnpjZ3JCcjJseHR6TlNGa2VwNzdyN3g4dTh2TWJCSnlEWmU0?oc=5",
             "age_hours": 2.5
           },
           {
-            "title": "Done in a weekend - the $12.5bn LA Lakers sale that shocked the NBA - BBC",
-            "source": "BBC",
-            "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5QMWkzeU9RUTBCbXh1RUhGU19KQ3gxSk9SSTIzR0RSdnc1eVNpbnR3VUlzZDNmR3k4czc5N29GekpQYklIeS1zd1doUVBVRGowWUdTdU12azBXb3IyUUxHQ1pzSlZrTW5QSVE?oc=5",
-            "age_hours": 3.5
+            "title": "“He Became the Blame of a Lot”: NBA Champion Reveals the Harsh Truth About Russell Westbrook’s Career After His Retirement - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxObE1LYmFySDRUQVR5ZkxGVE5KdW9SakRrNm9vOUJYY0NLcnNlSkd0R05oVVpRS2gwbUE2Rm92Xzg2c3pUenFmTENhVzVrZ2l1QkcxOVJNV0t6Yi1DazlvVFcwc1QxaTlpVUIwbDI5dk5CRUY0aEQ3cEcyaWFQS3ROeVhDZGQ?oc=5",
+            "age_hours": 2.4
+          },
+          {
+            "title": "NBA adds more broadcast TV games in second year of rights deal - Sports Media Watch",
+            "source": "Sports Media Watch",
+            "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORDUwbGlRNVl3Zk50cjZSOHJkZ05tNFp5YVNwUzhnOHpDY2ZDV2R4UTZxcjhwdGR0MjZybVpHU2tJeHNSdURLV3czZUg0RVZXa093YmVKeGxmYzd3b05CcDFha19maFFHRmtMU0hGaUJVc09EeUhMRDRUcXBHNmpDTC1vb2xSYjVLQmdDQ21YZVRiUnRRZTljLVNPNHVXVUIwcjRkUHBxY0k5QzhOQW9SempGNA?oc=5",
+            "age_hours": 4.0
+          },
+          {
+            "title": "The NBA's Sonics story takes twists along I-5, with turns in Portland, Los Angeles - KOMO",
+            "source": "KOMO",
+            "link": "https://news.google.com/rss/articles/CBMijwJBVV95cUxPUFdNZVpOWFhUSVhoUTA4Zm5ZeFItVW5sYUNXUWdDQU5sWE9QR2pjZzM1dWdabDZzNUhrNzJxd1VTZUVIX0s0dXBpc1BmdzJEZ0wwZDBUUWtReGo0Qkh2ZjJ1YXVRUmRYbzlZeXU3ei1QTUYwc3k3YmhBRVNnRVd5TlNqRWt3bUo2OVZwbmRQT3QwS0NLM2ZtMDJubFdDQncxR2t4dWh5bVZ6MEtKUUNJbkpRS095a0YwWmlYNjh2bUNJakxKZHUtRmZHR2JiQjNDbEhKUEJBNTRBd0pBYkIxRDNRRmhwWVpoM1RueEs0eUVrT1FEN1pQX1JsQ2FxVWtFSENGZ2l3a1BVY2pNQXBV?oc=5",
+            "age_hours": 1.9
+          },
+          {
+            "title": "NBA schedule release: Pelicans and Spurs will fly the most miles in 2026-27 season, Knicks will travel the least - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOY2NCVUNrNXNDNWRHSU1iX3Y5RXRyU1JEbzF4UWFVOEZyeDc2MU1XYnJRbkwtanhMdUs2ZmJmWXpQMGJRbG9UdDI0c3FVcnNFVDN4YktoQ2gyM3hwTHlRVXREeE1kUjVwUmF4ZGpQbzNNXzczejVfbS1vMjZJaDkzYkJSaDFkOEt4V0o2U2lWWXJCeWo0VnhHM1ByaTY1X2RKUGUzN1NhMVJ1dDh1NlFiZmRsRGVZREttYkZoRzM3cFFDT3ExVVg5RXlOSmFnLUpZRzdnUmJWcXcxQ2NsNTc2ejZmYlpLRFZaNS1LcXRuSUphMFVC?oc=5",
+            "age_hours": 4.7
+          },
+          {
+            "title": "LeBron James Drops Relocation Hint to 76ers Fans After NBA Reveals 2026–27 Schedule - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPU0pKRFpNWDYyaGdZUlowVXp6cEtyQ20xQUQzRjV3SlNNMVQxY21YeEd0UWZkVk9rTllNRFBKQjhGMGVfRDZsZWNfSkw0eXZhLUUzQV9OQjY4bng4U2Z3Ym9oaGtpcFhFQ1RhbmN4N3IweVNVSm1yVGwxLU9SYzVqQW4zZ29ZalZ0UmhV?oc=5",
+            "age_hours": 3.0
+          },
+          {
+            "title": "‘I don’t get it’ – NBA fans can’t believe Los Angeles Clippers gave Bradley Beal new $13 million deal - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5DZV9RM05DdDF1RV9oYmV1cmpXbmlKZzhsb0JnUXQwY2hZV3p0SjR5WkUzdTN5THVRRVpjbEFpcGs5bm9CX0VEVTZKeDlULXdnZ0J0RlA4T3UzWnhrWUJkeDJaSk5iRERZTXY3MHB6cTVXNjg?oc=5",
+            "age_hours": 1.4
+          },
+          {
+            "title": "76ers 2026-27 NBA season predictions after schedule release - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE15MEFhcUlTdTNuR0lxZkxhelo2d3VYS2thaTBXSktmQ0xNejVCa2tJS1NoWE5TeV8yem1faTQ2REFjZ3lwQ3lxVHBGOTF6NWJMRjdPS2xreXNMRlk5M1ZITHN5X0NKUzc1Y2FOVzdWeGpGa0wwa1V2bTB2TXhrdw?oc=5",
+            "age_hours": 3.7
+          },
+          {
+            "title": "Clippers Bring Back 3x NBA All-Star - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPbC1sNklnOTNRZTMwOElXQWFtN1E2MkhvMGxTRWFVZ1YxT0F0S0hjcC1EY25UaHZpUHdqS0FHb3VIci1PNEY0eVI1X2xvdlJTdjZ2dUlHZ3FvS0dJc05sODU0QlZVSlBfRFhPMjh6Q0RMWUs5MGc3WDkwdEJ3VjZnUA?oc=5",
+            "age_hours": 3.6
+          },
+          {
+            "title": "Most anticipated matchups on 2026-27 NBA schedule - Yahoo Sports",
+            "source": "Yahoo Sports",
+            "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNTm84bXkzdUNUSlJaTTNwY3Zqd282VEU2b2oyM0JzTjczaVdPVXkzOFJaQ0JyTzktZEJELUJzZjFhZy0xZTU2dVA2WVZlbVVtSE5sLWVhYzNyYnd4dm1XQnl1NjVKbVRDZ01xenR1Y1BCeWdta0k2WDlicGhNM0hrWGZnbDdjQWc?oc=5",
+            "age_hours": 4.7
           }
         ],
         "coverage": {
-          "lakers still run league fumble by": {
+          "top rookie matchups watch 2026 27": {
+            "count": 1,
+            "sources": [
+              "nba.com"
+            ]
+          },
+          "he became blame lot nba champion": {
             "count": 1,
             "sources": [
               "Yahoo Sports"
             ]
           },
-          "done weekend 12 5bn la lakers": {
+          "nba adds more broadcast tv games": {
             "count": 1,
             "sources": [
-              "BBC"
+              "Sports Media Watch"
+            ]
+          },
+          "nba sonics story takes twists along": {
+            "count": 1,
+            "sources": [
+              "KOMO"
+            ]
+          },
+          "nba schedule release pelicans spurs will": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
+            ]
+          },
+          "lebron james drops relocation hint 76ers": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
+            ]
+          },
+          "i don t get it nba": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
+            ]
+          },
+          "76ers 2026 27 nba season predictions": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
+            ]
+          },
+          "clippers bring back 3x nba all": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
+            ]
+          },
+          "most anticipated matchups 2026 27 nba": {
+            "count": 1,
+            "sources": [
+              "Yahoo Sports"
             ]
           }
         },
@@ -77,54 +167,54 @@
         "error": null,
         "trending": [
           {
-            "query": "sparks vs liberty",
-            "approx_traffic": 2000,
-            "approx_traffic_raw": "2000+"
+            "query": "daycare center",
+            "approx_traffic": 10000,
+            "approx_traffic_raw": "10000+"
           },
           {
-            "query": "nfl scores",
-            "approx_traffic": 2000,
-            "approx_traffic_raw": "2000+"
+            "query": "kyrie irving",
+            "approx_traffic": 200,
+            "approx_traffic_raw": "200+"
           },
           {
-            "query": "mason rudolph",
+            "query": "awarapan 2",
+            "approx_traffic": 200,
+            "approx_traffic_raw": "200+"
+          },
+          {
+            "query": "glm 5.3",
+            "approx_traffic": 500,
+            "approx_traffic_raw": "500+"
+          },
+          {
+            "query": "selena gomez wondermind lawsuit",
+            "approx_traffic": 5000,
+            "approx_traffic_raw": "5000+"
+          },
+          {
+            "query": "brewers",
+            "approx_traffic": 5000,
+            "approx_traffic_raw": "5000+"
+          },
+          {
+            "query": "bubble",
             "approx_traffic": 1000,
             "approx_traffic_raw": "1000+"
           },
           {
-            "query": "josh jacobs",
+            "query": "dodgers game today",
+            "approx_traffic": 2000,
+            "approx_traffic_raw": "2000+"
+          },
+          {
+            "query": "trevor megill",
             "approx_traffic": 500,
             "approx_traffic_raw": "500+"
           },
           {
-            "query": "marshawn lloyd",
-            "approx_traffic": 500,
-            "approx_traffic_raw": "500+"
-          },
-          {
-            "query": "mark cuban",
-            "approx_traffic": 500,
-            "approx_traffic_raw": "500+"
-          },
-          {
-            "query": "trey smack",
-            "approx_traffic": 500,
-            "approx_traffic_raw": "500+"
-          },
-          {
-            "query": "south africa vs nigeria",
-            "approx_traffic": 500,
-            "approx_traffic_raw": "500+"
-          },
-          {
-            "query": "asante samuel jr",
-            "approx_traffic": 500,
-            "approx_traffic_raw": "500+"
-          },
-          {
-            "query": "tv app",
-            "approx_traffic": 500,
-            "approx_traffic_raw": "500+"
+            "query": "paul mescal",
+            "approx_traffic": 200,
+            "approx_traffic_raw": "200+"
           }
         ]
       },
@@ -132,205 +222,41 @@
         "status": "ok",
         "note": null,
         "keywords": {
-          "Lakers basketball": {
+          "NBA": {
             "is_trending": false,
-            "growth_multiplier": 1.79,
-            "first": 56,
-            "last": 100,
+            "growth_multiplier": 1.19,
+            "first": 42,
+            "last": 50,
             "series_sample": [
-              56,
-              22,
-              30,
-              24,
-              30,
-              63,
-              29,
-              38,
-              33,
-              34,
-              63,
-              30,
-              38,
-              16,
+              42,
+              43,
               77,
+              39,
+              72,
+              41,
+              59,
+              66,
+              42,
+              90,
+              40,
+              77,
+              45,
               52,
-              54
+              87,
+              43,
+              88
             ],
             "note": null
-          },
-          "Lakers": {
-            "is_trending": null,
-            "growth_multiplier": null,
-            "note": "échec pytrends: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded wi"
-          },
-          "basketball": {
-            "is_trending": null,
-            "growth_multiplier": null,
-            "note": "échec pytrends: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded wi"
           }
         }
       }
     },
     "signal_vues_youtube": {
       "signal": "vues_youtube",
-      "status": "ok",
-      "search": {
-        "status": "ok",
-        "error": null,
-        "query": "Lakers basketball Lakers basketball",
-        "videos": [
-          {
-            "video_id": "UDESWO5F2Rw",
-            "title": "NAPULITIKA Ang Lakers KAYA IBENENTA Ulit! | NAGRETIRE na si Russell Westbrook!",
-            "channel": "3B Hoops",
-            "published_at": "2026-08-13T01:11:19Z",
-            "view_count": 118294,
-            "like_count": 1836,
-            "comment_count": 107
-          },
-          {
-            "video_id": "gg13feyrw20",
-            "title": "The FBI Forced The Lakers Into Being Sold 👀  #shorts",
-            "channel": "TheFlightMike",
-            "published_at": "2026-08-13T02:44:26Z",
-            "view_count": 23079,
-            "like_count": 780,
-            "comment_count": 64
-          },
-          {
-            "video_id": "A_b05eyOENU",
-            "title": "Shaq Says LeBron Is “At The Party”—But Not On The Lakers’ Mountaintop 👀🏀 #Viral #Trending #Shorts",
-            "channel": "TrendNova",
-            "published_at": "2026-08-13T12:00:09Z",
-            "view_count": 17547,
-            "like_count": 79,
-            "comment_count": 13
-          },
-          {
-            "video_id": "XKrKUPygpuI",
-            "title": "Lakers got sold AGAIN... for $12.5B 😳",
-            "channel": "Bleacher Report",
-            "published_at": "2026-08-12T23:54:58Z",
-            "view_count": 16373,
-            "like_count": 443,
-            "comment_count": 50
-          },
-          {
-            "video_id": "atW6mFwm54E",
-            "title": "This Russ shot vs. Lakers in the 2012 playoffs 🤯",
-            "channel": "Bleacher Report",
-            "published_at": "2026-08-13T04:06:42Z",
-            "view_count": 13819,
-            "like_count": 668,
-            "comment_count": 34
-          },
-          {
-            "video_id": "n64cB3FWLys",
-            "title": "Josh Kushner, Bob Iger to buy Lakers for record US$12.5B: report",
-            "channel": "CTV News",
-            "published_at": "2026-08-13T01:30:18Z",
-            "view_count": 13810,
-            "like_count": 103,
-            "comment_count": 27
-          },
-          {
-            "video_id": "UJ3woN93xvE",
-            "title": "Russell Westbrook dit stop, les Lakers encore vendus ! #CQFR",
-            "channel": "BasketSession",
-            "published_at": "2026-08-13T06:37:08Z",
-            "view_count": 7165,
-            "like_count": 497,
-            "comment_count": 94
-          },
-          {
-            "video_id": "w9qouPMdw08",
-            "title": "Powcast Daily Sports Real Talk with Snow Badua | Munzon Trade, MPBL, PBA at iba pang Isyu",
-            "channel": "Powcast Sports",
-            "published_at": "2026-08-13T03:19:07Z",
-            "view_count": 5270,
-            "like_count": 143,
-            "comment_count": 46
-          }
-        ]
-      },
-      "trending": {
-        "status": "ok",
-        "error": null,
-        "videos": [
-          {
-            "video_id": "4cn_lCSN0xY",
-            "title": "La Mas Doll - Vaca Muerta ( Tiradera A La Perversa ) Video Oficial",
-            "channel": "La Mas Doll",
-            "published_at": "2026-08-13T16:00:06Z",
-            "view_count": 89135,
-            "like_count": 21049,
-            "comment_count": 2822
-          },
-          {
-            "video_id": "YH9VdFvHiO8",
-            "title": "Total War: WARHAMMER III - Lords of The End Times - Cinematic trailer",
-            "channel": "Total War",
-            "published_at": "2026-08-13T13:58:40Z",
-            "view_count": 348254,
-            "like_count": 25802,
-            "comment_count": 1991
-          },
-          {
-            "video_id": "32XQ0sA8x_k",
-            "title": "FIGHTING THE ENDER DRAGON (FINAL) - MINECRAFT HARDCORE ALL BOSSES DAY 6🍄🔨🧟‍♂️ft. KaiCenat (Part 2)",
-            "channel": "IShowSpeed",
-            "published_at": "2026-08-12T23:08:23Z",
-            "view_count": 4831938,
-            "like_count": 146246,
-            "comment_count": 5598
-          },
-          {
-            "video_id": "TvujTbD1Aw0",
-            "title": "Pooh Shiesty & K Carbon - New One [Official Video]",
-            "channel": "Pooh Shiesty",
-            "published_at": "2026-08-12T23:32:21Z",
-            "view_count": 192617,
-            "like_count": 11178,
-            "comment_count": 867
-          },
-          {
-            "video_id": "5dXuZXpSOTY",
-            "title": "Battlefield 6 x Top Gun: Carrier Strike Cinematic Trailer",
-            "channel": "Battlefield",
-            "published_at": "2026-08-13T15:00:10Z",
-            "view_count": 241715,
-            "like_count": 27578,
-            "comment_count": 2457
-          },
-          {
-            "video_id": "zlQenSJ1lZY",
-            "title": "Five Nights at Freddy's: IN REAL TIME",
-            "channel": "Markiplier",
-            "published_at": "2026-08-13T04:13:37Z",
-            "view_count": 1435027,
-            "like_count": 64091,
-            "comment_count": 911
-          },
-          {
-            "video_id": "a5nrPZSl09k",
-            "title": "Quién Como Tú",
-            "channel": "Ana Gabriel - Topic",
-            "published_at": "2026-08-13T00:03:10Z",
-            "view_count": 136014,
-            "like_count": 935,
-            "comment_count": 1
-          },
-          {
-            "video_id": "rUZhYmoOk88",
-            "title": "NEW ZOMBIES MAP GAMEPLAY TRAILER: FANTASTIC! (Rex Infernus Black Ops 7 Zombies)",
-            "channel": "MrRoflWaffles",
-            "published_at": "2026-08-13T17:02:35Z",
-            "view_count": 30670,
-            "like_count": 1970,
-            "comment_count": 277
-          }
-        ]
-      }
+      "status": "no_youtube_key",
+      "error": "clé absente: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/CONTRACTS/youtube_secrets.json",
+      "search": {},
+      "trending": {}
     },
     "signal_demande": {
       "signal": "demande",
@@ -338,54 +264,18 @@
       "note": "suggestions Google ds=yt",
       "keywords": [
         {
-          "query": "Lakers basketball",
+          "query": "NBA",
           "suggestions": [
-            "lakers basketball live",
-            "lakers basketball 2025",
-            "lakers basketball court",
-            "lakers basketball game",
-            "lakers basketball highlights",
-            "lakers basketball match",
-            "lakers basketball game live",
-            "lakers basketball team",
-            "lakers basketball full game",
-            "lakers basketball jersey"
-          ],
-          "tension_hits": 1,
-          "total_hits": 10,
-          "demand_score": 100
-        },
-        {
-          "query": "Lakers",
-          "suggestions": [
-            "lakers vs",
-            "lakers highlights",
-            "lakers vs warriors",
-            "lakers vs spurs",
-            "lakers vs jazz",
-            "lakers vs suns",
-            "lakers vs mavericks",
-            "lakers vs clippers",
-            "lakers vs kings",
-            "lakers vs grizzlies"
-          ],
-          "tension_hits": 2,
-          "total_hits": 10,
-          "demand_score": 100
-        },
-        {
-          "query": "basketball",
-          "suggestions": [
-            "basketball zero",
-            "basketball sea games 2025",
-            "basketball zero codes",
-            "basketball kids",
-            "basketball shoes",
-            "basketball song",
-            "basketball highlights",
-            "basketball drills",
-            "basketball edit",
-            "basketball indonesia"
+            "nba highlights",
+            "nba music",
+            "nba 2k26",
+            "nba youngboy",
+            "nba live",
+            "nba 2k26 my career",
+            "nba 2k mobile",
+            "nba full game",
+            "nba finals 2025",
+            "nba 2k25"
           ],
           "tension_hits": 1,
           "total_hits": 10,
@@ -406,87 +296,33 @@
   },
   "subjects": [
     {
-      "subject_en": "$12.5B Lakers Sale Shocks NBA",
-      "notes_fr": "La vente des Lakers pour 12,5 milliards de dollars à Josh Kushner et Bob Iger est l'événement le plus brûlant. C'est un record absolu pour une franchise sportive. L'angle : comment une transaction de cette ampleur a pu se faire en un seul week-end. Le côté 'histoire de l'argent' fascine au-delà des fans de basket.",
-      "signal": "Multiples vidéos YouTube sur le sujet (Bleacher Report 16k vues, CTV News 13k vues, TheFlightMike 23k vues), article BBC frais à 3.5h, forte demande de recherche (demand_score 100).",
-      "score_10": 10,
-      "score_rationale_fr": "Sujet ultra-frais, présent sur YouTube ET RSS, avec un angle choquant (montant record, vitesse de vente). Score maximal car tous les signaux sont alignés et l'émotion (choc) est forte.",
-      "metrics": {
-        "top_video_views": 23079,
-        "yt_search_views": 118294,
-        "trend_growth_7d": 1.79,
-        "trending_rss_traffic": null,
-        "demand_score": 100,
-        "freshness_hours": 2.5,
-        "coverage_media_count": 2,
-        "signal_missing": [
-          "trending_rss_traffic (pas de trending Google direct sur Lakers)"
-        ]
-      },
-      "sources": [
-        "https://news.google.com/rss/articles/CBMiakFVX3lxTE5QMWkzeU9RUTBCbXh1RUhGU19KQ3gxSk9SSTIzR0RSdnc1eVNpbnR3VUlzZDNmR3k4czc5N29GekpQYklIeS1zd1doUVBVRGowWUdTdU12azBXb3IyUUxHQ1pzSlZrTW5QSVE?oc=5",
-        "https://www.youtube.com/watch?v=XKrKUPygpuI",
-        "https://www.youtube.com/watch?v=n64cB3FWLys",
-        "https://www.youtube.com/watch?v=gg13feyrw20"
-      ],
-      "angle_propose_fr": "90s : On explique comment Bob Iger (Disney) et Josh Kushner ont réussi à racheter LA franchise mythique en un week-end pour 12,5 milliards. Comparaison avec d'autres ventes historiques. Pourquoi les Buss ont vendu maintenant. Le futur des Lakers sous Iger/Kushner.",
-      "sous_mode": "informatif",
-      "clip_background_candidates": [
-        {
-          "desc_fr": "B-roll du siège des Lakers ou de Crypto.com Arena avec overlay du montant $12.5B",
-          "source_hint": "BBC / Bleacher Report"
-        },
-        {
-          "desc_fr": "Photos de Josh Kushner et Bob Iger en overlay sur des highlights Lakers",
-          "source_hint": "CTV News"
-        }
-      ],
-      "checklist_viabilite_ok": true,
-      "checklist_viralite_ok": true,
-      "viral_checks": {
-        "accroche_3s": true,
-        "emotion_forte": true,
-        "personne_identifiable": true,
-        "declencheur_conversationnel": true,
-        "micro_sujet": true,
-        "visuel_fort": true,
-        "boucle_de_clic": true,
-        "reference_culturelle": true,
-        "partageable": true,
-        "pas_de_barriere": true
-      },
-      "scan_id": "F00-a6fa824c"
-    },
-    {
-      "subject_en": "Lakers Still Run The NBA TV",
-      "notes_fr": "Yahoo Sports révèle que malgré la vente, les Lakers restent la franchise la plus exposée en TV nationale. L'angle : la NBA favorise-t-elle les Lakers au détriment de la compétition ? Débat enflamme les fans des autres équipes.",
-      "signal": "Article Yahoo Sports frais (2.5h), la phrase 'Lakers Still Run the League' indique un fort potentiel de débat. Faible couverture YouTube directe sur cet angle précis = opportunité de premier mover.",
-      "score_10": 8,
-      "score_rationale_fr": "Sujet frais avec un angle polarisant parfait pour l'engagement. Score légèrement inférieur car pas encore massivement repris sur YouTube, mais c'est une opportunité de capter la tendance avant les autres.",
+      "subject_en": "LeBron relocation hint to Philly fans",
+      "notes_fr": "LeBron James lâche un indice de relocalisation aux fans des 76ers juste après la publication du calendrier 2026-27. Contexte brûlant : la release du schedule NBA est l'événement du jour, et LeBron ajoute une couche de drama. Angle : pourquoi cette tease maintenant, qu'est-ce que ça signifie pour l'avenir de LeBron. C'est un sujet qui génère débat et spéculations, parfait pour un clip informatif rapide.",
+      "signal": "Article Yahoo Sports frais (3h), mention explicite d'un 'relocation hint' de LeBron aux fans des 76ers. Coïncide avec la sortie du calendrier 2026-27. Tendance Google 'NBA' en croissance (multiplier 1.19).",
+      "score_10": 9,
+      "score_rationale_fr": "LeBron + rumeur de transfert/relocalisation = cocktail viral maximal. Fraîcheur excellente (3h), star la plus identifiable de la ligue, déclencheur conversationnel énorme. Un point en moins car c'est une 'hint' et non un fait confirmé.",
       "metrics": {
         "top_video_views": null,
         "yt_search_views": null,
-        "trend_growth_7d": null,
+        "trend_growth_7d": 1.19,
         "trending_rss_traffic": null,
         "demand_score": 100,
-        "freshness_hours": 2.5,
+        "freshness_hours": 3.0,
         "coverage_media_count": 1,
         "signal_missing": [
-          "yt_search_views",
-          "top_video_views",
-          "trend_growth_7d",
-          "trending_rss_traffic"
+          "vues_youtube (clé absente)",
+          "traffic RSS trending pour ce sujet précis"
         ]
       },
       "sources": [
-        "https://news.google.com/rss/articles/CBMihgFBVV95cUxNZHhNZTlHMkN3aW1iR2F2RGNmN1phTWdxcDZvbG1haDlOSk9seXB4bnFZOXJubXdxR1E2TEF5elBXd19WTHRQU2hXeWs1blJNSXdpcGl2QmkyY1R3NHB5M3M1VDlqWktCY3QxSnlrWWhaNHJBVHViZUdRZzhXMGNCVUh1S2ZjQQ?oc=5"
+        "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPU0pKRFpNWDYyaGdZUlowVXp6cEtyQ20xQUQzRjV3SlNNMVQxY21YeEd0UWZkVk9rTllNRFBKQjhGMGVfRDZsZWNfSkw0eXZhLUUzQV9OQjY4bng4U2Z3Ym9oaGtpcFhFQ1RhbmN4N3IweVNVSm1yVGwxLU9SYzVqQW4zZ29ZalZ0UmhV?oc=5"
       ],
-      "angle_propose_fr": "90s : On analyse pourquoi les Lakers dominent encore le calendrier TV national NBA malgré une équipe en reconstruction. Comparaison du nombre de matchs TV vs petits marchés. La NBA est-elle devenue une ligue à deux vitesses ?",
+      "angle_propose_fr": "LeBron vient de teaser un possible avenir à Philadelphie. Est-ce un mind game, un vrai plan, ou juste pour faire le buzz ? Décryptage en 90s de ce que cette 'hint' cache vraiment.",
       "sous_mode": "informatif",
       "clip_background_candidates": [
         {
-          "desc_fr": "Montage des calendriers TV NBA avec un compteur géant comparant Lakers vs autres équipes",
-          "source_hint": "Yahoo Sports"
+          "desc_fr": "Clip de LeBron faisant des remarques ambiguës devant des fans ou en conférence de presse, réaction des fans des 76ers",
+          "source_hint": "Yahoo Sports / NBA clips récents"
         }
       ],
       "checklist_viabilite_ok": true,
@@ -494,7 +330,7 @@
       "viral_checks": {
         "accroche_3s": true,
         "emotion_forte": true,
-        "personne_identifiable": false,
+        "personne_identifiable": true,
         "declencheur_conversationnel": true,
         "micro_sujet": true,
         "visuel_fort": true,
@@ -503,137 +339,82 @@
         "partageable": true,
         "pas_de_barriere": true
       },
-      "scan_id": "F00-a6fa824c"
+      "scan_id": "F00-e55a8dbf"
     },
     {
-      "subject_en": "Shaq vs LeBron: Lakers Mountaintop Debate",
-      "notes_fr": "Shaquille O'Neal déclare que LeBron est 'à la fête' mais pas au sommet de l'histoire des Lakers. C'est un micro-sujet parfait qui crée un débat instantané parmi les fans. Shaq reste une personnalité ultra-identifiable.",
-      "signal": "Vidéo TrendNova sur YouTube (17k vues, 79 likes), le sujet Shaq vs LeBron est un classique viral, le nom de Shaq attire le clic.",
+      "subject_en": "Clippers gave Bradley Beal $13M fans shocked",
+      "notes_fr": "Les Clippers ont offert un contrat de 13 millions de dollars à Bradley Beal, et les fans NBA ne comprennent pas pourquoi. Réactions d'incompréhension générale. Angle informatif : pourquoi ce deal choque, analyse rapide de la valeur de Beal vs le contrat, contexte salarial. Sujet parfait pour un public qui aime débattre des décisions des GM.",
+      "signal": "Article Yahoo Sports frais (1.4h) avec citation 'I don't get it' des fans. Croissance tendance NBA 1.19x. Demand score NBA à 100.",
+      "score_10": 9,
+      "score_rationale_fr": "Fraîcheur exceptionnelle (1.4h), émotion forte (incompréhension/indignation des fans), sujet de débat instantané sur la gestion salariale. Bradley Beal est identifiable, le montant 13M est un hook numérique parfait.",
+      "metrics": {
+        "top_video_views": null,
+        "yt_search_views": null,
+        "trend_growth_7d": 1.19,
+        "trending_rss_traffic": null,
+        "demand_score": 100,
+        "freshness_hours": 1.4,
+        "coverage_media_count": 1,
+        "signal_missing": [
+          "vues_youtube (clé absente)",
+          "traffic RSS trending pour Bradley Beal"
+        ]
+      },
+      "sources": [
+        "https://news.google.com/rss/articles/CBMic0FVX3lxTE5DZV9RM05DdDF1RV9oYmV1cmpXbmlKZzhsb0JnUXQwY2hZV3p0SjR5WkUzdTN5THVRRVpjbEFpcGs5bm9CX0VEVTZKeDlULXdnZ0J0RlA4T3UzWnhrWUJkeDJaSk5iRERZTXY3MHB6cTVXNjg?oc=5"
+      ],
+      "angle_propose_fr": "13 millions à Bradley Beal ? Les fans sont en état de choc. On t'explique pourquoi ce deal fait polémique et si les Clippers ont perdu la tête.",
+      "sous_mode": "informatif",
+      "clip_background_candidates": [
+        {
+          "desc_fr": "Highlights/moments clés de Bradley Beal récents, montage des réactions de fans en ligne",
+          "source_hint": "Yahoo Sports / Twitter reactions"
+        }
+      ],
+      "checklist_viabilite_ok": true,
+      "checklist_viralite_ok": true,
+      "viral_checks": {
+        "accroche_3s": true,
+        "emotion_forte": true,
+        "personne_identifiable": true,
+        "declencheur_conversationnel": true,
+        "micro_sujet": true,
+        "visuel_fort": true,
+        "boucle_de_clic": true,
+        "reference_culturelle": true,
+        "partageable": true,
+        "pas_de_barriere": true
+      },
+      "scan_id": "F00-e55a8dbf"
+    },
+    {
+      "subject_en": "Pelicans Spurs fly most miles Knicks least",
+      "notes_fr": "Le calendrier NBA 2026-27 est sorti et révèle une injustice de kilométrage : Pelicans et Spurs vont voler le plus de miles, tandis que les Knicks voyageront le moins. Angle : visualisation de cette injustice, impact sur la fatigue et les performances, comparaison visuelle des distances. Format informatif avec data visualization.",
+      "signal": "Article Yahoo Sports frais (4.7h) sur le schedule release. Tendance NBA en hausse (1.19x). Sujet de couverture multiple car lié à la release du calendrier.",
       "score_10": 8,
-      "score_rationale_fr": "Sujet très solide basé sur une déclaration de Shaq, personnalité majeure. Score de 8 car l'engagement YouTube est modéré mais le potentiel de débat et la présence d'une star garantissent la viralité.",
+      "score_rationale_fr": "Sujet data-driven très visuel et partageable. L'angle 'injustice des miles' est un angle original qui sort des habituels matchs attendus. Fraîcheur bonne (4.7h). Un point de moins car moins émotionnel que LeBron ou Beal.",
       "metrics": {
-        "top_video_views": 17547,
-        "yt_search_views": 17547,
-        "trend_growth_7d": 1.79,
+        "top_video_views": null,
+        "yt_search_views": null,
+        "trend_growth_7d": 1.19,
         "trending_rss_traffic": null,
         "demand_score": 100,
-        "freshness_hours": 12.0,
+        "freshness_hours": 4.7,
         "coverage_media_count": 1,
         "signal_missing": [
-          "trending_rss_traffic",
-          "coverage_media_count exact"
+          "vues_youtube (clé absente)",
+          "traffic RSS trending pour ce sujet précis"
         ]
       },
       "sources": [
-        "https://www.youtube.com/watch?v=A_b05eyOENU"
+        "https://news.google.com/rss/articles/CBMi9AFBV95cUxOY2NCVUNrNXNDNWRHSU1iX3Y5RXRyU1JEbzF4UWFVOEZyeDc2MU1XYnJRbkwtanhMdUs2ZmJmWXpQMGJRbG9UdDI0c3FVcnNFVDN4YktoQ2gyM3hwTHlRVXREeE1kUjVwUmF4ZGpQbzNNXzczejVfbS1vMjZJaDkzYkJSaDFkOEt4V0o2U2lWWXJCeWo0VnhHM1ByaTY1X2RKUGUzN1NhMVJ1dDh1NlFiZmRsRGVZREttYkZoRzM3cFFDT3ExVVg5RXlOSmFnLUpZRzdnUmJWcXcxQ2NsNTc2ejZmYlpLRFZaNS1LcXRuSUphMFVC?oc=5"
       ],
-      "angle_propose_fr": "90s : On décortique la déclaration de Shaq. LeBron a-t-il vraiment sa place au sommet des Lakers avec Magic, Kobe et Shaq lui-même ? On compare les titres, les stats et l'impact culturel. Le débat tranché en 90 secondes.",
+      "angle_propose_fr": "Les Pelicans et Spurs vont parcourir l'équivalent de 3 fois le tour de la Terre cette saison, pendant que les Knicks dorment chez eux. Voici pourquoi le calendrier NBA est injuste.",
       "sous_mode": "informatif",
       "clip_background_candidates": [
         {
-          "desc_fr": "Clip de Shaq sur NBA on TNT avec sous-titre de sa citation sur LeBron",
-          "source_hint": "TrendNova / TNT"
-        },
-        {
-          "desc_fr": "Split screen LeBron en jersey Lakers vs Shaq/Kobe/Magic en highlight",
-          "source_hint": "TrendNova"
-        }
-      ],
-      "checklist_viabilite_ok": true,
-      "checklist_viralite_ok": true,
-      "viral_checks": {
-        "accroche_3s": true,
-        "emotion_forte": true,
-        "personne_identifiable": true,
-        "declencheur_conversationnel": true,
-        "micro_sujet": true,
-        "visuel_fort": true,
-        "boucle_de_clic": true,
-        "reference_culturelle": true,
-        "partageable": true,
-        "pas_de_barriere": true
-      },
-      "scan_id": "F00-a6fa824c"
-    },
-    {
-      "subject_en": "Westbrook Retires: Lakers Fans React",
-      "notes_fr": "Russell Westbrook prend sa retraite, et les fans Lakers ont encore frais le souvenir de son passage chaotique. Une vidéo philippine sur le sujet a déjà 118k vues. Angle humour : repasser les moments les plus 'Westbrook' sous le maillot Lakers.",
-      "signal": "Vidéo YouTube '3B Hoops' à 118294 vues sur le sujet, vidéo Bleacher Report sur un shot de Russ vs Lakers à 13k vues. Le sujet Westbrook génère toujours de l'engagement.",
-      "score_10": 7,
-      "score_rationale_fr": "Sujet porté par une vidéo à forte viralité (118k vues). Score 7 car bien que l'engagement soit là, la retraite de Westbrook est un sujet plus 'nostalgie/débat' que choc absolu, et l'angle principal vient d'une chaîne philippine.",
-      "metrics": {
-        "top_video_views": 118294,
-        "yt_search_views": 118294,
-        "trend_growth_7d": 1.79,
-        "trending_rss_traffic": null,
-        "demand_score": 100,
-        "freshness_hours": 15.0,
-        "coverage_media_count": null,
-        "signal_missing": [
-          "trending_rss_traffic",
-          "coverage_media_count"
-        ]
-      },
-      "sources": [
-        "https://www.youtube.com/watch?v=UDESWO5F2Rw",
-        "https://www.youtube.com/watch?v=atW6mFwm54E"
-      ],
-      "angle_propose_fr": "90s : Bilan du passage de Westbrook aux Lakers maintenant qu'il prend sa retraite. On reprend les pires airballs et les meilleures dunks. Est-ce le pire trade de l'histoire des Lakers ou y avait-il du bon ?",
-      "sous_mode": "humour",
-      "clip_background_candidates": [
-        {
-          "desc_fr": "Compilation des pires moments de Westbrook sous le maillot Lakers (airballs, passes perdues)",
-          "source_hint": "Bleacher Report / 3B Hoops"
-        },
-        {
-          "desc_fr": "La fameuse action 'This Russ shot vs Lakers in the 2012 playoffs'",
-          "source_hint": "https://www.youtube.com/watch?v=atW6mFwm54E"
-        }
-      ],
-      "checklist_viabilite_ok": true,
-      "checklist_viralite_ok": true,
-      "viral_checks": {
-        "accroche_3s": true,
-        "emotion_forte": true,
-        "personne_identifiable": true,
-        "declencheur_conversationnel": true,
-        "micro_sujet": true,
-        "visuel_fort": true,
-        "boucle_de_clic": true,
-        "reference_culturelle": true,
-        "partageable": true,
-        "pas_de_barriere": true
-      },
-      "scan_id": "F00-a6fa824c"
-    },
-    {
-      "subject_en": "FBI Forced Lakers Sale? Conspiracy Explained",
-      "notes_fr": "Une vidéo YouTube de TheFlightMike (23k vues) suggère que le FBI aurait forcé la vente des Lakers. C'est un angle 'théorie/conspiracy' parfait pour générer des commentaires et du bouche-à-oreille. À traiter avec humour ou esprit critique.",
-      "signal": "Vidéo 'TheFlightMike' à 23079 vues en quelques heures, angle unique non couvert par les médias traditionnels (BBC, Yahoo), forte curiosité.",
-      "score_10": 7,
-      "score_rationale_fr": "Angle original et accrocheur basé sur une vidéo déjà virale (23k vues). Score 7 car l'information nécessite une vérification et que le sujet repose sur un seul créateur YouTube, mais le potentiel de boucle de clic est énorme.",
-      "metrics": {
-        "top_video_views": 23079,
-        "yt_search_views": 23079,
-        "trend_growth_7d": 1.79,
-        "trending_rss_traffic": null,
-        "demand_score": 100,
-        "freshness_hours": 18.0,
-        "coverage_media_count": null,
-        "signal_missing": [
-          "trending_rss_traffic",
-          "coverage_media_count"
-        ]
-      },
-      "sources": [
-        "https://www.youtube.com/watch?v=gg13feyrw20"
-      ],
-      "angle_propose_fr": "90s : On explore la rumeur folle selon laquelle le FBI aurait poussé les Buss à vendre les Lakers. Quels faits réels (proximité Kushner, enquêtes) ont pu nourrir cette théorie ? On sépare le vrai du faux avec un ton informatif mais léger.",
-      "sous_mode": "humour",
-      "clip_background_candidates": [
-        {
-          "desc_fr": "Extrait de la vidéo TheFlightMike avec mise en contexte et gros titres 'FBI' clignotants",
-          "source_hint": "https://www.youtube.com/watch?v=gg13feyrw20"
+          "desc_fr": "Carte des États-Unis avec tracé des vols Pelicans/Spurs vs Knicks, images d'avions d'équipes NBA",
+          "source_hint": "Yahoo Sports / données de calendrier NBA"
         }
       ],
       "checklist_viabilite_ok": true,
@@ -650,7 +431,99 @@
         "partageable": true,
         "pas_de_barriere": true
       },
-      "scan_id": "F00-a6fa824c"
+      "scan_id": "F00-e55a8dbf"
+    },
+    {
+      "subject_en": "NBA champion harsh truth on Westbrook retirement",
+      "notes_fr": "Un champion NBA révèle une vérité brutale sur la carrière de Russell Westbrook après sa retraite. Citation 'He became the blame of a lot'. Angle : rétrospective de la carrière de Westbrook, pourquoi il a été le bouc émissaire, analyse de son héritage. Sujet émotionnel pour les fans qui ont suivi son parcours.",
+      "signal": "Article Yahoo Sports frais (2.4h). Tendance NBA en croissance (1.19x). Kyrie Irving apparaît dans les tendances Google (200+ traffic), suggérant un contexte de discussions sur les joueurs polémiques/retirés.",
+      "score_10": 8,
+      "score_rationale_fr": "Russell Westbrook est l'un des joueurs les plus polarisants de la NBA, sa retraite (ou fin de parcours) génère beaucoup d'émotion. L'angle 'bouc émissaire' est puissant et déclencheur de débats. Fraîcheur bonne (2.4h).",
+      "metrics": {
+        "top_video_views": null,
+        "yt_search_views": null,
+        "trend_growth_7d": 1.19,
+        "trending_rss_traffic": 200,
+        "demand_score": 100,
+        "freshness_hours": 2.4,
+        "coverage_media_count": 1,
+        "signal_missing": [
+          "vues_youtube (clé absente)",
+          "traffic RSS trending pour Westbrook précisément"
+        ]
+      },
+      "sources": [
+        "https://news.google.com/rss/articles/CBMihAFBVV95cUxObE1LYmFySDRUQVR5ZkxGVE5KdW9SakRrNm9vOUJYY0NLcnNlSkd0R05oVVpRS2gwbUE2Rm92Xzg2c3pUenFmTENhVzVrZ2l1QkcxOVJNV0t6Yi1DazlvVFcwc1QxaTlpVUIwbDI5dk5CRUY0aEQ3cEcyaWFQS3ROeVhDZGQ?oc=5"
+      ],
+      "angle_propose_fr": "Russell Westbrook a pris sa retraite et un champion NBA lâche une vérité qui fait mal : il est devenu le bouc émissaire de tout. Retour sur la carrière la plus injustement détestée de la NBA.",
+      "sous_mode": "informatif",
+      "clip_background_candidates": [
+        {
+          "desc_fr": "Montage des moments highs et lows de Westbrook, de son MVP à ses dernières saisons difficiles, réactions de fans",
+          "source_hint": "Yahoo Sports / NBA archives"
+        }
+      ],
+      "checklist_viabilite_ok": true,
+      "checklist_viralite_ok": true,
+      "viral_checks": {
+        "accroche_3s": true,
+        "emotion_forte": true,
+        "personne_identifiable": true,
+        "declencheur_conversationnel": true,
+        "micro_sujet": true,
+        "visuel_fort": true,
+        "boucle_de_clic": true,
+        "reference_culturelle": true,
+        "partageable": true,
+        "pas_de_barriere": true
+      },
+      "scan_id": "F00-e55a8dbf"
+    },
+    {
+      "subject_en": "Sonics return story twists Portland LA",
+      "notes_fr": "L'histoire du retour des Seattle SuperSonics prend des tournures inattendues, avec des rebondissements impliquant Portland et Los Angeles. Angle : où en est le retour des Sonics, pourquoi Portland et LA sont impliqués, décryptage des manœuvres géopolitiques de la NBA. Sujet parfait pour les fans passionnés de l'histoire de la ligue.",
+      "signal": "Article KOMO frais (1.9h). Croissance tendance NBA (1.19x). Sujet de niche mais avec une base de fans ultra-passionnée (Seattle).",
+      "score_10": 7,
+      "score_rationale_fr": "Le retour des Sonics est un sujet culte pour les fans NBA. L'implication de Portland et LA ajoute du mystère. Fraîcheur excellente (1.9h). Score légèrement plus bas car c'est un sujet plus niche que LeBron ou Beal, mais très fort en engagement pour l'audience ciblée.",
+      "metrics": {
+        "top_video_views": null,
+        "yt_search_views": null,
+        "trend_growth_7d": 1.19,
+        "trending_rss_traffic": null,
+        "demand_score": 100,
+        "freshness_hours": 1.9,
+        "coverage_media_count": 1,
+        "signal_missing": [
+          "vues_youtube (clé absente)",
+          "traffic RSS trending pour Sonics"
+        ]
+      },
+      "sources": [
+        "https://news.google.com/rss/articles/CBMijwJBVV95cUxPUFdNZVpOWFhUSVhoUTA4Zm5ZeFItVW5sYUNXUWdDQU5sWE9QR2pjZzM1dWdabDZzNUhrNzJxd1VTZUVIX0s0dXBpc1BmdzJEZ0wwZDBUUWtReGo0Qkh2ZjJ1YXVRUmRYbzlZeXU3ei1QTUYwc3k3YmhBRVNnRVd5TlNqRWt3bUo2OVZwbmRQT3QwS0NLM2ZtMDJubFdDQncxR2t4dWh5bVZ6MEtKUUNJbkpRS095a0YwWmlYNjh2bUNJakxKZHUtRmZHR2JiQjNDbEhKUEJBNTRBd0pBYkIxRDNRRmhwWVpoM1RueEs0eUVrT1FEN1pQX1JsQ2FxVWtFSENGZ2l3a1BVY2pNQXBV?oc=5"
+      ],
+      "angle_propose_fr": "Le retour des Sonics à Seattle ? Pas si simple. Portland et Los Angeles s'invitent dans la partie. Voici les coulisses du feuilleton le plus fou de la NBA.",
+      "sous_mode": "informatif",
+      "clip_background_candidates": [
+        {
+          "desc_fr": "Archives des Sonics à Seattle, images récentes de Portland et LA, scènes de fans de Seattle réclamant le retour de l'équipe",
+          "source_hint": "KOMO / archives NBA"
+        }
+      ],
+      "checklist_viabilite_ok": true,
+      "checklist_viralite_ok": true,
+      "viral_checks": {
+        "accroche_3s": true,
+        "emotion_forte": true,
+        "personne_identifiable": false,
+        "declencheur_conversationnel": true,
+        "micro_sujet": true,
+        "visuel_fort": true,
+        "boucle_de_clic": true,
+        "reference_culturelle": true,
+        "partageable": true,
+        "pas_de_barriere": true
+      },
+      "scan_id": "F00-e55a8dbf"
     }
   ],
   "premium_model": "z-ai/glm-5.2",

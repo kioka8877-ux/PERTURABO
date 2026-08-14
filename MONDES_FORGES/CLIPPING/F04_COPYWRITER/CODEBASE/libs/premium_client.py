@@ -191,8 +191,9 @@ class PremiumClient:
             raise PremiumClientError(f"Réponse Anthropic invalide: {e}") from e
 
     def _fetch(self, req: urllib.request.Request) -> str:
+        timeout = self.config.get("timeout_seconds", 240)
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return resp.read().decode("utf-8")
         except urllib.error.HTTPError as e:
             snippet = e.read().decode("utf-8", errors="replace")[:500]

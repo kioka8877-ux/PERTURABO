@@ -55,24 +55,35 @@
    `urlopen(..., timeout=120)`. La synthèse 5 sujets dépasse 120s sur
    NVIDIA/GLM-5.2 → `TimeoutError: The read operation timed out`. L'API
    NVIDIA répond pourtant en ~0.2s (test `GET /v1/models` = 200).
-   → Corriger : timeout configurable (ex. 240s) dans `_fetch`.
+   → **CORRIGÉ** : timeout configurable `timeout_seconds` (défaut 240s)
+   dans `premium_client._fetch()` + champ ajouté à
+   `copywriter_secrets.example.json` et `copywriter_secrets.json`.
 2. **pytrends absent** : `ModuleNotFoundError: No module named 'pytrends'`
    (signaux Trends dégradés en `pytrends_absent`). Installer
    `pytrends` + `urllib3==1.26.20` (piège connu, cf. §6).
+   → **CORRIGÉ dans le sandbox** (pip install, urllib3 1.26.20 testé OK
+   avec requests). À refaire dans chaque nouveau sandbox.
 3. **Clé YouTube absente** : `CONTRACTS/youtube_secrets.json` manquant dans
    ce sandbox → signal "vues réelles" YouTube skippé. Ré-injecter la clé.
 4. **Clé NVIDIA à re-injecter** : `CLIPPING_PREMIUM_API_KEY` dans `.env.local`
    (gitignored). Présente dans l'historique du chat.
    La config réelle `CONTRACTS/copywriter_secrets.json` (gitignored) :
    `model_id=z-ai/glm-5.2`, `provider=other`,
-   `base_url=https://integrate.api.nvidia.com/v1`.
+   `base_url=https://integrate.api.nvidia.com/v1`,
+   `max_tokens_per_call=8192`.
+5. **JSON GLM tronqué** : à 4096 tokens max, GLM coupe le JSON → erreur
+   `Expecting ',' delimiter` dans `f00_premium_synth.synthesize()`.
+   → **CORRIGÉ** : `max_tokens_per_call` passé à 8192 (config + example).
 
 ### 4.0.1 État du test NBA (2026-08-14)
 
 - `--scan-subjects --niche NBA --mode informatif --freshness brulant`
-  → signaux RSS + Suggest captés (`F00-e2fda737`), **échec synthèse GLM**
-  (timeout 120s). Pas d'export produit.
-- Rien n'a été committé pour ce test (working tree propre).
+  → signaux RSS + Suggest captés (`F00-a3d36199`), synthèse GLM tentée.
+- 1er run : timeout 120s. 2e run (timeout 240s) : GLM répond mais JSON
+  tronqué à 4096 tokens → `JSON GLM invalide`. 3e run (max_tokens 8192)
+  interrompu par le Warsmith (fin de chat) — **à re-exécuter** dans le
+  nouveau sandbox pour valider la synthèse de bout en bout.
+- Fixs poussés : timeout configurable + max_tokens 8192 + pytrends (env).
 
 ### 4.0.2 Autres refs déjà faites (ne pas refaire)
 
