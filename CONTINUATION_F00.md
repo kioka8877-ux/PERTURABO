@@ -77,13 +77,14 @@
 
 ### 4.0.1 État du test NBA (2026-08-14)
 
-- `--scan-subjects --niche NBA --mode informatif --freshness brulant`
-  → signaux RSS + Suggest captés (`F00-a3d36199`), synthèse GLM tentée.
-- 1er run : timeout 120s. 2e run (timeout 240s) : GLM répond mais JSON
-  tronqué à 4096 tokens → `JSON GLM invalide`. 3e run (max_tokens 8192)
-  interrompu par le Warsmith (fin de chat) — **à re-exécuter** dans le
-  nouveau sandbox pour valider la synthèse de bout en bout.
-- Fixs poussés : timeout configurable + max_tokens 8192 + pytrends (env).
+- `--scan-subjects --niche NBA --mode informatif --freshness brulant` :
+  **runs 1-2 en cours de debug** (timeout 120s puis JSON tronqué 4096),
+  **run 3 RÉUSSI** : scan `F00-e55a8dbf`, 5 sujets générés (scores 7-9),
+  export committé `EXPORT/subjects_proposal.json`+`.md`, check-in
+  IW_CUSTOS `capteurs: done` (commit `5a258b9`).
+- **Verdict** : les fixs (timeout 240s configurable + max_tokens 8192)
+  règlent le problème de synthèse. Prochaine étape dans le nouveau
+  sandbox : relancer le scan si besoin, puis `--deliver-subject`.
 
 ### 4.0.2 Autres refs déjà faites (ne pas refaire)
 
