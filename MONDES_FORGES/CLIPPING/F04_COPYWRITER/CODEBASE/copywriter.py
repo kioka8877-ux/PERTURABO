@@ -656,6 +656,16 @@ def cmd_generate_logo(args):
             "+ 1 paragraphe fair use) + tags + on-screen text."
         )
 
+    humour_spin = context.get("humour_spin")
+    if sub_mode == "humour" and humour_spin:
+        mission = (
+            mission
+            + f"\nSPIN HUMOUR (Warsmith) : {humour_spin} — chaque angle décline "
+            "cette direction humoristique (ironie, absurde, jeux de mots) SANS "
+            "quitter le sujet réel. Le titre et le paragraphe portent le spin, "
+            "jamais de moquerie diffamatoire."
+        )
+
     user_prompt = {
         "mission": mission,
         "campaign_id": context.get("campaign_id"),
@@ -665,6 +675,7 @@ def cmd_generate_logo(args):
         "clip_source_ref": context.get("clip_source_ref"),
         "article_source": context.get("article_source"),
         "joke_source": context.get("joke_source"),
+        "humour_spin": context.get("humour_spin"),
         "reference_clip_style": context.get("reference_clip_style"),
         "platform_target": platform,
         "market_target": market,

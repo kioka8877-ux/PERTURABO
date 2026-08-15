@@ -5,19 +5,19 @@
   "user_prompt": {
     "mission": "Mode HUMOUR : corrige la blague fournie (grammaire + langue cible, sans titre inventé), puis forge une variante pour CET angle (N blagues similaires, une par angle). Chaque blague doit tenir en moins de 30 secondes de lecture. Produis aussi les métadonnées de la video.\nSPIN HUMOUR (Warsmith) : la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress — chaque angle décline cette direction humoristique (ironie, absurde, jeux de mots) SANS quitter le sujet réel. Le titre et le paragraphe portent le spin, jamais de moquerie diffamatoire.",
     "campaign_id": "NBA_WESTBROOK",
-    "angle_id": "A01",
+    "angle_id": "A03",
     "sub_mode": "humour",
     "angle": {
-      "angle_id": "A01",
+      "angle_id": "A03",
       "genre": null,
       "title": null,
       "body": null,
       "on_screen_text": null,
       "seo_tags": null,
       "angle_family": "reframing",
-      "emotion_mode": "joie",
+      "emotion_mode": "tension",
       "engagement_type": "question",
-      "reframe_dim": "fait_vers_absurde",
+      "reframe_dim": "banal_vers_suspect",
       "zone": "direct"
     },
     "clip_source_ref": {

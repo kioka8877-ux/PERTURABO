@@ -1,84 +1,75 @@
 {
-  "campaign_id": "SPINWIN_BRADPITT",
+  "campaign_id": "NBA_WESTBROOK",
   "n_angles": 5,
   "anglesmith_status": "done",
   "weighting_eligible": false,
+  "spin_humour_operateur": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress",
   "angles": [
     {
       "angle_id": "A01",
       "angle_family": "reframing",
-      "emotion_mode": "tension",
+      "emotion_mode": "joie",
       "engagement_type": "question",
-      "reframe_dim": "victime_vers_survivant",
+      "reframe_dim": "fait_vers_absurde",
       "zone": "direct",
       "blue_ocean_reframe_applied": false,
       "blue_ocean_depth": null,
-      "territory": "surprise",
+      "territory": null,
       "weight": 1.0,
-      "hook": "7 ans sobre. Puis un verre. Puis un autre.",
-      "pitch": "Brad Pitt a tenu 7 ans sans boire. Il vient de révéler dans Esquire qu'il a replongé — mais il insiste: cette fois il se contrôle. La vraie question que tout le monde se pose: peut-on vraiment 'boire modérément' après ça?",
-      "loop": "open_loop"
+      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
     },
     {
       "angle_id": "A02",
       "angle_family": "reframing",
-      "emotion_mode": "tension",
+      "emotion_mode": "joie",
       "engagement_type": "confirmation",
-      "reframe_dim": "anonyme_vers_incroyable",
+      "reframe_dim": "banal_vers_suspect",
       "zone": "direct",
       "blue_ocean_reframe_applied": false,
       "blue_ocean_depth": null,
-      "territory": "surprise",
+      "territory": null,
       "weight": 1.0,
-      "hook": "Brad Pitt a failli 'lâcher' — et il raconte pourquoi.",
-      "pitch": "Dans une période 'insupportable' liée à des problèmes familiaux, Brad Pitt a frôlé le pire. Il dit avoir compris comment la mort pouvait sembler être un soulagement. Il assure n'avoir jamais eu l'intention d'aller au bout. Un témoignage sombre et inattendu.",
-      "loop": "open_loop"
+      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
     },
     {
       "angle_id": "A03",
       "angle_family": "reframing",
       "emotion_mode": "tension",
-      "engagement_type": "assertion",
+      "engagement_type": "question",
       "reframe_dim": "banal_vers_suspect",
       "zone": "direct",
       "blue_ocean_reframe_applied": false,
       "blue_ocean_depth": null,
-      "territory": "surprise",
+      "territory": null,
       "weight": 1.0,
-      "hook": "Il a 'gagné au loto'. Et il dit que c'est pas facile.",
-      "pitch": "Star mondiale, fortune, Oscar... Brad Pitt admet: 'C'est pas facile, ça.' Il a tout, et pourtant il décrit une descente aux enfers personnelle. Pourquoi la réussite ne protège pas de tout.",
-      "loop": "closed_loop"
+      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
     },
     {
       "angle_id": "A04",
       "angle_family": "reframing",
       "emotion_mode": "tension",
-      "engagement_type": "cliffhanger",
+      "engagement_type": "confirmation",
       "reframe_dim": "fait_vers_absurde",
       "zone": "direct",
       "blue_ocean_reframe_applied": false,
       "blue_ocean_depth": null,
-      "territory": "surprise",
+      "territory": null,
       "weight": 1.0,
-      "hook": "Bradley Cooper a sauvé Brad Pitt. Voici comment.",
-      "pitch": "Après sa séparation avec Angelina Jolie, Brad Pitt a fréquenté les Alcooliques Anonymes pendant plus d'un an. C'est Bradley Cooper qui l'a aidé à devenir sobre. Aujourd'hui, il boit à nouveau — et la boucle semble boucler.",
-      "loop": "open_loop"
+      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
     },
     {
       "angle_id": "A05",
       "angle_family": "emotion",
-      "emotion_mode": "admiration",
+      "emotion_mode": "joie",
       "engagement_type": "question",
-      "reframe_dim": "echec_vers_lecon",
+      "reframe_dim": "banal_vers_suspect",
       "zone": "direct",
       "blue_ocean_reframe_applied": false,
       "blue_ocean_depth": null,
-      "territory": "surprise",
+      "territory": null,
       "weight": 1.0,
-      "hook": "La plus grande leçon de Brad Pitt sur la sobriété.",
-      "pitch": "Il a été sobre 7 ans, a replongé, et en tire une leçon: 'Je dois rester professionnel.' Entre fierté, rechute et lucidité — le rapport honnête d'une star à sa propre addiction.",
-      "loop": "closed_loop"
+      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
     }
   ],
-  "check_in_iw_custos": "2026-08-10T21:14:11Z"
+  "check_in_iw_custos": null
 }

@@ -34,6 +34,18 @@ class ContextBuilder:
         self._archivum = os.path.join(forge_root, "ARCHIVUM")
         self._contracts = os.path.join(forge_root, "CONTRACTS")
 
+    def _load_spin_humour(self) -> str | None:
+        """Source de vérité du spin humour : liber_clipping.json (inputs_warsmith)."""
+        liber_path = os.path.join(self._forge_root, "liber_clipping.json")
+        if not os.path.exists(liber_path):
+            return None
+        try:
+            with open(liber_path, "r", encoding="utf-8") as f:
+                liber = json.load(f)
+            return liber.get("inputs_warsmith", {}).get("spin_humour") or None
+        except (OSError, json.JSONDecodeError):
+            return None
+
     # ------------------------------------------------------------------
     def _read(self, path: str, label: str) -> str:
         if not os.path.exists(path):
@@ -117,11 +129,16 @@ class ContextBuilder:
 
         Rassemble le clip source + l'article (informatif) OU la blague (humour)
         + le style du clip viral de référence + l'ARCHIVUM copywriting.
+
+        En mode humour, injecte le spin humour du Warsmith (source de vérité :
+        liber_clipping.json -> inputs_warsmith.spin_humour) pour orienter la forge.
         """
+        spin_humour = self._load_spin_humour()
         return {
             "campaign_id": verdict.get("campaign_id"),
             "angle_id": angle.get("angle_id"),
             "sub_mode": sub_mode,
+            "humour_spin": spin_humour if sub_mode == "humour" else None,
             "angle": {
                 "angle_id": angle.get("angle_id"),
                 "genre": angle.get("genre"),

@@ -1,0 +1,207 @@
+{
+  "pack_id": "LOGO-NBA_WESTBROOK-siege_20260810_205150",
+  "siege_id": "siege_20260810_205150",
+  "mode": "logo",
+  "sub_mode": "humour",
+  "clip_source_ref": {
+    "source_type": "youtube",
+    "reference": "https://www.youtube.com/watch?v=5XJUyMct2eQ",
+    "celebrity_or_subject": "Westbrook",
+    "niche": "NBA",
+    "duration_sec": null,
+    "timecodes": null
+  },
+  "article_source": null,
+  "joke_source": null,
+  "reference_clip_style": null,
+  "angles": [
+    {
+      "angle_id": "A01",
+      "zone": "direct",
+      "angle_family": "reframing",
+      "emotion_mode": "joie",
+      "engagement_type": "question",
+      "reframe_dim": "fait_vers_absurde"
+    },
+    {
+      "angle_id": "A02",
+      "zone": "direct",
+      "angle_family": "reframing",
+      "emotion_mode": "joie",
+      "engagement_type": "confirmation",
+      "reframe_dim": "banal_vers_suspect"
+    },
+    {
+      "angle_id": "A03",
+      "zone": "direct",
+      "angle_family": "reframing",
+      "emotion_mode": "tension",
+      "engagement_type": "question",
+      "reframe_dim": "banal_vers_suspect"
+    },
+    {
+      "angle_id": "A04",
+      "zone": "direct",
+      "angle_family": "reframing",
+      "emotion_mode": "tension",
+      "engagement_type": "confirmation",
+      "reframe_dim": "fait_vers_absurde"
+    },
+    {
+      "angle_id": "A05",
+      "zone": "direct",
+      "angle_family": "emotion",
+      "emotion_mode": "joie",
+      "engagement_type": "question",
+      "reframe_dim": "banal_vers_suspect"
+    }
+  ],
+  "videos": [
+    {
+      "video_index": 1,
+      "angle_id": "A01",
+      "title": "Westbrook's Tribute Made Fans Miss His",
+      "viral_paragraph": "The Lakers' retirement tribute made NBA fans angrier than Westbrook ever looked on court.\nComments like 'Deserved Better' and 'Delete This' flooded in, proving the real parting gift was unresolved drama.\nMeanwhile we're out here comparing student debt and bald spots like it's a dunk contest.\nSome legacies end with confetti; his ended with a group chat argument.",
+      "metadata": {
+        "title": "Russell Westbrook Tribute Backlash | Why Fans Say Deserved Better",
+        "description": "NBA fans erupt over Westbrook's Lakers tribute with 'Delete This' and 'Deserved Better'. We break down the backlash and the scapegoat years.\nFair use commentary on reported events for discussion purposes.",
+        "tags": [
+          "Westbrook",
+          "NBA",
+          "Lakers",
+          "Retirement",
+          "Tribute",
+          "Backlash",
+          "Basketball"
+        ]
+      },
+      "cut": {
+        "start_sec": null,
+        "end_sec": null,
+        "duration_sec": null,
+        "cut_source": "operator",
+        "note": "cuts à fournir par le Warsmith (mode humour)"
+      },
+      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
+      "on_screen_text": "Delete this? OK."
+    },
+    {
+      "video_index": 2,
+      "angle_id": "A02",
+      "title": "Westbrook Tribute Hides A Suspicious Scapegoat",
+      "viral_paragraph": "A champion just admitted Westbrook became 'the scapegoat for a lot of people.'\nThat one sentence reframes his whole Lakers chapter like a reveal scene.\nFunny how blaming him got louder than the applause ever did.\nEven his retirement video couldn't outshine the debate.",
+      "metadata": {
+        "title": "The Harsh Truth About Westbrook's Career Revealed",
+        "description": "A NBA champion reveals the hard truth: Westbrook became the scapegoat. Here's how the tribute backlash and 'Deserved Better' fans connect.\nFair use commentary on reported events for discussion purposes.",
+        "tags": [
+          "Westbrook",
+          "NBA",
+          "Scapegoat",
+          "Retirement",
+          "Champion",
+          "Truth",
+          "Basketball"
+        ]
+      },
+      "cut": {
+        "start_sec": null,
+        "end_sec": null,
+        "duration_sec": null,
+        "cut_source": "operator",
+        "note": "cuts à fournir par le Warsmith (mode humour)"
+      },
+      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
+      "on_screen_text": "Scapegoat of the group chat."
+    },
+    {
+      "video_index": 3,
+      "angle_id": "A03",
+      "title": "NBA Fans Furious At Westbrook Tribute",
+      "viral_paragraph": "The NBA world is reportedly 'enraged' by the Lakers' tribute for Westbrook.\n'Delete This' trended while his former MVP trophy sat in a drawer somewhere.\nTurns out a farewell can have worse reviews than a bad group project.\nNobody wanted closure; they wanted receipts.",
+      "metadata": {
+        "title": "Westbrook Retirement Tribute Draws NBA-Wide Anger",
+        "description": "Yahoo Sports reports the NBA world is enraged by Westbrook's Lakers tribute. Fans say 'Deserved Better' and 'Delete This' as debate rages.\nFair use commentary on reported events for discussion purposes.",
+        "tags": [
+          "Westbrook",
+          "NBA",
+          "Tribute",
+          "Controversy",
+          "Lakers",
+          "Retirement",
+          "Viral"
+        ]
+      },
+      "cut": {
+        "start_sec": null,
+        "end_sec": null,
+        "duration_sec": null,
+        "cut_source": "operator",
+        "note": "cuts à fournir par le Warsmith (mode humour)"
+      },
+      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
+      "on_screen_text": "Delete this."
+    },
+    {
+      "video_index": 4,
+      "angle_id": "A04",
+      "title": "Westbrook's Tribute Backlash Got Absurd Fast",
+      "viral_paragraph": "A retirement tribute sparked a bigger fight than his entire season.\n'Deserved Better' fans clashed with 'Delete This' haters in real time.\nAt this rate the next highlight reel will be the comment section.\nNobody talks about his stats anymore; they talk about the drama.",
+      "metadata": {
+        "title": "The Absurdity Of The Westbrook Tribute Backlash",
+        "description": "The Westbrook tribute backlash turned absurd as fans argue 'Deserved Better' vs 'Delete This'. A former champion calls him a scapegoat.\nFair use commentary on reported events for discussion purposes.",
+        "tags": [
+          "Westbrook",
+          "NBA",
+          "Viral",
+          "Drama",
+          "Tribute",
+          "Reaction",
+          "Basketball"
+        ]
+      },
+      "cut": {
+        "start_sec": null,
+        "end_sec": null,
+        "duration_sec": null,
+        "cut_source": "operator",
+        "note": "cuts à fournir par le Warsmith (mode humour)"
+      },
+      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
+      "on_screen_text": "Debate loading…"
+    },
+    {
+      "video_index": 5,
+      "angle_id": "A05",
+      "title": "Why Westbrook's Goodbye Hit Fans Hard",
+      "viral_paragraph": "Westbrook walked away and suddenly the internet remembered how good he was.\nThe tribute backlash proves love and frustration can share one timeline.\nFunny how a retirement made his haters louder than his fans.\nMaybe that's the real legacy: impossible to ignore.",
+      "metadata": {
+        "title": "Why Westbrook's Retirement Hits Fans So Hard",
+        "description": "Westbrook retires and fans flood the tribute with 'Deserved Better'. We explore why the goodbye feels so emotional and divisive.\nFair use commentary on reported events for discussion purposes.",
+        "tags": [
+          "Westbrook",
+          "NBA",
+          "Emotional",
+          "Retirement",
+          "Legacy",
+          "Fans",
+          "Basketball"
+        ]
+      },
+      "cut": {
+        "start_sec": null,
+        "end_sec": null,
+        "duration_sec": null,
+        "cut_source": "operator",
+        "note": "cuts à fournir par le Warsmith (mode humour)"
+      },
+      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
+      "on_screen_text": "We'll miss the chaos."
+    }
+  ],
+  "checklist": {
+    "factual_verified": false,
+    "no_defamation": false,
+    "no_fabricated_breaking": false,
+    "seo_optimized": true
+  }
+}

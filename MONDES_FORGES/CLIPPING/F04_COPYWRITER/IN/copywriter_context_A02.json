@@ -1,7 +1,8 @@
 {
   "campaign_id": "NBA_WESTBROOK",
   "angle_id": "A02",
-  "sub_mode": "informatif",
+  "sub_mode": "humour",
+  "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress",
   "angle": {
     "angle_id": "A02",
     "genre": null,
@@ -10,9 +11,9 @@
     "on_screen_text": null,
     "seo_tags": null,
     "angle_family": "reframing",
-    "emotion_mode": "tension",
+    "emotion_mode": "joie",
     "engagement_type": "confirmation",
-    "reframe_dim": "anonyme_vers_incroyable",
+    "reframe_dim": "banal_vers_suspect",
     "zone": "direct"
   },
   "clip_source_ref": {

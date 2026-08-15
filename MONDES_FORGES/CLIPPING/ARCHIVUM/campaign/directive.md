@@ -2,7 +2,7 @@
 
 Campaign ID: NBA_WESTBROOK
 
-> Déposée par F00_CAPTEURS --deliver-subject le 2026-08-14T16:14:40Z.
+> Déposée par F00_CAPTEURS --deliver-subject le 2026-08-15T09:34:31Z.
 > Sujet n°F00-5581179c — choix du Warsmith (gate: warsmith_chooses).
 
 ## Sujet du siège
@@ -12,6 +12,13 @@ Campaign ID: NBA_WESTBROOK
 - **Angle 90s (FR)** : Pourquoi la retraite de Westbrook divise tant : on analyse le backlash des fans contre les Lakers et la vérité dure d'un champion NBA sur son rôle de bouc émissaire.
 - **Tag** : `westbrook`
 - **Sous-mode** : informatif
+
+## Sens humouristique (opérateur)
+
+- **Spin humour** : la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress
+
+> Le Warsmith a choisi ce sujet ET proposé la direction humouristique.
+> ANGLESMITH forge les 5 angles AUTOUR de ce sens humour.
 
 ## Sources
 
