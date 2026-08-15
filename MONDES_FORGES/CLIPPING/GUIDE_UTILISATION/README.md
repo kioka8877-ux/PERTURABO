@@ -17,6 +17,7 @@ Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les
 | `01_MODE_LOGO_INFORMATIF.md` | **logo / informatif** | ✅ **Complet** (testé en production, siège TS01_SANDOVAL) |
 | `02_MODE_LOGO_HUMOUR.md` | logo / humour | ⏳ À compléter (même squelette) |
 | `03_MODE_WHOP.md` | whop (clip canon) | ⏳ À compléter (même squelette) |
+| `04_MODE_MEME.md` | logo / meme | ✅ **Complet** (doctrine montage 6 couches = contrat OMNIS_WATCH) |
 | `_PIEGES_APPRIS.md` | Tous | ✅ Les leçons du siège test — **à lire avant chaque siège** |
 
 ## 🧭 Comment naviguer
@@ -47,11 +48,17 @@ F00_CAPTEURS (scrap écosystème) ── avant Gate 1
 F01 SCOUT        → capture le specimen (source)
 F02 TYRANT CAMP  → verdict GO/NO-GO (Gate 1)
 ANGLESMITH (F02) → forge les angles (Gate 2)
-F03 SOURCE HUNTER→ sélectionne asset + segments (skippé en mode logo)
+F03 SOURCE HUNTER→ sélectionne asset + segments (skippé en mode logo et meme)
 F04 COPYWRITER   → forge les textes : titre, paragraphe, metadata, tags (Gate 3)
 F05 PACKAGER     → assemble le pack final (Gate 4)
 F06 TRACKER      → suit les posts après publication
 ORCHESTRATOR     → le nerf central : gates + ledger + expédition
 ```
+
+**Mode meme** (logo / meme) : l'opérateur fournit un **mot-clé** → F00 scanne la
+viralité sur TOUTES les sources (YouTube, Trends, RSS, Reddit, Suggest), **0 clip
+téléchargé** → F02 forge 5 angles avec émotion (anti-spam) → F04 forge
+titre + fake tweet + texte d'émotion → F05 assemble le pack dans EXPORT →
+OMNIS_WATCH monte via `04_MODE_MEME.md` (doctrine 6 couches). **F01 et F03 SKIP.**
 
 **Vocabulaire** : on dit **gate** (ou porte) — `gate 1` à `gate 4`. Le champion **valide ou rejette** chaque gate. Rien ne passe sans ta signature.
