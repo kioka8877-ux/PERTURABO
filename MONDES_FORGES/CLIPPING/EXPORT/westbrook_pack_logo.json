@@ -81,11 +81,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
+        "start_sec": 0,
+        "end_sec": 7,
+        "duration_sec": 7,
+        "cut_source": "operator",
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "Did Westbrook deserve this backlash?"
@@ -112,11 +112,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
+        "start_sec": 7,
+        "end_sec": 14,
+        "duration_sec": 7,
+        "cut_source": "operator",
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "He became everyone's scapegoat"
@@ -141,11 +141,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
+        "start_sec": 14,
+        "end_sec": 21,
+        "duration_sec": 7,
+        "cut_source": "operator",
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "\"Deserved Better\" — Fans ERUPT Over Westbrook Tribute"
@@ -171,11 +171,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
+        "start_sec": 21,
+        "end_sec": 28,
+        "duration_sec": 7,
+        "cut_source": "operator",
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "Fans said 'Delete This'. Was the tribute really that bad?"
@@ -201,11 +201,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
+        "start_sec": 28,
+        "end_sec": 35,
+        "duration_sec": 7,
+        "cut_source": "operator",
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "The Westbrook twist nobody expected."

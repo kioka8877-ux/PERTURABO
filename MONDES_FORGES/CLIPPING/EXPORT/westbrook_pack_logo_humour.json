@@ -76,11 +76,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
+        "start_sec": 0,
+        "end_sec": 7,
+        "duration_sec": 7,
         "cut_source": "operator",
-        "note": "cuts à fournir par le Warsmith (mode humour)"
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "Delete this? OK."
@@ -104,11 +104,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
+        "start_sec": 7,
+        "end_sec": 14,
+        "duration_sec": 7,
         "cut_source": "operator",
-        "note": "cuts à fournir par le Warsmith (mode humour)"
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "Scapegoat of the group chat."
@@ -132,11 +132,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
+        "start_sec": 14,
+        "end_sec": 21,
+        "duration_sec": 7,
         "cut_source": "operator",
-        "note": "cuts à fournir par le Warsmith (mode humour)"
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "Delete this."
@@ -160,11 +160,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
+        "start_sec": 21,
+        "end_sec": 28,
+        "duration_sec": 7,
         "cut_source": "operator",
-        "note": "cuts à fournir par le Warsmith (mode humour)"
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "Debate loading…"
@@ -188,11 +188,11 @@
         ]
       },
       "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
+        "start_sec": 28,
+        "end_sec": 35,
+        "duration_sec": 7,
         "cut_source": "operator",
-        "note": "cuts à fournir par le Warsmith (mode humour)"
+        "note": "7s — Warsmith"
       },
       "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
       "on_screen_text": "We'll miss the chaos."
