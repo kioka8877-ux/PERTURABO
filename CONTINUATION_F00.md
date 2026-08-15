@@ -151,6 +151,44 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
    F01→F02→ANGLESMITH→F03→F04→F05→F06 (chaîne intacte).
    → **FAIT** (F06_TRACKER reste à faire : posts, vues, payout).
 
+> ⚠️ **MAJ 2026-08-15 (mode humour)** : la chaîne F01→F05 est REFAIte en
+> humour (pack `LOGO-NBA_WESTBROOK` humour, 5 videos). Reste à faire :
+>
+> 1. **F06_TRACKER** : `tracker.py --post` pour expédier le pack humour vers
+>    OMNIS_WATCH (le checkpoint F06 a été signalé par l'orchestrateur après
+>    la Porte 4).
+> 2. **Cuts vidéo** : le pack humour a `cut_source: operator` — le Warsmith
+>    doit fournir les cuts (start/end/duration par angle) dans
+>    `ARCHIVUM/campaign/cuts.json` avant montage.
+> 3. **`joke_source` à compléter** : dans ce run humour, `joke_source` est
+>    null (pas de fichier blague fourni) — l'humour est porté par le spin
+>    Warsmith + les payloads F04. Si l'on veut une blague dédiée par angle,
+>    fournir `ARCHIVUM/campaign/joke_source.json`.
+> 4. **Clé premium NVIDIA** (`CLIPPING_PREMIUM_API_KEY` via `.env.local`,
+>    gitignoré) à ré-injecter dans tout nouveau sandbox, sinon F04 repasse
+>    en mode Oracle.
+> 5. Prochaine itération possible : générer un pack `--mode humour` sur un
+>    autre sujet du scan, ou valider le pack humour existant auprès du
+>    Warsmith avant diffusion.
+
+> ✅ **MAJ 2026-08-15 (mode humour — commit `be44729`, poussé sur main)** :
+> le siège NBA_WESTBROOK a été régénéré en **mode humour** de bout en bout
+> (les 4 portes validées) :
+> - Porte 1 : F01 specimen + F02 verdict GO.
+> - Porte 2 : ANGLESMITH 5 angles forgés avec le **spin humour** du Warsmith
+>   ("la dette étudiante et la calvitie qui s'unissent pour augmenter mon
+>   stress"), enregistré dans `liber_clipping.json -> inputs_warsmith.spin_humour`.
+> - Porte 3 : F04 humour A01-A05 — clé premium ABSENTE dans ce sandbox →
+>   **mode Oracle** (raws forgés à la main dans `OUT/text_payload_raw_A0*.json`,
+>   puis ordonnance/finalize). Contextes reconfigurés `--sub-mode humour`.
+> - Porte 4 : pack `LOGO-NBA_WESTBROOK-siege_20260810_205150` (5 videos,
+>   `cut_source: operator`).
+> - Code F04 étendu : `_load_spin_humour()` dans `context_builder.py` (source
+>   de vérité = ledger) + injection `humour_spin` dans le prompt de
+>   `copywriter.py` quand `sub_mode == humour`.
+> - Export : `EXPORT/westbrook_pack_logo_humour.json` +
+>   `EXPORT/packs_index_humour.json` + `EXPORT/westbrook_pack_humour_apercu.md`.
+
 ## 5. Commandes de vérification rapide
 
 ```bash
