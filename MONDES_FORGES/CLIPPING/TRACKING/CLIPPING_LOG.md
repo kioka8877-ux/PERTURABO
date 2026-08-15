@@ -719,3 +719,11 @@ F00_CAPTEURS/CODEBASE/capteurs.py
 ## [2026-08-15T09:50:42Z] F05 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: e388b6a9c351f013f2c536c502d865b6 — status: done
 
 ## [2026-08-15T10:12:43Z] F05 — check-in — output: /tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 0b22903292a7174cbb326e10cc6932ee — status: done
+
+## [2026-08-15T19:51:01Z] CAPTEURS — check-in — output: /workspace/PERTURABO/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_student_debt.md — md5: e7ea4b8d5067458b6ac59ea3ebcdee24 — status: done
+
+## [2026-08-15T20:19:35Z] ANGLESMITH — check-in — output: /workspace/PERTURABO/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json — md5: e28e837b1e61acc6580e85506ce4e086 — status: done
+
+## [2026-08-15T20:28:02Z] F04 — check-in — output: /workspace/PERTURABO/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md — md5: 9c0aea5a4ef02215abd0e268b3ab7ba3 — status: done
+
+## [2026-08-15T20:37:40Z] F05 — check-in — output: /workspace/PERTURABO/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 2c2bc27c434e5cb2af85e1765bc74968 — status: done

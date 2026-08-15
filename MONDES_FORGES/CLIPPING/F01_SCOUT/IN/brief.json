@@ -1,7 +1,7 @@
 {
-  "siege_id": "siege_20260810_205150",
-  "directive_path": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
-  "reference_clip_path": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
+  "siege_id": "siege_20260815_195037",
+  "directive_path": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
+  "reference_clip_path": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
   "platform_target": "youtube",
   "market_target": "us_young_english",
   "n_angles": 5

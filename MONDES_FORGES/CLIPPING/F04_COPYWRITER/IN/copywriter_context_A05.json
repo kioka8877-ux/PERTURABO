@@ -1,8 +1,8 @@
 {
-  "campaign_id": "NBA_WESTBROOK",
+  "campaign_id": null,
   "angle_id": "A05",
-  "sub_mode": "humour",
-  "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress",
+  "sub_mode": "meme",
+  "humour_spin": null,
   "angle": {
     "angle_id": "A05",
     "genre": null,
@@ -10,97 +10,417 @@
     "body": null,
     "on_screen_text": null,
     "seo_tags": null,
-    "angle_family": "emotion",
-    "emotion_mode": "joie",
-    "engagement_type": "question",
-    "reframe_dim": "banal_vers_suspect",
+    "angle_family": "reframing",
+    "emotion_mode": "emerveille",
+    "engagement_type": "assertion",
+    "reframe_dim": "echec_vers_lecon",
     "zone": "direct"
   },
   "clip_source_ref": {
-    "source_type": "youtube",
-    "url": "https://www.youtube.com/watch?v=5XJUyMct2eQ",
-    "video_url": "https://www.youtube.com/watch?v=5XJUyMct2eQ",
-    "reference": "https://www.youtube.com/watch?v=5XJUyMct2eQ",
-    "title": "Russell Westbrook Retirement Tribute Backlash Explained",
+    "source_type": "meme_keyword",
+    "sub_mode": "meme",
+    "keyword": "student debt",
+    "market": "us_young_english",
     "platform": "youtube",
-    "celebrity_or_subject": "Westbrook",
-    "niche": "NBA",
-    "duration_sec": null,
-    "view_count": 161044,
-    "timecodes": {
-      "t": 0
-    },
-    "context_article": {
-      "source": "F00_CAPTEURS --deliver-subject",
-      "published": "F00-5581179c",
-      "title": "Russell Westbrook Retirement Tribute Backlash Explained",
-      "summary": "La retraite de Russell Westbrook a été annoncée récemment et la réaction des fans est extrêmement polarisée. Yahoo Sports rapporte que le monde de la NBA est 'enragé' contre le tribute de retraite des Lakers, avec des fans qui disent 'Deserved Better' et 'Delete This'. En parallèle, un champion NBA révèle la vérité dure sur sa carrière, disant qu'il est devenu 'le bouc émissaire de beaucoup de gens'. C'est un sujet brûlant (2h de fraîcheur) avec un fort potentiel de débat et d'émotion. Une vidéo YouTube sur son style de jeu agressif a déjà cumulé 161 044 vues.",
-      "key_facts": "Sujet ultra-frais (2h), très émotionnel (backlash, bouc émissaire), personne très identifiable (Westbrook), fort déclencheur conversationnel. Manque un peu de données de tendance macro pour atteindre 10."
-    },
-    "scan_id": "F00-5581179c",
-    "gate": "warsmith_chooses"
+    "note": "Mode meme : aucun clip de référence fourni (F01/F03 SKIP). F00 scanna la viralité du mot-clé pour ANGLESMITH.",
+    "reference_clip_required": false,
+    "timecodes": {}
   },
-  "article_source": {
-    "_mode": "informatif",
-    "_sub_mode": "informatif",
-    "_description": "L'article est le VRAI sujet de la vidéo. Le clip source (video background) n'est qu'une illustration, aucun lien avec le sujet.",
-    "reference": "Russell Westbrook Retirement Tribute Backlash Explained",
-    "subject": "La retraite de Russell Westbrook a été annoncée récemment et la réaction des fans est extrêmement polarisée. Yahoo Sports rapporte que le monde de la NBA est 'enragé' contre le tribute de retraite des Lakers, avec des fans qui disent 'Deserved Better' et 'Delete This'. En parallèle, un champion NBA révèle la vérité dure sur sa carrière, disant qu'il est devenu 'le bouc émissaire de beaucoup de gens'. C'est un sujet brûlant (2h de fraîcheur) avec un fort potentiel de débat et d'émotion. Une vidéo YouTube sur son style de jeu agressif a déjà cumulé 161 044 vues.",
-    "celebrity_or_subject": "Westbrook",
-    "tag": "westbrook",
-    "key_facts": [
-      "La retraite de Russell Westbrook a été annoncée récemment et la réaction des fans est extrêmement polarisée",
-      "Yahoo Sports rapporte que le monde de la NBA est 'enragé' contre le tribute de retraite des Lakers, avec des fans qui disent 'Deserved Better' et 'Delete This'",
-      "En parallèle, un champion NBA révèle la vérité dure sur sa carrière, disant qu'il est devenu 'le bouc émissaire de beaucoup de gens'",
-      "C'est un sujet brûlant (2h de fraîcheur) avec un fort potentiel de débat et d'émotion",
-      "Une vidéo YouTube sur son style de jeu agressif a déjà cumulé 161 044 vues"
-    ],
-    "scan_id": "F00-5581179c",
-    "gate": "warsmith_chooses"
-  },
+  "article_source": null,
   "joke_source": null,
-  "reference_clip_style": null,
-  "verdict": {
-    "campaign_id": "NBA_WESTBROOK",
-    "verdict": "GO",
-    "verdict_justification": "GO — assets fournis par la campagne présents, verdict provisoire (IRON sandbox requis pour validation finale)",
-    "reference_skeleton": {
-      "hook_type": null,
-      "emotion_dominante": null,
-      "structure_narrative": null,
-      "loop_technique": null,
-      "engagement_type": null,
-      "endroits_preuve": [],
-      "iron_status": "pending",
-      "source_meta": {
-        "url": "https://www.youtube.com/watch?v=5XJUyMct2eQ",
-        "title": "Russell Westbrook Retirement Tribute Backlash Explained",
-        "view_count": 161044,
-        "duration_sec": null,
-        "platform": "youtube"
+  "keyword": "student debt",
+  "meme_source": {
+    "scan_id": "MEME-dee7c660",
+    "keyword": "student debt",
+    "scanned_at": "2026-08-15T19:51:01Z",
+    "sources_scanned": [
+      "youtube",
+      "trends",
+      "rss",
+      "reddit",
+      "suggest"
+    ],
+    "sources_available": {
+      "youtube": "vues réelles YouTube (search + stats API)",
+      "trends": "Google Trends (RSS global US + courbe 7j si pytrends)",
+      "rss": "Google News RSS (fraîcheur + couverture médias)",
+      "reddit": "Reddit search top (score + commentaires)",
+      "suggest": "Google Suggest ds=yt (demande réelle tapée)"
+    },
+    "signals": {
+      "signal_vues_youtube": {
+        "signal": "vues_youtube",
+        "status": "ok",
+        "search": {
+          "status": "ok",
+          "error": null,
+          "query": "student debt student debt",
+          "videos": [
+            {
+              "video_id": "U4grYa3TpOk",
+              "title": "Scared of Marriage but Willing to Take on Student Debt for $50K a Year",
+              "channel": "Kevin Samuels",
+              "published_at": "2026-08-15T01:00:27Z",
+              "view_count": 6714,
+              "like_count": 503,
+              "comment_count": 72
+            },
+            {
+              "video_id": "AT1xNZx6WkY",
+              "title": "පොළී රහිත ශිෂ්‍ය ණය යෝජනා ක්‍රමය පිළිබඳ ඔබ දැනගතයුතු හැමදේම | Interest Free Student Loan Scheme 2027",
+              "channel": "Mudith Ekanayake",
+              "published_at": "2026-08-15T08:00:06Z",
+              "view_count": 3338,
+              "like_count": 224,
+              "comment_count": 93
+            },
+            {
+              "video_id": "htTx8WYCFrY",
+              "title": "\"Rep Anna Paulina Luna: Cap Student Loan Interest At 2%\"#shorts",
+              "channel": "B press",
+              "published_at": "2026-08-15T10:09:04Z",
+              "view_count": 2214,
+              "like_count": 48,
+              "comment_count": 2
+            },
+            {
+              "video_id": "1st_IbSGI00",
+              "title": "Paying STUDENT DEBT with cat videos 😅 #cat #funny #pets #funnyvideo #shorts",
+              "channel": "ChaosAndClaws\n\n",
+              "published_at": "2026-08-15T10:34:19Z",
+              "view_count": 1956,
+              "like_count": 58,
+              "comment_count": 0
+            },
+            {
+              "video_id": "tBhHrmSpknM",
+              "title": "Student Loan Hack: Pay Off Loans FAST with Savings!",
+              "channel": "Alliance Financial Group",
+              "published_at": "2026-08-14T22:00:45Z",
+              "view_count": 1745,
+              "like_count": 7,
+              "comment_count": 0
+            },
+            {
+              "video_id": "GVKhxokq6Iw",
+              "title": "【実話】奨学金600万円。返済に追い詰められた芸人が、自己破産でお笑いに向き合うまで｜RE：LIFE #10",
+              "channel": "債務整理ドキュメンタリー RE:LIFE",
+              "published_at": "2026-08-15T03:00:34Z",
+              "view_count": 1483,
+              "like_count": 15,
+              "comment_count": 6
+            },
+            {
+              "video_id": "0YltFauUK5o",
+              "title": "Student Loan Payments: Are You Paying Too Much? #shorts",
+              "channel": "Financially Clips",
+              "published_at": "2026-08-14T20:00:25Z",
+              "view_count": 804,
+              "like_count": 6,
+              "comment_count": 0
+            },
+            {
+              "video_id": "8qPE14EGm08",
+              "title": "BEGGARS journey through TikTok for donations compilation",
+              "channel": "Consumer Debt Chit-Chat ",
+              "published_at": "2026-08-15T03:48:30Z",
+              "view_count": 746,
+              "like_count": 67,
+              "comment_count": 32
+            }
+          ]
+        },
+        "trending": {
+          "status": "ok",
+          "error": null,
+          "videos": [
+            {
+              "video_id": "FboTyBsFZQs",
+              "title": "Anuel AA | Donde Hubo Fuego Cenizas Quedan (Video Oficial)",
+              "channel": "Anuel AA",
+              "published_at": "2026-08-14T22:44:06Z",
+              "view_count": 2878655,
+              "like_count": 150569,
+              "comment_count": 8591
+            },
+            {
+              "video_id": "X1aFkAkFASk",
+              "title": "Avengers: Doomsday | Special Look | In Theaters December 18",
+              "channel": "Marvel Entertainment",
+              "published_at": "2026-08-15T04:06:21Z",
+              "view_count": 19871421,
+              "like_count": 1065345,
+              "comment_count": 47651
+            },
+            {
+              "video_id": "gVE2t-LRK-s",
+              "title": "Whatever You Hide As, You Keep!",
+              "channel": "MrBeast Gaming",
+              "published_at": "2026-08-15T16:00:01Z",
+              "view_count": 1962010,
+              "like_count": 122432,
+              "comment_count": 12932
+            },
+            {
+              "video_id": "TXPQ2wDRSNM",
+              "title": "Bulin 47 X Afriken An - Leo Leo Remix (Video Oficial)",
+              "channel": "Bulin 47 Oficial",
+              "published_at": "2026-08-14T15:59:16Z",
+              "view_count": 1186687,
+              "like_count": 80895,
+              "comment_count": 9383
+            },
+            {
+              "video_id": "54eFEhlnIjg",
+              "title": "KINGDOM HEARTS IV | D23 2026 Showcase Trailer",
+              "channel": "Pixar",
+              "published_at": "2026-08-15T02:55:22Z",
+              "view_count": 1135110,
+              "like_count": 60536,
+              "comment_count": 4157
+            },
+            {
+              "video_id": "u9pnNFueC9U",
+              "title": "Stuck In The Trenches...[Shellshock]",
+              "channel": "Joe Bart Games",
+              "published_at": "2026-08-15T13:07:42Z",
+              "view_count": 207143,
+              "like_count": 9749,
+              "comment_count": 592
+            },
+            {
+              "video_id": "UOD3K2JV9-o",
+              "title": "Ponte Bonita",
+              "channel": "LOS DOS DE TAMAULIPAS - Topic",
+              "published_at": "2026-08-13T10:00:26Z",
+              "view_count": 401835,
+              "like_count": 11279,
+              "comment_count": 96
+            },
+            {
+              "video_id": "Fdar7gTQnog",
+              "title": "Star Wars: Ahsoka Season 2 | Teaser Trailer | Streaming January 20 on Disney+",
+              "channel": "Star Wars",
+              "published_at": "2026-08-15T04:17:28Z",
+              "view_count": 1875548,
+              "like_count": 76225,
+              "comment_count": 5595
+            }
+          ]
+        }
+      },
+      "signal_tendance": {
+        "signal": "tendance",
+        "global_trending_rss": {
+          "status": "ok",
+          "error": null,
+          "trending": [
+            {
+              "query": "bruce willis daughter tallulah wedding",
+              "approx_traffic": 1000,
+              "approx_traffic_raw": "1000+"
+            },
+            {
+              "query": "tigers game",
+              "approx_traffic": 2000,
+              "approx_traffic_raw": "2000+"
+            },
+            {
+              "query": "pga leaderboard today",
+              "approx_traffic": 2000,
+              "approx_traffic_raw": "2000+"
+            },
+            {
+              "query": "donald trump republican primary losses",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
+            },
+            {
+              "query": "shane buechele",
+              "approx_traffic": 500,
+              "approx_traffic_raw": "500+"
+            },
+            {
+              "query": "sophie cunningham indianapolis bar performance",
+              "approx_traffic": 500,
+              "approx_traffic_raw": "500+"
+            },
+            {
+              "query": "rio ave vs porto",
+              "approx_traffic": 500,
+              "approx_traffic_raw": "500+"
+            },
+            {
+              "query": "fluminense vs palmeiras",
+              "approx_traffic": 2000,
+              "approx_traffic_raw": "2000+"
+            },
+            {
+              "query": "michael conforto",
+              "approx_traffic": 2000,
+              "approx_traffic_raw": "2000+"
+            },
+            {
+              "query": "cobán imperial - mixco",
+              "approx_traffic": 500,
+              "approx_traffic_raw": "500+"
+            }
+          ]
+        },
+        "keyword_curves": {
+          "status": "pytrends_absent",
+          "note": "pytrends non installé — ajouter à requirements_capteurs.txt",
+          "keywords": {
+            "student debt": {
+              "is_trending": null,
+              "growth_multiplier": null,
+              "note": "pytrends absent"
+            },
+            "student": {
+              "is_trending": null,
+              "growth_multiplier": null,
+              "note": "pytrends absent"
+            },
+            "debt": {
+              "is_trending": null,
+              "growth_multiplier": null,
+              "note": "pytrends absent"
+            }
+          }
+        }
+      },
+      "signal_fraicheur_couverture": {
+        "signal": "fraicheur_et_couverture",
+        "window_hours": 5,
+        "keywords": [
+          "student debt",
+          "student",
+          "debt"
+        ],
+        "fetched_articles": 100,
+        "fresh_articles": [
+          {
+            "title": "Heading off to college? Here are some tips for managing your finances - NBC Los Angeles",
+            "source": "NBC Los Angeles",
+            "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQOU9UYmh6ejB1QjF6S0RmNXgxclZVNFhDal9rcEx1d0M3VFdtZ3hWMEE2M1JGWXQwTlpLOTdIMzBZekhTTEQ2bU5PNzhPTUZtcHNTdEFKTklsWTdfbGNEQWNSVzFzblZzRlJJUzNWZVctMUdwZW92b2hfSEpiMHV5X0IxQmhCSEk0N1B4eUN1OVNKMnpqM216Z1Y4OTdOUdIBpgFBVV95cUxPcEVRN1QtR3M4U1Q1dGlfY2UxYmNmTHVraTRIdUsxTjRXei1DZURQR1d5QXh6cVdYZjBRTzc5ZnBmOGd2ZDFhV2N1R0FySXRlX2hzczBjUXZmMHBlckZGXzRpVUJXemR0eFE2NUdhRE9zVVRuMlIxWkRMeTV4RlA4NU9OZmdOVFlocjlTU3M4dEZRT2tsTldjOHpFdjRwZGk3WVJZY3FR?oc=5",
+            "age_hours": 3.2
+          },
+          {
+            "title": "Paine College erases debt for some former students to boost re-enrollment - WRDW",
+            "source": "WRDW",
+            "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdVBhR1ZWYXZ4VTdQTHJEd05UVThob1haSTh2WkVjcnJlSkcxTlBlUmNuamdLNVpnT2RBZlVWUmJRUlNudWVjQ1dYd3FxVkQ0bEtZOFY3Wnh0dHRuX2xQVTcwaFBCMWhLUVNMMGRWMTdvT2owWEJCeG1qZ3pRZml6a3g0TUdBNThMalhuMEFDUDZkMWlDSWdPcVp5MDlsbVBoVmpjcjBKdzI?oc=5",
+            "age_hours": 0.6
+          }
+        ],
+        "coverage": {
+          "heading off college here some tips": {
+            "count": 1,
+            "sources": [
+              "NBC Los Angeles"
+            ]
+          },
+          "paine college erases debt some former": {
+            "count": 1,
+            "sources": [
+              "WRDW"
+            ]
+          }
+        },
+        "status": "ok",
+        "error": null
+      },
+      "signal_reddit_viralite": {
+        "signal": "reddit_viralite",
+        "status": "fetch_failed",
+        "error": "http_403",
+        "keywords": [
+          "student debt",
+          "student",
+          "debt"
+        ],
+        "posts": [],
+        "top_subreddits": [],
+        "demand_score": null
+      },
+      "signal_demande": {
+        "signal": "demande",
+        "status": "ok",
+        "note": "suggestions Google ds=yt",
+        "keywords": [
+          {
+            "query": "student debt",
+            "suggestions": [
+              "student debt crisis",
+              "student debt usa",
+              "student debt relief",
+              "student debt ramsey",
+              "student debt uk",
+              "student debt forgiveness",
+              "student debt story",
+              "student debt dave ramsey",
+              "student debt tiktok",
+              "student debt crashout"
+            ],
+            "tension_hits": 0,
+            "total_hits": 10,
+            "demand_score": 100
+          },
+          {
+            "query": "student",
+            "suggestions": [
+              "student of the year",
+              "student of the year 2",
+              "student vlog",
+              "student of the year songs",
+              "student exchange",
+              "student visa australia",
+              "student one islamic school",
+              "student council",
+              "student of the year 2 songs",
+              "student and teacher love story"
+            ],
+            "tension_hits": 0,
+            "total_hits": 10,
+            "demand_score": 100
+          },
+          {
+            "query": "debt",
+            "suggestions": [
+              "debt collector",
+              "debt collector kalibata",
+              "debt collector pinjol",
+              "debt collector ke rumah sarwendah",
+              "depth",
+              "debt collector indonesia",
+              "debt short film",
+              "debt collector sarwendah",
+              "debt forsaken",
+              "debt collector ditangkap polisi"
+            ],
+            "tension_hits": 0,
+            "total_hits": 10,
+            "demand_score": 100
+          }
+        ]
       }
     },
-    "demon_analysis": {
-      "demon_id": null,
-      "dominant_emotion": null,
-      "exploited_territories": [],
-      "blue_ocean_unlocked": []
-    },
-    "direct_analysis": {
-      "campaign_fit_platform": 5,
-      "campaign_fit_market": 5,
-      "campaign_budget_remaining": null,
-      "cpm_expected": null,
-      "saturation_level": "unknown",
-      "evidence": {
-        "platform_profile_present": false,
-        "market_profile_present": false,
-        "cartographie_present": false
-      }
-    },
-    "check_in_iw_custos": "2026-08-14T16:22:07Z",
-    "iron_status": "auto"
+    "evidence_urls": [
+      "https://youtube.com/watch?v=U4grYa3TpOk",
+      "https://youtube.com/watch?v=AT1xNZx6WkY",
+      "https://youtube.com/watch?v=htTx8WYCFrY",
+      "https://youtube.com/watch?v=1st_IbSGI00",
+      "https://youtube.com/watch?v=tBhHrmSpknM",
+      "https://youtube.com/watch?v=GVKhxokq6Iw",
+      "https://youtube.com/watch?v=0YltFauUK5o",
+      "https://youtube.com/watch?v=8qPE14EGm08",
+      "https://news.google.com/rss/articles/CBMingFBVV95cUxQOU9UYmh6ejB1QjF6S0RmNXgxclZVNFhDal9rcEx1d0M3VFdtZ3hWMEE2M1JGWXQwTlpLOTdIMzBZekhTTEQ2bU5PNzhPTUZtcHNTdEFKTklsWTdfbGNEQWNSVzFzblZzRlJJUzNWZVctMUdwZW92b2hfSEpiMHV5X0IxQmhCSEk0N1B4eUN1OVNKMnpqM216Z1Y4OTdOUdIBpgFBVV95cUxPcEVRN1QtR3M4U1Q1dGlfY2UxYmNmTHVraTRIdUsxTjRXei1DZURQR1d5QXh6cVdYZjBRTzc5ZnBmOGd2ZDFhV2N1R0FySXRlX2hzczBjUXZmMHBlckZGXzRpVUJXemR0eFE2NUdhRE9zVVRuMlIxWkRMeTV4RlA4NU9OZmdOVFlocjlTU3M4dEZRT2tsTldjOHpFdjRwZGk3WVJZY3FR?oc=5",
+      "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdVBhR1ZWYXZ4VTdQTHJEd05UVThob1haSTh2WkVjcnJlSkcxTlBlUmNuamdLNVpnT2RBZlVWUmJRUlNudWVjQ1dYd3FxVkQ0bEtZOFY3Wnh0dHRuX2xQVTcwaFBCMWhLUVNMMGRWMTdvT2owWEJCeG1qZ3pRZml6a3g0TUdBNThMalhuMEFDUDZkMWlDSWdPcVp5MDlsbVBoVmpjcjBKdzI?oc=5"
+    ],
+    "no_clip_downloaded": true,
+    "note": "Mode meme : F00 ne télécharge AUCUN clip. Ces stats servent à ANGLESMITH (5 angles) + F04 (textes) + F05 (pack)."
   },
+  "reference_clip_style": null,
+  "verdict": {},
   "platform_target": "youtube",
   "market_target": "us_young_english",
   "archivum": {

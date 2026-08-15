@@ -1,75 +1,90 @@
 {
-  "campaign_id": "NBA_WESTBROOK",
+  "campaign_id": "student debt",
   "n_angles": 5,
   "anglesmith_status": "done",
   "weighting_eligible": false,
-  "spin_humour_operateur": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress",
+  "sub_mode": "meme",
   "angles": [
     {
       "angle_id": "A01",
       "angle_family": "reframing",
-      "emotion_mode": "joie",
+      "emotion_mode": "poignant",
+      "emotion": "poignant",
       "engagement_type": "question",
-      "reframe_dim": "fait_vers_absurde",
+      "reframe_dim": "ordinaire_vers_extraordinaire",
       "zone": "direct",
-      "blue_ocean_reframe_applied": false,
-      "blue_ocean_depth": null,
-      "territory": null,
-      "weight": 1.0,
-      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
+      "keyword": "student debt",
+      "duration_sec_range": {
+        "min": 5,
+        "max": 7
+      },
+      "meme_hook": "[sujet] at school: -> [sujet] at home: (emotion: poignant)",
+      "weight": 1.0
     },
     {
       "angle_id": "A02",
       "angle_family": "reframing",
-      "emotion_mode": "joie",
-      "engagement_type": "confirmation",
-      "reframe_dim": "banal_vers_suspect",
+      "emotion_mode": "drole",
+      "emotion": "drole",
+      "engagement_type": "assertion",
+      "reframe_dim": "ordinaire_vers_extraordinaire",
       "zone": "direct",
-      "blue_ocean_reframe_applied": false,
-      "blue_ocean_depth": null,
-      "territory": null,
-      "weight": 1.0,
-      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
+      "keyword": "student debt",
+      "duration_sec_range": {
+        "min": 5,
+        "max": 7
+      },
+      "meme_hook": "[sujet] at school: -> [sujet] at home: (emotion: drole)",
+      "weight": 1.0
     },
     {
       "angle_id": "A03",
       "angle_family": "reframing",
-      "emotion_mode": "tension",
-      "engagement_type": "question",
-      "reframe_dim": "banal_vers_suspect",
+      "emotion_mode": "choc",
+      "emotion": "choc",
+      "engagement_type": "cliffhanger",
+      "reframe_dim": "ordinaire_vers_extraordinaire",
       "zone": "direct",
-      "blue_ocean_reframe_applied": false,
-      "blue_ocean_depth": null,
-      "territory": null,
-      "weight": 1.0,
-      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
+      "keyword": "student debt",
+      "duration_sec_range": {
+        "min": 5,
+        "max": 7
+      },
+      "meme_hook": "[sujet] at school: -> [sujet] at home: (emotion: choc)",
+      "weight": 1.0
     },
     {
       "angle_id": "A04",
       "angle_family": "reframing",
-      "emotion_mode": "tension",
-      "engagement_type": "confirmation",
-      "reframe_dim": "fait_vers_absurde",
+      "emotion_mode": "tendu",
+      "emotion": "tendu",
+      "engagement_type": "question",
+      "reframe_dim": "echec_vers_lecon",
       "zone": "direct",
-      "blue_ocean_reframe_applied": false,
-      "blue_ocean_depth": null,
-      "territory": null,
-      "weight": 1.0,
-      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
+      "keyword": "student debt",
+      "duration_sec_range": {
+        "min": 5,
+        "max": 7
+      },
+      "meme_hook": "[sujet] fails: -> [sujet] learns: (emotion: tendu)",
+      "weight": 1.0
     },
     {
       "angle_id": "A05",
-      "angle_family": "emotion",
-      "emotion_mode": "joie",
-      "engagement_type": "question",
-      "reframe_dim": "banal_vers_suspect",
+      "angle_family": "reframing",
+      "emotion_mode": "emerveille",
+      "emotion": "emerveille",
+      "engagement_type": "assertion",
+      "reframe_dim": "echec_vers_lecon",
       "zone": "direct",
-      "blue_ocean_reframe_applied": false,
-      "blue_ocean_depth": null,
-      "territory": null,
-      "weight": 1.0,
-      "humour_spin": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
+      "keyword": "student debt",
+      "duration_sec_range": {
+        "min": 5,
+        "max": 7
+      },
+      "meme_hook": "[sujet] fails: -> [sujet] learns: (emotion: emerveille)",
+      "weight": 1.0
     }
   ],
-  "check_in_iw_custos": null
+  "check_in_iw_custos": "2026-08-15T20:19:35Z"
 }

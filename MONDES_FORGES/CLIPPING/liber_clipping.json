@@ -1,37 +1,36 @@
 {
-  "siege_id": "siege_20260810_205150",
-  "campaign_id": "NBA_WESTBROOK",
-  "campaign_status": "active",
+  "siege_id": "siege_20260815_195037",
+  "campaign_id": null,
+  "campaign_status": "closed",
   "current_porte": "closed",
   "fleet_status": "capteurs_done",
   "mode": "logo",
   "inputs_warsmith": {
-    "directive_path": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
-    "reference_clip_path": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
+    "directive_path": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
+    "reference_clip_path": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
     "platform_target": "youtube",
     "market_target": "us_young_english",
-    "n_angles": 5,
-    "spin_humour": "la dette étudiante et la calvitie qui s'unissent pour augmenter mon stress"
+    "n_angles": 5
   },
   "fregates_status": {
-    "f01_scout": "done",
-    "f01_scout_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F01_SCOUT/OUT/source_specimen.json",
+    "f01_scout": "pending",
+    "f01_scout_output": null,
     "f02_tyrant_camp": "pending",
-    "f02_tyrant_camp_output": "pending",
-    "anglesmith": "pending",
-    "anglesmith_output": "pending",
+    "f02_tyrant_camp_output": null,
+    "anglesmith": "done",
+    "anglesmith_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json",
     "f03_source_hunter": "pending",
-    "f03_source_hunter_output": "pending",
+    "f03_source_hunter_output": null,
     "f04_copywriter": "done",
-    "f04_copywriter_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md",
+    "f04_copywriter_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md",
     "f05_packager": "done",
-    "f05_packager_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md",
+    "f05_packager_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md",
     "f06_tracker": "pending",
-    "f06_tracker_output": "pending",
+    "f06_tracker_output": null,
     "tyrant": "pending",
-    "tyrant_output": "pending",
+    "tyrant_output": null,
     "capteurs": "done",
-    "capteurs_output": "/tmp/opencode/perturabo/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md"
+    "capteurs_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_student_debt.md"
   },
   "portes_validated": [
     "1",
@@ -42,55 +41,71 @@
   "gate_decisions": {
     "gate_1": {
       "validated": true,
-      "notes": "verdict GO conforme directive, spin humour enregistre",
-      "timestamp": "2026-08-15T09:47:17Z"
+      "notes": "F00 scan meme student debt OK (MEME-dee7c660), 0 clip. Sujet Warsmith: S3 payer sa dette avec des videos de chats (1st_IbSGI00). Reddit 403 non bloquant. Validateur patché meme-aware (F01/F02 skip).",
+      "timestamp": "2026-08-15T20:10:37Z"
     },
     "gate_2": {
       "validated": true,
-      "notes": "5 angles forges autour du spin humour, registre humour-compatible",
-      "timestamp": "2026-08-15T09:47:31Z"
+      "notes": "ANGLESMITH 5 angles meme sur S3 (student debt / cat videos). Anti-spam 5 emotions distinctes OK, anti-cannibale OK, durée 5-7s.",
+      "timestamp": "2026-08-15T20:22:06Z"
     },
     "gate_3": {
       "validated": true,
-      "notes": "5 text_payload humour A01-A05, spin dette+calvitie applique, titres <=6 mots",
-      "timestamp": "2026-08-15T09:50:26Z"
+      "notes": "5 text_payloads meme forgés (premium z-ai/glm-5.2), garde-fous OK: titres<=6 mots, tweets<=3 lignes, reactions<=4 mots. A05 emotion poignant (A01 aussi poignant — OK anti-spam).",
+      "timestamp": "2026-08-15T20:28:13Z"
     },
     "gate_4": {
       "validated": true,
-      "notes": "pack humour LOGO-NBA_WESTBROOK, 5 videos, cut_source operator, spin humour applique",
-      "timestamp": "2026-08-15T09:51:36Z"
+      "notes": "Pack meme 5 videos (LOGO-SIEGE-siege_20260815_195037) valide schéma logo v2, montage_guide_ref 04_MODE_MEME.md, exporté EXPORT/production_pack_meme_student_debt.json. Prêt pour OMNIS_WATCH.",
+      "timestamp": "2026-08-15T20:37:55Z"
     }
   },
   "packs_expedies_count": 1,
   "packs_posted_count": 0,
   "packs_submitted_whop_count": 0,
-  "last_event": "2026-08-15T09:51:36Z",
-  "siege_started_at": "2026-08-10T20:51:50Z",
-  "siege_closed_at": null,
+  "last_event": "2026-08-15T20:57:36Z",
+  "siege_started_at": "2026-08-15T19:50:37Z",
+  "siege_closed_at": "2026-08-15T20:57:36Z",
   "log_event": [
     {
-      "at": "2026-08-15T09:47:17Z",
+      "at": "2026-08-15T19:50:37Z",
+      "event": "siege_started",
+      "angle_id": null
+    },
+    {
+      "at": "2026-08-15T19:50:37Z",
+      "event": "siege_started",
+      "angle_id": null
+    },
+    {
+      "at": "2026-08-15T20:10:37Z",
       "event": "gate_1_valide",
       "angle_id": null
     },
     {
-      "at": "2026-08-15T09:47:31Z",
+      "at": "2026-08-15T20:22:06Z",
       "event": "gate_2_valide",
       "angle_id": null
     },
     {
-      "at": "2026-08-15T09:50:26Z",
+      "at": "2026-08-15T20:28:13Z",
       "event": "gate_3_valide",
       "angle_id": null
     },
     {
-      "at": "2026-08-15T09:51:36Z",
+      "at": "2026-08-15T20:37:55Z",
       "event": "gate_4_valide",
+      "angle_id": null
+    },
+    {
+      "at": "2026-08-15T20:57:36Z",
+      "event": "campaign_closed",
       "angle_id": null
     }
   ],
   "iw_custos": {
-    "last_validation": "2026-08-15T10:12:43Z",
+    "last_validation": "2026-08-15T20:37:40Z",
     "errors": []
-  }
+  },
+  "final_payout_summary": "Siège student debt (mode meme) — 4 gates validées, pack 5 videos EXPORT/production_pack_meme_student_debt.json expédié OMNIS_WATCH. F06 tracker à lancer après publication."
 }

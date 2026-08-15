@@ -22,10 +22,10 @@
       "required": ["source_type", "reference"],
       "additionalProperties": false,
       "properties": {
-        "source_type": {"type": "string", "enum": ["youtube", "tiktok", "instagram", "custom_footage", "url"]},
-        "reference": {"type": "string", "_description": "URL ou fichier local"},
-        "celebrity_or_subject": {"type": "string"},
-        "niche": {"type": "string"},
+        "source_type": {"type": "string", "enum": ["youtube", "tiktok", "instagram", "custom_footage", "url", "meme_keyword"]},
+        "reference": {"type": "string", "_description": "URL ou fichier local (mode meme : vide — sources dans meme_source.virality_scan)"},
+        "celebrity_or_subject": {"type": ["string", "null"], "_description": "Mode meme : le mot-cle du siege"},
+        "niche": {"type": ["string", "null"], "_description": "Mode meme : niche derivee du mot-cle"},
         "duration_sec": {"type": ["number", "null"]},
         "timecodes": {"type": ["object", "null"]}
       }

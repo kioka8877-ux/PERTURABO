@@ -49,20 +49,39 @@ class GateValidator:
         except (OSError, json.JSONDecodeError):
             return "whop"
 
+    def _sub_mode(self) -> str:
+        """Sous-mode (meme | humour | informatif) — le mode meme est signalé par
+        ARCHIVUM/campaign/keyword.txt (doctrine F01/F03 SKIP)."""
+        kw_path = os.path.join(self.forge_root, "ARCHIVUM", "campaign", "keyword.txt")
+        if os.path.exists(kw_path):
+            try:
+                with open(kw_path, "r", encoding="utf-8") as f:
+                    if f.read().strip():
+                        return "meme"
+            except OSError:
+                pass
+        return ""
+
     def _resolve(self, rel: str) -> str:
         return os.path.join(self.forge_root, rel)
 
     def validate_porte(self, gate_id, n_angles: int = None) -> tuple[bool, list[str]]:
         gate_id = str(gate_id)
         missing = []
+        sub_mode = self._sub_mode()
 
         if gate_id == "1":
-            for rel in [
-                "F01_SCOUT/OUT/source_specimen.json",
-                "F02_TYRANT_CAMP/OUT/campaign_verdict.json",
-            ]:
-                if not os.path.exists(self._resolve(rel)):
-                    missing.append(rel)
+            # Mode meme : F01/F02 SKIP — le scan F00 meme_virality_*.json suffit.
+            if sub_mode == "meme":
+                if not glob.glob(self._resolve("F00_CAPTEURS/OUT/meme_virality_*.json")):
+                    missing.append("F00_CAPTEURS/OUT/meme_virality_<keyword>.json")
+            else:
+                for rel in [
+                    "F01_SCOUT/OUT/source_specimen.json",
+                    "F02_TYRANT_CAMP/OUT/campaign_verdict.json",
+                ]:
+                    if not os.path.exists(self._resolve(rel)):
+                        missing.append(rel)
 
         elif gate_id == "2":
             candidates = [
