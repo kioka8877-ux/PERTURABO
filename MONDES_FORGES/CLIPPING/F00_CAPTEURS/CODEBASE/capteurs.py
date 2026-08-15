@@ -45,6 +45,7 @@ from f00_rss_ingestor import scan as rss_scan
 from f00_trends_ingestor import scan as trends_scan
 from f00_youtube_ingestor import scan as youtube_scan
 from f00_suggestions_ingestor import scan as suggestions_scan
+from f00_reddit_ingestor import scan as reddit_scan
 from f00_virality_scorer import score_subject, score_subject_from_metrics
 from f00_premium_synth import synthesize as premium_synthesize
 
@@ -637,6 +638,189 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
 
 
 # ----------------------------------------------------------------------
+# Mode MEME — scan de viralité par mot-clé (multi-sources, sans clip)
+# ----------------------------------------------------------------------
+_MEME_SOURCES = {
+    "youtube": "vues réelles YouTube (search + stats API)",
+    "trends": "Google Trends (RSS global US + courbe 7j si pytrends)",
+    "rss": "Google News RSS (fraîcheur + couverture médias)",
+    "reddit": "Reddit search top (score + commentaires)",
+    "suggest": "Google Suggest ds=yt (demande réelle tapée)",
+}
+
+
+def cmd_scan_meme(args):
+    """Scan de viralité pour le mode meme : TOUTES les sources, aucun clip
+    téléchargé. Produit OUT/meme_virality_<keyword>.json + .md, consommé
+    par ANGLESMITH (Gate 2) pour forger les 5 angles."""
+    guard_campaign_open()
+
+    keyword = (args.keyword or "").strip()
+    if not keyword:
+        print("[F00_CAPTEURS] --keyword requis pour --scan-meme")
+        sys.exit(1)
+
+    requested = [s.strip() for s in (args.sources or "youtube trends rss reddit suggest").split()]
+    sources = [s for s in requested if s in _MEME_SOURCES]
+    skipped = [s for s in requested if s not in _MEME_SOURCES]
+    for s in skipped:
+        print(f"[F00_CAPTEURS] Source inconnue: {s} — ignorée "
+              f"(disponibles: {', '.join(sorted(_MEME_SOURCES))})")
+
+    keywords = [keyword] + _derive_keywords(keyword)[:3]
+    keywords = list(dict.fromkeys(kw for kw in keywords if kw))[:6]
+
+    signals = {"sources_scanned": [], "signals": {}}
+    print(f"[F00_CAPTEURS] Scan meme keyword='{keyword}' sources={sources}")
+
+    if "youtube" in sources:
+        yt = youtube_scan(keywords, max_results=args.max_videos)
+        signals["signals"]["signal_vues_youtube"] = yt
+        signals["sources_scanned"].append("youtube")
+    if "trends" in sources:
+        tr = trends_scan(keywords)
+        signals["signals"]["signal_tendance"] = tr
+        signals["sources_scanned"].append("trends")
+    if "rss" in sources:
+        rs = rss_scan(keywords, freshness=args.freshness, max_items=args.max_items)
+        signals["signals"]["signal_fraicheur_couverture"] = rs
+        signals["sources_scanned"].append("rss")
+    if "reddit" in sources:
+        rd = reddit_scan(keywords, max_items=args.max_items)
+        signals["signals"]["signal_reddit_viralite"] = rd
+        signals["sources_scanned"].append("reddit")
+    if "suggest" in sources:
+        sg = suggestions_scan(keywords)
+        signals["signals"]["signal_demande"] = sg
+        signals["sources_scanned"].append("suggest")
+
+    evidence_urls = _meme_evidence_urls(signals)
+    scan_id = f"MEME-{uuid.uuid4().hex[:8]}"
+    out = {
+        "scan_id": scan_id,
+        "keyword": keyword,
+        "scanned_at": now_iso(),
+        "sources_scanned": signals["sources_scanned"],
+        "sources_available": _MEME_SOURCES,
+        "signals": signals["signals"],
+        "evidence_urls": evidence_urls,
+        "no_clip_downloaded": True,
+        "note": ("Mode meme : F00 ne télécharge AUCUN clip. Ces stats servent "
+                 "à ANGLESMITH (5 angles) + F04 (textes) + F05 (pack)."),
+    }
+
+    safe_key = re.sub(r"[^a-z0-9]+", "_", keyword.lower()).strip("_") or "keyword"
+    out_json = os.path.join(OUT_DIR, f"meme_virality_{safe_key}.json")
+    save_json(out_json, out)
+
+    md_path = _write_meme_virality_md(out, safe_key)
+    print(f"[F00_CAPTEURS] Scan meme {scan_id} — {out_json}")
+    print(f"[F00_CAPTEURS] {len(evidence_urls)} preuve(s) URL — "
+          f"{md_path} (ANGLESMITH Gate 2 peut forger les angles)")
+
+    custos = os.path.join(_FORGE_ROOT, "IW_CUSTOS.py")
+    if os.path.exists(custos):
+        subprocess.run([sys.executable, custos, "--mode", "check-in",
+                        "--frigate", "CAPTEURS", "--output", md_path],
+                       capture_output=True, text=True, timeout=30)
+    print("[F00_CAPTEURS] check-in IW_CUSTOS — le Warsmith peut valider la Gate 1.")
+
+
+def _meme_evidence_urls(signals: dict) -> list[str]:
+    """Collecte les URLs réelles des signaux (vues/tendance/demande)."""
+    urls: list[str] = []
+    yt = (signals.get("signals") or {}).get("signal_vues_youtube") or {}
+    for v in ((yt.get("search") or {}).get("videos", []) or []):
+        vid = v.get("video_id")
+        if vid:
+            urls.append(f"https://youtube.com/watch?v={vid}")
+    rss = (signals.get("signals") or {}).get("signal_fraicheur_couverture") or {}
+    for a in (rss.get("fresh_articles") or [])[:6]:
+        if a.get("link"):
+            urls.append(a["link"])
+    red = (signals.get("signals") or {}).get("signal_reddit_viralite") or {}
+    for p in (red.get("posts") or [])[:6]:
+        if p.get("permalink"):
+            urls.append(p["permalink"])
+    return list(dict.fromkeys(urls))[:15]
+
+
+def _write_meme_virality_md(out: dict, safe_key: str) -> str:
+    signals = out.get("signals") or {}
+    yt = signals.get("signal_vues_youtube") or {}
+    tr = signals.get("signal_tendance") or {}
+    rs = signals.get("signal_fraicheur_couverture") or {}
+    rd = signals.get("signal_reddit_viralite") or {}
+    sg = signals.get("signal_demande") or {}
+
+    lines = [
+        "# F00_CAPTEURS — Scan viralité MEME",
+        "",
+        f"- Scan : {out['scan_id']}",
+        f"- Date : {out['scanned_at']}",
+        f"- Keyword : **{out['keyword']}**",
+        f"- Sources scannées : {', '.join(out['sources_scanned'])}",
+        f"- Clip téléchargé : NON (mode meme)",
+        "",
+        "## Signal vues YouTube",
+    ]
+    yt_videos = ((yt.get("search") or {}).get("videos") or []) if yt.get("status") == "ok" else []
+    if yt_videos:
+        for v in yt_videos[:8]:
+            lines.append(f"- {v.get('view_count', 0):,} vues | {v.get('title', '')[:60]} "
+                         f"| {v.get('channel', '')} (youtube.com/watch?v={v.get('video_id')})")
+    else:
+        lines.append(f"- {yt.get('status', '?')}: {yt.get('error', 'aucun signal')}")
+
+    lines += ["", "## Signal tendance Google Trends"]
+    tr_rss = (tr.get("global_trending_rss") or {}).get("trending", []) or []
+    if tr_rss:
+        for t in tr_rss[:6]:
+            lines.append(f"- {t.get('query')} ({t.get('approx_traffic_raw', '?')})")
+    else:
+        curves = (tr.get("keyword_curves") or {}).get("keywords", {}) or {}
+        for kw, c in list(curves.items())[:4]:
+            lines.append(f"- {kw}: growth x{c.get('growth_multiplier')} "
+                         f"(trending: {c.get('is_trending')})")
+
+    lines += ["", "## Signal fraîcheur + couverture (Google News)"]
+    for a in (rs.get("fresh_articles") or [])[:6]:
+        lines.append(f"- {a.get('title', '')[:70]} ({a.get('source', '?')}) "
+                     f"[{a.get('age_hours')}h]")
+    if not rs.get("fresh_articles"):
+        lines.append(f"- {rs.get('status', '?')}: {rs.get('error', 'aucun article frais')}")
+
+    lines += ["", "## Signal Reddit (viralité US)"]
+    for p in (rd.get("posts") or [])[:6]:
+        lines.append(f"- r/{p.get('subreddit', '?')} | score {p.get('score', 0)} "
+                     f"| {p.get('title', '')[:60]} ({p.get('permalink', '')})")
+    if not rd.get("posts"):
+        lines.append(f"- {rd.get('status', '?')}: {rd.get('error', 'aucun post')}")
+
+    lines += ["", "## Signal demande (Google Suggest ds=yt)"]
+    for kw in (sg.get("keywords") or [])[:4]:
+        suggs = ", ".join((kw.get("suggestions") or [])[:4])
+        lines.append(f"- {kw.get('query')} (demand_score {kw.get('demand_score')}): {suggs}")
+
+    lines += ["", "## Preuves URL (evidence)",
+              "", "| Source | URL |", "|---|---|"]
+    for u in out.get("evidence_urls", [])[:15]:
+        lines.append(f"| youtube/reddit/news | {u} |")
+    lines += [
+        "",
+        "> ANGLESMITH (Gate 2) forge 5 angles sur ces seules stats réelles. "
+        "F04 (Gate 3) forge le texte par angle.",
+        "",
+        "*Fer au-dedans, Fer au-dehors.*",
+        "",
+    ]
+    path = os.path.join(OUT_DIR, f"meme_virality_{safe_key}.md")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    return path
+
+
+# ----------------------------------------------------------------------
 # Livraison du sujet choisi (Porte du Warsmith)
 # ----------------------------------------------------------------------
 _CAMPAIGN_DIR = os.path.join(ARCHIVUM_DIR, "campaign")
@@ -919,6 +1103,13 @@ def main():
                         help="Chemin vers la proposition (défaut EXPORT/subjects_proposal.json)")
     parser.add_argument("--campaign-id", default=None,
                         help="Campaign ID explicite (défaut: NICHE_TAG dérivé)")
+    parser.add_argument("--scan-meme", action="store_true",
+                        help="F00 mode meme: scan viralité multi-sources par "
+                             "mot-clé, SANS télécharger de clip")
+    parser.add_argument("--keyword", default=None,
+                        help="Mot-clé du siège (mode meme)")
+    parser.add_argument("--sources", default=None,
+                        help="Sources à scanner (défaut: youtube trends rss reddit suggest)")
     args = parser.parse_args()
 
     if args.scan:
@@ -931,6 +1122,8 @@ def main():
         cmd_scan_demons(args)
     elif args.scrap_youtube:
         cmd_scrap_youtube(args)
+    elif args.scan_meme:
+        cmd_scan_meme(args)
     elif args.scan_subjects:
         cmd_scan_subjects(args)
     elif args.deliver_subject:

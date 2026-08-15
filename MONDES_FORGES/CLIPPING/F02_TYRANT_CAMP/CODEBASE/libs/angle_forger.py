@@ -42,6 +42,21 @@ _HUMOUR_REFRAMES = ["fait_vers_absurde", "banal_vers_suspect"]
 
 _MIN_DIFFERENT_AXES = 2
 
+# Mode MEME : emotions pop-culture (regle anti-spam : 2 max par emotion)
+_MEME_EMOTIONS = [
+    "poignant", "drole", "choc", "tendu", "emerveille",
+    "nostalgique", "absurde", "fier", "indigne", "tendre",
+]
+_MEME_REFRAFES = [
+    "ordinaire_vers_extraordinaire",
+    "echec_vers_lecon",
+    "fait_vers_absurde",
+    "banal_vers_suspect",
+    "cache_vers_revele",
+    "seul_vers_communaute",
+]
+_MEME_DURATION_DEFAULT = (5, 7)
+
 
 class AngleForger:
     def __init__(self):
@@ -144,3 +159,81 @@ class AngleForger:
                         idx += 1
 
         return angles[:n]
+
+    # ------------------------------------------------------------------
+    def forge_meme(self, n: int, campaign_id: str,
+                   keyword: str, virality: dict = None) -> list[dict]:
+        """Mode MEME : 5 angles forgés sur les stats réelles du scan F00
+        (jamais sur un clip téléchargé). Chaque angle porte :
+          - emotion        : emotion pop-culture (anti-spam, 2 max par emotion)
+          - duration_sec_range : fourchette (défaut 5-7s)
+          - meme_hook      : direction du fake post (A->B) suggérée
+        Règle anti-spam : une même emotion au maximum 2 angles sur les 5."""
+        virality = virality or {}
+        # Calibration durée depuis la fourchette demandée (ou défaut 5-7s)
+        dur = virality.get("duration_range_sec") or {}
+        if isinstance(dur, (list, tuple)):
+            dur = {"min": dur[0], "max": dur[1]}
+        dur_lo = int(dur.get("min") or _MEME_DURATION_DEFAULT[0])
+        dur_hi = int(dur.get("max") or _MEME_DURATION_DEFAULT[1])
+
+        emotions = list(_MEME_EMOTIONS)
+        angles = []
+        idx = 1
+        emotion_count: dict[str, int] = {}
+
+        for family in ["reframing", "emotion", "engagement"]:
+            for reframe in _MEME_REFRAFES:
+                if idx > n:
+                    break
+                for engagement in ["question", "assertion", "cliffhanger"]:
+                    if idx > n:
+                        break
+                    # Choix d'émotion : priorité aux moins utilisées,
+                    # jamais plus de 2 angles avec la même emotion
+                    available = [e for e in emotions
+                                 if emotion_count.get(e, 0) < 2]
+                    if not available:
+                        available = [e for e, c in emotion_count.items()
+                                     if c < 2]
+                    emotion = available[(idx - 1) % len(available)] \
+                        if available else emotions[0]
+                    emotion_count[emotion] = emotion_count.get(emotion, 0) + 1
+
+                    candidate = {
+                        "angle_id": f"A{idx:02d}",
+                        "angle_family": family,
+                        "emotion_mode": emotion,
+                        "emotion": emotion,
+                        "engagement_type": engagement,
+                        "reframe_dim": reframe,
+                        "zone": "direct",
+                        "keyword": keyword,
+                        "duration_sec_range": {"min": dur_lo, "max": dur_hi},
+                        "meme_hook": _meme_hook(reframe, emotion),
+                        "weight": 1.0,
+                    }
+                    if self._anti_cannibale(angles, candidate):
+                        angles.append(candidate)
+                        idx += 1
+                if idx > n:
+                    break
+            if idx > n:
+                break
+
+        return angles[:n]
+
+
+def _meme_hook(reframe: str, emotion: str) -> str:
+    """Direction de fake post A->B suggérée pour le reframe/émotion."""
+    hooks = {
+        "ordinaire_vers_extraordinaire": "[sujet] at school: -> [sujet] at home:",
+        "echec_vers_lecon": "[sujet] fails: -> [sujet] learns:",
+        "fait_vers_absurde": "[sujet] said it: -> [sujet] actually did it:",
+        "banal_vers_suspect": "[sujet] looks normal: -> [sujet] is NOT normal:",
+        "cache_vers_revele": "[sujet] before: -> [sujet] after:",
+        "seul_vers_communaute": "[sujet] alone: -> [sujet] with everyone:",
+    }
+    base = hooks.get(reframe,
+                     "[sujet] at [A]: -> [sujet] at [B]:")
+    return f"{base} (emotion: {emotion})"

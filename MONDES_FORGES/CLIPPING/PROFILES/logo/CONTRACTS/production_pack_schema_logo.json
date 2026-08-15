@@ -13,8 +13,8 @@
     "mode": {"type": "string", "const": "logo"},
     "sub_mode": {
       "type": "string",
-      "enum": ["informatif", "humour"],
-      "_description": "informatif = article + video background. humour = blague/meme + cuts operateur."
+      "enum": ["informatif", "humour", "meme"],
+      "_description": "informatif = article + video background. humour = blague/meme + cuts operateur. meme = mot-cle viral, pas de clip fourni : pack = textes + emotion + duree fourchette + reference au guide 04_MODE_MEME.md. F01/F03 SKIP. OMNIS_WATCH charge le guide pour le montage."
     },
     "clip_source_ref": {
       "type": "object",
@@ -48,6 +48,35 @@
         "text": {"type": "string"},
         "meme_type": {"type": "string", "enum": ["tweet", "reddit", "citation", "texte"]},
         "reference": {"type": "string"}
+      }
+    },
+    "meme_source": {
+      "type": ["object", "null"],
+      "_description": "Mode meme : le mot-cle venu du Warsmith + la scan viralite F00 (multi-sources, sans clip telecharge). Pack = textes + emotion + duree + reference guide 04_MODE_MEME.md. F01/F03 SKIP.",
+      "additionalProperties": false,
+      "required": ["keyword"],
+      "properties": {
+        "keyword": {"type": "string", "_description": "Mot-cle fourni par l'operateur"},
+        "virality_scan": {
+          "type": ["object", "null"],
+          "_description": "Ce qui est viral US pour ce mot-cle : sources reelles (YouTube stats, Google Trends, RSS, Reddit...). Jamais invente.",
+          "properties": {
+            "sources_scanned": {"type": "array", "items": {"type": "string"}},
+            "signals": {"type": "object", "additionalProperties": true},
+            "evidence_urls": {"type": "array", "items": {"type": "string"}},
+            "scanned_at": {"type": "string"}
+          }
+        },
+        "montage_guide_ref": {
+          "type": "string",
+          "_description": "Chemin du guide de montage charge par OMNIS_WATCH (doctrine 6 couches).",
+          "const": "GUIDE_UTILISATION/04_MODE_MEME.md"
+        },
+        "duration_range_sec": {
+          "type": ["object", "null"],
+          "properties": {"min": {"type": "integer"}, "max": {"type": "integer"}},
+          "_description": "Fourchette de duree recommandee (default 5-7s)."
+        }
       }
     },
     "reference_clip_style": {
@@ -142,7 +171,24 @@
             "type": "string",
             "_description": "Le logo appartient a la campagne (image transparente). Perturabo instruit OMNIS_WATCH d'utiliser cette image transparente contenant le logo (placement campagne 1080x1920)."
           },
-          "on_screen_text": {"type": ["string", "null"]}
+          "on_screen_text": {"type": ["string", "null"]},
+          "tweet_text": {
+            "type": ["string", "null"],
+            "_description": "Mode meme : le fake tweet (max 3 lignes) affiche comme faux post quart haut."
+          },
+          "reaction_text": {
+            "type": ["string", "null"],
+            "_description": "Mode meme : le texte d'emotion au milieu (max 4 mots)."
+          },
+          "emotion": {
+            "type": ["string", "null"],
+            "_description": "Mode meme : l'emotion de cet angle (anti-spam : max 2 angles avec la meme emotion)."
+          },
+          "duration_sec_range": {
+            "type": ["object", "null"],
+            "properties": {"min": {"type": "integer"}, "max": {"type": "integer"}},
+            "_description": "Mode meme : fourchette de duree pour cet angle (defaut 5-7s)."
+          }
         }
       }
     },

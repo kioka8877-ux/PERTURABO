@@ -174,16 +174,24 @@ def _logo_campaign_inputs() -> dict:
                 campaign[name.replace(".json", "")] = load_json(path)
             except Exception:
                 campaign[name.replace(".json", "")] = {}
+    kw_path = os.path.join(ARCHIVUM_DIR, "campaign", "keyword.txt")
+    if os.path.exists(kw_path):
+        try:
+            campaign["keyword"] = read_text(kw_path).strip()
+        except OSError:
+            campaign["keyword"] = None
     return campaign
 
 
 def _detect_sub_mode(args) -> str:
     sm = (getattr(args, "sub_mode", None) or "").lower()
-    if sm in ("informatif", "humour"):
+    if sm in ("informatif", "humour", "meme"):
         return sm
     campaign = _logo_campaign_inputs()
     if campaign.get("joke_source"):
         return "humour"
+    if campaign.get("keyword"):
+        return "meme"
     return "informatif"
 
 
@@ -224,7 +232,7 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
 
     meta = raw.get("metadata") or {}
     description = str(meta.get("description") or viral).strip()
-    if sub_mode == "informatif":
+    if sub_mode in ("informatif", "meme"):
         lower = description.lower()
         if "fair use" not in lower and "illustration" not in lower:
             description = f"{description}\n\n{FAIR_USE_NOTE}".strip()
@@ -251,11 +259,70 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
                           or angle.get("on_screen_text"),
         "check_in_iw_custos": None,
     }
+
+    if sub_mode == "meme":
+        tweet = str(raw.get("tweet_text") or "").strip()
+        tweet_lines = len(tweet.splitlines()) if tweet else 0
+        if tweet_lines > 3:
+            notes.append(f"tweet {tweet_lines} lignes > 3 — tronqué à 3")
+            tweet = "\n".join(tweet.splitlines()[:3])
+        reaction = str(raw.get("reaction_text") or "").strip()
+        reaction_words = len(reaction.split()) if reaction else 0
+        if reaction_words > 4:
+            notes.append(f"reaction {reaction_words} mots > 4 — tronqué à 4")
+            reaction = " ".join(reaction.split()[:4])
+        emotion = str(raw.get("emotion")
+                      or angle.get("emotion")
+                      or angle.get("emotion_mode")
+                      or "").strip()
+        dur = raw.get("duration_sec_range") or angle.get("duration_sec_range") or {}
+        payload["tweet_text"] = tweet or None
+        payload["reaction_text"] = reaction or None
+        payload["emotion"] = emotion or None
+        payload["duration_sec_range"] = {
+            "min": int(dur.get("min", 5)),
+            "max": int(dur.get("max", 7)),
+        }
+
     return payload, notes
+
+
+def _meme_heresies(sub_mode: str) -> list[str]:
+    if sub_mode != "meme":
+        return [
+            "Abonne-toi / Like et partage / Swipe up",
+            "Titre > 6 mots",
+            "Paragraphe > 4 lignes",
+            "Mentionner que le clip est un background (l'audience ne doit pas le voir)",
+            "Fabrication de faits absents de l'article",
+        ]
+    return [
+        "Abonne-toi / Like et partage / Swipe up",
+        "tweet_text > 3 lignes",
+        "reaction_text > 4 mots",
+        "Titre en haut > 6 mots (ou clickbait vide sans payoff)",
+        "URL de meme / vidéo dans le pack (les sources restent dans le scan F00)",
+        "Inventer une stat virale absente du scan F00",
+        "Timecodes / segments de coupe (F01/F03 sont SKIP en mode meme)",
+    ]
 
 
 def _render_logo_md(payload: dict) -> str:
     meta = payload.get("metadata", {})
+    if payload.get("sub_mode") == "meme":
+        dur = payload.get("duration_sec_range") or {}
+        return (
+            f"# Pack texte LOGO MEME — {payload.get('angle_id')}\n\n"
+            f"**Titre en haut (si nécessaire, ≤6 mots)** : "
+            f"{payload.get('title') or '—'}\n\n"
+            f"**Fake tweet (max 3 lignes)** :\n{payload.get('tweet_text') or '—'}\n\n"
+            f"**Texte d'émotion (max 4 mots)** : {payload.get('reaction_text') or '—'}\n"
+            f"**Émotion** : {payload.get('emotion') or '—'}\n"
+            f"**Durée (s)** : {dur.get('min', 5)}-{dur.get('max', 7)}s\n\n"
+            f"**Metadata** :\n- Title : {meta.get('title')}\n"
+            f"- Description :\n{meta.get('description')}\n"
+            f"- Tags : {', '.join(meta.get('tags', []))}\n"
+        )
     return (
         f"# Pack texte LOGO — {payload.get('angle_id')}\n\n"
         f"**Titre viral ({LOGO_MAX_TITLE_WORDS} mots max)** :\n{payload.get('title')}\n\n"
@@ -612,6 +679,9 @@ def cmd_setup_context_logo(args):
     platform, market = warsmith_targets(args)
     campaign = _logo_campaign_inputs()
 
+    if sub_mode == "meme":
+        campaign["meme_source"] = _load_meme_scan()
+
     builder = ContextBuilder(_FORGE_ROOT)
     context = builder.build_logo(angle, sub_mode, campaign, verdict,
                                  platform, market)
@@ -620,6 +690,20 @@ def cmd_setup_context_logo(args):
     print(f"[F04:LOGO] Phase A : {out} ({os.path.getsize(out)//1024} KB)")
     print(f"[F04:LOGO] Angle {args.angle} — sub_mode {sub_mode} — {platform} / {market}")
     print("[F04:LOGO] Lancer --generate pour la Phase B (premium direct)")
+
+
+def _load_meme_scan() -> dict:
+    """Charge le scan viralité F00 le plus récent (mode meme)."""
+    f00_out = os.path.join(_FORGE_ROOT, "F00_CAPTEURS", "OUT")
+    candidates = sorted(
+        f for f in os.listdir(f00_out)
+        if f.startswith("meme_virality_") and f.endswith(".json")
+    ) if os.path.isdir(f00_out) else []
+    if not candidates:
+        print("[F04:LOGO] Aucun scan meme F00 — contexte meme sans stats "
+              "(F00 --scan-meme requis en Gate 1)")
+        return {}
+    return load_json(os.path.join(f00_out, candidates[-1]))
 
 
 def cmd_generate_logo(args):
@@ -632,16 +716,32 @@ def cmd_generate_logo(args):
     system_prompt = (
         "Tu es F04_COPYWRITER, frégate copywriting du forge CLIPPING — profil LOGO. "
         "Le clip source est FOURNI par le Warsmith et ne sert que d'illustration "
-        "(aucun lien avec le sujet). Tu forges le pack texte d'une video virale. "
-        "Réponds en JSON strict conforme à l'output_schema. Contraintes: titre "
+        "(aucun lien avec le sujet) — sauf mode meme où AUCUN clip n'est fourni "
+        "(le mot-clé + les stats F00 font foi). Tu forges le pack texte d'une video "
+        "virale. Réponds en JSON strict conforme à l'output_schema. Contraintes: titre "
         f"{LOGO_MAX_TITLE_WORDS} mots max, paragraphe {LOGO_MAX_PARAGRAPH_LINES} "
         "lignes max, description en 2 paragraphes (résumé + note fair use) en mode "
-        "informatif, jamais de 'abonne-toi'."
-        " IMPORTANT: Écris TOUT (titres, paragraphe, description, tags, on-screen) "
-        "en ANGLAIS, même si l'article source est dans une autre langue."
+        "informatif/meme, jamais de 'abonne-toi'."
+        " IMPORTANT: Écris TOUT (titres, paragraphe, tweet, reaction, description, "
+        "tags, on-screen) en ANGLAIS, même si l'article source est dans une autre langue."
     )
 
-    if sub_mode == "humour":
+    if sub_mode == "meme":
+        keyword = (context.get("keyword")
+                   or (context.get("clip_source_ref") or {}).get("keyword")
+                   or "inconnu")
+        mission = (
+            "Mode MEME : à partir du mot-clé viral et des stats réelles du "
+            "scan F00, forge pour CET angle : 1) title (le titre en haut, "
+            "max 6 mots, SI nécessaire seulement — jamais de clickbait vide), "
+            "2) tweet_text (le FAKE tweet du faux post, format X/Twitter, max "
+            "3 lignes, mots-clés colorables vert/rouge), 3) reaction_text (le "
+            "texte d'émotion du milieu, max 4 mots). Tout en ANGLAIS."
+            " La video est montee par OMNIS_WATCH selon la doctrine 6 couches "
+            "de GUIDE_UTILISATION/04_MODE_MEME.md (setup/faux post, preuve, "
+            "label A->B, reacteur pop-culture, pivot 50-55%, watermark)."
+        )
+    elif sub_mode == "humour":
         mission = (
             "Mode HUMOUR : corrige la blague fournie (grammaire + langue cible, "
             "sans titre inventé), puis forge une variante pour CET angle (N blagues "
@@ -666,6 +766,31 @@ def cmd_generate_logo(args):
             "jamais de moquerie diffamatoire."
         )
 
+    if sub_mode == "meme":
+        output_schema = {
+            "title": "titre en haut (max 6 mots, SI nécessaire) ou null",
+            "tweet_text": "fake tweet du faux post (max 3 lignes)",
+            "reaction_text": "texte d'émotion du milieu (max 4 mots)",
+            "emotion": "l'émotion de l'angle (ex: poignant, drole, choc, tendu)",
+            "duration_sec_range": {"min": 5, "max": 7},
+            "metadata": {
+                "title": "titre metadata YouTube",
+                "description": "résumé 2 lignes + clause 107 fair use",
+                "tags": ["tag1", "tag2"],
+            },
+        }
+    else:
+        output_schema = {
+            "title": "titre viral (6 mots max)",
+            "viral_paragraph": "paragraphe viral (4 lignes max)",
+            "metadata": {
+                "title": "titre metadata",
+                "description": "résumé 2 lignes + paragraphe fair use",
+                "tags": ["tag1", "tag2"],
+            },
+            "on_screen_text": "texte court ou null",
+        }
+
     user_prompt = {
         "mission": mission,
         "campaign_id": context.get("campaign_id"),
@@ -680,24 +805,15 @@ def cmd_generate_logo(args):
         "platform_target": platform,
         "market_target": market,
         "archivum": context.get("archivum"),
-        "output_schema": {
-            "title": "titre viral (6 mots max)",
-            "viral_paragraph": "paragraphe viral (4 lignes max)",
-            "metadata": {
-                "title": "titre metadata",
-                "description": "résumé 2 lignes + paragraphe fair use",
-                "tags": ["tag1", "tag2"],
-            },
-            "on_screen_text": "texte court ou null",
-        },
-        "heresies_interdites": [
-            "Abonne-toi / Like et partage / Swipe up",
-            "Titre > 6 mots",
-            "Paragraphe > 4 lignes",
-            "Mentionner que le clip est un background (l'audience ne doit pas le voir)",
-            "Fabrication de faits absents de l'article",
-        ],
+        "output_schema": output_schema,
+        "heresies_interdites": _meme_heresies(sub_mode),
     }
+
+    if sub_mode == "meme":
+        user_prompt["keyword"] = context.get("keyword")
+        user_prompt["meme_source"] = context.get("meme_source")
+        user_prompt["montage_guide_ref"] = (
+            "GUIDE_UTILISATION/04_MODE_MEME.md")
 
     client = PremiumClient(_FORGE_ROOT)
     if getattr(args, "dry_run", False):
@@ -839,7 +955,7 @@ def main():
     parser.add_argument("--force", action="store_true",
                         help="Init system prompt malgré un fichier déjà figé / placeholder")
     parser.add_argument("--sub-mode", default=None,
-                        help="Mode LOGO: informatif | humour (auto-détecté sinon)")
+                        help="Mode LOGO: informatif | humour | meme (auto-détecté sinon)")
     args = parser.parse_args()
 
     try:

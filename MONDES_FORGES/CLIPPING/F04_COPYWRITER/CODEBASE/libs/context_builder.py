@@ -155,6 +155,8 @@ class ContextBuilder:
             "clip_source_ref": campaign.get("reference_clip"),
             "article_source": campaign.get("article_source"),
             "joke_source": campaign.get("joke_source"),
+            "keyword": campaign.get("keyword"),
+            "meme_source": campaign.get("meme_source"),
             "reference_clip_style": campaign.get("reference_clip_style"),
             "verdict": verdict,
             "platform_target": platform,

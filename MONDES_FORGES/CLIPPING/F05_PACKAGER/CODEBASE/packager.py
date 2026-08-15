@@ -87,6 +87,33 @@ def resolve_schema_path() -> str:
     return SCHEMA_PATH
 
 
+def _load_latest_meme_scan() -> dict:
+    """Charge le scan viralité F00 le plus récent (mode meme)."""
+    f00_out = os.path.join(_FORGE_ROOT, "F00_CAPTEURS", "OUT")
+    candidates = sorted(
+        f for f in os.listdir(f00_out)
+        if f.startswith("meme_virality_") and f.endswith(".json")
+    ) if os.path.isdir(f00_out) else []
+    if not candidates:
+        return {}
+    try:
+        return load_json(os.path.join(f00_out, candidates[-1]))
+    except Exception:
+        return {}
+
+
+def _load_campaign_keyword() -> str:
+    """Le mot-clé du siège (mode meme) depuis ARCHIVUM/campaign/keyword.txt."""
+    path = os.path.join(ARCHIVUM_DIR, "campaign", "keyword.txt")
+    if not os.path.exists(path):
+        return ""
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    except OSError:
+        return ""
+
+
 def _load_campaign_file(name: str) -> dict:
     path = os.path.join(ARCHIVUM_DIR, "campaign", name)
     if os.path.exists(path):
@@ -153,6 +180,8 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
     viral_paragraph = (payload.get("viral_paragraph")
                        or payload.get("body") or angle.get("body") or "")
     metadata = payload.get("metadata") or {}
+    if sub_mode == "meme" and not title:
+        title = metadata.get("title") or payload.get("reaction_text") or ""
     if not metadata:
         description = viral_paragraph or ""
         if description:
@@ -164,7 +193,7 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
             "description": description,
             "tags": (payload.get("tags") or angle.get("seo_tags") or []),
         }
-    return {
+    asset = {
         "video_index": video_index,
         "angle_id": angle_id,
         "title": title or "",
@@ -175,6 +204,19 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
         "on_screen_text": (payload.get("on_screen_text")
                             or angle.get("on_screen_text")),
     }
+    if sub_mode == "meme":
+        dur = (payload.get("duration_sec_range")
+               or angle.get("duration_sec_range") or {})
+        asset["tweet_text"] = payload.get("tweet_text")
+        asset["reaction_text"] = payload.get("reaction_text")
+        asset["emotion"] = (payload.get("emotion")
+                            or angle.get("emotion")
+                            or angle.get("emotion_mode"))
+        asset["duration_sec_range"] = {
+            "min": int(dur.get("min", 5)),
+            "max": int(dur.get("max", 7)),
+        }
+    return asset
 
 
 _ANGLE_KEEP = ["angle_id", "genre", "title", "body", "on_screen_text",
@@ -222,7 +264,7 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
     campaign_id = verdict.get("campaign_id") or (angles[0].get("campaign_id") if angles else None)
     pack_id = f"LOGO-{campaign_id or 'SIEGE'}-{siege_id or 'X'}"
 
-    return {
+    pack = {
         "pack_id": pack_id,
         "siege_id": siege_id or "",
         "mode": "logo",
@@ -240,6 +282,26 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
             "seo_optimized": True,
         },
     }
+    if sub_mode == "meme":
+        scan = campaign.get("meme_source") or _load_latest_meme_scan()
+        dur = (scan or {}).get("duration_range_sec")
+        pack["meme_source"] = {
+            "keyword": (campaign.get("keyword")
+                        or (scan or {}).get("keyword")
+                        or angles[0].get("keyword")),
+            "virality_scan": {
+                "sources_scanned": (scan or {}).get("sources_scanned", []),
+                "signals": (scan or {}).get("signals", {}),
+                "evidence_urls": (scan or {}).get("evidence_urls", []),
+                "scanned_at": (scan or {}).get("scanned_at"),
+            } if scan else None,
+            "montage_guide_ref": "GUIDE_UTILISATION/04_MODE_MEME.md",
+            "duration_range_sec": {
+                "min": int((dur or {}).get("min", 5)),
+                "max": int((dur or {}).get("max", 7)),
+            },
+        }
+    return pack
 
 
 def now_iso() -> str:
@@ -522,8 +584,9 @@ def cmd_assemble_logo(args):
     """Assemblage LOGO v2 : 1 pack, N videos (une par angle)."""
     angles = angles_from_file(find_angles_path(args))
     sub_mode = (args.sub_mode or "informatif").lower()
-    if sub_mode not in ("informatif", "humour"):
-        print(f"[F05:LOGO] sub_mode inconnu: {sub_mode} (attendu: informatif|humour)")
+    if sub_mode not in ("informatif", "humour", "meme"):
+        print(f"[F05:LOGO] sub_mode inconnu: {sub_mode} "
+              f"(attendu: informatif|humour|meme)")
         sys.exit(1)
     verdict = find_verdict()
     campaign = {
@@ -531,6 +594,8 @@ def cmd_assemble_logo(args):
         "joke_source": _load_campaign_file("joke_source.json"),
         "cuts": _load_campaign_file("cuts.json"),
         "reference_clip_style": _load_campaign_file("reference_clip_style.json"),
+        "keyword": _load_campaign_keyword(),
+        "meme_source": _load_latest_meme_scan() if sub_mode == "meme" else {},
     }
     siege_id = None
     if os.path.exists(LIBER_PATH):
@@ -541,6 +606,10 @@ def cmd_assemble_logo(args):
     n = len(pack.get("videos", []))
     print(f"[F05:LOGO] Pack logo ({sub_mode}) : {n} videos, {len(angles)} angles "
           f"-> {os.path.basename(out)}")
+    if sub_mode == "meme":
+        ref = (pack.get("meme_source") or {}).get("montage_guide_ref")
+        print(f"[F05:LOGO] meme: montage_guide_ref={ref} — "
+              f"OMNIS_WATCH charge le guide pour le rendu")
     print("[F05] Lancer --finalize pour valider (schéma logo) + expédier")
 
 
@@ -751,7 +820,8 @@ def main():
     parser.add_argument("--platform", default=None, help="Plateforme cible (override)")
     parser.add_argument("--market", default=None, help="Marché cible (override)")
     parser.add_argument("--sub-mode", default=None,
-                        help="Mode LOGO: informatif (article+background) | humour (blague/meme)")
+                        help="Mode LOGO: informatif (article+background) | humour "
+                             "(blague/meme) | meme (mot-clé viral, F01/F03 SKIP)")
     args = parser.parse_args()
 
     if args.assemble:
