@@ -151,15 +151,25 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
    F01→F02→ANGLESMITH→F03→F04→F05→F06 (chaîne intacte).
    → **FAIT** (F06_TRACKER reste à faire : posts, vues, payout).
 
+> ⚠️ **MAJ 2026-08-15 (cuts 7s — commit `77cb715`)** : les 5 clips des packs
+> humour ET informatif sont désormais à **7s chacun** (windows séquentielles
+> dans la vidéo `5XJUyMct2eQ`) :
+> A01 0-7s / A02 7-14s / A03 14-21s / A04 21-28s / A05 28-35s.
+> Fournis dans `ARCHIVUM/campaign/cuts.json` (`cut_source: operator`) et
+> injectés dans `EXPORT/westbrook_pack_logo.json` (informatif) +
+> `EXPORT/westbrook_pack_logo_humour.json` (humour).
+> ⚠️ Durée réelle de la vidéo non vérifiable (pas de clé YouTube/yt-dlp) —
+> les windows sont arbitraires, à ajuster si la vidéo fait <35s.
+
 > ⚠️ **MAJ 2026-08-15 (mode humour)** : la chaîne F01→F05 est REFAIte en
 > humour (pack `LOGO-NBA_WESTBROOK` humour, 5 videos). Reste à faire :
 >
 > 1. **F06_TRACKER** : `tracker.py --post` pour expédier le pack humour vers
 >    OMNIS_WATCH (le checkpoint F06 a été signalé par l'orchestrateur après
 >    la Porte 4).
-> 2. **Cuts vidéo** : le pack humour a `cut_source: operator` — le Warsmith
->    doit fournir les cuts (start/end/duration par angle) dans
->    `ARCHIVUM/campaign/cuts.json` avant montage.
+> 2. **Cuts vidéo** : FAIT — `ARCHIVUM/campaign/cuts.json` fourni (7s par
+>    clip, A01 0-7s → A05 28-35s), injecté dans les packs humour + informatif
+>    (commit `77cb715`).
 > 3. **`joke_source` à compléter** : dans ce run humour, `joke_source` est
 >    null (pas de fichier blague fourni) — l'humour est porté par le spin
 >    Warsmith + les payloads F04. Si l'on veut une blague dédiée par angle,
