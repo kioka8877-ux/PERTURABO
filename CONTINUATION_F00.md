@@ -199,6 +199,41 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 > - Export : `EXPORT/westbrook_pack_logo_humour.json` +
 >   `EXPORT/packs_index_humour.json` + `EXPORT/westbrook_pack_humour_apercu.md`.
 
+> ✅ **MAJ 2026-08-15 (mode meme — commit `1e1e0b4`, poussé sur main)** :
+> nouveau siège **`student debt`** (sujet S3 "payer sa dette avec des vidéos
+> de chats"), marché US -25 ans, YouTube, langue anglais. Les 4 portes
+> validées de bout en bout, la campagne est **CLÔTURÉE** :
+> - Gate 0 : ancien siège `NBA_WESTBROOK` fermé + archivé dans
+>   `ARCHIVUM/campaign/_archive_TS02_NBA_WESTBROOK/`. Nouveaux inputs meme :
+>   `ARCHIVUM/campaign/keyword.txt` (`student debt`) + `directive.md`
+>   (Campaign `STUDENT_DEBT_MEME`) + `reference_clip.json` placeholder
+>   (`source_type: meme_keyword`).
+> - Gate 1 : `capteurs.py --scan-meme --keyword "student debt"` → scan
+>   `MEME-dee7c660` (youtube+trends+rss+reddit+suggest, **0 clip téléchargé**,
+>   demande score 100, news fraîches < 4h). Reddit 403 non bloquant.
+>   Sujet choisi par le Warsmith : S3 (cat videos, `youtube.com/watch?v=1st_IbSGI00`).
+> - Gate 2 : ANGLESMITH `--sub-mode meme` → 5 angles (poignant/drôle/choc/
+>   tendu/émerveillé, anti-spam OK, durée 5-7s) → `F02_TYRANT_CAMP/OUT/angles.json`.
+> - Gate 3 : F04 premium **GLM 5.2 via NVIDIA** (clé re-injectée) → 5
+>   `text_payload_A0X.json` (titres ≤ 6 mots, tweets ≤ 3 lignes, reactions
+>   ≤ 4 mots, garde-fous vérifiés).
+> - Gate 4 : F05 `packager.py --assemble --sub-mode meme` → pack
+>   `LOGO-SIEGE-siege_20260815_195037` (5 videos, `meme_source.montage_guide_ref
+>   = GUIDE_UTILISATION/04_MODE_MEME.md`) exporté
+>   `EXPORT/production_pack_meme_student_debt.json` + summary `.md`
+>   **→ visible OMNIS_WATCH sur GitHub (il ne lit PAS en local)**.
+> - **Patchs meme-aware** (faits et poussés) :
+>   `ORCHESTRATOR/CODEBASE/libs/gate_validator.py` (Gate 1 : skip F01/F02 si
+>   `ARCHIVUM/campaign/keyword.txt` présent → vérifie scan F00) +
+>   `PROFILES/logo/CONTRACTS/production_pack_schema_logo.json`
+>   (enum `source_type` + `meme_keyword`, `celebrity_or_subject`/`niche`
+>   nullables) — sans ces 2 patchs, le mode meme ne pouvait pas passer les
+>   portes 1 et 4.
+> - Ledger : `portes_validated: ['1','2','3','4']`, `campaign_status: closed`,
+>   `packs_expedies: 1`.
+> - **Reste à faire** : F06_TRACKER `tracker.py --post` quand OMNIS_WATCH aura
+>   posté les 5 vidéos (vues 1h/24h, payout, learnings).
+
 ## 5. Commandes de vérification rapide
 
 ```bash
