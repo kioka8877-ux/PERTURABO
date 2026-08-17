@@ -7,10 +7,10 @@
 
 | # | Angle | Meme | Titre | Durée (s) |
 |---|---|---|---|---|
-| 1 | A01 | meme_1 | Your Degree Was A Trap | 8 |
-| 2 | A02 | meme_1 | Student Debt Is A Scam | 8 |
-| 3 | A03 | meme_1 | They Erased Her Debt | 8 |
-| 4 | A04 | meme_2 | Your Degree Was A Trap | 8 |
-| 5 | A05 | meme_2 | Your Degree Was A Lesson | 8 |
+| 1 | A01 | meme_001 | Your Degree Was A Trap | 8 |
+| 2 | A02 | meme_001 | Student Debt Is A Scam | 8 |
+| 3 | A03 | meme_001 | They Erased Her Debt | 8 |
+| 4 | A04 | meme_002 | Your Degree Was A Trap | 8 |
+| 5 | A05 | meme_002 | Your Degree Was A Lesson | 8 |
 
 **5 videos prêtes → OMNIS_WATCH**

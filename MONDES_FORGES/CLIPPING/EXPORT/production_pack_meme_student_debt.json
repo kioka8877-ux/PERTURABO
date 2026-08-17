@@ -62,19 +62,17 @@
       "angle_id": "A01",
       "title": "Your Degree Was A Trap",
       "emotion": "poignant",
-      "meme": "meme_1",
+      "meme": "meme_001",
       "tweet": {
         "text": "Took out $50K in student loans for a degree\nNobody told me the interest would double it\nNow I owe more than my parents' mortgage",
-        "keywords_style": [
-          {
-            "word": "student loans",
-            "color": "rouge"
-          },
-          {
-            "word": "owe more",
-            "color": "rouge"
-          }
-        ]
+        "keywords_style": {
+          "green": [],
+          "red": [
+            "loans",
+            "interest",
+            "owe"
+          ]
+        }
       },
       "text_emotion": "This Actually Hurts",
       "duration_sec": 8
@@ -84,19 +82,18 @@
       "angle_id": "A02",
       "title": "Student Debt Is A Scam",
       "emotion": "drole",
-      "meme": "meme_1",
+      "meme": "meme_001",
       "tweet": {
         "text": "My student debt is $87,000.\nThe degree got me a $42K job.\nI make less than my Uber driver cousin.",
-        "keywords_style": [
-          {
-            "word": "student debt",
-            "color": "rouge"
-          },
-          {
-            "word": "make less",
-            "color": "rouge"
-          }
-        ]
+        "keywords_style": {
+          "green": [
+            "degree"
+          ],
+          "red": [
+            "debt",
+            "less"
+          ]
+        }
       },
       "text_emotion": "Bro is cooked forever",
       "duration_sec": 8
@@ -106,19 +103,17 @@
       "angle_id": "A03",
       "title": "They Erased Her Debt",
       "emotion": "choc",
-      "meme": "meme_1",
+      "meme": "meme_001",
       "tweet": {
         "text": "My university just wiped $47K of my student debt 💀\nI literally cried in the financial aid office\nTurns out they HAD to — here's the loophole nobody talks about 👀",
-        "keywords_style": [
-          {
-            "word": "wiped $47K",
-            "color": "vert"
-          },
-          {
-            "word": "student debt",
-            "color": "rouge"
-          }
-        ]
+        "keywords_style": {
+          "green": [
+            "wiped"
+          ],
+          "red": [
+            "debt"
+          ]
+        }
       },
       "text_emotion": "Bro the system is",
       "duration_sec": 8
@@ -128,19 +123,16 @@
       "angle_id": "A04",
       "title": "Your Degree Was A Trap",
       "emotion": "tendu",
-      "meme": "meme_2",
+      "meme": "meme_002",
       "tweet": {
         "text": "Took out $50K in student loans for a degree nobody asked for.\nNow I owe more than my car's worth.\nBest financial decision of my life though 💀",
-        "keywords_style": [
-          {
-            "word": "student loans",
-            "color": "rouge"
-          },
-          {
-            "word": "owe more",
-            "color": "rouge"
-          }
-        ]
+        "keywords_style": {
+          "green": [],
+          "red": [
+            "loans",
+            "owe"
+          ]
+        }
       },
       "text_emotion": "We got played",
       "duration_sec": 8
@@ -150,19 +142,19 @@
       "angle_id": "A05",
       "title": "Your Degree Was A Lesson",
       "emotion": "poignant",
-      "meme": "meme_2",
+      "meme": "meme_002",
       "tweet": {
         "text": "Graduated with $50K student debt and a degree I never used\nBut that debt taught me more about money than any class ever did\nThe real degree was the failure",
-        "keywords_style": [
-          {
-            "word": "student debt",
-            "color": "rouge"
-          },
-          {
-            "word": "taught me more",
-            "color": "vert"
-          }
-        ]
+        "keywords_style": {
+          "green": [
+            "taught",
+            "money"
+          ],
+          "red": [
+            "debt",
+            "failure"
+          ]
+        }
       },
       "text_emotion": "that hit different",
       "duration_sec": 8

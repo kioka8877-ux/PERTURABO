@@ -283,10 +283,11 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
             dur_sec = max(5, min(30, int(dur_raw))) if dur_raw else 8
         except (TypeError, ValueError):
             dur_sec = 8
-        keywords_style = _normalize_keywords_style(tweet_raw.get("keywords_style"))
+        keywords_style = _normalize_keywords_style(
+            tweet_raw.get("keywords_style"), tweet)
         payload["tweet"] = {
             "text": tweet or None,
-            "keywords_style": keywords_style or [],
+            "keywords_style": keywords_style,
         }
         payload["text_emotion"] = reaction or None
         payload["emotion"] = emotion or None
@@ -295,21 +296,41 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
     return payload, notes
 
 
-def _normalize_keywords_style(kws_style) -> list[dict]:
-    """Normalise tweet.keywords_style : [{word, color}] avec color ∈ vert|rouge.
-    Garde uniquement les mots réellement présents dans le tweet (le reste est
-    retiré silencieusement)."""
-    if not isinstance(kws_style, list):
-        return []
-    cleaned = []
-    for item in kws_style:
-        if not isinstance(item, dict):
+def _tweet_tokens(text: str) -> set:
+    """Mots seuls du tweet, ponctuation ignorée (apostrophes, $, #, virgules…)."""
+    import re
+    return set(re.findall(r"[a-z0-9]+", (text or "").lower()))
+
+
+def _normalize_keywords_style(kws_style, tweet_text: str = "") -> dict:
+    """Normalise tweet.keywords_style au format LACRIMAE v2.5 :
+    DICT {"green": [...], "red": [...]} (clés anglaises). Chaque entrée est un
+    MOT SEUL présent mot à mot dans tweet.text (ponctuation ignorée) ; les
+    phrases multi-mots ne matchent jamais. Une LISTE [{word, color}] (ancien
+    format) → aucune couleur (dict vide) conformément à la note LACRIMAE."""
+    empty = {"green": [], "red": []}
+    if not isinstance(kws_style, dict):
+        return empty
+    tokens = _tweet_tokens(tweet_text)
+    result = {"green": [], "red": []}
+    for key in ("green", "red"):
+        entries = kws_style.get(key)
+        if not isinstance(entries, list):
             continue
-        word = str(item.get("word") or "").strip()
-        color = str(item.get("color") or "").strip().lower()
-        if word and color in ("vert", "rouge"):
-            cleaned.append({"word": word, "color": color})
-    return cleaned
+        seen = set()
+        for entry in entries:
+            word = str(entry or "").strip()
+            word_tokens = set(_tweet_tokens(word))
+            if len(word_tokens) != 1:
+                continue  # phrase multi-mots ou vide → jamais matchée
+            token = next(iter(word_tokens))
+            if token not in tokens:
+                continue  # mot absent du tweet (mot à mot) → retiré
+            if token in seen:
+                continue
+            seen.add(token)
+            result[key].append(word)
+    return result
 
 
 def _meme_heresies(sub_mode: str) -> list[str]:
@@ -332,14 +353,12 @@ def _meme_heresies(sub_mode: str) -> list[str]:
     ]
 
 
-def _render_keywords_md(kws: list) -> str:
-    if not kws:
+def _render_keywords_md(kws: dict) -> str:
+    if not isinstance(kws, dict) or not (kws.get("green") or kws.get("red")):
         return ""
-    lines = ["**Mots-clés colorés** :"]
-    for k in kws:
-        word = k.get("word")
-        color = k.get("color")
-        if word:
+    lines = ["**Mots-clés colorés (LACRIMAE)** :"]
+    for color in ("green", "red"):
+        for word in kws.get(color) or []:
             lines.append(f"- `{word}` — {color}")
     return "\n".join(lines) + "\n"
 
@@ -774,9 +793,10 @@ def cmd_generate_logo(args):
             "scan F00, forge pour CET angle : 1) title (le titre en haut, "
             "max 6 mots, SI nécessaire seulement — jamais de clickbait vide), "
             "2) tweet.text (le FAKE tweet du faux post, format X/Twitter, max "
-            "3 lignes) + tweet.keywords_style (les mots-clés colorables du "
-            "tweet : vert = valeur/espoir, rouge = danger/absurde, chacun avec "
-            "exactement une couleur parmi vert/rouge), 3) text_emotion (le "
+            "3 lignes) + tweet.keywords_style (DICT à clés anglaises green/red : "
+            "green = valeur/espoir, red = danger/absurde — chaque liste contient "
+            "des MOTS SEULS présents mot à mot dans tweet.text, ponctuation "
+            "ignorée, jamais de phrases multi-mots), 3) text_emotion (le "
             "texte d'émotion du milieu, max 4 mots), 4) duration_sec (entier "
             "5-30, défaut 8). Tout en ANGLAIS."
             " La video est montee par OMNIS_WATCH selon la doctrine 6 couches "
@@ -813,9 +833,10 @@ def cmd_generate_logo(args):
             "title": "titre en haut (max 6 mots, SI nécessaire) ou null",
             "tweet": {
                 "text": "fake tweet du faux post (max 3 lignes)",
-                "keywords_style": [
-                    {"word": "mot du tweet", "color": "vert"},
-                ],
+                "keywords_style": {
+                    "green": ["mot seul du tweet"],
+                    "red": ["mot seul du tweet"],
+                },
             },
             "text_emotion": "texte d'émotion du milieu (max 4 mots)",
             "emotion": "l'émotion de l'angle (ex: poignant, drole, choc, tendu)",

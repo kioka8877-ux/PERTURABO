@@ -205,7 +205,8 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
         asset["meme"] = meme or ""
         asset["tweet"] = {
             "text": tweet.get("text"),
-            "keywords_style": tweet.get("keywords_style") or [],
+            "keywords_style": _keywords_v2(tweet.get("keywords_style"),
+                                           tweet.get("text")),
         }
         asset["text_emotion"] = payload.get("text_emotion")
         asset["emotion"] = (payload.get("emotion")
@@ -242,15 +243,45 @@ def _pick(data: dict, keys: list) -> dict:
     return {k: data.get(k) for k in keys if k in data}
 
 
+def _keywords_v2(kws_style, tweet_text: str = "") -> dict:
+    """Conforme à la note LACRIMAE (05_NOTE_PERTURABO_PACK_MEME.md section 4) :
+    keywords_style = DICT {"green": [...], "red": [...]}, mots seuls présents
+    mot à mot dans tweet.text. Une liste [{word,color}] (v1) -> aucune couleur."""
+    empty = {"green": [], "red": []}
+    if not isinstance(kws_style, dict):
+        return empty
+    tokens = _tweet_tokens(tweet_text)
+    result = {"green": [], "red": []}
+    for key in ("green", "red"):
+        entries = kws_style.get(key)
+        if not isinstance(entries, list):
+            continue
+        seen = set()
+        for entry in entries:
+            word = str(entry or "").strip()
+            word_tokens = set(_tweet_tokens(word))
+            if len(word_tokens) != 1:
+                continue
+            token = next(iter(word_tokens))
+            if token not in tokens or token in seen:
+                continue
+            seen.add(token)
+            result[key].append(word)
+    return result
+
+
+def _tweet_tokens(text: str) -> set:
+    import re
+    return set(re.findall(r"[a-z0-9]+", (text or "").lower()))
+
+
 def _meme_for_angle(angle_id: str) -> str:
-    """Mapping Warsmith : A01+A02+A03 -> meme_1, A04+A05 -> meme_2.
-    Tout angle inconnu tombe sur meme_2 (groupe secondaire)."""
     n = str(angle_id or "")
     try:
         num = int(n[1:]) if len(n) > 1 and n[0].upper() == "A" else 0
     except ValueError:
         num = 0
-    return "meme_1" if 1 <= num <= 3 else "meme_2"
+    return "meme_001" if 1 <= num <= 3 else "meme_002"
 
 
 def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,

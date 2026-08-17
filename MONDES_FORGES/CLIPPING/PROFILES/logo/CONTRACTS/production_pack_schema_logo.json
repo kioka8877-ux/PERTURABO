@@ -412,10 +412,10 @@
               "null"
             ],
             "enum": [
-              "meme_1",
-              "meme_2"
+              "meme_001",
+              "meme_002"
             ],
-            "_description": "Mode meme : identifiant du format de meme (input Warsmith). A01-A03 -> meme_1, A04-A05 -> meme_2."
+            "_description": "Mode meme : fichier existant de la memetheque LACRIMAE. A01-A03 -> meme_001, A04-A05 -> meme_002 (jamais meme_1/meme_2)."
           },
           "tweet": {
             "type": [
@@ -435,30 +435,30 @@
                 "_description": "Mode meme : fake tweet max 3 lignes affiche comme faux post quart haut."
               },
               "keywords_style": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "required": [
-                    "word",
-                    "color"
-                  ],
-                  "properties": {
-                    "word": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "green": {
+                    "type": "array",
+                    "items": {
                       "type": "string",
-                      "minLength": 1,
-                      "_description": "Mot ou groupe de mots present dans le tweet."
+                      "minLength": 1
                     },
-                    "color": {
+                    "_description": "Mots seuls a colorer en vert (valeur/espoir)."
+                  },
+                  "red": {
+                    "type": "array",
+                    "items": {
                       "type": "string",
-                      "enum": [
-                        "vert",
-                        "rouge"
-                      ],
-                      "_description": "vert = valeur positive, rouge = danger/negatif."
-                    }
+                      "minLength": 1
+                    },
+                    "_description": "Mots seuls a colorer en rouge (danger/absurde)."
                   }
-                }
+                },
+                "_description": "Format LACRIMAE v2.5 : DICT a cles anglaises green/red, chaque entree = un mot seul present mot a mot dans tweet.text (ponctuation ignoree). Une liste [{word,color}] = aucune couleur."
               }
             },
             "_description": "Mode meme : le tweet affiche en surimpression (quart haut) + la coloration des mots-clés (vert/rouge)."
