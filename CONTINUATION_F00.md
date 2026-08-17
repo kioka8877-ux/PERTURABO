@@ -326,7 +326,11 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
   tags idem. `cmd_finalize_logo` bloque si une vidéo est sans description.
 - **Schéma** `production_pack_schema_logo.json` : `tags.maxItems` 12 → 15,
   items `pattern: "^#"`. **Validateur** : support du `pattern` regex.
-- **À valider** : la structure description 4 blocs sur le prochain pack meme.
+- **Métadonnées pack student debt régénérées** (commit `cc85df8`) : chaque
+  vidéo du pack `EXPORT/production_pack_meme_student_debt.json` porte
+  désormais `metadata` (title, description 4 blocs, tags 15 `#`). Tags
+  complétés depuis `channel_tags.md` du compte actif via `_channel_tags()`
+  (accepte les tags multi-mots). Validation schéma : 0 erreur.
 
 ## 5. Commandes de vérification rapide
 
