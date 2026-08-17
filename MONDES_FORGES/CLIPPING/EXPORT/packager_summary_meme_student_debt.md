@@ -5,12 +5,12 @@
 - Videos : 5
 - Schéma : /workspace/PERTURABO/MONDES_FORGES/CLIPPING/PROFILES/logo/CONTRACTS/production_pack_schema_logo.json
 
-| # | Angle | Titre | Cut | Logo |
+| # | Angle | Meme | Titre | Durée (s) |
 |---|---|---|---|---|
-| 1 | A01 | Your Degree Was A Trap | None-Nones (perturabo_proposed) | image transparente campagne |
-| 2 | A02 | Student Debt Is A Scam | None-Nones (perturabo_proposed) | image transparente campagne |
-| 3 | A03 | They Erased Her Debt | None-Nones (perturabo_proposed) | image transparente campagne |
-| 4 | A04 | Your Degree Was A Trap | None-Nones (perturabo_proposed) | image transparente campagne |
-| 5 | A05 | Your Degree Was A Lesson | None-Nones (perturabo_proposed) | image transparente campagne |
+| 1 | A01 | meme_1 | Your Degree Was A Trap | 8 |
+| 2 | A02 | meme_1 | Student Debt Is A Scam | 8 |
+| 3 | A03 | meme_1 | They Erased Her Debt | 8 |
+| 4 | A04 | meme_2 | Your Degree Was A Trap | 8 |
+| 5 | A05 | meme_2 | Your Degree Was A Lesson | 8 |
 
 **5 videos prêtes → OMNIS_WATCH**

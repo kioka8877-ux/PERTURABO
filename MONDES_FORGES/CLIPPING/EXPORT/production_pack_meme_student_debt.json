@@ -61,183 +61,111 @@
       "video_index": 1,
       "angle_id": "A01",
       "title": "Your Degree Was A Trap",
-      "viral_paragraph": "",
-      "metadata": {
-        "title": "Student Debt Is The Ultimate Trap",
-        "description": "A poignant look at how student debt silently compounds beyond the original loan, reframing the ordinary college experience into an extraordinary financial burden that follows graduates for decades. The system was designed to keep you paying, not to set you free.\n\nThis transformative commentary content falls under fair use (17 U.S.C. §107) as it provides original analysis, reframing, and cultural critique of publicly available information about student debt trends and statistics.",
-        "tags": [
-          "studentdebt",
-          "studentloans",
-          "college",
-          "debtcrisis",
-          "financialfreedom",
-          "moneytips",
-          "genz",
-          "personalfinance"
+      "emotion": "poignant",
+      "meme": "meme_1",
+      "tweet": {
+        "text": "Took out $50K in student loans for a degree\nNobody told me the interest would double it\nNow I owe more than my parents' mortgage",
+        "keywords_style": [
+          {
+            "word": "student loans",
+            "color": "rouge"
+          },
+          {
+            "word": "owe more",
+            "color": "rouge"
+          }
         ]
       },
-      "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
-      },
-      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
-      "on_screen_text": null,
-      "tweet_text": "Took out $50K in student loans for a degree\nNobody told me the interest would double it\nNow I owe more than my parents' mortgage",
-      "reaction_text": "This Actually Hurts",
-      "emotion": "poignant",
-      "duration_sec_range": {
-        "min": 5,
-        "max": 7
-      }
+      "text_emotion": "This Actually Hurts",
+      "duration_sec": 8
     },
     {
       "video_index": 2,
       "angle_id": "A02",
       "title": "Student Debt Is A Scam",
-      "viral_paragraph": "",
-      "metadata": {
-        "title": "Student Debt Is A Scam",
-        "description": "A viral tweet exposes the brutal math of student loans — $87K borrowed for a $42K salary. The numbers don't lie and the reactions say it all.\n\nThis short-form video is transformative commentary protected under 17 U.S.C. § 107 (fair use). All sourced material is significantly altered with added narration, editing, and editorial perspective for educational and satirical purposes.",
-        "tags": [
-          "studentdebt",
-          "studentloans",
-          "college",
-          "debtcrisis",
-          "financialstruggle",
-          "genz",
-          "comedy",
-          "relatable"
+      "emotion": "drole",
+      "meme": "meme_1",
+      "tweet": {
+        "text": "My student debt is $87,000.\nThe degree got me a $42K job.\nI make less than my Uber driver cousin.",
+        "keywords_style": [
+          {
+            "word": "student debt",
+            "color": "rouge"
+          },
+          {
+            "word": "make less",
+            "color": "rouge"
+          }
         ]
       },
-      "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
-      },
-      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
-      "on_screen_text": null,
-      "tweet_text": "My student debt is $87,000.\nThe degree got me a $42K job.\nI make less than my Uber driver cousin.",
-      "reaction_text": "Bro is cooked forever",
-      "emotion": "drole",
-      "duration_sec_range": {
-        "min": 5,
-        "max": 7
-      }
+      "text_emotion": "Bro is cooked forever",
+      "duration_sec": 8
     },
     {
       "video_index": 3,
       "angle_id": "A03",
       "title": "They Erased Her Debt",
-      "viral_paragraph": "",
-      "metadata": {
-        "title": "Student Debt Loophole Colleges Don't Want You to Know",
-        "description": "A fake tweet claims a university quietly erased $47K in student loans through an obscure loophole. The video reframes ordinary financial aid frustration into an extraordinary hidden escape route, using real trending search demand around student debt forgiveness.\n\nThis content is transformative commentary protected under 17 U.S. Code § 107 (fair use). The fake tweet, reaction text, and on-screen elements are original creations for informational and satirical purposes. No actual clip footage is reproduced.",
-        "tags": [
-          "studentdebt",
-          "studentloans",
-          "debtforgiveness",
-          "collegetuition",
-          "financialaid",
-          "studentdebtcrisis",
-          "loophole",
-          "moneytips",
-          "genzfinance",
-          "studentdebtrelief"
+      "emotion": "choc",
+      "meme": "meme_1",
+      "tweet": {
+        "text": "My university just wiped $47K of my student debt 💀\nI literally cried in the financial aid office\nTurns out they HAD to — here's the loophole nobody talks about 👀",
+        "keywords_style": [
+          {
+            "word": "wiped $47K",
+            "color": "vert"
+          },
+          {
+            "word": "student debt",
+            "color": "rouge"
+          }
         ]
       },
-      "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
-      },
-      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
-      "on_screen_text": null,
-      "tweet_text": "My university just wiped $47K of my student debt 💀\nI literally cried in the financial aid office\nTurns out they HAD to — here's the loophole nobody talks about 👀",
-      "reaction_text": "Bro the system is",
-      "emotion": "choc",
-      "duration_sec_range": {
-        "min": 5,
-        "max": 7
-      }
+      "text_emotion": "Bro the system is",
+      "duration_sec": 8
     },
     {
       "video_index": 4,
       "angle_id": "A04",
       "title": "Your Degree Was A Trap",
-      "viral_paragraph": "",
-      "metadata": {
-        "title": "Student Debt Is The Ultimate Financial Trap",
-        "description": "A satirical meme-format breakdown of the student debt crisis. Millions of young Americans signed loans at 18 that now exceed their annual income. This video reframes that failure as the most expensive lesson of their lives.\n\nFair Use Disclaimer (17 U.S.C. § 107): This transformative content uses publicly available data and cultural references for commentary and critique purposes only. No copyrighted material is reproduced. All statistics referenced are derived from public search trends.",
-        "tags": [
-          "studentdebt",
-          "studentloans",
-          "financialfail",
-          "collegescam",
-          "debttrap",
-          "moneyfail",
-          "genzfinance",
-          "studentloandebt"
+      "emotion": "tendu",
+      "meme": "meme_2",
+      "tweet": {
+        "text": "Took out $50K in student loans for a degree nobody asked for.\nNow I owe more than my car's worth.\nBest financial decision of my life though 💀",
+        "keywords_style": [
+          {
+            "word": "student loans",
+            "color": "rouge"
+          },
+          {
+            "word": "owe more",
+            "color": "rouge"
+          }
         ]
       },
-      "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
-      },
-      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
-      "on_screen_text": null,
-      "tweet_text": "Took out $50K in student loans for a degree nobody asked for.\nNow I owe more than my car's worth.\nBest financial decision of my life though 💀",
-      "reaction_text": "We got played",
-      "emotion": "tendu",
-      "duration_sec_range": {
-        "min": 5,
-        "max": 7
-      }
+      "text_emotion": "We got played",
+      "duration_sec": 8
     },
     {
       "video_index": 5,
       "angle_id": "A05",
       "title": "Your Degree Was A Lesson",
-      "viral_paragraph": "",
-      "metadata": {
-        "title": "Your Student Debt Was Actually The Lesson",
-        "description": "A reframed take on the student debt crisis: what feels like a financial failure is actually the hardest money lesson you'll ever get. Memetic commentary format built around the \"student debt\" keyword and real YouTube search demand (student debt crisis, student debt story, student debt crashout).\n\nFair use notice: this video is transformative commentary protected under 17 U.S.C. §107. All statistics referenced derive from publicly available YouTube search and Google Trends RSS data. No third-party clips are used in meme mode.",
-        "tags": [
-          "studentdebt",
-          "studentloans",
-          "moneylessons",
-          "financialfreedom",
-          "debtfree",
-          "personalfinance",
-          "crashout",
-          "daveramsey"
+      "emotion": "poignant",
+      "meme": "meme_2",
+      "tweet": {
+        "text": "Graduated with $50K student debt and a degree I never used\nBut that debt taught me more about money than any class ever did\nThe real degree was the failure",
+        "keywords_style": [
+          {
+            "word": "student debt",
+            "color": "rouge"
+          },
+          {
+            "word": "taught me more",
+            "color": "vert"
+          }
         ]
       },
-      "cut": {
-        "start_sec": null,
-        "end_sec": null,
-        "duration_sec": null,
-        "cut_source": "perturabo_proposed",
-        "note": "cuts proposés par PERTURABO — validation Warsmith requise"
-      },
-      "logo_placement": "Logo fourni par la campagne (image transparente). OMNIS_WATCH applique l'image transparente contenant le logo — placement campagne 1080x1920, ne pas déplacer, ne pas redimensionner, ne pas recolorer.",
-      "on_screen_text": null,
-      "tweet_text": "Graduated with $50K student debt and a degree I never used\nBut that debt taught me more about money than any class ever did\nThe real degree was the failure",
-      "reaction_text": "that hit different",
-      "emotion": "poignant",
-      "duration_sec_range": {
-        "min": 5,
-        "max": 7
-      }
+      "text_emotion": "that hit different",
+      "duration_sec": 8
     }
   ],
   "checklist": {
@@ -627,10 +555,6 @@
       ],
       "scanned_at": "2026-08-15T19:51:01Z"
     },
-    "montage_guide_ref": "GUIDE_UTILISATION/04_MODE_MEME.md",
-    "duration_range_sec": {
-      "min": 5,
-      "max": 7
-    }
+    "montage_guide_ref": "GUIDE_UTILISATION/04_MODE_MEME.md"
   }
 }
