@@ -173,7 +173,7 @@ def _resolve_cuts(sub_mode: str, angle_id: str, cuts: dict) -> dict:
 
 
 def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
-                      cuts: dict, video_index: int) -> dict:
+                      cuts: dict, video_index: int, meme: str = None) -> dict:
     angle_id = angle.get("angle_id")
     payload = payload or {}
     title = payload.get("title") or angle.get("title")
@@ -181,7 +181,7 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
                        or payload.get("body") or angle.get("body") or "")
     metadata = payload.get("metadata") or {}
     if sub_mode == "meme" and not title:
-        title = metadata.get("title") or payload.get("reaction_text") or ""
+        title = metadata.get("title") or (payload.get("tweet") or {}).get("text") or ""
     if not metadata:
         description = viral_paragraph or ""
         if description:
@@ -197,25 +197,28 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
         "video_index": video_index,
         "angle_id": angle_id,
         "title": title or "",
-        "viral_paragraph": viral_paragraph,
-        "metadata": metadata,
-        "cut": _resolve_cuts(sub_mode, angle_id, cuts),
-        "logo_placement": LOGO_LOGO_PLACEMENT,
-        "on_screen_text": (payload.get("on_screen_text")
-                            or angle.get("on_screen_text")),
     }
     if sub_mode == "meme":
-        dur = (payload.get("duration_sec_range")
-               or angle.get("duration_sec_range") or {})
-        asset["tweet_text"] = payload.get("tweet_text")
-        asset["reaction_text"] = payload.get("reaction_text")
+        # Contrat LACRIMAE : le pack meme ne porte que les champs qu'OMNIS_WATCH
+        # consomme. cut/metadata/on_screen_text/logo_placement sont ignorés.
+        tweet = payload.get("tweet") or {}
+        asset["meme"] = meme or ""
+        asset["tweet"] = {
+            "text": tweet.get("text"),
+            "keywords_style": tweet.get("keywords_style") or [],
+        }
+        asset["text_emotion"] = payload.get("text_emotion")
         asset["emotion"] = (payload.get("emotion")
                             or angle.get("emotion")
                             or angle.get("emotion_mode"))
-        asset["duration_sec_range"] = {
-            "min": int(dur.get("min", 5)),
-            "max": int(dur.get("max", 7)),
-        }
+        asset["duration_sec"] = int(payload.get("duration_sec", 8))
+    else:
+        asset["viral_paragraph"] = viral_paragraph
+        asset["metadata"] = metadata
+        asset["cut"] = _resolve_cuts(sub_mode, angle_id, cuts)
+        asset["logo_placement"] = LOGO_LOGO_PLACEMENT
+        asset["on_screen_text"] = (payload.get("on_screen_text")
+                                   or angle.get("on_screen_text"))
     return asset
 
 
@@ -239,6 +242,17 @@ def _pick(data: dict, keys: list) -> dict:
     return {k: data.get(k) for k in keys if k in data}
 
 
+def _meme_for_angle(angle_id: str) -> str:
+    """Mapping Warsmith : A01+A02+A03 -> meme_1, A04+A05 -> meme_2.
+    Tout angle inconnu tombe sur meme_2 (groupe secondaire)."""
+    n = str(angle_id or "")
+    try:
+        num = int(n[1:]) if len(n) > 1 and n[0].upper() == "A" else 0
+    except ValueError:
+        num = 0
+    return "meme_1" if 1 <= num <= 3 else "meme_2"
+
+
 def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
                        verdict: dict, siege_id: str = None) -> dict:
     """Assemble le pack LOGO v2 : N videos (une par angle) + sources + style."""
@@ -258,7 +272,8 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
 
     videos = [
         _logo_video_asset(angle, f01_payloads.get(angle.get("angle_id")),
-                          sub_mode, cuts, idx)
+                          sub_mode, cuts, idx,
+                          meme=_meme_for_angle(angle.get("angle_id")))
         for idx, angle in enumerate(angles, start=1)
     ]
     campaign_id = verdict.get("campaign_id") or (angles[0].get("campaign_id") if angles else None)
@@ -284,7 +299,6 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
     }
     if sub_mode == "meme":
         scan = campaign.get("meme_source") or _load_latest_meme_scan()
-        dur = (scan or {}).get("duration_range_sec")
         pack["meme_source"] = {
             "keyword": (campaign.get("keyword")
                         or (scan or {}).get("keyword")
@@ -296,10 +310,6 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
                 "scanned_at": (scan or {}).get("scanned_at"),
             } if scan else None,
             "montage_guide_ref": "GUIDE_UTILISATION/04_MODE_MEME.md",
-            "duration_range_sec": {
-                "min": int((dur or {}).get("min", 5)),
-                "max": int((dur or {}).get("max", 7)),
-            },
         }
     return pack
 
@@ -690,17 +700,29 @@ def cmd_finalize_logo(args):
         f"- Videos : {total_videos}",
         f"- Schéma : {resolve_schema_path()}",
         "",
-        "| # | Angle | Titre | Cut | Logo |",
-        "|---|---|---|---|---|",
     ]
+    if sub_mode == "meme":
+        lines += [
+            "| # | Angle | Meme | Titre | Durée (s) |",
+            "|---|---|---|---|---|",
+        ]
+    else:
+        lines += ["| # | Angle | Titre | Cut | Logo |", "|---|---|---|---|---|"]
     for _, pack in packs:
         for v in pack.get("videos", []):
-            cut = v.get("cut", {})
-            lines.append(
-                f"| {v.get('video_index')} | {v.get('angle_id')} "
-                f"| {(v.get('title') or '')[:40]} "
-                f"| {cut.get('start_sec')}-{cut.get('end_sec')}s "
-                f"({cut.get('cut_source')}) | image transparente campagne |")
+            if sub_mode == "meme":
+                lines.append(
+                    f"| {v.get('video_index')} | {v.get('angle_id')} "
+                    f"| {v.get('meme') or '—'} "
+                    f"| {(v.get('title') or '')[:40]} "
+                    f"| {v.get('duration_sec', 8)} |")
+            else:
+                cut = v.get("cut", {})
+                lines.append(
+                    f"| {v.get('video_index')} | {v.get('angle_id')} "
+                    f"| {(v.get('title') or '')[:40]} "
+                    f"| {cut.get('start_sec')}-{cut.get('end_sec')}s "
+                    f"({cut.get('cut_source')}) | image transparente campagne |")
     lines += ["", f"**{total_videos} videos prêtes → OMNIS_WATCH**"]
     summary_path = os.path.join(OUT_DIR, "packager_summary.md")
     with open(summary_path, "w", encoding="utf-8") as f:

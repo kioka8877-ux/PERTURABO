@@ -261,12 +261,15 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
     }
 
     if sub_mode == "meme":
-        tweet = str(raw.get("tweet_text") or "").strip()
+        tweet_raw = raw.get("tweet") or {}
+        if isinstance(tweet_raw, str):
+            tweet_raw = {"text": tweet_raw}
+        tweet = str(tweet_raw.get("text") or "").strip()
         tweet_lines = len(tweet.splitlines()) if tweet else 0
         if tweet_lines > 3:
             notes.append(f"tweet {tweet_lines} lignes > 3 — tronqué à 3")
             tweet = "\n".join(tweet.splitlines()[:3])
-        reaction = str(raw.get("reaction_text") or "").strip()
+        reaction = str(raw.get("text_emotion") or "").strip()
         reaction_words = len(reaction.split()) if reaction else 0
         if reaction_words > 4:
             notes.append(f"reaction {reaction_words} mots > 4 — tronqué à 4")
@@ -275,16 +278,38 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
                       or angle.get("emotion")
                       or angle.get("emotion_mode")
                       or "").strip()
-        dur = raw.get("duration_sec_range") or angle.get("duration_sec_range") or {}
-        payload["tweet_text"] = tweet or None
-        payload["reaction_text"] = reaction or None
-        payload["emotion"] = emotion or None
-        payload["duration_sec_range"] = {
-            "min": int(dur.get("min", 5)),
-            "max": int(dur.get("max", 7)),
+        dur_raw = raw.get("duration_sec")
+        try:
+            dur_sec = max(5, min(30, int(dur_raw))) if dur_raw else 8
+        except (TypeError, ValueError):
+            dur_sec = 8
+        keywords_style = _normalize_keywords_style(tweet_raw.get("keywords_style"))
+        payload["tweet"] = {
+            "text": tweet or None,
+            "keywords_style": keywords_style or [],
         }
+        payload["text_emotion"] = reaction or None
+        payload["emotion"] = emotion or None
+        payload["duration_sec"] = dur_sec
 
     return payload, notes
+
+
+def _normalize_keywords_style(kws_style) -> list[dict]:
+    """Normalise tweet.keywords_style : [{word, color}] avec color ∈ vert|rouge.
+    Garde uniquement les mots réellement présents dans le tweet (le reste est
+    retiré silencieusement)."""
+    if not isinstance(kws_style, list):
+        return []
+    cleaned = []
+    for item in kws_style:
+        if not isinstance(item, dict):
+            continue
+        word = str(item.get("word") or "").strip()
+        color = str(item.get("color") or "").strip().lower()
+        if word and color in ("vert", "rouge"):
+            cleaned.append({"word": word, "color": color})
+    return cleaned
 
 
 def _meme_heresies(sub_mode: str) -> list[str]:
@@ -298,8 +323,8 @@ def _meme_heresies(sub_mode: str) -> list[str]:
         ]
     return [
         "Abonne-toi / Like et partage / Swipe up",
-        "tweet_text > 3 lignes",
-        "reaction_text > 4 mots",
+        "tweet.text > 3 lignes",
+        "text_emotion > 4 mots",
         "Titre en haut > 6 mots (ou clickbait vide sans payoff)",
         "URL de meme / vidéo dans le pack (les sources restent dans le scan F00)",
         "Inventer une stat virale absente du scan F00",
@@ -307,18 +332,32 @@ def _meme_heresies(sub_mode: str) -> list[str]:
     ]
 
 
+def _render_keywords_md(kws: list) -> str:
+    if not kws:
+        return ""
+    lines = ["**Mots-clés colorés** :"]
+    for k in kws:
+        word = k.get("word")
+        color = k.get("color")
+        if word:
+            lines.append(f"- `{word}` — {color}")
+    return "\n".join(lines) + "\n"
+
+
 def _render_logo_md(payload: dict) -> str:
     meta = payload.get("metadata", {})
     if payload.get("sub_mode") == "meme":
-        dur = payload.get("duration_sec_range") or {}
+        tweet = (payload.get("tweet") or {}).get("text")
+        kws = (payload.get("tweet") or {}).get("keywords_style") or []
         return (
             f"# Pack texte LOGO MEME — {payload.get('angle_id')}\n\n"
             f"**Titre en haut (si nécessaire, ≤6 mots)** : "
             f"{payload.get('title') or '—'}\n\n"
-            f"**Fake tweet (max 3 lignes)** :\n{payload.get('tweet_text') or '—'}\n\n"
-            f"**Texte d'émotion (max 4 mots)** : {payload.get('reaction_text') or '—'}\n"
+            f"**Fake tweet (max 3 lignes)** :\n{tweet or '—'}\n"
+            f"{_render_keywords_md(kws)}\n"
+            f"**Texte d'émotion (max 4 mots)** : {payload.get('text_emotion') or '—'}\n"
             f"**Émotion** : {payload.get('emotion') or '—'}\n"
-            f"**Durée (s)** : {dur.get('min', 5)}-{dur.get('max', 7)}s\n\n"
+            f"**Durée (s)** : {payload.get('duration_sec', 8)}s\n\n"
             f"**Metadata** :\n- Title : {meta.get('title')}\n"
             f"- Description :\n{meta.get('description')}\n"
             f"- Tags : {', '.join(meta.get('tags', []))}\n"
@@ -734,9 +773,12 @@ def cmd_generate_logo(args):
             "Mode MEME : à partir du mot-clé viral et des stats réelles du "
             "scan F00, forge pour CET angle : 1) title (le titre en haut, "
             "max 6 mots, SI nécessaire seulement — jamais de clickbait vide), "
-            "2) tweet_text (le FAKE tweet du faux post, format X/Twitter, max "
-            "3 lignes, mots-clés colorables vert/rouge), 3) reaction_text (le "
-            "texte d'émotion du milieu, max 4 mots). Tout en ANGLAIS."
+            "2) tweet.text (le FAKE tweet du faux post, format X/Twitter, max "
+            "3 lignes) + tweet.keywords_style (les mots-clés colorables du "
+            "tweet : vert = valeur/espoir, rouge = danger/absurde, chacun avec "
+            "exactement une couleur parmi vert/rouge), 3) text_emotion (le "
+            "texte d'émotion du milieu, max 4 mots), 4) duration_sec (entier "
+            "5-30, défaut 8). Tout en ANGLAIS."
             " La video est montee par OMNIS_WATCH selon la doctrine 6 couches "
             "de GUIDE_UTILISATION/04_MODE_MEME.md (setup/faux post, preuve, "
             "label A->B, reacteur pop-culture, pivot 50-55%, watermark)."
@@ -769,10 +811,15 @@ def cmd_generate_logo(args):
     if sub_mode == "meme":
         output_schema = {
             "title": "titre en haut (max 6 mots, SI nécessaire) ou null",
-            "tweet_text": "fake tweet du faux post (max 3 lignes)",
-            "reaction_text": "texte d'émotion du milieu (max 4 mots)",
+            "tweet": {
+                "text": "fake tweet du faux post (max 3 lignes)",
+                "keywords_style": [
+                    {"word": "mot du tweet", "color": "vert"},
+                ],
+            },
+            "text_emotion": "texte d'émotion du milieu (max 4 mots)",
             "emotion": "l'émotion de l'angle (ex: poignant, drole, choc, tendu)",
-            "duration_sec_range": {"min": 5, "max": 7},
+            "duration_sec": 8,
             "metadata": {
                 "title": "titre metadata YouTube",
                 "description": "résumé 2 lignes + clause 107 fair use",
