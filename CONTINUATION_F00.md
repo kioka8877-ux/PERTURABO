@@ -248,21 +248,50 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 >   consommés par OMNIS_WATCH — `meme`, `tweet{text, keywords_style}`,
 >   `text_emotion`, `emotion`, `duration_sec`. `cut`/`metadata`/
 >   `on_screen_text`/`logo_placement` sont **ignorés par LACRIMAE** (retirés
->   du mode meme, conservés pour informatif/humour). Mapping meme :
->   A01+A02+A03 → `meme_1`, A04+A05 → `meme_2`. En-tête `meme_source`
+>   du mode meme, conservés pour informatif/humour). Mapping meme initial :
+>   A01+A02+A03 → `meme_1`, A04+A05 → `meme_2` (renommés en `meme_001`/
+>   `meme_002` en v2.5 — cf. MAJ suivante). En-tête `meme_source`
 >   garde `montage_guide_ref: GUIDE_UTILISATION/04_MODE_MEME.md`, retire
 >   `duration_range_sec`. Summary `.md` adapté (colonne Meme/Durée).
 > - **Schéma** `production_pack_schema_logo.json` : video item allégé
 >   (required `video_index`/`angle_id`/`title`), ajout `meme`
->   (enum meme_1/meme_2), `tweet{text, keywords_style}`, `text_emotion`,
->   `duration_sec` (5-30). Champs v1 retirés.
+>   (enum initial meme_1/meme_2 → meme_001/002 en v2.5), `tweet{text,
+>   keywords_style}`, `text_emotion`, `duration_sec` (5-30). Champs v1 retirés.
 > - **Pack `EXPORT/production_pack_meme_student_debt.json`** : les 5 vidéos
 >   ont été **converties en v2 sans re-run** (patch direct, pas de relance
->   GLM) — A01-A03 → `meme_1`, A04-A05 → `meme_2`, `keywords_style` sobre
->   (vert sur les victoires type "wiped $47K", rouge sur les dangers),
->   `duration_sec: 8`. Summary `.md` aligné. **Validation schéma : 0 erreur.**
+>   GLM) — A01-A03 → `meme_1`, A04-A05 → `meme_2` (renommés meme_001/002 en
+>   v2.5), `keywords_style` sobre (vert sur les victoires type "wiped $47K",
+>   rouge sur les dangers), `duration_sec: 8`. Summary `.md` aligné.
+>   **Validation schéma : 0 erreur.**
 > - Le `--finalize` de F05 échoue encore sur l'artefact build stale de
 >   `F05_PACKAGER/OUT/` (gitignoré, non committé) — sans impact livrable.
+> - **Reste à faire** : F06_TRACKER `tracker.py --post` quand OMNIS_WATCH aura
+>   posté les 5 vidéos (vues 1h/24h, payout, learnings).
+
+> ✅ **MAJ 2026-08-16 (v2.5 note LACRIMAE — commit `2f73462`, poussé sur main)** :
+> LACRIMAE (successeur d'OMNIS_WATCH) a renvoyé la note
+> `GUIDE_UTILISATION/05_NOTE_PERTURABO_PACK_MEME.md` avec une **section 4
+> dédiée aux couleurs** — corrections v2.5 :
+> - **Règle 1 — format** : `tweet.keywords_style` = **DICT** `{"green": [...],
+>   "red": [...]}` (clés anglaises). Une liste `[{word, color}]` (v1) →
+>   **aucune couleur** (PERTURABO ne produit plus jamais une liste).
+> - **Règle 2 — mots** : chaque entrée = **un mot seul** présent mot à mot
+>   dans `tweet.text` (ponctuation ignorée). Les phrases multi-mots
+>   ("student loans", "owe more") ne matchent jamais → découpées en mots
+>   simples (`loans`, `owe`).
+> - **2e blocage (levé)** : `meme` doit pointer `meme_001` / `meme_002`
+>   (fichiers existants de la méméthèque LACRIMAE), **pas** `meme_1`/`meme_2`.
+> - **F04** : `_normalize_keywords_style(kws_style, tweet_text)` réécrit
+>   (dict green/red, mots seuls filtrés sur les tokens du tweet), mission +
+>   output_schema alignés, `_render_keywords_md` adapté au dict.
+> - **F05** : `_meme_for_angle` → `meme_001`/`meme_002` ; garde-fou
+>   `_keywords_v2` (liste v1 → dict vide). Schéma : enum `meme_001/002`,
+>   `keywords_style` dict green/red.
+> - **Pack EXPORT** : les 5 vidéos patchées **sans re-run** (ex. A01 :
+>   `{"green": [], "red": ["loans", "interest", "owe"]}` ; A03 :
+>   `{"green": ["wiped"], "red": ["debt"]}`). Summary `.md` aligné
+>   (meme_001/002). **Validation schéma v2.5 : 0 erreur.**
+> - Lien pack et note vérifiés HTTP 200 (raw GitHub).
 > - **Reste à faire** : F06_TRACKER `tracker.py --post` quand OMNIS_WATCH aura
 >   posté les 5 vidéos (vues 1h/24h, payout, learnings).
 
