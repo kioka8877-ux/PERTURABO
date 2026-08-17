@@ -219,9 +219,9 @@ def _normalize_tags(values) -> list[str]:
         if not isinstance(t, str):
             continue
         t = t.strip().strip("#").strip()
-        if not t or " " in t:
+        if not t:
             continue
-        key = t.lower()
+        key = t.lower().replace(" ", "")
         if key in seen:
             continue
         seen.add(key)
@@ -229,6 +229,44 @@ def _normalize_tags(values) -> list[str]:
         if len(tags) >= 15:
             break
     return tags
+
+
+def _active_channel_slug() -> str:
+    """Slug du compte actif (ARCHIVUM/campaign/channel.txt). Retour '' sinon."""
+    slug_path = os.path.join(ARCHIVUM_DIR, "campaign", "channel.txt")
+    if not os.path.exists(slug_path):
+        return ""
+    try:
+        return read_text(slug_path).strip()
+    except OSError:
+        return ""
+
+
+def _channel_tags() -> list[str]:
+    """Tags de chaîne (channel_tags.md du compte actif, bloc ``` ```) :
+    liste de tags complémentaires, normalisés '#', max 15. Retour [] sinon."""
+    slug = _active_channel_slug()
+    if not slug:
+        return []
+    path = os.path.join(ARCHIVUM_DIR, "channels", slug, "channel_tags.md")
+    if not os.path.exists(path):
+        return []
+    try:
+        content = read_text(path)
+    except OSError:
+        return []
+    lines = []
+    capture = False
+    for line in content.splitlines():
+        if line.startswith("```"):
+            capture = not capture
+            continue
+        if capture:
+            lines.append(line)
+    raw_tags = []
+    for line in lines:
+        raw_tags.extend(t.strip() for t in line.split(",") if t.strip())
+    return _normalize_tags(raw_tags)
 
 
 def _channel_base_paragraph() -> str:
@@ -301,6 +339,11 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
     for ht in _campaign_hashtags():
         if ht not in tags:
             tags.append(ht)
+    for ct in _channel_tags():
+        if len(tags) >= 15:
+            break
+        if ct not in tags:
+            tags.append(ct)
     tags = tags[:15]
     if tags:
         hashtag_line = ", ".join(tags)

@@ -123,9 +123,9 @@ def _normalize_tags(values) -> list[str]:
         if not isinstance(t, str):
             continue
         t = t.strip().strip("#").strip()
-        if not t or " " in t:
+        if not t:
             continue
-        key = t.lower()
+        key = t.lower().replace(" ", "")
         if key in seen:
             continue
         seen.add(key)
