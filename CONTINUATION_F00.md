@@ -295,6 +295,39 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 > - **Reste à faire** : F06_TRACKER `tracker.py --post` quand OMNIS_WATCH aura
 >   posté les 5 vidéos (vues 1h/24h, payout, learnings).
 
+## 4bis. Push chaîne actu `cocktail_meme` + description 3 blocs obligatoire
+
+> Création de la chaîne **Daily Shake** (`@memecocktail`, slug `cocktail_meme`)
+> dans `MONDES_FORGES/CLIPPING/ARCHIVUM/channels/` (modèle `starflash_us`) :
+> meme quotidien sur l'actu US **non-politique** (pop-culture, sport, tech,
+> entertainment). Zéro politique. Avertissement **non-monétisation**
+> (placements de produit / brand partnerships) dans la description de chaîne.
+
+- **Squelette chaîne** (`ARCHIVUM/channels/cocktail_meme/`) : `identity.json`
+  (profile_mode meme, warmup incomplete), `channel_description.md`,
+  `channel_tags.md` (15 tags), `description_base_paragraph.md`,
+  `performance.json`, `branding/` (banner 2560×1440 + avatar 800×800,
+  SVG+PNG). Lien campagne → compte : `ARCHIVUM/campaign/channel.txt`
+  (contenu : `cocktail_meme`).
+- **Injection F04** (`copywriter.py`) : `_channel_base_paragraph()` lit
+  `campaign/channel.txt` → `channels/<slug>/description_base_paragraph.md`
+  et concatène le bloc (avertissement + fair use) en fin de
+  `metadata.description` de chaque vidéo.
+- **Pack vidéo = 4 blocs obligatoires** (contrat Warsmith) dans
+  `metadata.description` : 1) résumé du tweet 2-3 lignes (produit par GLM),
+  2) note fair use (Section 107), 3) avertissement non-monétisation,
+  4) ligne de 15 hashtags `#`. `metadata.tags` = 15 tags préfixés `#`.
+- **F04** : `_normalize_tags()` (préfixe `#`, dédoublonnage, max 15, ignore
+  tags multi-mots) + ligne hashtags en fin de description. Le prompt ne
+  demande plus que le résumé au modèle (fair use + avertissement injectés).
+- **F05** (`packager.py`) : `_logo_video_asset` écrit désormais
+  `metadata`/description en mode meme (manquant sur le pack précédent) ;
+  fallback = résumé + fair use + avertissement + hashtags ; normalisation
+  tags idem. `cmd_finalize_logo` bloque si une vidéo est sans description.
+- **Schéma** `production_pack_schema_logo.json` : `tags.maxItems` 12 → 15,
+  items `pattern: "^#"`. **Validateur** : support du `pattern` regex.
+- **À valider** : la structure description 4 blocs sur le prochain pack meme.
+
 ## 5. Commandes de vérification rapide
 
 ```bash

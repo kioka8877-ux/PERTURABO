@@ -73,9 +73,9 @@ LOGO_LOGO_PLACEMENT = (
     "ne pas déplacer, ne pas redimensionner, ne pas recolorer."
 )
 FAIR_USE_NOTE = (
-    "Les vidéos et images utilisées dans cette création servent uniquement "
-    "d'illustration (fair use). Elles ne sont ni revendiquées ni monétisées "
-    "au-delà du format de clip autorisé."
+    "The videos and images used in this creation serve only as illustration "
+    "(fair use). They are neither claimed nor monetized beyond the permitted "
+    "clip format."
 )
 
 
@@ -112,6 +112,61 @@ def _load_campaign_keyword() -> str:
             return f.read().strip()
     except OSError:
         return ""
+
+
+def _normalize_tags(values) -> list[str]:
+    """Normalise la liste de tags : str, préfixe '#', sans doublon (case
+    insensible), max 15. Utilisée pour metadata.tags et la ligne hashtags."""
+    seen = set()
+    tags = []
+    for t in values or []:
+        if not isinstance(t, str):
+            continue
+        t = t.strip().strip("#").strip()
+        if not t or " " in t:
+            continue
+        key = t.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        tags.append(f"#{t}")
+        if len(tags) >= 15:
+            break
+    return tags
+
+
+def _channel_base_paragraph() -> str:
+    """Paragraphe de base du compte (description_base_paragraph.md dans
+    ARCHIVUM/channels/<slug>/) : avertissement non-monétisation + note fair
+    use. Slug lu depuis ARCHIVUM/campaign/channel.txt. Retour '' si absent."""
+    slug_path = os.path.join(ARCHIVUM_DIR, "campaign", "channel.txt")
+    if not os.path.exists(slug_path):
+        return ""
+    try:
+        with open(slug_path, "r", encoding="utf-8") as f:
+            slug = f.read().strip()
+    except OSError:
+        return ""
+    if not slug:
+        return ""
+    para_path = os.path.join(ARCHIVUM_DIR, "channels", slug,
+                             "description_base_paragraph.md")
+    if not os.path.exists(para_path):
+        return ""
+    try:
+        with open(para_path, "r", encoding="utf-8") as f:
+            content = f.read()
+    except OSError:
+        return ""
+    lines = []
+    capture = False
+    for line in content.splitlines():
+        if line.startswith("```"):
+            capture = not capture
+            continue
+        if capture:
+            lines.append(line)
+    return "\n".join(lines).strip()
 
 
 def _load_campaign_file(name: str) -> dict:
@@ -188,19 +243,31 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
             description = f"{description}\n\n{FAIR_USE_NOTE}"
         else:
             description = FAIR_USE_NOTE
+        base_para = _channel_base_paragraph()
+        if base_para and "not monetized" not in description.lower() \
+                and "not monetised" not in description.lower():
+            description = f"{description}\n\n{base_para}".strip()
         metadata = {
             "title": title or "",
             "description": description,
-            "tags": (payload.get("tags") or angle.get("seo_tags") or []),
+            "tags": _normalize_tags(payload.get("tags")
+                                    or angle.get("seo_tags") or []),
         }
+    metadata["tags"] = _normalize_tags(metadata.get("tags") or [])
+    if metadata["tags"]:
+        hashtag_line = ", ".join(metadata["tags"])
+        if hashtag_line.lower() not in metadata["description"].lower():
+            metadata["description"] = f"{metadata['description']}\n\n{hashtag_line}".strip()
     asset = {
         "video_index": video_index,
         "angle_id": angle_id,
         "title": title or "",
     }
     if sub_mode == "meme":
-        # Contrat LACRIMAE : le pack meme ne porte que les champs qu'OMNIS_WATCH
-        # consomme. cut/metadata/on_screen_text/logo_placement sont ignorés.
+        # Contrat LACRIMAE : le pack meme porte les champs qu'OMNIS_WATCH
+        # consomme. metadata (description) est exigé par le Warsmith pour
+        # chaque vidéo : résumé du tweet + note fair use + avertissement.
+        # cut/on_screen_text/logo_placement sont ignorés.
         tweet = payload.get("tweet") or {}
         asset["meme"] = meme or ""
         asset["tweet"] = {
@@ -213,6 +280,7 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
                             or angle.get("emotion")
                             or angle.get("emotion_mode"))
         asset["duration_sec"] = int(payload.get("duration_sec", 8))
+        asset["metadata"] = metadata
     else:
         asset["viral_paragraph"] = viral_paragraph
         asset["metadata"] = metadata
@@ -704,6 +772,11 @@ def cmd_finalize_logo(args):
         errors += validator.validate(pack, root=os.path.basename(path))
         if pack.get("mode") != "logo":
             errors.append(f"{os.path.basename(path)}: mode != logo")
+        for i, video in enumerate(pack.get("videos", [])):
+            desc = (video.get("metadata") or {}).get("description") or ""
+            if not desc.strip():
+                errors.append(f"{os.path.basename(path)}: videos[{i}] "
+                              f"(angle {video.get('angle_id')}) sans description")
     if errors:
         print("[F05:LOGO] Packs invalides :")
         for e in errors:

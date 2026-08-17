@@ -210,6 +210,60 @@ def _campaign_hashtags() -> list[str]:
     return []
 
 
+def _normalize_tags(values) -> list[str]:
+    """Normalise la liste de tags : str, préfixe '#', sans doublon (case
+    insensible), max 15. Utilisée pour metadata.tags et la ligne hashtags."""
+    seen = set()
+    tags = []
+    for t in values or []:
+        if not isinstance(t, str):
+            continue
+        t = t.strip().strip("#").strip()
+        if not t or " " in t:
+            continue
+        key = t.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        tags.append(f"#{t}")
+        if len(tags) >= 15:
+            break
+    return tags
+
+
+def _channel_base_paragraph() -> str:
+    """Paragraphe de base du compte (description_base_paragraph.md dans
+    ARCHIVUM/channels/<slug>/) : avertissement non-monétisation + note fair
+    use, injecté en fin de chaque description vidéo. Slug lu depuis
+    ARCHIVUM/campaign/channel.txt. Retour '' si absent."""
+    slug_path = os.path.join(ARCHIVUM_DIR, "campaign", "channel.txt")
+    if not os.path.exists(slug_path):
+        return ""
+    try:
+        slug = read_text(slug_path).strip()
+    except OSError:
+        return ""
+    if not slug:
+        return ""
+    para_path = os.path.join(ARCHIVUM_DIR, "channels", slug,
+                             "description_base_paragraph.md")
+    if not os.path.exists(para_path):
+        return ""
+    try:
+        content = read_text(para_path)
+    except OSError:
+        return ""
+    lines = []
+    capture = False
+    for line in content.splitlines():
+        if line.startswith("```"):
+            capture = not capture
+            continue
+        if capture:
+            lines.append(line)
+    return "\n".join(lines).strip()
+
+
 def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
                      platform: str, market: str,
                      campaign_id: str = None) -> tuple[dict, list[str]]:
@@ -237,12 +291,22 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
         if "fair use" not in lower and "illustration" not in lower:
             description = f"{description}\n\n{FAIR_USE_NOTE}".strip()
             notes.append("note fair use ajoutée à la description")
-    tags = [t.strip() for t in (meta.get("tags") or raw.get("tags") or [])
-            if isinstance(t, str) and t.strip()][:12]
+    base_para = _channel_base_paragraph()
+    if base_para:
+        lower = description.lower()
+        if "not monetized" not in lower and "not monetised" not in lower:
+            description = f"{description}\n\n{base_para}".strip()
+            notes.append("paragraphe de base du compte ajouté à la description")
+    tags = _normalize_tags(meta.get("tags") or raw.get("tags") or [])
     for ht in _campaign_hashtags():
         if ht not in tags:
             tags.append(ht)
-    tags = tags[:12]
+    tags = tags[:15]
+    if tags:
+        hashtag_line = ", ".join(tags)
+        if hashtag_line.lower() not in description.lower():
+            description = f"{description}\n\n{hashtag_line}".strip()
+            notes.append("ligne de 15 hashtags ajoutée à la description")
 
     payload = {
         "campaign_id": raw.get("campaign_id") or campaign_id,
@@ -843,7 +907,10 @@ def cmd_generate_logo(args):
             "duration_sec": 8,
             "metadata": {
                 "title": "titre metadata YouTube",
-                "description": "résumé 2 lignes + clause 107 fair use",
+                "description": "paragraphe 1 : résumé du tweet en 2-3 lignes "
+                               "(le post, le chiffre choc, la réaction). "
+                               "N'AJOUTE PAS de note fair use ni d'avertissement "
+                               "monétisation : ils sont injectés automatiquement.",
                 "tags": ["tag1", "tag2"],
             },
         }

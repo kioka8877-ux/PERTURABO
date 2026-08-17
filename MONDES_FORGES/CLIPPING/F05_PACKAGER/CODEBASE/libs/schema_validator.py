@@ -21,6 +21,7 @@ modification doit être coordonnée.
 
 import json
 import os
+import re
 
 
 class SchemaValidator:
@@ -48,6 +49,14 @@ class SchemaValidator:
             issues.append(f"{path}: const '{schema['const']}' requis, "
                           f"reçu '{value}'")
         if isinstance(value, str):
+            if "pattern" in schema:
+                try:
+                    if re.search(schema["pattern"], value) is None:
+                        issues.append(f"{path}: ne matche pas le pattern "
+                                      f"'{schema['pattern']}'")
+                except re.error:
+                    issues.append(f"{path}: pattern invalide "
+                                  f"'{schema['pattern']}'")
             if "minLength" in schema and len(value) < schema["minLength"]:
                 issues.append(f"{path}: minLength {schema['minLength']} violé "
                               f"({len(value)} chars)")

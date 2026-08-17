@@ -339,9 +339,10 @@
               "tags": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "pattern": "^#"
                 },
-                "maxItems": 12
+                "maxItems": 15
               }
             }
           },
