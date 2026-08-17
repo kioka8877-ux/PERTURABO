@@ -234,6 +234,38 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 > - **Reste à faire** : F06_TRACKER `tracker.py --post` quand OMNIS_WATCH aura
 >   posté les 5 vidéos (vues 1h/24h, payout, learnings).
 
+> ✅ **MAJ 2026-08-16 (format pack meme v2 — commits `b27fc63` + `f4a5197`,
+> poussés sur main)** : le pack meme passe au **contrat LACRIMAE v2** (le
+> schéma de LACRIMAE fait foi — c'est lui le consommateur final, pas le
+> schéma PERTURABO). Restructuration complète :
+> - **F04 COPYWRITER** : l'ordonnance meme produit désormais
+>   `tweet{text, keywords_style}` + `text_emotion` + `duration_sec`
+>   (plage 5-30, défaut 8) au lieu de `tweet_text`/`reaction_text`/
+>   `duration_sec_range`. `keywords_style` normalisé : `[{word, color}]`
+>   avec `color ∈ vert|rouge` (vert = valeur, rouge = danger), mots absents
+>   du tweet retirés silencieusement. Hérésies et render `.md` alignés.
+> - **F05 PACKAGER** : la vidéo meme ne porte plus que les champs
+>   consommés par OMNIS_WATCH — `meme`, `tweet{text, keywords_style}`,
+>   `text_emotion`, `emotion`, `duration_sec`. `cut`/`metadata`/
+>   `on_screen_text`/`logo_placement` sont **ignorés par LACRIMAE** (retirés
+>   du mode meme, conservés pour informatif/humour). Mapping meme :
+>   A01+A02+A03 → `meme_1`, A04+A05 → `meme_2`. En-tête `meme_source`
+>   garde `montage_guide_ref: GUIDE_UTILISATION/04_MODE_MEME.md`, retire
+>   `duration_range_sec`. Summary `.md` adapté (colonne Meme/Durée).
+> - **Schéma** `production_pack_schema_logo.json` : video item allégé
+>   (required `video_index`/`angle_id`/`title`), ajout `meme`
+>   (enum meme_1/meme_2), `tweet{text, keywords_style}`, `text_emotion`,
+>   `duration_sec` (5-30). Champs v1 retirés.
+> - **Pack `EXPORT/production_pack_meme_student_debt.json`** : les 5 vidéos
+>   ont été **converties en v2 sans re-run** (patch direct, pas de relance
+>   GLM) — A01-A03 → `meme_1`, A04-A05 → `meme_2`, `keywords_style` sobre
+>   (vert sur les victoires type "wiped $47K", rouge sur les dangers),
+>   `duration_sec: 8`. Summary `.md` aligné. **Validation schéma : 0 erreur.**
+> - Le `--finalize` de F05 échoue encore sur l'artefact build stale de
+>   `F05_PACKAGER/OUT/` (gitignoré, non committé) — sans impact livrable.
+> - **Reste à faire** : F06_TRACKER `tracker.py --post` quand OMNIS_WATCH aura
+>   posté les 5 vidéos (vues 1h/24h, payout, learnings).
+
 ## 5. Commandes de vérification rapide
 
 ```bash
