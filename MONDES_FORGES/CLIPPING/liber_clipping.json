@@ -23,9 +23,9 @@
     "f03_source_hunter": "pending",
     "f03_source_hunter_output": null,
     "f04_copywriter": "done",
-    "f04_copywriter_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A08.md",
-    "f05_packager": "pending",
-    "f05_packager_output": null,
+    "f04_copywriter_output": "MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A08.md",
+    "f05_packager": "done",
+    "f05_packager_output": "MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md",
     "f06_tracker": "pending",
     "f06_tracker_output": null,
     "tyrant": "pending",
@@ -67,7 +67,7 @@
     }
   ],
   "iw_custos": {
-    "last_validation": "2026-08-18T16:08:06Z",
+    "last_validation": "2026-08-18T19:38:55Z",
     "errors": []
   }
 }
