@@ -130,15 +130,16 @@ class ContextBuilder:
         Rassemble le clip source + l'article (informatif) OU la blague (humour)
         + le style du clip viral de référence + l'ARCHIVUM copywriting.
 
-        En mode humour, injecte le spin humour du Warsmith (source de vérité :
-        liber_clipping.json -> inputs_warsmith.spin_humour) pour orienter la forge.
+        En mode humour OU meme, injecte le spin humour du Warsmith (source de
+        vérité : liber_clipping.json -> inputs_warsmith.spin_humour) pour
+        orienter la forge.
         """
         spin_humour = self._load_spin_humour()
         return {
             "campaign_id": verdict.get("campaign_id"),
             "angle_id": angle.get("angle_id"),
             "sub_mode": sub_mode,
-            "humour_spin": spin_humour if sub_mode == "humour" else None,
+            "humour_spin": spin_humour if sub_mode in ("humour", "meme") else None,
             "angle": {
                 "angle_id": angle.get("angle_id"),
                 "genre": angle.get("genre"),

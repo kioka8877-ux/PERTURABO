@@ -47,6 +47,11 @@ _MEME_EMOTIONS = [
     "poignant", "drole", "choc", "tendu", "emerveille",
     "nostalgique", "absurde", "fier", "indigne", "tendre",
 ]
+# Registre MEME humour-compatible quand un spin humour operateur est fourni
+_HUMOUR_MEME_EMOTIONS = [
+    "drole", "absurde", "choc", "ironique", "tendu",
+    "nostalgique", "emerveille", "fier",
+]
 _MEME_REFRAFES = [
     "ordinaire_vers_extraordinaire",
     "echec_vers_lecon",
@@ -162,12 +167,15 @@ class AngleForger:
 
     # ------------------------------------------------------------------
     def forge_meme(self, n: int, campaign_id: str,
-                   keyword: str, virality: dict = None) -> list[dict]:
+                   keyword: str, virality: dict = None,
+                   spin_humour: str = None) -> list[dict]:
         """Mode MEME : 5 angles forgés sur les stats réelles du scan F00
         (jamais sur un clip téléchargé). Chaque angle porte :
           - emotion        : emotion pop-culture (anti-spam, 2 max par emotion)
           - duration_sec_range : fourchette (défaut 5-7s)
           - meme_hook      : direction du fake post (A->B) suggérée
+          - humour_spin    : si spin_humour fourni, les angles déclinent la
+                             direction humouristique du Warsmith (traçabilité)
         Règle anti-spam : une même emotion au maximum 2 angles sur les 5."""
         virality = virality or {}
         # Calibration durée depuis la fourchette demandée (ou défaut 5-7s)
@@ -177,7 +185,9 @@ class AngleForger:
         dur_lo = int(dur.get("min") or _MEME_DURATION_DEFAULT[0])
         dur_hi = int(dur.get("max") or _MEME_DURATION_DEFAULT[1])
 
-        emotions = list(_MEME_EMOTIONS)
+        humour = bool(spin_humour)
+        # Registre humour-compatible si spin fourni (anti-spam : 2 max quand même)
+        emotions = (_HUMOUR_MEME_EMOTIONS if humour else list(_MEME_EMOTIONS))
         angles = []
         idx = 1
         emotion_count: dict[str, int] = {}
@@ -213,6 +223,8 @@ class AngleForger:
                         "meme_hook": _meme_hook(reframe, emotion),
                         "weight": 1.0,
                     }
+                    if humour:
+                        candidate["humour_spin"] = spin_humour
                     if self._anti_cannibale(angles, candidate):
                         angles.append(candidate)
                         idx += 1

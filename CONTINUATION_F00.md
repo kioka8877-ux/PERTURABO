@@ -3,7 +3,11 @@
 > LIRE CE FICHIER EN PREMIER si vous arrivez dans ce repo "à froid".
 > Il dit EXACTEMENT où le travail s'est arrêté et quoi faire ensuite.
 
-## 1. État au dernier push (commit `19ed5ca`, branche `main`)
+## 1. État au dernier push (voir §4ter pour le siège EN COURS)
+
+> ⚠️ **PRÉCÉDENCE** : le siège actif est **`marvel doomsday`**
+> (`siege_20260818_134224`) — reprise directe à **F04 A03→A08** (voir §4ter).
+> Le §1-§4bis ci-dessous documentent les sièges précédents (archivés).
 
 - F00_CAPTEURS est **opérationnel de bout en bout** : les 4 signaux sont
   captés (RSS, Trends, YouTube, Suggest), GLM 5.2 synthétise 5 sujets
@@ -331,6 +335,67 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
   désormais `metadata` (title, description 4 blocs, tags 15 `#`). Tags
   complétés depuis `channel_tags.md` du compte actif via `_channel_tags()`
   (accepte les tags multi-mots). Validation schéma : 0 erreur.
+
+## 4ter. SIÈGE EN COURS — `marvel doomsday` (commit à venir, poussé main)
+
+> ⚠️ **MAJ 2026-08-18 — reprise directe F04** : le siège est **EN COURS**
+> (`siege_id: siege_20260818_134224`, `campaign_status: active`, chaîne
+> `cocktail_meme`). Le prochain chat doit **reprendre exactement là** (NE PAS
+> refaire Gate 1 / Gate 2).
+
+### Ce qui est fait (à NE PAS refaire)
+
+- **Gate 0** : directive `ARCHIVUM/campaign/directive.md` (Campaign
+  `MARVEL_DOOMSDAY_MEME`, keyword `marvel doomsday`, mode meme, marché US
+  jeunes -25 ans, chaîne `cocktail_meme`). Spin humour Warsmith enregistré
+  dans `liber_clipping.json -> inputs_warsmith.spin_humour` (Doom, famille,
+  timeline sans dette étudiante, Taylor Swift réacteur émotionnel).
+- **Gate 1** : scans F00 faits — `MEME-5638b961` (marvel doomsday) +
+  `MEME-2316d976` (student loan forgiveness), exports
+  `EXPORT/meme_virality_marvel_doomsday.json` + `.md`. Porte validée.
+- **Gate 2** : ANGLESMITH premium (GLM 5.2 NVIDIA) → **8 angles A01-A08**
+  forgés dans `F02_TYRANT_CAMP/OUT/angles.json` (émotions drole×2, trahison×2,
+  joie×2, vertige, frustration ; meme_hook Doom vs dette étudiante).
+  Portes validées : `['1','2']`.
+- **Gate 3 (EN COURS)** : F04 COPYWRITER — contextes A01→A08 générés
+  (`IN/copywriter_context_A0X.json`). **A01 + A02 terminés (premium NVIDIA)** :
+  `OUT/text_payload_A01.json/.md` + `A02` existent. **A03→A08 NON faits.**
+
+### Bloqueurs production (important pour la reprise)
+
+1. **NVIDIA rate-limit 429** : `CLIPPING_PREMIUM_API_KEY` (GLM 5.2) renvoie
+   des 429 réguliers → la prod premium est lente/instable. Attendre entre les
+   calls ou passer en backup.
+2. **Baseten WAF bloqué** : la clé Kimi-K3 via Baseten (`K3` hébergé chez
+   Baseten) est **bloquée par le WAF du sandbox** (HTTP 451/403) — provider
+   inutilisable ici. Ne PAS y perdre de temps.
+3. **Fallback Oracle documenté** : si la prod échoue, forger les raws à la
+   main dans `OUT/text_payload_raw_A0X.json` (schéma LACRIMAE v2.5 :
+   `title`, `tweet{text, keywords_style:{green,red}}`, `text_emotion`,
+   `emotion`, `duration_sec` 5-30, `metadata{title,description,tags}`,
+   `angle_id`), puis `copywriter.py --ordonnance --auto-ord --angle A0X` +
+   `--finalize`. A01/A02 ont été faits en prod ; **A03-A08 restent à faire**.
+   Un raw A03 partiel existe déjà (`OUT/text_payload_raw_A03.json`).
+
+### À faire ensuite (dans l'ordre)
+
+1. **F04 A03→A08** : premium NVIDIA (en espaçant les calls, attendre 429)
+   ou Oracle forge. Puis Gate 3.
+2. **Gate 4** : F05 `packager.py --assemble --sub-mode meme` → pack
+   `LOGO-...` → `EXPORT/production_pack_meme_marvel_doomsday.json` +
+   summary `.md`, visible OMNIS_WATCH sur GitHub.
+3. **F06** : `tracker.py --post` après diffusion OMNIS_WATCH (vues 1h/24h,
+   payout, learnings).
+4. Clôturer le siège (ledger `campaign_status: closed`) comme le run
+   STUDENT_DEBT_MEME.
+
+### Refs utiles
+
+- Ledger : `liber_clipping.json` (`siege_20260818_134224`, gates `['1','2']`).
+- Angles : `F02_TYRANT_CAMP/OUT/angles.json` (A01-A08).
+- Pattern précédent réussi : run `student debt` (STUDENT_DEBT_MEME, §4 MAJ
+  2026-08-15/16) — même chaîne, pack v2.5 validé, referencer
+  `EXPORT/production_pack_meme_student_debt.json`.
 
 ## 5. Commandes de vérification rapide
 

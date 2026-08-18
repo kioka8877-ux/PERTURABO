@@ -26,6 +26,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -84,7 +85,9 @@ def load_verdict() -> dict:
 
 
 def load_meme_virality() -> dict:
-    """Mode MEME : charge le scan viralité F00 (OUT/meme_virality_*.json)."""
+    """Mode MEME : charge le scan viralité F00 (OUT/meme_virality_*.json).
+    Priorité au scan correspondant au mot-clé du siège (ARCHIVUM/campaign/
+    keyword.txt), sinon le plus récent."""
     f00_out = os.path.join(_FORGE_ROOT, "F00_CAPTEURS", "OUT")
     candidates = sorted(
         f for f in os.listdir(f00_out)
@@ -94,6 +97,21 @@ def load_meme_virality() -> dict:
         print("[ANGLESMITH] Aucun scan meme F00 (F00_CAPTEURS/OUT/meme_virality_*.json)")
         print("[ANGLESMITH] Lancer F00_CAPTEURS --scan-meme --keyword <mot-clé> d'abord (Gate 1)")
         sys.exit(1)
+    # Mot-clé du siège (source de vérité) si présent
+    kw_path = os.path.join(_FORGE_ROOT, "ARCHIVUM", "campaign", "keyword.txt")
+    wanted = None
+    if os.path.exists(kw_path):
+        try:
+            with open(kw_path, "r", encoding="utf-8") as f:
+                wanted = f.read().strip().lower()
+        except OSError:
+            wanted = None
+    if wanted:
+        safe_wanted = re.sub(r"[^a-z0-9]+", "_", wanted).strip("_")
+        match = os.path.join(f00_out, f"meme_virality_{safe_wanted}.json")
+        if os.path.exists(match):
+            print(f"[ANGLESMITH] Scan meme ciblé sur le mot-clé du siège: {os.path.basename(match)}")
+            return load_json(match)
     path = os.path.join(f00_out, candidates[-1])
     return load_json(path)
 
@@ -152,10 +170,14 @@ def cmd_auto(args):
 
     if sub_mode == "meme":
         virality = load_meme_virality()
+        spin = load_humour_spin()
         angles = forger.forge_meme(n=n, campaign_id=virality.get("keyword"),
                                    keyword=virality.get("keyword"),
-                                   virality=virality)
+                                   virality=virality,
+                                   spin_humour=spin)
         campaign_id = virality.get("keyword")
+        if spin:
+            print(f"[ANGLESMITH] Spin humour operateur injecte dans les angles meme: {spin}")
     else:
         verdict = load_verdict()
         spin = load_humour_spin()
@@ -184,6 +206,133 @@ def cmd_auto(args):
         emotions = [a.get("emotion") for a in angles]
         print(f"[ANGLESMITH] mode meme: keyword={campaign_id} — "
               f"emotions={emotions} (anti-spam: 2 max par emotion)")
+
+
+def cmd_premium(args):
+    """Mode MEME premium : forge les N angles via le modèle premium (GLM 5.2).
+    Charge le scan F00 (stats réelles) + spin humour du ledger, appelle le
+    premium, valide le schéma (anti-spam 2 max / anti-cannibale), écrit
+    OUT/angles.json. Le finalize fait la validation + check-in."""
+    sub_mode = (getattr(args, "sub_mode", None) or "").lower()
+    n = int(args.n_angles)
+    if sub_mode != "meme":
+        print("[ANGLESMITH] --premium n'est implémenté qu'en --sub-mode meme")
+        sys.exit(1)
+
+    virality = load_meme_virality()
+    spin = load_humour_spin()
+    keyword = virality.get("keyword", "inconnu")
+
+    sys.path.insert(0, os.path.join(_FORGE_ROOT, "F04_COPYWRITER", "CODEBASE", "libs"))
+    try:
+        from premium_client import PremiumClient, PremiumClientError
+    except ImportError as e:
+        print(f"[ANGLESMITH] premium_client introuvable (F04): {e}")
+        sys.exit(1)
+
+    system_prompt = (
+        "Tu es ANGLESMITH, la forge d'angles d'attaque du pipeline CLIPPING "
+        "PERTURABO — mode MEME. À partir des stats réelles du scan F00 "
+        "(vues YouTube, tendances, demande, fraîcheur) et du spin humour du "
+        "Warsmith, tu forges les angles d'attaque pour des videos virales "
+        "YouTube Shorts (doctrine 6 couches de GUIDE_UTILISATION/04_MODE_MEME.md). "
+        "Réponds en JSON strict conforme au output_schema."
+    )
+
+    user_prompt = {
+        "mission": (
+            f"Forge {n} angles meme (A01..A{n:02d}) pour le mot-clé « {keyword} » "
+            "en déclinant le SENS HUMOUR du Warsmith dans un registre compatible "
+            "(parodie, ironie, absurde, jeux de mots) SANS quitter le sujet réel."
+        ),
+        "keyword": keyword,
+        "spin_humour_operateur": spin or "(aucun — forger des angles meme neutres)",
+        "virality_scan": virality,
+        "regles": [
+            "Chaque angle porte : angle_id, emotion (une émotion pop-culture), "
+            "emotion_mode (= emotion), angle_family, reframe_dim, engagement_type, "
+            "meme_hook (format '[sujet] at [A]: -> [sujet] at [B]:'), "
+            "duration_sec_range {min:5, max:7}, zone 'direct', keyword.",
+            "ANTI-SPAM : une même emotion au maximum 2 angles sur les "
+            f"{n} — les autres doivent être différentes.",
+            "ANTI-CANNIBALE : 2 axes differenciants minimum entre chaque angle.",
+            "duration_sec_range : 5-7s (jamais au-delà).",
+            "emotion réaliste et credible, jamais de moquerie diffamatoire.",
+            "Tout en ANGLAIS (meme_hook inclus).",
+        ],
+        "heresies_interdites": [
+            "2 angles trop proches (cannibalisme)",
+            "Une émotion sur plus de 2 angles",
+            "Inventer des stats (seules les stats du scan font foi)",
+        ],
+        "output_schema": {
+            "angles": [
+                {
+                    "angle_id": "A01",
+                    "emotion": "drole",
+                    "emotion_mode": "drole",
+                    "angle_family": "reframing",
+                    "reframe_dim": "fait_vers_absurde",
+                    "engagement_type": "question",
+                    "meme_hook": "[sujet] at [A]: -> [sujet] at [B]:",
+                    "duration_sec_range": {"min": 5, "max": 7},
+                    "zone": "direct",
+                    "keyword": keyword,
+                }
+            ]
+        },
+    }
+
+    client = PremiumClient(_FORGE_ROOT)
+    try:
+        client.require_config()
+        result = client.chat(system_prompt=system_prompt,
+                             user_prompt=json.dumps(user_prompt, indent=2,
+                                                    ensure_ascii=False))
+    except PremiumClientError as e:
+        print(f"[ANGLESMITH] Échec premium : {e}")
+        sys.exit(1)
+
+    if not result:
+        print("[ANGLESMITH] Réponse premium vide")
+        sys.exit(1)
+    try:
+        parsed = json.loads(client.extract_json(result))
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f"[ANGLESMITH] Sortie premium non-JSON: {e}")
+        print(result[:1000])
+        sys.exit(1)
+
+    angles = parsed.get("angles") or []
+    if len(angles) < n:
+        print(f"[ANGLESMITH] WARN: {len(angles)} angles reçus (demandé {n})")
+
+    for i, angle in enumerate(angles):
+        angle["angle_id"] = f"A{i + 1:02d}"
+        angle.setdefault("emotion_mode", angle.get("emotion"))
+        angle.setdefault("zone", "direct")
+        angle.setdefault("keyword", keyword)
+        angle.setdefault("duration_sec_range", {"min": 5, "max": 7})
+        angle.setdefault("weight", 1.0)
+        if spin:
+            angle["humour_spin"] = spin
+
+    out = {
+        "campaign_id": keyword,
+        "n_angles": len(angles),
+        "anglesmith_status": "done",
+        "weighting_eligible": LearningsWeight(_FORGE_ROOT).eligible(),
+        "sub_mode": sub_mode,
+        "forge_mode": "premium",
+        "angles": angles,
+        "check_in_iw_custos": None,
+    }
+    save_json(ANGLES_PATH, out)
+    print(f"[ANGLESMITH] --premium : {len(angles)} angles meme forges via premium "
+          f"({client.config.get('model_id')}) — OUT/angles.json")
+    print(f"[ANGLESMITH] keyword={keyword} spin={spin is not None}")
+    emotions = [a.get("emotion") for a in angles]
+    print(f"[ANGLESMITH] emotions={emotions} — lancer --finalize pour valider (anti-spam)")
 
 
 def cmd_finalize(args):
@@ -240,6 +389,9 @@ def main():
     parser = argparse.ArgumentParser(description="ANGLESMITH — Forge des N angles (Porte 2)")
     parser.add_argument("--prepare", action="store_true", help="Phase 1 : prompt IRON")
     parser.add_argument("--auto", action="store_true", help="Forge auto locale (sans IRON)")
+    parser.add_argument("--premium", action="store_true",
+                        help="Mode MEME premium : forger les angles via le modele "
+                             "premium (GLM 5.2) sur le scan F00 + spin humour")
     parser.add_argument("--finalize", action="store_true", help="Phase 3 : validation + check-in")
     parser.add_argument("--n-angles", default="10", help="Nombre d'angles (defaut 10)")
     parser.add_argument("--sub-mode", default=None,
@@ -251,6 +403,8 @@ def main():
         cmd_prepare(args)
     elif args.auto:
         cmd_auto(args)
+    elif args.premium:
+        cmd_premium(args)
     elif args.finalize:
         cmd_finalize(args)
     else:

@@ -858,7 +858,8 @@ def cmd_setup_context_logo(args):
 
 
 def _load_meme_scan() -> dict:
-    """Charge le scan viralité F00 le plus récent (mode meme)."""
+    """Charge le scan viralité F00 le plus récent (mode meme).
+    Priorité au scan correspondant au mot-clé du siège (keyword.txt)."""
     f00_out = os.path.join(_FORGE_ROOT, "F00_CAPTEURS", "OUT")
     candidates = sorted(
         f for f in os.listdir(f00_out)
@@ -868,6 +869,19 @@ def _load_meme_scan() -> dict:
         print("[F04:LOGO] Aucun scan meme F00 — contexte meme sans stats "
               "(F00 --scan-meme requis en Gate 1)")
         return {}
+    kw_path = os.path.join(_FORGE_ROOT, "ARCHIVUM", "campaign", "keyword.txt")
+    if os.path.exists(kw_path):
+        try:
+            with open(kw_path, "r", encoding="utf-8") as f:
+                wanted = f.read().strip().lower()
+        except OSError:
+            wanted = None
+        if wanted:
+            import re as _re
+            safe_wanted = _re.sub(r"[^a-z0-9]+", "_", wanted).strip("_")
+            match = os.path.join(f00_out, f"meme_virality_{safe_wanted}.json")
+            if os.path.exists(match):
+                return load_json(match)
     return load_json(os.path.join(f00_out, candidates[-1]))
 
 
@@ -926,13 +940,13 @@ def cmd_generate_logo(args):
         )
 
     humour_spin = context.get("humour_spin")
-    if sub_mode == "humour" and humour_spin:
+    if sub_mode in ("humour", "meme") and humour_spin:
         mission = (
             mission
             + f"\nSPIN HUMOUR (Warsmith) : {humour_spin} — chaque angle décline "
             "cette direction humoristique (ironie, absurde, jeux de mots) SANS "
-            "quitter le sujet réel. Le titre et le paragraphe portent le spin, "
-            "jamais de moquerie diffamatoire."
+            "quitter le sujet réel. Le titre, le tweet et le texte d'émotion "
+            "portent le spin, jamais de moquerie diffamatoire."
         )
 
     if sub_mode == "meme":

@@ -1,14 +1,14 @@
-# Directive — Student Debt (mode meme)
+# Directive — Marvel Doomsday (mode meme)
 
-Campaign ID: STUDENT_DEBT_MEME
+Campaign ID: MARVEL_DOOMSDAY_MEME
 
-> MEME MODE: keyword student debt — marché US, -25 ans (étudiants ou
-> fraîchement diplômés). Cible YouTube Shorts, langue anglais.
+> MEME MODE: keyword marvel doomsday — marché US, jeunes (-25 ans), fans pop-culture / MCU.
+> Cible YouTube Shorts, langue anglais. Chaîne de diffusion : cocktail_meme (Daily Shake).
 
 ## Sujet du siège
 
-- **Mot-clé** : `student debt`
-- **Marché** : US, jeunes (-25 ans), étudiants ou récemment diplômés
+- **Mot-clé** : `marvel doomsday`
+- **Marché** : US, jeunes (-25 ans), pop-culture / MCU
 - **Plateforme** : YouTube (Shorts)
 - **Langue** : anglais
 - **Sous-mode** : meme

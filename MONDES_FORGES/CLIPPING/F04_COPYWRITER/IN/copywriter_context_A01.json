@@ -2,7 +2,7 @@
   "campaign_id": null,
   "angle_id": "A01",
   "sub_mode": "meme",
-  "humour_spin": null,
+  "humour_spin": "Docteur Doom fait tout ce qu il fait parce qu il a perdu sa famille alors que la reponse etait juste depuis le debut : il essaie de creer un timeline ou la dette etudiante n existe pas. Taylor Swift en reacteur emotionnel, reaction des etudiants (heureux).",
   "angle": {
     "angle_id": "A01",
     "genre": null,
@@ -11,15 +11,17 @@
     "on_screen_text": null,
     "seo_tags": null,
     "angle_family": "reframing",
-    "emotion_mode": "poignant",
+    "emotion_mode": "drole",
     "engagement_type": "question",
-    "reframe_dim": "ordinaire_vers_extraordinaire",
+    "reframe_dim": "fait_vers_absurde",
     "zone": "direct"
   },
   "clip_source_ref": {
     "source_type": "meme_keyword",
     "sub_mode": "meme",
-    "keyword": "student debt",
+    "keyword": "marvel doomsday",
+    "celebrity_or_subject": "Marvel Doomsday",
+    "niche": "pop-culture/mcu",
     "market": "us_young_english",
     "platform": "youtube",
     "note": "Mode meme : aucun clip de référence fourni (F01/F03 SKIP). F00 scanna la viralité du mot-clé pour ANGLESMITH.",
@@ -28,11 +30,11 @@
   },
   "article_source": null,
   "joke_source": null,
-  "keyword": "student debt",
+  "keyword": "marvel doomsday",
   "meme_source": {
-    "scan_id": "MEME-dee7c660",
-    "keyword": "student debt",
-    "scanned_at": "2026-08-15T19:51:01Z",
+    "scan_id": "MEME-5638b961",
+    "keyword": "marvel doomsday",
+    "scanned_at": "2026-08-18T13:43:40Z",
     "sources_scanned": [
       "youtube",
       "trends",
@@ -54,79 +56,79 @@
         "search": {
           "status": "ok",
           "error": null,
-          "query": "student debt student debt",
+          "query": "marvel doomsday marvel doomsday",
           "videos": [
             {
-              "video_id": "U4grYa3TpOk",
-              "title": "Scared of Marriage but Willing to Take on Student Debt for $50K a Year",
-              "channel": "Kevin Samuels",
-              "published_at": "2026-08-15T01:00:27Z",
-              "view_count": 6714,
-              "like_count": 503,
-              "comment_count": 72
+              "video_id": "00mmlw69QoE",
+              "title": "KANG EMOCIONABA igual que DOOM en AVENGERS DOOMSDAY | #Shorts",
+              "channel": "ComicsYotros Pormenores",
+              "published_at": "2026-08-18T00:00:38Z",
+              "view_count": 578155,
+              "like_count": 57276,
+              "comment_count": 499
             },
             {
-              "video_id": "AT1xNZx6WkY",
-              "title": "පොළී රහිත ශිෂ්‍ය ණය යෝජනා ක්‍රමය පිළිබඳ ඔබ දැනගතයුතු හැමදේම | Interest Free Student Loan Scheme 2027",
-              "channel": "Mudith Ekanayake",
-              "published_at": "2026-08-15T08:00:06Z",
-              "view_count": 3338,
-              "like_count": 224,
-              "comment_count": 93
+              "video_id": "hSWHerMLCBA",
+              "title": "A MARVEL DIVULGOU A LISTA OFICIAL COM TUDO QUE VOCÊ PRECISA ASSISTIR ANTES DE VINGADORES DOOMSDAY",
+              "channel": "THWIP",
+              "published_at": "2026-08-17T15:10:41Z",
+              "view_count": 299242,
+              "like_count": 29083,
+              "comment_count": 369
             },
             {
-              "video_id": "htTx8WYCFrY",
-              "title": "\"Rep Anna Paulina Luna: Cap Student Loan Interest At 2%\"#shorts",
-              "channel": "B press",
-              "published_at": "2026-08-15T10:09:04Z",
-              "view_count": 2214,
-              "like_count": 48,
-              "comment_count": 2
+              "video_id": "M8rb8WrQ-bI",
+              "title": "PELÍCULAS que según MARVEL debes ver para entender AVENGERS DOOMSDAY🎬#avengers #peliculas",
+              "channel": "Pepe Ocampo",
+              "published_at": "2026-08-17T22:31:48Z",
+              "view_count": 216558,
+              "like_count": 16895,
+              "comment_count": 215
             },
             {
-              "video_id": "1st_IbSGI00",
-              "title": "Paying STUDENT DEBT with cat videos 😅 #cat #funny #pets #funnyvideo #shorts",
-              "channel": "ChaosAndClaws\n\n",
-              "published_at": "2026-08-15T10:34:19Z",
-              "view_count": 1956,
-              "like_count": 58,
-              "comment_count": 0
+              "video_id": "XOAqX6g7KDU",
+              "title": "Marvel misdirecting us again doomsday..? 💀 #shorts #avengers #doomsday",
+              "channel": "SENSIMITY",
+              "published_at": "2026-08-17T17:03:24Z",
+              "view_count": 180678,
+              "like_count": 7962,
+              "comment_count": 31
             },
             {
-              "video_id": "tBhHrmSpknM",
-              "title": "Student Loan Hack: Pay Off Loans FAST with Savings!",
-              "channel": "Alliance Financial Group",
-              "published_at": "2026-08-14T22:00:45Z",
-              "view_count": 1745,
-              "like_count": 7,
-              "comment_count": 0
+              "video_id": "YHne-itlYmc",
+              "title": "¿ESE ES EL UNIVERSO DE TOBEY EXPLOTANDO? 💀 #marvel #doomsday #spiderman",
+              "channel": "TYK Glitch",
+              "published_at": "2026-08-17T23:00:15Z",
+              "view_count": 150760,
+              "like_count": 3096,
+              "comment_count": 66
             },
             {
-              "video_id": "GVKhxokq6Iw",
-              "title": "【実話】奨学金600万円。返済に追い詰められた芸人が、自己破産でお笑いに向き合うまで｜RE：LIFE #10",
-              "channel": "債務整理ドキュメンタリー RE:LIFE",
-              "published_at": "2026-08-15T03:00:34Z",
-              "view_count": 1483,
-              "like_count": 15,
-              "comment_count": 6
+              "video_id": "UmJPLjT-L9U",
+              "title": "VAZOU! DOUTOR ESTRANHO SERÁ O \"BORIS\" EM VINGADORES DOOMSDAY",
+              "channel": "Ei Nerd",
+              "published_at": "2026-08-17T21:30:13Z",
+              "view_count": 122775,
+              "like_count": 13082,
+              "comment_count": 275
             },
             {
-              "video_id": "0YltFauUK5o",
-              "title": "Student Loan Payments: Are You Paying Too Much? #shorts",
-              "channel": "Financially Clips",
-              "published_at": "2026-08-14T20:00:25Z",
-              "view_count": 804,
-              "like_count": 6,
-              "comment_count": 0
+              "video_id": "EkJbkCYsx4Y",
+              "title": "Universes Coming To Avengers Doomsday #marvel #mcu",
+              "channel": "Built By Gamers",
+              "published_at": "2026-08-17T17:39:31Z",
+              "view_count": 99203,
+              "like_count": 3811,
+              "comment_count": 69
             },
             {
-              "video_id": "8qPE14EGm08",
-              "title": "BEGGARS journey through TikTok for donations compilation",
-              "channel": "Consumer Debt Chit-Chat ",
-              "published_at": "2026-08-15T03:48:30Z",
-              "view_count": 746,
-              "like_count": 67,
-              "comment_count": 32
+              "video_id": "Qxnpi7I4fkg",
+              "title": "Marvel CONFIRMS EVERY MOVIE CONNECTION to Avengers Doomsday! ",
+              "channel": "The Cosmic Wonder",
+              "published_at": "2026-08-17T18:24:57Z",
+              "view_count": 68685,
+              "like_count": 1887,
+              "comment_count": 383
             }
           ]
         },
@@ -135,76 +137,76 @@
           "error": null,
           "videos": [
             {
-              "video_id": "FboTyBsFZQs",
-              "title": "Anuel AA | Donde Hubo Fuego Cenizas Quedan (Video Oficial)",
-              "channel": "Anuel AA",
-              "published_at": "2026-08-14T22:44:06Z",
-              "view_count": 2878655,
-              "like_count": 150569,
-              "comment_count": 8591
+              "video_id": "91FS6p9yC2E",
+              "title": "FullyChop - Purple Switch (Official Music Video)",
+              "channel": "FullyChop",
+              "published_at": "2026-08-17T21:30:46Z",
+              "view_count": 110203,
+              "like_count": 9543,
+              "comment_count": 642
             },
             {
-              "video_id": "X1aFkAkFASk",
-              "title": "Avengers: Doomsday | Special Look | In Theaters December 18",
-              "channel": "Marvel Entertainment",
-              "published_at": "2026-08-15T04:06:21Z",
-              "view_count": 19871421,
-              "like_count": 1065345,
-              "comment_count": 47651
+              "video_id": "9AsEwQJiQQE",
+              "title": "Chapter 7 Season 4: Override | Official Trailer",
+              "channel": "Fortnite",
+              "published_at": "2026-08-16T16:00:07Z",
+              "view_count": 1820687,
+              "like_count": 94029,
+              "comment_count": 9801
             },
             {
-              "video_id": "gVE2t-LRK-s",
-              "title": "Whatever You Hide As, You Keep!",
-              "channel": "MrBeast Gaming",
-              "published_at": "2026-08-15T16:00:01Z",
-              "view_count": 1962010,
-              "like_count": 122432,
-              "comment_count": 12932
+              "video_id": "1OYU38dGlBI",
+              "title": "I Can't Believe They Streamed This",
+              "channel": "penguinz0",
+              "published_at": "2026-08-17T18:00:05Z",
+              "view_count": 2595118,
+              "like_count": 82791,
+              "comment_count": 10243
             },
             {
-              "video_id": "TXPQ2wDRSNM",
-              "title": "Bulin 47 X Afriken An - Leo Leo Remix (Video Oficial)",
-              "channel": "Bulin 47 Oficial",
-              "published_at": "2026-08-14T15:59:16Z",
-              "view_count": 1186687,
-              "like_count": 80895,
-              "comment_count": 9383
+              "video_id": "W4LhfsQTi5E",
+              "title": "KATSEYE - PINKY UP (Live From The Today Show/2026)",
+              "channel": "KATSEYEVEVO",
+              "published_at": "2026-08-17T19:51:20Z",
+              "view_count": 612636,
+              "like_count": 27914,
+              "comment_count": 4911
             },
             {
-              "video_id": "54eFEhlnIjg",
-              "title": "KINGDOM HEARTS IV | D23 2026 Showcase Trailer",
-              "channel": "Pixar",
-              "published_at": "2026-08-15T02:55:22Z",
-              "view_count": 1135110,
-              "like_count": 60536,
-              "comment_count": 4157
+              "video_id": "W8jMEXwErvk",
+              "title": "A Different World | Official Trailer | Netflix",
+              "channel": "Netflix",
+              "published_at": "2026-08-17T15:00:00Z",
+              "view_count": 583665,
+              "like_count": 26529,
+              "comment_count": 3003
             },
             {
-              "video_id": "u9pnNFueC9U",
-              "title": "Stuck In The Trenches...[Shellshock]",
-              "channel": "Joe Bart Games",
-              "published_at": "2026-08-15T13:07:42Z",
-              "view_count": 207143,
-              "like_count": 9749,
-              "comment_count": 592
+              "video_id": "ZyZb2dFYqQs",
+              "title": "If This Balloon Touches The Ground You DIE",
+              "channel": "SMii7Y",
+              "published_at": "2026-08-17T19:13:13Z",
+              "view_count": 1504740,
+              "like_count": 90219,
+              "comment_count": 2475
             },
             {
-              "video_id": "UOD3K2JV9-o",
-              "title": "Ponte Bonita",
-              "channel": "LOS DOS DE TAMAULIPAS - Topic",
-              "published_at": "2026-08-13T10:00:26Z",
-              "view_count": 401835,
-              "like_count": 11279,
-              "comment_count": 96
+              "video_id": "j5MKeHn_0v0",
+              "title": "James Blunt - Tastes Like Summer (Official Music Video)",
+              "channel": "James Blunt",
+              "published_at": "2026-08-14T12:00:06Z",
+              "view_count": 468610,
+              "like_count": 11200,
+              "comment_count": 1980
             },
             {
-              "video_id": "Fdar7gTQnog",
-              "title": "Star Wars: Ahsoka Season 2 | Teaser Trailer | Streaming January 20 on Disney+",
-              "channel": "Star Wars",
-              "published_at": "2026-08-15T04:17:28Z",
-              "view_count": 1875548,
-              "like_count": 76225,
-              "comment_count": 5595
+              "video_id": "kzI4R1DwXb0",
+              "title": "VISIONQUEST TRAILER BREAKDOWN! Every Easter Egg & Detail You Missed!",
+              "channel": "New Rockstars",
+              "published_at": "2026-08-18T00:08:58Z",
+              "view_count": 244420,
+              "like_count": 10957,
+              "comment_count": 848
             }
           ]
         }
@@ -216,75 +218,96 @@
           "error": null,
           "trending": [
             {
-              "query": "bruce willis daughter tallulah wedding",
-              "approx_traffic": 1000,
-              "approx_traffic_raw": "1000+"
-            },
-            {
-              "query": "tigers game",
-              "approx_traffic": 2000,
-              "approx_traffic_raw": "2000+"
-            },
-            {
-              "query": "pga leaderboard today",
-              "approx_traffic": 2000,
-              "approx_traffic_raw": "2000+"
-            },
-            {
-              "query": "donald trump republican primary losses",
+              "query": "new york times games",
               "approx_traffic": 200,
               "approx_traffic_raw": "200+"
             },
             {
-              "query": "shane buechele",
+              "query": "jenny mccarthy",
               "approx_traffic": 500,
               "approx_traffic_raw": "500+"
             },
             {
-              "query": "sophie cunningham indianapolis bar performance",
-              "approx_traffic": 500,
-              "approx_traffic_raw": "500+"
+              "query": "uzbekistan",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
             },
             {
-              "query": "rio ave vs porto",
-              "approx_traffic": 500,
-              "approx_traffic_raw": "500+"
+              "query": "mauricio umansky",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
             },
             {
-              "query": "fluminense vs palmeiras",
-              "approx_traffic": 2000,
-              "approx_traffic_raw": "2000+"
+              "query": "cybele raver",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
             },
             {
-              "query": "michael conforto",
-              "approx_traffic": 2000,
-              "approx_traffic_raw": "2000+"
+              "query": "oswaldo pirela ice detention",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
             },
             {
-              "query": "cobán imperial - mixco",
-              "approx_traffic": 500,
-              "approx_traffic_raw": "500+"
+              "query": "trevor goosby",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
+            },
+            {
+              "query": "za'darius smith",
+              "approx_traffic": 1000,
+              "approx_traffic_raw": "1000+"
+            },
+            {
+              "query": "thailand vs singapore",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
+            },
+            {
+              "query": "naacp",
+              "approx_traffic": 200,
+              "approx_traffic_raw": "200+"
             }
           ]
         },
         "keyword_curves": {
-          "status": "pytrends_absent",
-          "note": "pytrends non installé — ajouter à requirements_capteurs.txt",
+          "status": "ok",
+          "note": null,
           "keywords": {
-            "student debt": {
+            "marvel doomsday": {
               "is_trending": null,
               "growth_multiplier": null,
-              "note": "pytrends absent"
+              "note": "échec pytrends: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded wi"
             },
-            "student": {
+            "marvel": {
               "is_trending": null,
               "growth_multiplier": null,
-              "note": "pytrends absent"
+              "note": "échec pytrends: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded wi"
             },
-            "debt": {
-              "is_trending": null,
-              "growth_multiplier": null,
-              "note": "pytrends absent"
+            "doomsday": {
+              "is_trending": false,
+              "growth_multiplier": 1.33,
+              "first": 18,
+              "last": 24,
+              "series_sample": [
+                18,
+                29,
+                13,
+                20,
+                16,
+                16,
+                25,
+                18,
+                41,
+                66,
+                65,
+                63,
+                35,
+                52,
+                23,
+                37,
+                28
+              ],
+              "note": null
             }
           }
         }
@@ -293,36 +316,132 @@
         "signal": "fraicheur_et_couverture",
         "window_hours": 5,
         "keywords": [
-          "student debt",
-          "student",
-          "debt"
+          "marvel doomsday",
+          "marvel",
+          "doomsday"
         ],
-        "fetched_articles": 100,
+        "fetched_articles": 99,
         "fresh_articles": [
           {
-            "title": "Heading off to college? Here are some tips for managing your finances - NBC Los Angeles",
-            "source": "NBC Los Angeles",
-            "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQOU9UYmh6ejB1QjF6S0RmNXgxclZVNFhDal9rcEx1d0M3VFdtZ3hWMEE2M1JGWXQwTlpLOTdIMzBZekhTTEQ2bU5PNzhPTUZtcHNTdEFKTklsWTdfbGNEQWNSVzFzblZzRlJJUzNWZVctMUdwZW92b2hfSEpiMHV5X0IxQmhCSEk0N1B4eUN1OVNKMnpqM216Z1Y4OTdOUdIBpgFBVV95cUxPcEVRN1QtR3M4U1Q1dGlfY2UxYmNmTHVraTRIdUsxTjRXei1DZURQR1d5QXh6cVdYZjBRTzc5ZnBmOGd2ZDFhV2N1R0FySXRlX2hzczBjUXZmMHBlckZGXzRpVUJXemR0eFE2NUdhRE9zVVRuMlIxWkRMeTV4RlA4NU9OZmdOVFlocjlTU3M4dEZRT2tsTldjOHpFdjRwZGk3WVJZY3FR?oc=5",
-            "age_hours": 3.2
+            "title": "Doctor Doom’s Ticket Sales Are Already Making Marvel History Before ‘Avengers: Doomsday’ Even Hits Theaters - IMDb",
+            "source": "IMDb",
+            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5vMXQzWGl4VElHS084cFJvVVVoaWxQTGV0cHZXTlhXNTJ1MTlDeG9oMGJHRXhTek4yc0dNeXdpT3J2OWtSWl93Qk1uenNqY2lMX0FmMXJGNHUxZ2paRjNCWnFIeWlNLVU?oc=5",
+            "age_hours": 4.4
           },
           {
-            "title": "Paine College erases debt for some former students to boost re-enrollment - WRDW",
-            "source": "WRDW",
-            "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdVBhR1ZWYXZ4VTdQTHJEd05UVThob1haSTh2WkVjcnJlSkcxTlBlUmNuamdLNVpnT2RBZlVWUmJRUlNudWVjQ1dYd3FxVkQ0bEtZOFY3Wnh0dHRuX2xQVTcwaFBCMWhLUVNMMGRWMTdvT2owWEJCeG1qZ3pRZml6a3g0TUdBNThMalhuMEFDUDZkMWlDSWdPcVp5MDlsbVBoVmpjcjBKdzI?oc=5",
-            "age_hours": 0.6
+            "title": "Loki star teases possible Avengers: Doomsday cameo, and it's all to do with the Latverian Witch theory - GamesRadar+",
+            "source": "GamesRadar+",
+            "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQcUFCNU9Ibi1TTm1rTDVYZmhtQXI1NGFvWnFWdU8xNEhPR3Bfbjd4YzBXdUJUaldvNEw0Tzh1RVYzN2F6c0xVVUgzU0lUMlk4azBJNUxxT19QWE9mQlFxUTRsalZLakJtUU1ZUzBHV1F5ajdRaGxNa1lZcmFwdmFNT0UtclpEamJlOElTa2o3eG4zOVhzX2xMWkNSeFFXSDkwM0ZoZTZTc1UzNEl5WEdKeFV6cUxOajU4Qk5KTjJ0Wk9xWktZRkJyeGYzYlU0SnhoY1BmLThTNTdhc2R5dVlzYWc2LURUcDI1SHhr?oc=5",
+            "age_hours": 3.4
+          },
+          {
+            "title": "‘Avengers: Doomsday’ Tracking for Insane Worldwide Opening, Report Says - IMDb",
+            "source": "IMDb",
+            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5xeU9MWFY5dXpuaTE4MnMxTGxiTHU2X1ZfMmdaNUJ5SHJFY2RPS3FfRnp1OEFxTk8tV2FKend3LTRFR3FyQXFwdW92R0pEWUQ4ZlY1d29iRDB2UFhaLWpNV0YzVjlPZlk?oc=5",
+            "age_hours": 1.1
+          },
+          {
+            "title": "‘Avengers: Doomsday’ special look unveiled at D23 - IMDb",
+            "source": "IMDb",
+            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1Nc1NYM1hhRXljNnF0NVc0WmtWaG1nYnl2aUZNb3IycmZpcWx2UEt2bU5LMnI2b0lDYkxxZ01XVXh2SWdlYmZpcFQySlpOSjFpOXRRUnpPMGJvWm9telhvTWQzQ3YtdFE?oc=5",
+            "age_hours": 4.4
+          },
+          {
+            "title": "Avengers: Doomsday collectible features Doctor Doom holding a mysterious device, and fans have theories - GamesRadar+",
+            "source": "GamesRadar+",
+            "link": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPZFduOFJVaEhUcDl5WEhsMG9BbWpTWXdrTTlrUUJReXJ5OHBfbGNnbXZXWF95RTNZYXRzbFJ1SUlGZEVEaENBeGNDSm5CYnpURnQyNzJRU2k1QnM5QUN0Z3JTOFBxUHJ3Y25saHBIV3hKNk5wam94cHBWMC1aRW9MUm1qYWc1RnBXYW84endKb2ZwODFCU2JmUVViWTdjNEV5NE50UENnVUgwaXpBekJIRDBYdlNqaU42MHFvVnFFQmRTTWdBcWoyMTRGOTlIQXc3RWN0Ql9EbDM1ZkctR1U3TmtkaHFlbmxHbGx5Uk1n?oc=5",
+            "age_hours": 2.4
+          },
+          {
+            "title": "Early Ticket Sales Put “Avengers: Doomsday” Ahead of Record-Setting “Spider-Man” - IMDb",
+            "source": "IMDb",
+            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5NZ0stSmdtQmFFRFhELVhtTW5CclJzNEMtalptQWQxVlVReVBTMGhZWXlTaldIMW4tWkNwWEJPZkE5bmVKdVBDTllBZUhlWGYzNmhaS2N4YUh6YVFYR3pVUDdsbkdlNFk?oc=5",
+            "age_hours": 2.6
+          },
+          {
+            "title": "Essential MCU Titles to Watch Before 'Avengers: Doomsday' - Tempo.co English",
+            "source": "Tempo.co English",
+            "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNeGtFcWg4Q25xaGVCZDhGV2Z6RnN1Tm14Zms1VVlLdmc5YVVueld0TG40bjFRZ1NSZWxpMHdlQWp0Mnp0Z3FrMWZWb2t5c3NaaThoMWh3Sng4ak9saUpTeUxqZGJQdE5KSHZqeGJtb3E3VS1CZVYtUFlrb2JOUWZWSzQ2emk4MndnbjJIZkVYRWs?oc=5",
+            "age_hours": 2.5
+          },
+          {
+            "title": "How Avengers: Endgame Sets Up Doctor Doom in Avengers: Doomsday - Epicstream",
+            "source": "Epicstream",
+            "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQcHFERHBmRE5VQ1Q3TlJ0YlEzSDJNc0R0cnkzU1BWVzEzS0tOMWtDNXNvQzJ3QVZNT1hNaUlYM0w4TWhXelZvemI4bno4d08xajFGekpUUlpVQVRTQU53emRySU03ZUZheHYyZ0ZRS0ljZEphYlhaU3RITC1seC1NOGNZNy1naVpyS3ZWci04WFh3NXVvQ09r?oc=5",
+            "age_hours": 0.5
+          },
+          {
+            "title": "Avengers: Doomsday eyes historic $1 billion global box office opening as presales break records months ahead of release | Hollywood - Hindustan Times",
+            "source": "Hindustan Times",
+            "link": "https://news.google.com/rss/articles/CBMingJBVV95cUxNQk81Mi1vdHN0NmJqU3JCRUZ3VGtYZ1RsVXlERlc0QXdDTF9xc0VDRWl2STkyRFFNN1N4REJrQzJ4ZzEtU0JQTjdEY2dEbldZVFczS1RGbHI3SDlHVmhuVHB6WEdCeXNFbEZzNkNDVE1GWTFlNHNrYUlMbDBDM2JWUFoxbzdkTXV4alA0LUNnRC1kRjlJYXRoS19BVDNHYXZUb05tcWpSYnB4a2ZCN25NWDVfVjN4UW5hYmU5cGRYVmFBYW1xVWVhUG1SUWoyRmFoSERpR0tnUUZEWkVnS1I1MDloVWFfQk5STTVPeHJfVXpQUlpXSTBOQi1pUEpoVDBNakx6LW9yWTJxOXFDLW56RlgtX3A4eXlSRVNvRWNR0gGjAkFVX3lxTE52RVRkUWs1Z1JWM2RPcnBVZVVzVWlWbXJVT2VEeHJkM01GVEtzZ1VILUdKRjF0WkhwaU5JcjFlYnc4V2FueWtveldaRVhQcGVld2ppT0JhU2lYMC0yamNMWnBRN0s0dENfd2E2SkNnZzVtODZfdWdXUUNQZDNEVHpiZXVpUGxmU3hDUzZKY1AzTkdhMWhNdG53UkFUcmtWUE4xTjMyUzh3UnBRVDRyTHgwVGt0REs4Q3JBYnBKZkRVMjB5NFk3WkdJZGxLVlNBN25QYVlkYTVXZUtCX0pPODNWdURRYTc0M0hmRnk3UjlBZFQxWFVJVmhFMzk2ZVYwa1VWMzRaRGhvSy1rWGVpcjcwZnliU1pTcUN2cVAxZWZ0Z3FCbw?oc=5",
+            "age_hours": 4.4
+          },
+          {
+            "title": "Avengers Doomsday Beats Spider-Man Brand New Day In Early Presales; Eyes $1 Billion Global Opening - ETV Bharat",
+            "source": "ETV Bharat",
+            "link": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNWlFDTWhIamNtNnZXRTNUSndYMmdaVlhiM0pWQlZ0WjlyV0VEWFlxajhNaHRfNGtyV0t1ZFJtdVFhMk51aVJlM3hZb0tDMEx1TjNFQVE1UC1FY3NZRGVHRmp1UUZPbFVMNkJtLXhab2tYZXp5dWFrR3VMWVM4RU5hX3dwaEs1YU5pemxkaW95TVdWak5zdVZpT3h6bjluM21PZF9jQmZ2d3lodjVFM2l2RmRXLVlCcGpXVFhnVVgzWV9hUGRaRG54RjNGRTNLUy1mNExmZUZ2bExqRFBlRUZiQUh6X1NtdUgzdW1nTUNxWGY4QWxkeXBz0gH8AUFVX3lxTE85LVJXSlJiZ19GUlhkS3ZocFExS09lNkdhLU1Qck5OaERpaUYwZWhIQkM1SG42emllZGZ6OEZTOUh6bzVhVllZT09EZjRPRExha05VLTNNWlZoM0paX0NZZ1c2WGx2NUc0RzRzY3RYMmZ1VmY4MDIxNXlQd2pyUmVrNEtGQ2JkTHBSZXRVX08yb0wxTllERzdqODBBYXR1NlpyeVdwU2hRdzAwZGx3NnV2SVdhM3RsUWlaTXBUa09nX19SZlVid3FPODdUQmZ5SmhZRXJwazh4VUJkYkdadmRMUzU3VV9jbkRpdGxtUXJlUXJtM08tNzI4SllLMw?oc=5",
+            "age_hours": 2.1
           }
         ],
         "coverage": {
-          "heading off college here some tips": {
+          "doctor doom s ticket sales already": {
             "count": 1,
             "sources": [
-              "NBC Los Angeles"
+              "IMDb"
             ]
           },
-          "paine college erases debt some former": {
+          "loki star teases possible avengers doomsday": {
             "count": 1,
             "sources": [
-              "WRDW"
+              "GamesRadar+"
+            ]
+          },
+          "avengers doomsday tracking insane worldwide opening": {
+            "count": 1,
+            "sources": [
+              "IMDb"
+            ]
+          },
+          "avengers doomsday special look unveiled at": {
+            "count": 1,
+            "sources": [
+              "IMDb"
+            ]
+          },
+          "avengers doomsday collectible features doctor doom": {
+            "count": 1,
+            "sources": [
+              "GamesRadar+"
+            ]
+          },
+          "early ticket sales put avengers doomsday": {
+            "count": 1,
+            "sources": [
+              "IMDb"
+            ]
+          },
+          "essential mcu titles watch before avengers": {
+            "count": 1,
+            "sources": [
+              "Tempo.co English"
+            ]
+          },
+          "how avengers endgame sets up doctor": {
+            "count": 1,
+            "sources": [
+              "Epicstream"
+            ]
+          },
+          "avengers doomsday eyes historic 1 billion": {
+            "count": 1,
+            "sources": [
+              "Hindustan Times"
+            ]
+          },
+          "avengers doomsday beats spider man brand": {
+            "count": 1,
+            "sources": [
+              "ETV Bharat"
             ]
           }
         },
@@ -334,9 +453,9 @@
         "status": "fetch_failed",
         "error": "http_403",
         "keywords": [
-          "student debt",
-          "student",
-          "debt"
+          "marvel doomsday",
+          "marvel",
+          "doomsday"
         ],
         "posts": [],
         "top_subreddits": [],
@@ -348,56 +467,56 @@
         "note": "suggestions Google ds=yt",
         "keywords": [
           {
-            "query": "student debt",
+            "query": "marvel doomsday",
             "suggestions": [
-              "student debt crisis",
-              "student debt usa",
-              "student debt relief",
-              "student debt ramsey",
-              "student debt uk",
-              "student debt forgiveness",
-              "student debt story",
-              "student debt dave ramsey",
-              "student debt tiktok",
-              "student debt crashout"
+              "marvel doomsday trailer",
+              "marvel doomsday explained",
+              "marvel doomsday teaser",
+              "marvel doomsday cast",
+              "marvel doomsday trailer reaction",
+              "marvel doomsday leak",
+              "marvel doomsday clock",
+              "marvel doomsday comic",
+              "marvel doomsday announcement",
+              "marvel doomsday trailer xmen"
+            ],
+            "tension_hits": 1,
+            "total_hits": 10,
+            "demand_score": 100
+          },
+          {
+            "query": "marvel",
+            "suggestions": [
+              "marvel rivals",
+              "marvel indonesia",
+              "marvel tokon",
+              "marvel zombies",
+              "marvel spider man 2",
+              "marvel studios",
+              "marvel trailer",
+              "marvel snap",
+              "marvel ultimate alliance",
+              "marvel intro"
             ],
             "tension_hits": 0,
             "total_hits": 10,
             "demand_score": 100
           },
           {
-            "query": "student",
+            "query": "doomsday",
             "suggestions": [
-              "student of the year",
-              "student of the year 2",
-              "student vlog",
-              "student of the year songs",
-              "student exchange",
-              "student visa australia",
-              "student one islamic school",
-              "student council",
-              "student of the year 2 songs",
-              "student and teacher love story"
+              "doomsday trailer",
+              "doomsday trailer 2",
+              "doomsday trailer reaction",
+              "doomsday special look reaction",
+              "doomsday teaser",
+              "doomsday clock",
+              "doomsday trailer 2 reaction",
+              "doomsday special look",
+              "doomsday leak",
+              "doomsday reaction"
             ],
-            "tension_hits": 0,
-            "total_hits": 10,
-            "demand_score": 100
-          },
-          {
-            "query": "debt",
-            "suggestions": [
-              "debt collector",
-              "debt collector kalibata",
-              "debt collector pinjol",
-              "debt collector ke rumah sarwendah",
-              "depth",
-              "debt collector indonesia",
-              "debt short film",
-              "debt collector sarwendah",
-              "debt forsaken",
-              "debt collector ditangkap polisi"
-            ],
-            "tension_hits": 0,
+            "tension_hits": 1,
             "total_hits": 10,
             "demand_score": 100
           }
@@ -405,16 +524,20 @@
       }
     },
     "evidence_urls": [
-      "https://youtube.com/watch?v=U4grYa3TpOk",
-      "https://youtube.com/watch?v=AT1xNZx6WkY",
-      "https://youtube.com/watch?v=htTx8WYCFrY",
-      "https://youtube.com/watch?v=1st_IbSGI00",
-      "https://youtube.com/watch?v=tBhHrmSpknM",
-      "https://youtube.com/watch?v=GVKhxokq6Iw",
-      "https://youtube.com/watch?v=0YltFauUK5o",
-      "https://youtube.com/watch?v=8qPE14EGm08",
-      "https://news.google.com/rss/articles/CBMingFBVV95cUxQOU9UYmh6ejB1QjF6S0RmNXgxclZVNFhDal9rcEx1d0M3VFdtZ3hWMEE2M1JGWXQwTlpLOTdIMzBZekhTTEQ2bU5PNzhPTUZtcHNTdEFKTklsWTdfbGNEQWNSVzFzblZzRlJJUzNWZVctMUdwZW92b2hfSEpiMHV5X0IxQmhCSEk0N1B4eUN1OVNKMnpqM216Z1Y4OTdOUdIBpgFBVV95cUxPcEVRN1QtR3M4U1Q1dGlfY2UxYmNmTHVraTRIdUsxTjRXei1DZURQR1d5QXh6cVdYZjBRTzc5ZnBmOGd2ZDFhV2N1R0FySXRlX2hzczBjUXZmMHBlckZGXzRpVUJXemR0eFE2NUdhRE9zVVRuMlIxWkRMeTV4RlA4NU9OZmdOVFlocjlTU3M4dEZRT2tsTldjOHpFdjRwZGk3WVJZY3FR?oc=5",
-      "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdVBhR1ZWYXZ4VTdQTHJEd05UVThob1haSTh2WkVjcnJlSkcxTlBlUmNuamdLNVpnT2RBZlVWUmJRUlNudWVjQ1dYd3FxVkQ0bEtZOFY3Wnh0dHRuX2xQVTcwaFBCMWhLUVNMMGRWMTdvT2owWEJCeG1qZ3pRZml6a3g0TUdBNThMalhuMEFDUDZkMWlDSWdPcVp5MDlsbVBoVmpjcjBKdzI?oc=5"
+      "https://youtube.com/watch?v=00mmlw69QoE",
+      "https://youtube.com/watch?v=hSWHerMLCBA",
+      "https://youtube.com/watch?v=M8rb8WrQ-bI",
+      "https://youtube.com/watch?v=XOAqX6g7KDU",
+      "https://youtube.com/watch?v=YHne-itlYmc",
+      "https://youtube.com/watch?v=UmJPLjT-L9U",
+      "https://youtube.com/watch?v=EkJbkCYsx4Y",
+      "https://youtube.com/watch?v=Qxnpi7I4fkg",
+      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5vMXQzWGl4VElHS084cFJvVVVoaWxQTGV0cHZXTlhXNTJ1MTlDeG9oMGJHRXhTek4yc0dNeXdpT3J2OWtSWl93Qk1uenNqY2lMX0FmMXJGNHUxZ2paRjNCWnFIeWlNLVU?oc=5",
+      "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQcUFCNU9Ibi1TTm1rTDVYZmhtQXI1NGFvWnFWdU8xNEhPR3Bfbjd4YzBXdUJUaldvNEw0Tzh1RVYzN2F6c0xVVUgzU0lUMlk4azBJNUxxT19QWE9mQlFxUTRsalZLakJtUU1ZUzBHV1F5ajdRaGxNa1lZcmFwdmFNT0UtclpEamJlOElTa2o3eG4zOVhzX2xMWkNSeFFXSDkwM0ZoZTZTc1UzNEl5WEdKeFV6cUxOajU4Qk5KTjJ0Wk9xWktZRkJyeGYzYlU0SnhoY1BmLThTNTdhc2R5dVlzYWc2LURUcDI1SHhr?oc=5",
+      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5xeU9MWFY5dXpuaTE4MnMxTGxiTHU2X1ZfMmdaNUJ5SHJFY2RPS3FfRnp1OEFxTk8tV2FKend3LTRFR3FyQXFwdW92R0pEWUQ4ZlY1d29iRDB2UFhaLWpNV0YzVjlPZlk?oc=5",
+      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1Nc1NYM1hhRXljNnF0NVc0WmtWaG1nYnl2aUZNb3IycmZpcWx2UEt2bU5LMnI2b0lDYkxxZ01XVXh2SWdlYmZpcFQySlpOSjFpOXRRUnpPMGJvWm9telhvTWQzQ3YtdFE?oc=5",
+      "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPZFduOFJVaEhUcDl5WEhsMG9BbWpTWXdrTTlrUUJReXJ5OHBfbGNnbXZXWF95RTNZYXRzbFJ1SUlGZEVEaENBeGNDSm5CYnpURnQyNzJRU2k1QnM5QUN0Z3JTOFBxUHJ3Y25saHBIV3hKNk5wam94cHBWMC1aRW9MUm1qYWc1RnBXYW84endKb2ZwODFCU2JmUVViWTdjNEV5NE50UENnVUgwaXpBekJIRDBYdlNqaU42MHFvVnFFQmRTTWdBcWoyMTRGOTlIQXc3RWN0Ql9EbDM1ZkctR1U3TmtkaHFlbmxHbGx5Uk1n?oc=5",
+      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5NZ0stSmdtQmFFRFhELVhtTW5CclJzNEMtalptQWQxVlVReVBTMGhZWXlTaldIMW4tWkNwWEJPZkE5bmVKdVBDTllBZUhlWGYzNmhaS2N4YUh6YVFYR3pVUDdsbkdlNFk?oc=5"
     ],
     "no_clip_downloaded": true,
     "note": "Mode meme : F00 ne télécharge AUCUN clip. Ces stats servent à ANGLESMITH (5 angles) + F04 (textes) + F05 (pack)."

@@ -1,8 +1,8 @@
 {
-  "siege_id": "siege_20260815_195037",
+  "siege_id": "siege_20260818_134224",
   "campaign_id": null,
-  "campaign_status": "closed",
-  "current_porte": "closed",
+  "campaign_status": "active",
+  "current_porte": "p3",
   "fleet_status": "capteurs_done",
   "mode": "logo",
   "inputs_warsmith": {
@@ -10,7 +10,8 @@
     "reference_clip_path": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
     "platform_target": "youtube",
     "market_target": "us_young_english",
-    "n_angles": 5
+    "n_angles": 5,
+    "spin_humour": "Docteur Doom fait tout ce qu il fait parce qu il a perdu sa famille alors que la reponse etait juste depuis le debut : il essaie de creer un timeline ou la dette etudiante n existe pas. Taylor Swift en reacteur emotionnel, reaction des etudiants (heureux)."
   },
   "fregates_status": {
     "f01_scout": "pending",
@@ -21,91 +22,52 @@
     "anglesmith_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json",
     "f03_source_hunter": "pending",
     "f03_source_hunter_output": null,
-    "f04_copywriter": "done",
-    "f04_copywriter_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A05.md",
-    "f05_packager": "done",
-    "f05_packager_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md",
+    "f04_copywriter": "pending",
+    "f04_copywriter_output": null,
+    "f05_packager": "pending",
+    "f05_packager_output": null,
     "f06_tracker": "pending",
     "f06_tracker_output": null,
     "tyrant": "pending",
     "tyrant_output": null,
     "capteurs": "done",
-    "capteurs_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_student_debt.md"
+    "capteurs_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_student_loan_forgiveness.md"
   },
   "portes_validated": [
-    "1",
-    "2",
-    "3",
-    "4"
+    "2"
   ],
   "gate_decisions": {
-    "gate_1": {
-      "validated": true,
-      "notes": "F00 scan meme student debt OK (MEME-dee7c660), 0 clip. Sujet Warsmith: S3 payer sa dette avec des videos de chats (1st_IbSGI00). Reddit 403 non bloquant. Validateur patché meme-aware (F01/F02 skip).",
-      "timestamp": "2026-08-15T20:10:37Z"
-    },
     "gate_2": {
       "validated": true,
-      "notes": "ANGLESMITH 5 angles meme sur S3 (student debt / cat videos). Anti-spam 5 emotions distinctes OK, anti-cannibale OK, durée 5-7s.",
-      "timestamp": "2026-08-15T20:22:06Z"
-    },
-    "gate_3": {
-      "validated": true,
-      "notes": "5 text_payloads meme forgés (premium z-ai/glm-5.2), garde-fous OK: titres<=6 mots, tweets<=3 lignes, reactions<=4 mots. A05 emotion poignant (A01 aussi poignant — OK anti-spam).",
-      "timestamp": "2026-08-15T20:28:13Z"
-    },
-    "gate_4": {
-      "validated": true,
-      "notes": "Pack meme 5 videos (LOGO-SIEGE-siege_20260815_195037) valide schéma logo v2, montage_guide_ref 04_MODE_MEME.md, exporté EXPORT/production_pack_meme_student_debt.json. Prêt pour OMNIS_WATCH.",
-      "timestamp": "2026-08-15T20:37:55Z"
+      "notes": "8 angles meme forges via premium GLM 5.2 (marvel doomsday), anti-spam emotions OK, spin humour Warsmith injecte",
+      "timestamp": "2026-08-18T14:41:03Z"
     }
   },
-  "packs_expedies_count": 1,
+  "packs_expedies_count": 0,
   "packs_posted_count": 0,
   "packs_submitted_whop_count": 0,
-  "last_event": "2026-08-15T20:57:36Z",
-  "siege_started_at": "2026-08-15T19:50:37Z",
-  "siege_closed_at": "2026-08-15T20:57:36Z",
+  "last_event": "2026-08-18T14:41:03Z",
+  "siege_started_at": "2026-08-18T13:42:24Z",
+  "siege_closed_at": null,
   "log_event": [
     {
-      "at": "2026-08-15T19:50:37Z",
+      "at": "2026-08-18T13:42:24Z",
       "event": "siege_started",
       "angle_id": null
     },
     {
-      "at": "2026-08-15T19:50:37Z",
+      "at": "2026-08-18T13:42:24Z",
       "event": "siege_started",
       "angle_id": null
     },
     {
-      "at": "2026-08-15T20:10:37Z",
-      "event": "gate_1_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-15T20:22:06Z",
+      "at": "2026-08-18T14:41:03Z",
       "event": "gate_2_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-15T20:28:13Z",
-      "event": "gate_3_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-15T20:37:55Z",
-      "event": "gate_4_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-15T20:57:36Z",
-      "event": "campaign_closed",
       "angle_id": null
     }
   ],
   "iw_custos": {
-    "last_validation": "2026-08-15T20:37:40Z",
+    "last_validation": "2026-08-18T14:27:17Z",
     "errors": []
-  },
-  "final_payout_summary": "Siège student debt (mode meme) — 4 gates validées, pack 5 videos EXPORT/production_pack_meme_student_debt.json expédié OMNIS_WATCH. F06 tracker à lancer après publication."
+  }
 }

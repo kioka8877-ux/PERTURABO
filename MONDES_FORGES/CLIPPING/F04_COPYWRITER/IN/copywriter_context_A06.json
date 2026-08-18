@@ -1,19 +1,19 @@
 {
   "campaign_id": null,
-  "angle_id": "A05",
+  "angle_id": "A06",
   "sub_mode": "meme",
   "humour_spin": "Docteur Doom fait tout ce qu il fait parce qu il a perdu sa famille alors que la reponse etait juste depuis le debut : il essaie de creer un timeline ou la dette etudiante n existe pas. Taylor Swift en reacteur emotionnel, reaction des etudiants (heureux).",
   "angle": {
-    "angle_id": "A05",
+    "angle_id": "A06",
     "genre": null,
     "title": null,
     "body": null,
     "on_screen_text": null,
     "seo_tags": null,
-    "angle_family": "jeu_de_mots",
+    "angle_family": "parodie",
     "emotion_mode": "joie",
-    "engagement_type": "reaction",
-    "reframe_dim": "doomsday_vers_doomsday_de_la_dette",
+    "engagement_type": "tag",
+    "reframe_dim": "reaction_etudiants_vers_campagne_marketing",
     "zone": "direct"
   },
   "clip_source_ref": {
