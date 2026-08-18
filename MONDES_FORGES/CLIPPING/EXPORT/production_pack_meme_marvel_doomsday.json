@@ -101,7 +101,7 @@
           ]
         }
       },
-      "text_emotion": "Students reading this",
+      "text_emotion": "Students reading this:",
       "emotion": "drole",
       "duration_sec": 10,
       "metadata": {
@@ -148,7 +148,7 @@
           ]
         }
       },
-      "text_emotion": "Doom right now",
+      "text_emotion": "Doom right now:",
       "emotion": "drole",
       "duration_sec": 10,
       "metadata": {
@@ -193,7 +193,7 @@
           ]
         }
       },
-      "text_emotion": "Doom right now",
+      "text_emotion": "Doom right now:",
       "emotion": "trahison",
       "duration_sec": 10,
       "metadata": {
@@ -240,7 +240,7 @@
           ]
         }
       },
-      "text_emotion": "Doom right now",
+      "text_emotion": "Doom right now:",
       "emotion": "drole",
       "duration_sec": 9,
       "metadata": {
@@ -287,7 +287,7 @@
           ]
         }
       },
-      "text_emotion": "Students right now",
+      "text_emotion": "Students right now:",
       "emotion": "joie",
       "duration_sec": 8,
       "metadata": {
@@ -335,7 +335,7 @@
           ]
         }
       },
-      "text_emotion": "Students right now",
+      "text_emotion": "Students right now:",
       "emotion": "joie",
       "duration_sec": 8,
       "metadata": {
@@ -380,7 +380,7 @@
           ]
         }
       },
-      "text_emotion": "Doom running amortization tables",
+      "text_emotion": "Doom running amortization tables:",
       "emotion": "vertige",
       "duration_sec": 10,
       "metadata": {
@@ -423,7 +423,7 @@
           ]
         }
       },
-      "text_emotion": "Doom right now",
+      "text_emotion": "Doom right now:",
       "emotion": "frustration",
       "duration_sec": 10,
       "metadata": {
