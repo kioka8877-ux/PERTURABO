@@ -414,9 +414,10 @@
             ],
             "enum": [
               "meme_001",
-              "meme_002"
+              "meme_002",
+              "meme_003"
             ],
-            "_description": "Mode meme : fichier existant de la memetheque LACRIMAE. A01-A03 -> meme_001, A04-A05 -> meme_002 (jamais meme_1/meme_2)."
+            "_description": "Mode meme : fichier existant de la memetheque LACRIMAE. A01-A04 -> meme_003, A05-A06 -> meme_002, A07-A08 -> meme_003 (jamais meme_1/meme_2/meme_3)."
           },
           "tweet": {
             "type": [
@@ -469,7 +470,11 @@
               "string",
               "null"
             ],
-            "_description": "Mode meme : texte d'emotion au milieu (max 4 mots)."
+            "_description": "Mode meme : texte d'emotion au milieu (max 4 mots), se termine par ':'."
+          },
+          "watermark": {
+            "type": "string",
+            "_description": "Mode meme : filigrane texte semi-transparent bas-gauche, ex: '@memecocktail'."
           },
           "duration_sec": {
             "type": [

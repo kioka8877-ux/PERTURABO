@@ -169,6 +169,30 @@ def _channel_base_paragraph() -> str:
     return "\n".join(lines).strip()
 
 
+def _channel_handle() -> str:
+    """Handle @ du compte (identity.json dans ARCHIVUM/channels/<slug>/).
+    Slug lu depuis ARCHIVUM/campaign/channel.txt. Retour '' si absent."""
+    slug_path = os.path.join(ARCHIVUM_DIR, "campaign", "channel.txt")
+    if not os.path.exists(slug_path):
+        return ""
+    try:
+        with open(slug_path, "r", encoding="utf-8") as f:
+            slug = f.read().strip()
+    except OSError:
+        return ""
+    if not slug:
+        return ""
+    ident_path = os.path.join(ARCHIVUM_DIR, "channels", slug, "identity.json")
+    if not os.path.exists(ident_path):
+        return ""
+    try:
+        with open(ident_path, "r", encoding="utf-8") as f:
+            ident = json.load(f)
+    except (OSError, ValueError):
+        return ""
+    return str(ident.get("handle") or "").strip()
+
+
 def _load_campaign_file(name: str) -> dict:
     path = os.path.join(ARCHIVUM_DIR, "campaign", name)
     if os.path.exists(path):
@@ -280,6 +304,7 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
                             or angle.get("emotion")
                             or angle.get("emotion_mode"))
         asset["duration_sec"] = int(payload.get("duration_sec", 8))
+        asset["watermark"] = _channel_handle() or "@memecocktail"
         asset["metadata"] = metadata
     else:
         asset["viral_paragraph"] = viral_paragraph
@@ -349,7 +374,7 @@ def _meme_for_angle(angle_id: str) -> str:
         num = int(n[1:]) if len(n) > 1 and n[0].upper() == "A" else 0
     except ValueError:
         num = 0
-    return "meme_001" if 1 <= num <= 3 else "meme_002"
+    return "meme_002" if 5 <= num <= 6 else "meme_003"
 
 
 def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
