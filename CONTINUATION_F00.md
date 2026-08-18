@@ -338,10 +338,11 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 
 ## 4ter. SIÈGE EN COURS — `marvel doomsday` (commit à venir, poussé main)
 
-> ⚠️ **MAJ 2026-08-18 — reprise directe F04** : le siège est **EN COURS**
-> (`siege_id: siege_20260818_134224`, `campaign_status: active`, chaîne
-> `cocktail_meme`). Le prochain chat doit **reprendre exactement là** (NE PAS
-> refaire Gate 1 / Gate 2).
+> ⚠️ **MAJ 2026-08-18 — F04 COMPLET, en attente validation opérateur Gate 3** :
+> le siège est **EN COURS** (`siege_id: siege_20260818_134224`,
+> `campaign_status: active`, chaîne `cocktail_meme`). Le prochain chat doit
+> **reprendre exactement là** (NE PAS refaire Gate 1 / Gate 2 / Gate 3 sans
+> validation opérateur).
 
 ### Ce qui est fait (à NE PAS refaire)
 
@@ -357,9 +358,15 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
   forgés dans `F02_TYRANT_CAMP/OUT/angles.json` (émotions drole×2, trahison×2,
   joie×2, vertige, frustration ; meme_hook Doom vs dette étudiante).
   Portes validées : `['1','2']`.
-- **Gate 3 (EN COURS)** : F04 COPYWRITER — contextes A01→A08 générés
-  (`IN/copywriter_context_A0X.json`). **A01 + A02 terminés (premium NVIDIA)** :
-  `OUT/text_payload_A01.json/.md` + `A02` existent. **A03→A08 NON faits.**
+- **Gate 3 (EN ATTENTE VALIDATION OPÉRATEUR)** : F04 COPYWRITER **COMPLET** —
+  les **8 angles A01→A08** sont forgés en premium NVIDIA (GLM 5.2,
+  `CLIPPING_PREMIUM_API_KEY`) : `OUT/text_payload_raw_A0X.json` → ordonnance
+  `--auto-ord` → `OUT/text_payload_A0X.json/.md` existent pour les 8.
+  Ledger : `f04_copywriter: done`, `fleet_status: capteurs_done`,
+  `current_porte: p3`. **La validation Gate 3 est au choix de l'opérateur —
+  PAS automatique.** Émotions corrigées sur les raws A03/A04/A07/A08 pour
+  coller aux angles (trahison/trahison/vertige/frustration). Note : NVIDIA
+  429 fréquent → espacer les calls (A05 a nécessité 1 retry).
 
 ### Bloqueurs production (important pour la reprise)
 
@@ -379,8 +386,10 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 
 ### À faire ensuite (dans l'ordre)
 
-1. **F04 A03→A08** : premium NVIDIA (en espaçant les calls, attendre 429)
-   ou Oracle forge. Puis Gate 3.
+1. **VALIDATION OPÉRATEUR GATE 3** : vérifier les 8 `OUT/text_payload_A0X.md`
+   de `F04_COPYWRITER` (titre ≤6 mots, tweet ≤3 lignes, keywords_style
+   green/red mots seuls du tweet, durée 5-30s, 15 tags, fair use + paragraphe
+   de compte injectés). Porter la validation dans le ledger.
 2. **Gate 4** : F05 `packager.py --assemble --sub-mode meme` → pack
    `LOGO-...` → `EXPORT/production_pack_meme_marvel_doomsday.json` +
    summary `.md`, visible OMNIS_WATCH sur GitHub.
@@ -391,8 +400,12 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 
 ### Refs utiles
 
-- Ledger : `liber_clipping.json` (`siege_20260818_134224`, gates `['1','2']`).
+- Ledger : `liber_clipping.json` (`siege_20260818_134224`, gates `['1','2']`,
+  F04 `done`).
 - Angles : `F02_TYRANT_CAMP/OUT/angles.json` (A01-A08).
+- Payloads F04 : `F04_COPYWRITER/OUT/text_payload_A0X.json/.md` (8).
+  ⚠️ `OUT/` est gitignoré — non poussé sur GitHub. À re-fabriquer dans un
+  nouveau sandbox via `copywriter.py` (contextes + angles déjà commités).
 - Pattern précédent réussi : run `student debt` (STUDENT_DEBT_MEME, §4 MAJ
   2026-08-15/16) — même chaîne, pack v2.5 validé, referencer
   `EXPORT/production_pack_meme_student_debt.json`.

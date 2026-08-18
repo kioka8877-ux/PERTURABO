@@ -22,8 +22,8 @@
     "anglesmith_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json",
     "f03_source_hunter": "pending",
     "f03_source_hunter_output": null,
-    "f04_copywriter": "pending",
-    "f04_copywriter_output": null,
+    "f04_copywriter": "done",
+    "f04_copywriter_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A08.md",
     "f05_packager": "pending",
     "f05_packager_output": null,
     "f06_tracker": "pending",
@@ -67,7 +67,7 @@
     }
   ],
   "iw_custos": {
-    "last_validation": "2026-08-18T14:27:17Z",
+    "last_validation": "2026-08-18T16:08:06Z",
     "errors": []
   }
 }
