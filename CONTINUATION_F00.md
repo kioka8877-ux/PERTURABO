@@ -338,12 +338,15 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 
 ## 4ter. SIÈGE EN COURS — `marvel doomsday` (commit à venir, poussé main)
 
-> ⚠️ **MAJ 2026-08-18 (soir) — GATE 3 VALIDÉE par l'opérateur + GATE 4 FAITE
-> (packs poussés commits `03aaecd`, `c87bf50`, `1d5eb00`)** : le siège est
-> **EN COURS** (`siege_id: siege_20260818_134224`, `campaign_status: active`,
-> chaîne `cocktail_meme`). Portes validées `['1','2','3','4']`. Le prochain
-> chat doit **reprendre exactement là** — il ne reste que F06_TRACKER (après
-> diffusion OMNIS_WATCH) puis clôture.
+> ⚠️ **MAJ 2026-08-18 (soir) — ÉTAT RÉEL : Portes 3 et 4 EN ATTENTE de
+> validation opérateur** (`siege_id: siege_20260818_134224`,
+> `campaign_status: active`, chaîne `cocktail_meme`). F04 et F05 ont tourné
+> **mécaniquement** (payloads + pack assemblés, commits `03aaecd`,
+> `c87bf50`, `1d5eb00`) mais **AUCUNE validation opérateur n'a été portée
+> dans le ledger** (`portes_validated: ['2']` uniquement). Le prochain chat
+> doit **reprendre exactement là** : montrer le pack à l'opérateur et
+> attendre sa validation Porte 3 puis Porte 4. **F06 est INTERDIT avant
+> validation Porte 4.**
 
 ### Ce qui est fait (à NE PAS refaire)
 
@@ -355,42 +358,50 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 - **Gate 1** : scans F00 faits — `MEME-5638b961` (marvel doomsday) +
   `MEME-2316d976` (student loan forgiveness), exports
   `EXPORT/meme_virality_marvel_doomsday.json` + `.md`. Porte validée.
-- **Gate 2** : ANGLESMITH premium (GLM 5.2 NVIDIA) → **8 angles A01-A08**
-  forgés dans `F02_TYRANT_CAMP/OUT/angles.json` (émotions drole×2, trahison×2,
-  joie×2, vertige, frustration ; meme_hook Doom vs dette étudiante).
-- **Gate 3 (VALIDÉE opérateur)** : F04 COPYWRITER — les **8 angles A01→A08**
+- **Gate 2 (VALIDÉE opérateur — ledger)** : ANGLESMITH premium (GLM 5.2
+  NVIDIA) → **8 angles A01-A08** forgés dans `F02_TYRANT_CAMP/OUT/angles.json`
+  (émotions drole×2, trahison×2, joie×2, vertige, frustration ; meme_hook
+  Doom vs dette étudiante).
+- **Gate 3 (F04 MÉCANIQUEMENT FAIT — PAS VALIDÉ)** : les **8 angles A01→A08**
   forgés : A01-A07 premium NVIDIA (GLM 5.2, `CLIPPING_PREMIUM_API_KEY`),
   **A08 forgé Oracle** (clés premium bloquées : NVIDIA 429/timeout +
-  OpenRouter 402 crédits insuffisants). Style validé par l'opérateur :
+  OpenRouter 402 crédits insuffisants). Style demandé par l'opérateur :
   tweets = **théories d'étudiant sur X** ("I have a theory guys...", "What
   if...", "Okay hear me out...", "Call me crazy but...") — jamais
   d'affirmations ; `text_emotion` = A01 étudiants devant le tweet, A02-A08
-  réactions Doom/personnage. **Tous les text_emotion se terminent par ':'**
-  (demande opérateur). Prompt F04 mis à jour en conséquence.
-- **Gate 4 (FAITE)** : F05 `packager.py --assemble --finalize --sub-mode meme`
-  → pack `LOGO-SIEGE-siege_20260818_134224` (8 videos) exporté
-  `EXPORT/production_pack_meme_marvel_doomsday.json` (23817 octets) +
-  `EXPORT/packager_summary_meme_marvel_doomsday.md` — **visible OMNIS_WATCH
-  sur GitHub**. Mapping meme (demande opérateur) : **A01-A04 → `meme_003`,
-  A05-A06 → `meme_002`, A07-A08 → `meme_003`**. **Watermark `@memecocktail`**
-  sur chaque vidéo (champ `watermark`, lu depuis
-  `ARCHIVUM/channels/cocktail_meme/identity.json -> handle`). Schéma logo
-  mis à jour : enum meme `meme_001/002/003` + champ `watermark`. Validation
-  schéma : 0 erreur.
+  réactions Doom/personnage, **tous terminés par ':'**. Prompt F04 mis à
+  jour en conséquence.
+- **Gate 4 (F05 MÉCANIQUEMENT FAIT — PAS VALIDÉ)** : `packager.py
+  --assemble --finalize --sub-mode meme` → pack
+  `LOGO-SIEGE-siege_20260818_134224` (8 videos) exporté
+  `EXPORT/production_pack_meme_marvel_doomsday.json` +
+  `EXPORT/packager_summary_meme_marvel_doomsday.md`. Mapping meme (demande
+  opérateur) : **A01-A04 → `meme_003`, A05-A06 → `meme_002`, A07-A08 →
+  `meme_003`**. **Watermark `@memecocktail`** par vidéo (champ `watermark`,
+  lu depuis `ARCHIVUM/channels/cocktail_meme/identity.json -> handle`).
+  Schéma logo mis à jour : enum meme `meme_001/002/003` + champ `watermark`.
 
-### Ce qui reste (dans l'ordre)
+### Ce qui reste (dans l'ordre — validation opérateur obligatoire)
 
-1. **F06_TRACKER** : `tracker.py --post` **APRÈS diffusion OMNIS_WATCH**
-   (vues 1h/24h, payout, learnings). ⚠️ Ne PAS lancer tant que les 8 vidéos
-   ne sont pas postées.
-2. **Clôture** : ledger `campaign_status: closed` + archive campagne comme
+1. **VALIDATION OPÉRATEUR GATE 3** : vérifier les 8 `OUT/text_payload_A0X.md`
+   de `F04_COPYWRITER` (titre ≤6 mots, tweet ≤3 lignes style théorie,
+   keywords_style green/red mots seuls, text_emotion avec ':', durée 5-30s,
+   15 tags, fair use + paragraphe de compte). Porter la validation dans le
+   ledger (`portes_validated: ['2','3']`).
+2. **VALIDATION OPÉRATEUR GATE 4** : vérifier le pack
+   `EXPORT/production_pack_meme_marvel_doomsday.json` (8 videos, meme
+   meme_003/002, watermark @memecocktail). Porter la validation dans le
+   ledger (`portes_validated: ['2','3','4']`). C'est après cette validation
+   que les packs sont **expédiés à OMNIS_WATCH**.
+3. **F06_TRACKER** : `tracker.py --post` **SEULEMENT après validation Porte
+   4 ET diffusion OMNIS_WATCH** (vues 1h/24h, payout, learnings).
+4. **Clôture** : ledger `campaign_status: closed` + archive campagne comme
    le run STUDENT_DEBT_MEME.
-3. Optionnel : vider/réinitialiser le ledger pour le prochain siège.
 
 ### Refs utiles
 
-- Ledger : `liber_clipping.json` (`siege_20260818_134224`, gates
-  `['1','2','3','4']`, F04/F05 `done`).
+- Ledger : `liber_clipping.json` (`siege_20260818_134224`,
+  `portes_validated: ['2']`, `current_porte: p3`, F04/F05 `done` mécanique).
 - Angles : `F02_TYRANT_CAMP/OUT/angles.json` (A01-A08).
 - Payloads F04 : `F04_COPYWRITER/OUT/text_payload_A0X.json/.md` (8).
   ⚠️ `OUT/` est gitignoré — non poussé sur GitHub. À re-fabriquer dans un
