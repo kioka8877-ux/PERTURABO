@@ -338,11 +338,12 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 
 ## 4ter. SIÈGE EN COURS — `marvel doomsday` (commit à venir, poussé main)
 
-> ⚠️ **MAJ 2026-08-18 — F04 COMPLET, en attente validation opérateur Gate 3** :
-> le siège est **EN COURS** (`siege_id: siege_20260818_134224`,
-> `campaign_status: active`, chaîne `cocktail_meme`). Le prochain chat doit
-> **reprendre exactement là** (NE PAS refaire Gate 1 / Gate 2 / Gate 3 sans
-> validation opérateur).
+> ⚠️ **MAJ 2026-08-18 (soir) — GATE 3 VALIDÉE par l'opérateur + GATE 4 FAITE
+> (packs poussés commits `03aaecd`, `c87bf50`, `1d5eb00`)** : le siège est
+> **EN COURS** (`siege_id: siege_20260818_134224`, `campaign_status: active`,
+> chaîne `cocktail_meme`). Portes validées `['1','2','3','4']`. Le prochain
+> chat doit **reprendre exactement là** — il ne reste que F06_TRACKER (après
+> diffusion OMNIS_WATCH) puis clôture.
 
 ### Ce qui est fait (à NE PAS refaire)
 
@@ -357,58 +358,46 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 - **Gate 2** : ANGLESMITH premium (GLM 5.2 NVIDIA) → **8 angles A01-A08**
   forgés dans `F02_TYRANT_CAMP/OUT/angles.json` (émotions drole×2, trahison×2,
   joie×2, vertige, frustration ; meme_hook Doom vs dette étudiante).
-  Portes validées : `['1','2']`.
-- **Gate 3 (EN ATTENTE VALIDATION OPÉRATEUR)** : F04 COPYWRITER **COMPLET** —
-  les **8 angles A01→A08** sont forgés en premium NVIDIA (GLM 5.2,
-  `CLIPPING_PREMIUM_API_KEY`) : `OUT/text_payload_raw_A0X.json` → ordonnance
-  `--auto-ord` → `OUT/text_payload_A0X.json/.md` existent pour les 8.
-  Ledger : `f04_copywriter: done`, `fleet_status: capteurs_done`,
-  `current_porte: p3`. **La validation Gate 3 est au choix de l'opérateur —
-  PAS automatique.** Émotions corrigées sur les raws A03/A04/A07/A08 pour
-  coller aux angles (trahison/trahison/vertige/frustration). Note : NVIDIA
-  429 fréquent → espacer les calls (A05 a nécessité 1 retry).
+- **Gate 3 (VALIDÉE opérateur)** : F04 COPYWRITER — les **8 angles A01→A08**
+  forgés : A01-A07 premium NVIDIA (GLM 5.2, `CLIPPING_PREMIUM_API_KEY`),
+  **A08 forgé Oracle** (clés premium bloquées : NVIDIA 429/timeout +
+  OpenRouter 402 crédits insuffisants). Style validé par l'opérateur :
+  tweets = **théories d'étudiant sur X** ("I have a theory guys...", "What
+  if...", "Okay hear me out...", "Call me crazy but...") — jamais
+  d'affirmations ; `text_emotion` = A01 étudiants devant le tweet, A02-A08
+  réactions Doom/personnage. **Tous les text_emotion se terminent par ':'**
+  (demande opérateur). Prompt F04 mis à jour en conséquence.
+- **Gate 4 (FAITE)** : F05 `packager.py --assemble --finalize --sub-mode meme`
+  → pack `LOGO-SIEGE-siege_20260818_134224` (8 videos) exporté
+  `EXPORT/production_pack_meme_marvel_doomsday.json` (23817 octets) +
+  `EXPORT/packager_summary_meme_marvel_doomsday.md` — **visible OMNIS_WATCH
+  sur GitHub**. Mapping meme (demande opérateur) : **A01-A04 → `meme_003`,
+  A05-A06 → `meme_002`, A07-A08 → `meme_003`**. **Watermark `@memecocktail`**
+  sur chaque vidéo (champ `watermark`, lu depuis
+  `ARCHIVUM/channels/cocktail_meme/identity.json -> handle`). Schéma logo
+  mis à jour : enum meme `meme_001/002/003` + champ `watermark`. Validation
+  schéma : 0 erreur.
 
-### Bloqueurs production (important pour la reprise)
+### Ce qui reste (dans l'ordre)
 
-1. **NVIDIA rate-limit 429** : `CLIPPING_PREMIUM_API_KEY` (GLM 5.2) renvoie
-   des 429 réguliers → la prod premium est lente/instable. Attendre entre les
-   calls ou passer en backup.
-2. **Baseten WAF bloqué** : la clé Kimi-K3 via Baseten (`K3` hébergé chez
-   Baseten) est **bloquée par le WAF du sandbox** (HTTP 451/403) — provider
-   inutilisable ici. Ne PAS y perdre de temps.
-3. **Fallback Oracle documenté** : si la prod échoue, forger les raws à la
-   main dans `OUT/text_payload_raw_A0X.json` (schéma LACRIMAE v2.5 :
-   `title`, `tweet{text, keywords_style:{green,red}}`, `text_emotion`,
-   `emotion`, `duration_sec` 5-30, `metadata{title,description,tags}`,
-   `angle_id`), puis `copywriter.py --ordonnance --auto-ord --angle A0X` +
-   `--finalize`. A01/A02 ont été faits en prod ; **A03-A08 restent à faire**.
-   Un raw A03 partiel existe déjà (`OUT/text_payload_raw_A03.json`).
-
-### À faire ensuite (dans l'ordre)
-
-1. **VALIDATION OPÉRATEUR GATE 3** : vérifier les 8 `OUT/text_payload_A0X.md`
-   de `F04_COPYWRITER` (titre ≤6 mots, tweet ≤3 lignes, keywords_style
-   green/red mots seuls du tweet, durée 5-30s, 15 tags, fair use + paragraphe
-   de compte injectés). Porter la validation dans le ledger.
-2. **Gate 4** : F05 `packager.py --assemble --sub-mode meme` → pack
-   `LOGO-...` → `EXPORT/production_pack_meme_marvel_doomsday.json` +
-   summary `.md`, visible OMNIS_WATCH sur GitHub.
-3. **F06** : `tracker.py --post` après diffusion OMNIS_WATCH (vues 1h/24h,
-   payout, learnings).
-4. Clôturer le siège (ledger `campaign_status: closed`) comme le run
-   STUDENT_DEBT_MEME.
+1. **F06_TRACKER** : `tracker.py --post` **APRÈS diffusion OMNIS_WATCH**
+   (vues 1h/24h, payout, learnings). ⚠️ Ne PAS lancer tant que les 8 vidéos
+   ne sont pas postées.
+2. **Clôture** : ledger `campaign_status: closed` + archive campagne comme
+   le run STUDENT_DEBT_MEME.
+3. Optionnel : vider/réinitialiser le ledger pour le prochain siège.
 
 ### Refs utiles
 
-- Ledger : `liber_clipping.json` (`siege_20260818_134224`, gates `['1','2']`,
-  F04 `done`).
+- Ledger : `liber_clipping.json` (`siege_20260818_134224`, gates
+  `['1','2','3','4']`, F04/F05 `done`).
 - Angles : `F02_TYRANT_CAMP/OUT/angles.json` (A01-A08).
 - Payloads F04 : `F04_COPYWRITER/OUT/text_payload_A0X.json/.md` (8).
   ⚠️ `OUT/` est gitignoré — non poussé sur GitHub. À re-fabriquer dans un
   nouveau sandbox via `copywriter.py` (contextes + angles déjà commités).
-- Pattern précédent réussi : run `student debt` (STUDENT_DEBT_MEME, §4 MAJ
-  2026-08-15/16) — même chaîne, pack v2.5 validé, referencer
-  `EXPORT/production_pack_meme_student_debt.json`.
+- Pack : `EXPORT/production_pack_meme_marvel_doomsday.json` (committé) —
+  8 videos, meme_003 (A01-A04, A07-A08) / meme_002 (A05-A06), watermark
+  `@memecocktail`, keywords_style dict green/red, duration 8-10s.
 
 ## 5. Commandes de vérification rapide
 
