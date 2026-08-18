@@ -2,7 +2,7 @@
   "siege_id": "siege_20260818_134224",
   "campaign_id": null,
   "campaign_status": "active",
-  "current_porte": "p3",
+  "current_porte": "p4",
   "fleet_status": "capteurs_done",
   "mode": "logo",
   "inputs_warsmith": {
@@ -34,13 +34,19 @@
     "capteurs_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_student_loan_forgiveness.md"
   },
   "portes_validated": [
-    "2"
+    "2",
+    "4"
   ],
   "gate_decisions": {
     "gate_2": {
       "validated": true,
       "notes": "8 angles meme forges via premium GLM 5.2 (marvel doomsday), anti-spam emotions OK, spin humour Warsmith injecte",
       "timestamp": "2026-08-18T14:41:03Z"
+    },
+    "gate_4": {
+      "validated": true,
+      "notes": "Pack EXPORT/production_pack_meme_marvel_doomsday.json valide par l'operateur : 8 videos, meme_003 (A01-A04, A07-A08) / meme_002 (A05-A06), watermark @memecocktail, durees 6s, textes non valides par l'operateur (Gate 3)", 
+      "timestamp": "2026-08-18T20:21:00Z"
     }
   },
   "packs_expedies_count": 0,
