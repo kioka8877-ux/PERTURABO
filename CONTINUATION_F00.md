@@ -343,6 +343,11 @@ article RSS) voient leur score mécanique re-pondéré sur vues+demande seuls
 > `cocktail_meme`. Portes validées : `['2','4']` (Gate 3 : textes NON
 > validés par l'opérateur — il a validé le pack tel quel). Pack expédié
 > `EXPORT/production_pack_meme_marvel_doomsday.json` (8 videos).
+> **EXPORT nettoyé par l'opérateur (commit `…`) : tous les packs sauf
+> doomsday supprimés** (student debt, westbrook informatif/humour,
+> logo_pack_TS01_SANDOVAL.zip, packs_index*.json, summaries associés).
+> Il ne reste que : `production_pack_meme_marvel_doomsday.json` +
+> `packager_summary_meme_marvel_doomsday.md` + `subjects_proposal.json/.md`.
 > Le prochain chat doit **commencer par F06_TRACKER** (voir ci-dessous) —
 > NE PAS refaire F01→F05.
 
