@@ -246,3 +246,30 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
   Doctrine inchangée : commandité (jamais de cron), éteint si campagne fermée.
 
 *Fer au-dedans, Fer au-dehors. Rien n'échappe au siège.*
+
+## DIRECTEUR DE PROSPECTION PREMIUM — V4
+
+Le Directeur premium est une couche facultative qui intervient **avant** la collecte. Il formule des hypothèses, questions et requêtes ; l’Oracle exécute les recherches autorisées et conserve les réponses brutes. Le Directeur n’est pas une source de métriques.
+
+Commande explicite :
+
+```bash
+python3 capteurs.py --discover-market \
+  --market "US residents interested in Among Us" \
+  --platform youtube_shorts \
+  --discovery-horizon 30d \
+  --premium-director
+```
+
+La session est enregistrée sous `prospection_session` dans `market_discovery_proposal.json`. Les contrats associés sont :
+
+- `CONTRACTS/prospecting_questions_schema.json` — objectifs, questions, requêtes, sources et preuves attendues ;
+- `CONTRACTS/prospecting_session_schema.json` — tours, états premium, limites, réponses et validation ;
+- `libs/prospection_director.py` — fallback déterministe et plan premium ;
+- `libs/premium_evidence_guard.py` — contrôle des URLs et indicateurs d’invention.
+
+Limites initiales : trois tours maximum, dix questions par tour, six requêtes par question. Une question doit avoir un objectif, une source autorisée et une preuve attendue. Les sources autorisées sont `youtube`, `reddit`, `trends`, `suggest` et `rss`.
+
+États possibles du Directeur : `not_called`, `planned`, `unavailable` et `error`. En cas d’absence de clé ou d’échec premium, le système conserve le plan déterministe et n’invente pas d’analyse premium. L’état final reste `warsmith_review` ; aucune production ou publication n’est automatique.
+
+Règle de traçabilité : chaque question, requête, réponse brute et interprétation doit rester identifiable. Une métrique ou URL absente du payload brut est `unverified` et ne peut pas être utilisée comme preuve de candidat.

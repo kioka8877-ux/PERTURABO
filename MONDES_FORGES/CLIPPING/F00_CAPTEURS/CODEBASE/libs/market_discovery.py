@@ -182,7 +182,9 @@ def _deduplicate(candidates: list[dict]) -> tuple[list[dict], list[dict]]:
 def discover_market(market: str, platform: str, horizon: str, *,
                     rss_scan: Callable, trends_scan: Callable,
                     youtube_scan: Callable, suggestions_scan: Callable,
-                    reddit_scan: Callable, max_items: int = 10) -> dict:
+                    reddit_scan: Callable, max_items: int = 10,
+                    probe_queries: list[str] | None = None,
+                    question_plan: list[dict] | None = None) -> dict:
     if not market.strip():
         raise ValueError("market requis")
     if platform != "youtube_shorts":
@@ -190,7 +192,9 @@ def discover_market(market: str, platform: str, horizon: str, *,
     if horizon not in HORIZONS:
         raise ValueError("horizon requis: 2h|6h|12h|7d|30d")
     spec = HORIZONS[horizon]
-    probes = build_probe_queries(market)
+    probes = list(dict.fromkeys(probe_queries or build_probe_queries(market)))[:20]
+    if not probes:
+        raise ValueError("aucune requête de prospection valide")
     rss = rss_scan(probes, freshness=spec["freshness"], max_items=max_items)
     trends = trends_scan(probes)
     yt = youtube_scan(probes, max_results=20)
@@ -218,7 +222,8 @@ def discover_market(market: str, platform: str, horizon: str, *,
         "blue_candidates": blue,
         "availability": {"requested": 30, "observed_eligible": len(eligible), "invented": 0, "quota_filled": len(eligible) >= 30},
         "signal_payload": {"rss": rss, "trends": trends, "youtube": yt, "suggestions": sugg, "reddit": reddit},
-        "validation": {"state": "warsmith_review", "premium_used": False, "anti_invention": "pass"},
+        "validation": {"state": "warsmith_review", "premium_used": bool(question_plan), "anti_invention": "pass"},
+        "question_plan": question_plan or [],
     }
 
 

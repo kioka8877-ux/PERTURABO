@@ -50,6 +50,7 @@ from f00_virality_scorer import score_subject, score_subject_from_metrics
 from f00_premium_synth import synthesize as premium_synthesize
 from research_profile import build_profile
 from market_discovery import discover_market, build_packs, allocate_angles
+from prospection_director import build_session, premium_plan, validate_question_plan
 
 OUT_DIR = os.path.join(_CAPTEURS_DIR, "OUT")
 IN_DIR = os.path.join(_CAPTEURS_DIR, "IN")
@@ -944,7 +945,10 @@ def _write_market_discovery_md(result: dict, path: str) -> str:
     lines += ["", "## Démons observés", "", "| Démon | Territoire observé | Pression | Preuves |", "|---|---|---:|---:|"]
     for d in result["demon_map"]:
         lines.append(f"| {d['identity']} | {'; '.join(d['territory'][:3])} | {d['pressure_score']} | {len(d['evidence_urls'])} |")
-    lines += ["", "## Anti-doublons", "", f"Clusters uniques : {result['candidate_clusters']['unique_count']}", f"Doublons écartés : {len(result['candidate_clusters']['removed_duplicates'])}", "",         "## Packs proposés", "", f"Packs candidats : {len(result.get('packs', []))}", "", "## Allocation d’angles", "", f"`{result.get('angle_allocation', {})}`", "", "## Validation Champion", "", "État : `warsmith_review` — aucun siège n’est lancé automatiquement.", ""]
+    session = result.get("prospection_session", {})
+    director = session.get("director", {})
+    questions = (session.get("turns") or [{}])[0].get("questions", [])
+    lines += ["", "## Anti-doublons", "", f"Clusters uniques : {result['candidate_clusters']['unique_count']}", f"Doublons écartés : {len(result['candidate_clusters']['removed_duplicates'])}", "", "## Directeur de prospection", "", f"Rôle : `{director.get('role', 'prospection_director')}` | Premium : `{director.get('premium_status', 'not_called')}`", f"Questions proposées au tour 1 : {len(questions)}", f"Tours maximum : {session.get('limits', {}).get('max_turns', 3)}", "", "## Packs proposés", "", f"Packs candidats : {len(result.get('packs', []))}", "", "## Allocation d’angles", "", f"`{result.get('angle_allocation', {})}`", "", "## Validation Champion", "", "État : `warsmith_review` — aucun siège n’est lancé automatiquement.", ""]
 
     with open(path, "w", encoding="utf-8") as f:
         f.write("\\n".join(lines))
@@ -953,15 +957,26 @@ def _write_market_discovery_md(result: dict, path: str) -> str:
 
 def cmd_discover_market(args):
     guard_campaign_open()
+    session = build_session(args.market, args.platform, args.discovery_horizon, premium_requested=args.premium_director)
+    if args.premium_director:
+        premium_result = premium_plan(session)
+        session = premium_result.get("plan") or session
+        session["director"]["premium_call_status"] = premium_result.get("status")
+        session["director"]["premium_error"] = premium_result.get("error")
+    question_plan = session.get("turns", [{}])[0].get("questions", [])
+    plan_queries = [q for item in question_plan for q in item.get("queries", [])]
     try:
         result = discover_market(
             args.market, args.platform, args.discovery_horizon,
             rss_scan=rss_scan, trends_scan=trends_scan,
             youtube_scan=youtube_scan, suggestions_scan=suggestions_scan,
-            reddit_scan=reddit_scan, max_items=args.max_items)
+            reddit_scan=reddit_scan, max_items=args.max_items,
+            probe_queries=plan_queries, question_plan=question_plan)
     except ValueError as exc:
         print(f"[F00_CAPTEURS] {exc}")
         sys.exit(1)
+    session["discovery_link"] = result.get("discovery_id")
+    result["prospection_session"] = session
     result["packs"] = build_packs(result.get("candidates", []), max_packs=args.max_packs)
     result["angle_allocation"] = ({"status": "not_requested", "decision": "warsmith_review"}
                                  if args.discovery_angles == 0 else
@@ -1258,6 +1273,8 @@ def main():
                         help="Nombre d’angles océan rouge demandé")
     parser.add_argument("--max-packs", type=int, default=5,
                         help="Nombre maximal de packs de deux candidats")
+    parser.add_argument("--premium-director", action="store_true",
+                        help="Active le Directeur de prospection premium pour formuler les questions")
     parser.add_argument("--niche", default=None,
                         help="Nom de la niche (ex: 'Lakers basketball')")
     parser.add_argument("--hot", action="store_true",

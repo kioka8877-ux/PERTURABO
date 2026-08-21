@@ -6,8 +6,9 @@ La durée demandée par le Champion définit le type d’opportunité recherché
 
 | Horizon | Question opérationnelle | Décision attendue |
 |---|---|---|
+| `2h` | Le signal accélère-t-il maintenant ? | Prospection urgente, aucune extrapolation lente |
 | `6h` | Le sujet peut-il être exploité immédiatement ? | Production rapide ou abandon |
-| `24h` | Le sujet survit-il à son premier pic ? | Production tactique |
+| `12h` | Le sujet survit-il à son premier pic ? | Confirmation tactique |
 | `7d` | Le sujet reste-t-il actif et déclinable ? | Série courte possible |
 | `30d` | Le sujet est-il récurrent ou saisonnier ? | Série durable ou réserve d’idées |
 
@@ -15,9 +16,13 @@ La durée demandée par le Champion définit le type d’opportunité recherché
 
 Le mode `6h` privilégie la fraîcheur, l’accélération des vues et la convergence de plusieurs résultats YouTube récents. Il est adapté à une actualité culturelle ou à un événement de niche qui vient d’apparaître. Le Champion doit vérifier que le sujet peut être transformé et publié rapidement, car un signal très frais peut disparaître avant la production.
 
-## Mode 24 heures
+## Mode 2 heures
 
-Le mode `24h` cherche un sujet qui demeure actif après son premier pic. La décision doit comparer la fraîcheur, les vues récentes, les résultats YouTube et les confirmations Google ou Reddit. Ce mode constitue le profil tactique par défaut pour une campagne meme qui ne doit pas être lancée dans la précipitation.
+Le mode `2h` est réservé aux accélérations très récentes. Il exige une preuve YouTube immédiate, une vitesse observable et une capacité de production presque instantanée. Une hypothèse premium seule ne suffit jamais.
+
+## Mode 12 heures
+
+Le mode `12h` cherche un signal qui reste actif après plusieurs heures. Il sert à distinguer une vraie émergence d’un pic accidentel et permet au Directeur de demander des vérifications ciblées.
 
 ## Mode 7 jours
 
@@ -29,7 +34,8 @@ Le mode `30d` est destiné aux sujets récurrents, saisonniers ou evergreen. Il 
 
 ## Règle de comparaison
 
-Les scores doivent toujours être lus avec leur `research_profile`. Un score contextualisé de `6h` et un score contextualisé de `30d` répondent à deux questions différentes. Le système conserve le score legacy pour fournir une référence historique, mais le Champion décide selon l’horizon réellement demandé.
+Les scores doivent toujours être lus avec leur `research_profile`. Un score contextualisé de `2h`, `6h`, `12h`, `7d` et `30d` répond à une question différente. Le Directeur premium peut utiliser l’horizon pour choisir les questions et les requêtes, mais les preuves restent celles de l’Oracle.
+ Le système conserve le score legacy pour fournir une référence historique, mais le Champion décide selon l’horizon réellement demandé.
 
 ## Checklist du Champion
 

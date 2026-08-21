@@ -75,3 +75,17 @@ python3 -c "import json; [json.load(open(f'MONDES_FORGES/CLIPPING/F04_COPYWRITER
 
 - Avant chaque siège : relire cette page.
 - Si tu rencontres une erreur **pas encore listée** : la noter ici (et dans `TRACKING/CLIPPING_LOG.md`) pour le prochain champion.
+
+## 9. Le Directeur premium ne remplace pas les preuves
+
+Le premium peut diriger l’interrogation, mais il ne remplace pas les capteurs. Il formule les hypothèses, questions et requêtes ; l’Oracle collecte les réponses et conserve les URLs, dates et métriques. Une question premium n’est jamais une preuve.
+
+Ne jamais laisser le premium remplir un quota de candidats, inventer une URL, compléter une métrique absente, transformer un désert en océan bleu ou présenter une interprétation comme une observation. Si la clé est absente, le fallback déterministe doit rester explicite.
+
+## 10. La boucle adaptative est limitée
+
+Le Directeur dispose de trois tours maximum. Un tour supplémentaire doit répondre à une lacune identifiée : preuve YouTube absente, Démon incomplet, contradiction, doublon ou hypothèse d’océan bleu non vérifiée. Une collecte qui n’améliore plus la preuve doit s’arrêter.
+
+## 11. Faits et interprétations restent séparés
+
+Les réponses brutes de l’Oracle et les analyses du Directeur doivent rester dans des blocs séparés. Avant validation Champion, vérifier `invented = 0`, les URLs autorisées, les sources, le statut de confiance et l’état `warsmith_review`.

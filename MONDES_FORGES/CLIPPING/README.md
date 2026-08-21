@@ -52,7 +52,7 @@ Chaque pack = **1 vidéo pour 1 plateforme pour 1 marché**. Pas de multi-platef
 | 3 | F03_SOURCE_HUNTER + F04_COPYWRITER | `source_specimen.json` + `text_payload.json` + `.md` | Warsmith + IRON ordonnancement |
 | 4 | F05_PACKAGER | N `production_pack.json` → OMNIS_WATCH | Warsmith |
 
-`F01_SCOUT` alimente les portes 1-2 (assets campagne). `F06_TRACKER` active la checklist après Porte 4 et nourrit `learnings.json`. `F00_CAPTEURS` s'exécute **avant** Porte 1 sur commande Warsmith uniquement.
+`F01_SCOUT` alimente les portes 1-2 (assets campagne). `F06_TRACKER` active la checklist après Porte 4 et nourrit `learnings.json`. `F00_CAPTEURS` s'exécute **avant** Porte 1 sur commande Warsmith uniquement. En mode découverte, le Directeur de prospection premium formule les questions et requêtes avant que l'Oracle/capteurs ne collecte les preuves réelles ; aucune production ne démarre sans validation Warsmith.
 
 ---
 
@@ -71,7 +71,7 @@ Composants annexes :
 | Code | Rôle |
 |---|---|
 | TYRANT | Deux modes : réactif (analyse campagne) + prospectif (océan bleu sur même source que le Démon) |
-| F00_CAPTEURS | **Commandité Warsmith** (pas auto). Multi-sites (Whop + Clippa/Cliptic/...). Cartographie écosystème + niche + payouts réels |
+| F00_CAPTEURS | **Commandité Warsmith** (pas auto). Cartographie marché, Démons, YouTube Shorts, océans rouge/bleu et preuves réelles |
 | ORCHESTRATOR | 4 Portes, pattern hybride (sauf F04 qui dialog direct premium) |
 
 ---
