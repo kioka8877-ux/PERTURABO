@@ -16,6 +16,8 @@ HORIZONS = {
     "2h": {"hours": 2, "timeframe": "day", "freshness": "brulant"},
     "6h": {"hours": 6, "timeframe": "day", "freshness": "brulant"},
     "12h": {"hours": 12, "timeframe": "day", "freshness": "frais"},
+    "24h": {"hours": 24, "timeframe": "day", "freshness": "frais"},
+    "3d": {"hours": 72, "timeframe": "week", "freshness": "frais"},
     "7d": {"hours": 168, "timeframe": "week", "freshness": "frais"},
     "30d": {"hours": 720, "timeframe": "month", "freshness": "frais"},
 }
@@ -190,7 +192,7 @@ def discover_market(market: str, platform: str, horizon: str, *,
     if platform != "youtube_shorts":
         raise ValueError("plateforme non supportée: youtube_shorts uniquement")
     if horizon not in HORIZONS:
-        raise ValueError("horizon requis: 2h|6h|12h|7d|30d")
+        raise ValueError("horizon requis: 2h|6h|12h|24h|3d|7d|30d")
     spec = HORIZONS[horizon]
     probes = list(dict.fromkeys(probe_queries or build_probe_queries(market)))[:20]
     if not probes:

@@ -10,18 +10,18 @@ Depuis `MONDES_FORGES/CLIPPING/F00_CAPTEURS/CODEBASE/` :
 
 ```bash
 python3 capteurs.py --discover-market \
-  --market "US residents interested in Among Us" \
+  --market "US residents age 25-45 interested in @Zdak" \
   --platform youtube_shorts \
-  --discovery-horizon 30d
+  --discovery-horizon 3d
 ```
 
 Pour demander dix angles après la sélection :
 
 ```bash
 python3 capteurs.py --discover-market \
-  --market "US residents interested in Among Us" \
+  --market "US residents age 25-45 interested in @Zdak" \
   --platform youtube_shorts \
-  --discovery-horizon 30d \
+  --discovery-horizon 3d \
   --discovery-angles 10 \
   --blue-angles 6 \
   --red-angles 4
@@ -43,7 +43,7 @@ Le système tente de produire jusqu’à 30 candidats réellement observés. Il 
 | Océan bleu | Demande suffisante, espace moins saturé et hypothèse vérifiable |
 | Désert | Faible concurrence sans demande prouvée ; non classé comme bleu |
 
-La répartition 15/15 est une cible d’analyse, pas une obligation. Une sortie peut contenir moins de 30 candidats ou moins de 15 bleus si les preuves ne suffisent pas.
+La répartition 15/15 est une cible d’analyse, pas une obligation. Les horizons disponibles sont `2h`, `6h`, `12h`, `24h`, `3d`, `7d` et `30d`. Une sortie peut contenir moins de 30 candidats ou moins de 15 bleus si les preuves ne suffisent pas.
 
 ## Anti-invention et anti-doublons
 

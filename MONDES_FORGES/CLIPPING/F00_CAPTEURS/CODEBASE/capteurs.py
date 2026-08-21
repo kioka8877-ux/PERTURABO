@@ -1263,8 +1263,8 @@ def main():
                         help="Marché cible en langage naturel (obligatoire avec --discover-market)")
     parser.add_argument("--platform", choices=["youtube_shorts"], default="youtube_shorts",
                         help="Plateforme de découverte (défaut: youtube_shorts)")
-    parser.add_argument("--discovery-horizon", choices=["2h", "6h", "12h", "7d", "30d"], default="30d",
-                        help="Horizon de découverte (défaut: 30d)")
+    parser.add_argument("--discovery-horizon", choices=["2h", "6h", "12h", "24h", "3d", "7d", "30d"], default="30d",
+                        help="Horizon de découverte (2h, 6h, 12h, 24h, 3d, 7d ou 30d)")
     parser.add_argument("--discovery-angles", type=int, default=0,
                         help="Nombre d’angles à préparer après validation (0 = aucun)")
     parser.add_argument("--blue-angles", type=int, default=None,
@@ -1284,7 +1284,7 @@ def main():
     parser.add_argument("--freshness", choices=["brulant", "frais"],
                         default="brulant",
                         help="Compatibilité legacy: fenêtre brulant=5h ou frais=24h")
-    parser.add_argument("--horizon", choices=["6h", "24h", "7d", "30d"],
+    parser.add_argument("--horizon", choices=["2h", "6h", "12h", "24h", "3d", "7d", "30d"],
                         default=None,
                         help="Profil contextualisé: horizon de recherche")
     parser.add_argument("--niche-mode", choices=["general", "meme"],

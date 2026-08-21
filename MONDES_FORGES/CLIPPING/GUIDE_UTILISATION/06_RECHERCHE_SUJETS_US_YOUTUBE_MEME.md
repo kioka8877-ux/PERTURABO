@@ -10,7 +10,7 @@ Le profil de recherche est défini par cinq dimensions :
 
 | Dimension | Valeurs initiales |
 |---|---|
-| Horizon | `6h`, `24h`, `7d`, `30d` |
+| Horizon | `2h`, `6h`, `12h`, `24h`, `3d`, `7d`, `30d` |
 | Plateforme | `youtube_shorts` |
 | Marché | `us_young_english` |
 | Niche de production | `meme` |
@@ -54,8 +54,11 @@ Une source externe ne remplace jamais la preuve YouTube. Un sujet Reddit très d
 
 | Horizon | Utilisation | Signal dominant |
 |---|---|---|
+| `2h` | Signal extrêmement récent | Accélération immédiate |
 | `6h` | Sujet à exploiter immédiatement | Fraîcheur et accélération |
+| `12h` | Signal qui résiste au premier cycle | Confirmation rapide |
 | `24h` | Sujet encore actif après le premier pic | Équilibre fraîcheur / stabilité |
+| `3d` | Sujet court terme à confirmer et décliner | Tendance récente et concurrence |
 | `7d` | Sujet persistant et déclinable | Tendance et répétabilité |
 | `30d` | Sujet récurrent, saisonnier ou evergreen | Demande régulière et série |
 

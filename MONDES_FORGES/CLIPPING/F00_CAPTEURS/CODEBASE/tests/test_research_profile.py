@@ -41,7 +41,7 @@ class ResearchProfileTests(unittest.TestCase):
 
     def test_all_horizons_are_distinct(self):
         windows = []
-        for horizon in ("6h", "24h", "7d", "30d"):
+        for horizon in ("2h", "6h", "12h", "24h", "3d", "7d", "30d"):
             profile = build_profile(
                 horizon=horizon,
                 platform="youtube_shorts",
@@ -52,7 +52,7 @@ class ResearchProfileTests(unittest.TestCase):
                 freshness="brulant",
             )
             windows.append(profile["window_hours"])
-        self.assertEqual(windows, [6, 24, 168, 720])
+        self.assertEqual(windows, [2, 6, 12, 24, 72, 168, 720])
 
 
 if __name__ == "__main__":

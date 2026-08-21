@@ -12,18 +12,18 @@ Le mode déterministe reste le défaut :
 
 ```bash
 python3 capteurs.py --discover-market \
-  --market "US residents interested in Among Us" \
+  --market "US residents age 25-45 interested in @Zdak" \
   --platform youtube_shorts \
-  --discovery-horizon 30d
+  --discovery-horizon 3d
 ```
 
 Le Directeur premium est demandé explicitement :
 
 ```bash
 python3 capteurs.py --discover-market \
-  --market "US residents interested in Among Us" \
+  --market "US residents age 25-45 interested in @Zdak" \
   --platform youtube_shorts \
-  --discovery-horizon 30d \
+  --discovery-horizon 3d \
   --premium-director
 ```
 

@@ -19,7 +19,7 @@ Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les
 | `03_MODE_WHOP.md` | whop (clip canon) | ⏳ À compléter (même squelette) |
 | `04_MODE_MEME.md` | logo / meme | ✅ **Complet** (doctrine montage 6 couches = contrat OMNIS_WATCH) |
 | `06_RECHERCHE_SUJETS_US_YOUTUBE_MEME.md` | Recherche | ✅ Profil US / YouTube Shorts / niche meme |
-| `07_HORIZONS_RECHERCHE.md` | Recherche | ✅ Fenêtres 6h / 24h / 7d / 30d |
+| `07_HORIZONS_RECHERCHE.md` | Recherche | ✅ Fenêtres 2h / 6h / 12h / 24h / 3d / 7d / 30d |
 | `08_DISCOVERY_MARKET_DEMONS_RED_BLUE.md` | Discovery | ✅ Marché, Démons, océans rouge/bleu et validation |
 | `09_DIRECTEUR_PROSPECTION_PREMIUM.md` | Discovery | ✅ Questions premium, collecte Oracle et anti-invention |
 | `_PIEGES_APPRIS.md` | Tous | ✅ Les leçons du siège test — **à lire avant chaque siège** |

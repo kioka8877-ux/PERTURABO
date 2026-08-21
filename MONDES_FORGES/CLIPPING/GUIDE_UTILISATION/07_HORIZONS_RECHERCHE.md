@@ -9,7 +9,9 @@ La durée demandée par le Champion définit le type d’opportunité recherché
 | `2h` | Le signal accélère-t-il maintenant ? | Prospection urgente, aucune extrapolation lente |
 | `6h` | Le sujet peut-il être exploité immédiatement ? | Production rapide ou abandon |
 | `12h` | Le sujet survit-il à son premier pic ? | Confirmation tactique |
-| `7d` | Le sujet reste-t-il actif et déclinable ? | Série courte possible |
+| `24h` | Le sujet reste-t-il actif après une journée ? | Confirmation courte |
+| `3d` | Le sujet reste-t-il exploitable après plusieurs cycles ? | Série courte possible |
+| `7d` | Le sujet reste-t-il actif et déclinable ? | Série hebdomadaire possible |
 | `30d` | Le sujet est-il récurrent ou saisonnier ? | Série durable ou réserve d’idées |
 
 ## Mode 6 heures
@@ -34,7 +36,7 @@ Le mode `30d` est destiné aux sujets récurrents, saisonniers ou evergreen. Il 
 
 ## Règle de comparaison
 
-Les scores doivent toujours être lus avec leur `research_profile`. Un score contextualisé de `2h`, `6h`, `12h`, `7d` et `30d` répond à une question différente. Le Directeur premium peut utiliser l’horizon pour choisir les questions et les requêtes, mais les preuves restent celles de l’Oracle.
+Les scores doivent toujours être lus avec leur `research_profile`. Un score contextualisé de `2h`, `6h`, `12h`, `24h`, `3d`, `7d` et `30d` répond à une question différente. Le Directeur premium peut utiliser l’horizon pour choisir les questions et les requêtes, mais les preuves restent celles de l’Oracle.
  Le système conserve le score legacy pour fournir une référence historique, mais le Champion décide selon l’horizon réellement demandé.
 
 ## Checklist du Champion

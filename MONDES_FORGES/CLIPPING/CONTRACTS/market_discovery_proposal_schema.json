@@ -12,7 +12,7 @@
       "properties": {
         "market": {"type": "string", "minLength": 1},
         "platform": {"const": "youtube_shorts"},
-        "horizon": {"enum": ["2h", "6h", "12h", "7d", "30d"]},
+        "horizon": {"enum": ["2h", "6h", "12h", "24h", "3d", "7d", "30d"]},
         "language": {"type": "string"},
         "production_niche": {"type": "string"}
       }
