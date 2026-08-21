@@ -18,6 +18,22 @@ Objectif : produire une **cartographie complète de l'écosystème clipping** au
 
 ---
 
+## DISCOVERY MARCHÉ — V3 ADDITIVE
+
+F00 accepte désormais un marché en langage naturel sans mot-clé imposé et produit une proposition soumise au Warsmith. La première plateforme est `youtube_shorts` et les horizons sont `2h`, `6h`, `12h`, `7d` et `30d`.
+
+```bash
+python3 capteurs.py --discover-market \
+  --market "US residents interested in Among Us" \
+  --platform youtube_shorts \
+  --discovery-horizon 30d \
+  --discovery-angles 10 --blue-angles 6 --red-angles 4
+```
+
+Le mode produit `OUT/market_discovery_proposal.json` et `.md`, puis les copie dans `EXPORT/`. Il cartographie les Démons observés, déduplique les candidats, sépare océans rouge/bleu, propose des packs et vérifie l’allocation d’angles. `availability.invented` doit toujours être égal à zéro. Si les preuves ne permettent pas d’obtenir 30 candidats, le quota reste incomplet ; aucun candidat n’est inventé.
+
+La clé premium est optionnelle. Si elle est activée ultérieurement, elle ne pourra synthétiser que le payload observé. `premium_evidence_guard.py` bloque toute URL inconnue ou tout indicateur d’invention avant acceptation.
+
 ## RECHERCHE CONTEXTUALISÉE — V2 ADDITIVE
 
 F00 conserve le comportement historique et ajoute un profil de recherche optionnel pour les sujets. Le profil initial cible `youtube_shorts` / `us_young_english` / `meme` et accepte les horizons `6h`, `24h`, `7d`, `30d`.
@@ -91,6 +107,8 @@ Les quatre horizons changent la pondération : `6h` privilégie la fraîcheur et
 
 ### Autres
 - `OUT/cartographie.md` — synthèse lisible pour le Warsmith (ce que l'écosystème dit de la campaigne, qui a clip quel angle, où sont les angles libres)
+- `OUT/market_discovery_proposal.json` — marché, Démons, candidats, océans, packs et validation
+- `OUT/market_discovery_proposal.md` — tableau lisible pour le Champion
 - `OUT/subjects_proposal.json` — proposition de sujets avec scores legacy et contextualisés
 - `OUT/subjects_proposal.md` — tableau lisible pour le Champion
 
@@ -181,6 +199,8 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
 | Code Python implémenté | ✅ | v1 (commit F00_CAPTEURS) |
 | `capteurs.py` | ✅ | CLI commandité : `--scan`, `--scan-demons`, `--scan-subjects` legacy et profil contextualisé |
 | `research_profile.py` | ✅ | Profils horizon / plateforme / marché / niche et pondérations |
+| `market_discovery.py` | ✅ | Discovery marché, Démons, anti-invention, océans et allocations |
+| `premium_evidence_guard.py` | ✅ | Bloque les preuves premium absentes du payload réel |
 | `libs/whop_scanner.py` | ✅ | Scrap Whop Discover + pages campagne (statut, budget, CPM, guidelines, assets) |
 | `libs/clipping_ecosystem_scanner.py` | ✅ | Scrap sites clipping du Warsmith (payouts, outils AI, campagnes référencées) |
 | `libs/campaign_context_scanner.py` | ✅ | Perception de la campagne dans l'écosystème (compétiteurs, angles déjà utilisés) |
@@ -207,6 +227,7 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
   `ARCHIVUM/demons/demon_wild_scan_<id>.json`.
 - **Check-in IW_CUSTOS** : fin de scan → `CAPTEURS` done, `fleet_status`
   → `capteurs_done`.
+- **Découverte commanditée** : `--discover-market` ne tourne que sur appel explicite du Warsmith ; il n’y a ni cron ni publication automatique.
 - **Compatibilité legacy** : les anciennes options `--freshness brulant|frais`
   et leurs pondérations sont conservées ; le profil contextualisé s’ajoute en
   parallèle et n’efface jamais `score_mecanique_legacy`.

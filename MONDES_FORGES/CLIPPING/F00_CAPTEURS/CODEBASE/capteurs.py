@@ -49,6 +49,7 @@ from f00_reddit_ingestor import scan as reddit_scan
 from f00_virality_scorer import score_subject, score_subject_from_metrics
 from f00_premium_synth import synthesize as premium_synthesize
 from research_profile import build_profile
+from market_discovery import discover_market, build_packs, allocate_angles
 
 OUT_DIR = os.path.join(_CAPTEURS_DIR, "OUT")
 IN_DIR = os.path.join(_CAPTEURS_DIR, "IN")
@@ -914,6 +915,73 @@ def _write_meme_virality_md(out: dict, safe_key: str) -> str:
     return path
 
 
+def _write_market_discovery_md(result: dict, path: str) -> str:
+    mi = result["market_input"]
+    lines = [
+        "# F00_CAPTEURS — Découverte de marché",
+        "",
+        f"- Discovery : `{result['discovery_id']}`",
+        f"- Marché : {mi['market']}",
+        f"- Plateforme : {mi['platform']} | Horizon : {mi['horizon']}",
+        f"- Candidats observés et éligibles : {result['availability']['observed_eligible']}",
+        f"- Candidats inventés : {result['availability']['invented']} (doit rester 0)",
+        f"- Démon(s) observé(s) : {len(result['demon_map'])}",
+        "",
+        "## Décision de disponibilité",
+        "",
+        f"Quota demandé : 30 | Quota rempli : {'oui' if result['availability']['quota_filled'] else 'non'}",
+        "",
+        "> Aucun candidat n’est ajouté pour remplir artificiellement le quota. Le Champion valide ou demande une nouvelle recherche.",
+        "",
+        "## Candidats classés",
+        "",
+        "| Rang | Candidat observé | Océan | Demande | YouTube | Pression Démon | Saturation | Bleu | Confiance |",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for c in result["candidates"]:
+        s = c["scores"]
+        lines.append(f"| {c.get('rank','—')} | {c['keyword']} | {c['ocean']} | {s['demand']} | {s['youtube']} | {s['demon_pressure']} | {s['saturation']} | {s['blue_ocean']} | {s['confidence']} |")
+    lines += ["", "## Démons observés", "", "| Démon | Territoire observé | Pression | Preuves |", "|---|---|---:|---:|"]
+    for d in result["demon_map"]:
+        lines.append(f"| {d['identity']} | {'; '.join(d['territory'][:3])} | {d['pressure_score']} | {len(d['evidence_urls'])} |")
+    lines += ["", "## Anti-doublons", "", f"Clusters uniques : {result['candidate_clusters']['unique_count']}", f"Doublons écartés : {len(result['candidate_clusters']['removed_duplicates'])}", "",         "## Packs proposés", "", f"Packs candidats : {len(result.get('packs', []))}", "", "## Allocation d’angles", "", f"`{result.get('angle_allocation', {})}`", "", "## Validation Champion", "", "État : `warsmith_review` — aucun siège n’est lancé automatiquement.", ""]
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\\n".join(lines))
+    return path
+
+
+def cmd_discover_market(args):
+    guard_campaign_open()
+    try:
+        result = discover_market(
+            args.market, args.platform, args.discovery_horizon,
+            rss_scan=rss_scan, trends_scan=trends_scan,
+            youtube_scan=youtube_scan, suggestions_scan=suggestions_scan,
+            reddit_scan=reddit_scan, max_items=args.max_items)
+    except ValueError as exc:
+        print(f"[F00_CAPTEURS] {exc}")
+        sys.exit(1)
+    result["packs"] = build_packs(result.get("candidates", []), max_packs=args.max_packs)
+    result["angle_allocation"] = ({"status": "not_requested", "decision": "warsmith_review"}
+                                 if args.discovery_angles == 0 else
+                                 allocate_angles(result.get("candidates", []), args.discovery_angles,
+                                                 blue=args.blue_angles, red=args.red_angles))
+    result["market_input"]["angle_request"] = result["angle_allocation"]
+    out_json = os.path.join(OUT_DIR, "market_discovery_proposal.json")
+    save_json(out_json, result)
+    out_md = os.path.join(OUT_DIR, "market_discovery_proposal.md")
+    _write_market_discovery_md(result, out_md)
+    export_dir = os.path.join(_FORGE_ROOT, "EXPORT")
+    os.makedirs(export_dir, exist_ok=True)
+    for source in (out_json, out_md):
+        with open(source, "r", encoding="utf-8") as src, open(os.path.join(export_dir, os.path.basename(source)), "w", encoding="utf-8") as dst:
+            dst.write(src.read())
+    print(f"[F00_CAPTEURS] Découverte écrite: {out_json}")
+    print(f"[F00_CAPTEURS] Tableau Champion: {out_md}")
+    print(f"[F00_CAPTEURS] Candidats observés: {result['availability']['observed_eligible']} | inventés: 0 | gate: warsmith_review")
+
+
 # ----------------------------------------------------------------------
 # Livraison du sujet choisi (Porte du Warsmith)
 # ----------------------------------------------------------------------
@@ -1174,6 +1242,22 @@ def main():
                         help="Secondes entre deux captures (défaut 1.0)")
     parser.add_argument("--scan-subjects", action="store_true",
                         help="F00: proposer 5 sujets viraux (niche OU hot)")
+    parser.add_argument("--discover-market", action="store_true",
+                        help="F00: découvrir jusqu'à 30 candidats depuis un marché, sans mot-clé imposé")
+    parser.add_argument("--market", default=None,
+                        help="Marché cible en langage naturel (obligatoire avec --discover-market)")
+    parser.add_argument("--platform", choices=["youtube_shorts"], default="youtube_shorts",
+                        help="Plateforme de découverte (défaut: youtube_shorts)")
+    parser.add_argument("--discovery-horizon", choices=["2h", "6h", "12h", "7d", "30d"], default="30d",
+                        help="Horizon de découverte (défaut: 30d)")
+    parser.add_argument("--discovery-angles", type=int, default=0,
+                        help="Nombre d’angles à préparer après validation (0 = aucun)")
+    parser.add_argument("--blue-angles", type=int, default=None,
+                        help="Nombre d’angles océan bleu demandé")
+    parser.add_argument("--red-angles", type=int, default=None,
+                        help="Nombre d’angles océan rouge demandé")
+    parser.add_argument("--max-packs", type=int, default=5,
+                        help="Nombre maximal de packs de deux candidats")
     parser.add_argument("--niche", default=None,
                         help="Nom de la niche (ex: 'Lakers basketball')")
     parser.add_argument("--hot", action="store_true",
@@ -1186,11 +1270,6 @@ def main():
     parser.add_argument("--horizon", choices=["6h", "24h", "7d", "30d"],
                         default=None,
                         help="Profil contextualisé: horizon de recherche")
-    parser.add_argument("--platform", choices=["youtube_shorts"],
-                        default=None,
-                        help="Plateforme initiale du profil contextualisé")
-    parser.add_argument("--market", default=None,
-                        help="Marché du profil contextualisé (défaut US anglais)")
     parser.add_argument("--niche-mode", choices=["general", "meme"],
                         default=None,
                         help="Niche de production (meme ou général)")
@@ -1219,7 +1298,11 @@ def main():
                         help="Sources à scanner (défaut: youtube trends rss reddit suggest)")
     args = parser.parse_args()
 
-    if args.scan:
+    if args.discover_market:
+        if not args.market:
+            print("[F00_CAPTEURS] --market requis avec --discover-market"); sys.exit(1)
+        cmd_discover_market(args)
+    elif args.scan:
         if not args.campaign:
             print("[F00_CAPTEURS] --campaign requis pour --scan"); sys.exit(1)
         cmd_scan(args)

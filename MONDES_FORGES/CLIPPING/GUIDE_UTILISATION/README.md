@@ -20,13 +20,14 @@ Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les
 | `04_MODE_MEME.md` | logo / meme | ✅ **Complet** (doctrine montage 6 couches = contrat OMNIS_WATCH) |
 | `06_RECHERCHE_SUJETS_US_YOUTUBE_MEME.md` | Recherche | ✅ Profil US / YouTube Shorts / niche meme |
 | `07_HORIZONS_RECHERCHE.md` | Recherche | ✅ Fenêtres 6h / 24h / 7d / 30d |
+| `08_DISCOVERY_MARKET_DEMONS_RED_BLUE.md` | Discovery | ✅ Marché, Démons, océans rouge/bleu et validation |
 | `_PIEGES_APPRIS.md` | Tous | ✅ Les leçons du siège test — **à lire avant chaque siège** |
 
 ## 🧭 Comment naviguer
 
 1. **Premier lancement** → lis `00_COMMENCER_ICI.md`
 2. **Avant chaque siège** → relis `_PIEGES_APPRIS.md` (5 minutes, ça évite les erreurs déjà payées)
-3. **Recherche de sujet** → lis `06_RECHERCHE_SUJETS_US_YOUTUBE_MEME.md` puis `07_HORIZONS_RECHERCHE.md`
+3. **Recherche de sujet** → lis `06_RECHERCHE_SUJETS_US_YOUTUBE_MEME.md`, `07_HORIZONS_RECHERCHE.md` et `08_DISCOVERY_MARKET_DEMONS_RED_BLUE.md`
 4. **Mode utilisé** → ouvre le guide du mode (ex : `01_MODE_LOGO_INFORMATIF.md`)
 5. **Doute en cours de siège** → reviens sur la section concernée du guide
 
