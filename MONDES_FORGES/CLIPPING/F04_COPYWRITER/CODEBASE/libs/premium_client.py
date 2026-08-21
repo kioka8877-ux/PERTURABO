@@ -11,7 +11,7 @@ la référence env + le model_id). Fallback sur l'example public.
   {
     "env_var_name": "CLIPPING_PREMIUM_API_KEY",
     "model_id": "<model_premium_id>",
-    "provider": "openai|openrouter|anthropic|other",
+    "provider": "openai|openrouter|baseten|anthropic|other",
     "base_url": "...",           // si provider = "other"
     "max_tokens_per_call": 4096,
     "temperature_default": 0.7
@@ -37,6 +37,7 @@ DEFAULT_ENV_VAR = "CLIPPING_PREMIUM_API_KEY"
 BASE_URLS = {
     "openai": "https://api.openai.com/v1",
     "openrouter": "https://openrouter.ai/api/v1",
+    "baseten": "https://inference.baseten.co/v1",
     "anthropic": "https://api.anthropic.com/v1",
 }
 

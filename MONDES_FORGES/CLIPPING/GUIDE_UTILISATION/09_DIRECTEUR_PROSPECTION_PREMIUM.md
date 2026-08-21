@@ -62,3 +62,31 @@ Si la clé est absente ou si l’appel premium échoue, le système conserve les
 La proposition de découverte contient `prospection_session`, `question_plan`, `demon_map`, les candidats, les scores et les preuves. La session conserve l’identité du marché, les tours, les questions, les réponses et l’état `warsmith_review`.
 
 Le Champion examine d’abord les questions et les preuves, puis valide, rejette ou demande un nouveau tour. Aucun siège n’est déclenché automatiquement.
+
+
+## Provider Baseten
+
+Baseten est le provider premium prévu pour le Directeur de prospection. Le client utilise son endpoint OpenAI-compatible et lit la clé depuis `CLIPPING_PREMIUM_API_KEY`. Le `model_id` est un identifiant de modèle ou de déploiement configuré localement dans `CONTRACTS/copywriter_secrets.json`, qui reste ignoré par Git.
+
+```json
+{
+  "env_var_name": "CLIPPING_PREMIUM_API_KEY",
+  "model_id": "<baseten_model_or_deployment_id>",
+  "provider": "baseten",
+  "base_url": "https://inference.baseten.co/v1"
+}
+```
+
+La clé n'est jamais inscrite dans un fichier suivi, une sortie, un prompt archivé ou un log. Une absence de clé ou une erreur Baseten doit produire un état explicite et ne doit jamais être masquée par une analyse premium simulée.
+
+## Barrières de production meme
+
+Pour la niche meme, le Directeur peut proposer des questions et des hashtags, mais F00 ne retient un candidat que si une vidéo YouTube observée confirme le format meme, la pertinence du Démon ou du marché, la compatibilité Shorts et les métriques disponibles. Trends, Suggest, Reddit et RSS sont des signaux de prospection uniquement.
+
+Les hashtags sont classés `observed_reference`, `observed_demon`, `derived_query`, `premium_proposed` ou `unverified`. Un hashtag proposé par Baseten reste une hypothèse tant qu'il n'a pas été retrouvé dans une collecte réelle.
+
+Le système préfère une liste courte et propre à un quota rempli artificiellement. Un candidat sans preuve YouTube, hors meme, hors univers du Démon, non vérifiable ou redondant devient `observation_only`, `rejected_signal` ou `desert`, jamais `eligible_candidate`.
+
+## Séquence Champion/frégates
+
+La séquence est strictement séquentielle : F00 produit le dossier ; le Champion valide la porte ; une seule frégate suivante peut alors être autorisée ; puis le système s'arrête de nouveau. Le Directeur premium ne peut pas autoriser une frégate et ne peut pas contourner une validation `warsmith_review`.

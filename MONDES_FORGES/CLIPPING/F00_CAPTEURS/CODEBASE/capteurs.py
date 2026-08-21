@@ -971,7 +971,10 @@ def cmd_discover_market(args):
             rss_scan=rss_scan, trends_scan=trends_scan,
             youtube_scan=youtube_scan, suggestions_scan=suggestions_scan,
             reddit_scan=reddit_scan, max_items=args.max_items,
-            probe_queries=plan_queries, question_plan=question_plan)
+            probe_queries=plan_queries, question_plan=question_plan,
+            reference_channels=args.reference_channel,
+            reference_hashtags=args.reference_hashtag,
+            demon_hashtags=args.demon_hashtag)
     except ValueError as exc:
         print(f"[F00_CAPTEURS] {exc}")
         sys.exit(1)
@@ -1273,6 +1276,12 @@ def main():
                         help="Nombre d’angles océan rouge demandé")
     parser.add_argument("--max-packs", type=int, default=5,
                         help="Nombre maximal de packs de deux candidats")
+    parser.add_argument("--reference-channel", action="append", default=[],
+                        help="Chaîne de référence YouTube (répétable, ex: @Zdak)")
+    parser.add_argument("--reference-hashtag", action="append", default=[],
+                        help="Hashtag observé d’une chaîne de référence (répétable)")
+    parser.add_argument("--demon-hashtag", action="append", default=[],
+                        help="Hashtag observé d’un Démon de la niche (répétable)")
     parser.add_argument("--premium-director", action="store_true",
                         help="Active le Directeur de prospection premium pour formuler les questions")
     parser.add_argument("--niche", default=None,

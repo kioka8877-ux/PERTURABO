@@ -120,17 +120,25 @@ def search(keywords: list[str], max_results: int = 8,
     videos = []
     if ids:
         stats_data, _err = _get("/videos", {
-            "part": "statistics,snippet",
+            "part": "statistics,snippet,contentDetails",
             "id": ",".join(ids),
         })
         for it in ((stats_data or {}).get("items", []) or []):
             sn = it.get("snippet", {})
             st = it.get("statistics", {})
+            cd = it.get("contentDetails", {})
+            title = sn.get("title", "")
+            description = sn.get("description", "")
+            hashtags = sorted(set(__import__("re").findall(r"#[A-Za-z0-9_]+", f"{title} {description}")))
             videos.append({
                 "video_id": it.get("id"),
-                "title": sn.get("title", ""),
+                "title": title,
+                "description": description,
                 "channel": sn.get("channelTitle", ""),
                 "published_at": sn.get("publishedAt", ""),
+                "duration": cd.get("duration", ""),
+                "tags": sn.get("tags", []) or [],
+                "hashtags": hashtags,
                 "view_count": int(st.get("viewCount", 0) or 0),
                 "like_count": int(st.get("likeCount", 0) or 0),
                 "comment_count": int(st.get("commentCount", 0) or 0),

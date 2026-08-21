@@ -273,3 +273,18 @@ Limites initiales : trois tours maximum, dix questions par tour, six requêtes p
 États possibles du Directeur : `not_called`, `planned`, `unavailable` et `error`. En cas d’absence de clé ou d’échec premium, le système conserve le plan déterministe et n’invente pas d’analyse premium. L’état final reste `warsmith_review` ; aucune production ou publication n’est automatique.
 
 Règle de traçabilité : chaque question, requête, réponse brute et interprétation doit rester identifiable. Une métrique ou URL absente du payload brut est `unverified` et ne peut pas être utilisée comme preuve de candidat.
+
+
+## PRODUCTION GATE V2 — MEME STRICT ET DIRECTEUR BASETEN
+
+Pour `production_niche=meme`, les signaux Trends, Suggest et Reddit restent des pistes d'exploration. Seul un contenu YouTube observé, avec preuve URL/statistiques, format meme identifiable, pertinence pour le marché ou le Démon et confiance suffisante peut devenir `eligible_candidate`. Tout le reste est `observation_only`, `rejected_signal` ou `desert`.
+
+La carte des Démons est également bloquante : un créateur n'est pas un Démon parce qu'il possède beaucoup de vues. Il doit avoir au moins deux observations pertinentes dans le territoire meme ciblé. Les chaînes et vidéos de tendance globale ne doivent jamais contaminer la carte d'un Démon.
+
+Les hashtags et tags sont classés par provenance : `observed_reference`, `observed_demon`, `derived_query`, `premium_proposed` ou `unverified`. Seuls les termes observés et vérifiés par une collecte YouTube peuvent influencer le classement. Les métadonnées doivent conserver `title`, `description`, `hashtags`, `tags`, `duration`, `view_count`, `like_count`, `comment_count`, `published_at` et l'URL quand ils sont disponibles.
+
+La déduplication agit sur le texte, le hashtag, le territoire, le hook, l'émotion, le format et l'historique. Une paire de mots n'est un pack admissible que si elle possède une ancre de demande, un contraste réel et aucune cannibalisation. Un océan bleu sans preuve de demande est un désert et ne remplit jamais le quota de 30.
+
+Le Directeur premium peut utiliser le provider `baseten` via `CLIPPING_PREMIUM_API_KEY`, `model_id` configuré localement et endpoint `https://inference.baseten.co/v1`. Il propose des questions et des requêtes ; il ne produit pas de faits. Toute URL, métrique, date, chaîne ou tendance absente du payload brut est bloquée. Si la clé est absente ou si le provider échoue, l'état est explicite et aucune analyse premium ne doit être simulée.
+
+La validation reste séquentielle : F00 produit le dossier, le Champion décide, puis une seule frégate suivante est autorisée. Aucune exécution automatique ne doit franchir une porte non validée.

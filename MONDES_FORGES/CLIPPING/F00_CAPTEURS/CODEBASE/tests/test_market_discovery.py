@@ -37,5 +37,80 @@ class MarketDiscoveryTests(unittest.TestCase):
         self.assertEqual(result["anti_invention"], "fail")
 
 
+    def test_non_meme_signal_is_desert(self):
+        from market_discovery import _score_candidate
+        candidate = {
+            "keyword": "real estate market report",
+            "normalized_key": "real estate market report",
+            "evidence_urls": ["https://youtube.com/watch?v=x"],
+            "evidence_types": ["youtube"],
+            "youtube_video_count": 1,
+            "youtube_top_views": 100000,
+            "youtube_total_views": 100000,
+            "suggestion_count": 2,
+            "reddit_post_count": 0,
+            "reddit_comments": 0,
+            "trend_count": 0,
+            "channel_count": 1,
+            "channel_names": ["unrelated"],
+        }
+        result = _score_candidate(candidate, "3d", [], "US audience fans of @Zdak")
+        self.assertEqual(result["ocean"], "desert")
+        self.assertEqual(result["gates"]["meme"], "block")
+
+    def test_signal_without_youtube_evidence_is_desert(self):
+        from market_discovery import _score_candidate
+        candidate = {
+            "keyword": "funny meme reaction",
+            "normalized_key": "funny meme reaction",
+            "evidence_urls": [],
+            "evidence_types": ["suggest"],
+            "youtube_video_count": 0,
+            "youtube_top_views": 0,
+            "youtube_total_views": 0,
+            "suggestion_count": 1,
+            "reddit_post_count": 0,
+            "reddit_comments": 0,
+            "trend_count": 0,
+            "channel_count": 0,
+            "channel_names": [],
+        }
+        result = _score_candidate(candidate, "3d", [], "US audience fans of @Zdak")
+        self.assertEqual(result["ocean"], "desert")
+        self.assertEqual(result["gates"]["youtube_evidence"], "block")
+
+    def test_unrelated_channel_does_not_pass_relevance(self):
+        from market_discovery import _score_candidate
+        candidate = {
+            "keyword": "funny reaction meme",
+            "normalized_key": "funny reaction meme",
+            "evidence_urls": ["https://youtube.com/watch?v=x"],
+            "evidence_types": ["youtube"],
+            "youtube_video_count": 1,
+            "youtube_top_views": 100000,
+            "youtube_total_views": 100000,
+            "suggestion_count": 1,
+            "reddit_post_count": 0,
+            "reddit_comments": 0,
+            "trend_count": 0,
+            "channel_count": 1,
+            "channel_names": ["totally unrelated channel"],
+        }
+        result = _score_candidate(candidate, "3d", [], "US audience fans of @Zdak")
+        self.assertEqual(result["gates"]["market_relevance"], "block")
+        self.assertEqual(result["ocean"], "desert")
+
+    def test_probe_queries_anchor_to_handle(self):
+        probes = build_probe_queries("US audience fans of @Zdak")
+        self.assertIn("@Zdak", probes)
+        self.assertIn("Zdak meme", probes)
+
+    def test_pack_requires_shared_territory(self):
+        from market_discovery import build_packs
+        a = {"candidate_id": "a", "keyword": "funny meme", "normalized_key": "funny meme", "ocean": "blue"}
+        b = {"candidate_id": "b", "keyword": "gaming clips", "normalized_key": "gaming clips", "ocean": "red"}
+        self.assertEqual(build_packs([a, b]), [])
+
+
 if __name__ == "__main__":
     unittest.main()

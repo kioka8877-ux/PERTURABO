@@ -224,3 +224,14 @@ OMNIS_WATCH (dev1, delta) :
 Voir `TRACKING/INDEX.md` pour la cartographie complète.
 
 *Fer au-dedans, Fer au-dehors. Aucune hérésie ne survivra au siège.*
+
+
+## DISCOVERY PRODUCTION — BARRIÈRES MEME
+
+Le mode de découverte reçoit le marché, la plateforme et l'horizon. Pour `youtube_shorts` / `meme`, les tendances, suggestions, RSS et Reddit servent uniquement de signaux d'exploration. Un candidat doit être confirmé par une vidéo YouTube observée, être pertinent pour le Démon ou la chaîne de référence, présenter un format meme identifiable, franchir les règles de sécurité et ne pas être redondant.
+
+F00 sépare les candidats éligibles des observations, rejets et déserts. Le quota de 30 n'est jamais rempli artificiellement. Un faible volume concurrentiel sans demande prouvée est un désert, pas un océan bleu. Les tags et hashtags sont conservés avec leur provenance et ne deviennent des preuves qu'après vérification YouTube.
+
+Le Directeur de prospection premium peut utiliser Baseten comme planificateur de questions et de requêtes via l'endpoint OpenAI-compatible `https://inference.baseten.co/v1`. Il ne remplace pas les capteurs et ne peut jamais créer une métrique, une URL, une date ou un résultat. Les faits bruts restent séparés de l'interprétation premium.
+
+La progression des frégates est séquentielle : F00 doit être validée par le Warsmith/Champion avant qu'une seule frégate suivante soit autorisée. Aucune production automatique ne découle de la découverte.

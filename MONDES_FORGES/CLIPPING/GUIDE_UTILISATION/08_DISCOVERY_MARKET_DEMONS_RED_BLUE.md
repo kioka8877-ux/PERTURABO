@@ -58,3 +58,34 @@ Les packs de deux candidats sont proposés seulement après le classement. Ils u
 ## Validation
 
 L’état de sortie est `warsmith_review`. Le Champion peut valider des candidats, rejeter des doublons, demander des remplacements ou refuser toute la liste. La validation ne doit être suivie d’une production qu’après lecture des preuves, des Démons, du camp et du niveau de confiance.
+
+
+## Barrières de production meme
+
+Pour `production_niche=meme`, un résultat Trends, Suggest, Reddit ou RSS est une piste, pas un candidat. Le candidat doit être confirmé par au moins une vidéo YouTube observée, présenter un signal meme identifiable, être pertinent pour le Démon ou le marché cible, rester compatible avec Shorts et franchir le contrôle de sécurité. Un résultat informatif, sportif, immobilier, musical ou généraliste est rejeté s'il ne possède pas de preuve de format meme dans l'écosystème ciblé.
+
+Les candidats sans preuve YouTube, sans pertinence cible, sans signal meme ou avec une confiance insuffisante sont conservés dans `rejected_signals`, `observation_only` ou `desert`. Ils ne remplissent jamais le quota de 30.
+
+## Chaînes et hashtags comme inputs contrôlés
+
+Une chaîne de référence et les Démons peuvent fournir des inputs explicites :
+
+```bash
+python3 capteurs.py --discover-market \
+  --market "US audience 25-45 fans of target creator" \
+  --platform youtube_shorts \
+  --discovery-horizon 3d \
+  --reference-channel "@reference_creator" \
+  --reference-hashtag "#observed_tag" \
+  --demon-hashtag "#demon_tag"
+```
+
+Les hashtags extraits d'une chaîne ou d'un Démon sont des termes observés. Les hashtags proposés par le Directeur premium sont des sondes et doivent être vérifiés sur YouTube avant de servir au classement. Chaque terme doit conserver sa provenance : `observed_reference`, `observed_demon`, `derived_query`, `premium_proposed` ou `unverified`.
+
+## Anti-cannibalisation
+
+La déduplication compare le vocabulaire, le sens, le hashtag, le territoire, le hook, l'émotion, le format et l'historique. Deux candidats qui produisent le même Short sont cannibalisants même si leurs mots diffèrent. Un pack à deux mots doit utiliser une ancre de demande et un contraste réel ; une combinaison redondante est refusée.
+
+## Directeur premium
+
+Baseten peut être configuré comme provider OpenAI-compatible avec `https://inference.baseten.co/v1`. Le Directeur propose les questions et requêtes ; F00 collecte les réponses réelles ; le garde-fou vérifie les URLs et métriques. Le premium ne peut pas fabriquer une preuve et ne peut pas transformer une hypothèse en fait.
