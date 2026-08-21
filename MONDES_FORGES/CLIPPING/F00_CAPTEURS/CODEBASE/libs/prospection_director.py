@@ -75,7 +75,7 @@ def premium_plan(session: dict) -> dict:
     """Demande au premium un plan de questions ; ne collecte aucune donnée."""
     if PremiumClient is None:
         return {"status": "unavailable", "error": "premium_client indisponible", "plan": None}
-    forge_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(SCRIPT_DIR))))
+    forge_root = os.path.dirname(os.path.dirname(os.path.dirname(SCRIPT_DIR)))
     try:
         client = PremiumClient(forge_root)
         client.require_config()
