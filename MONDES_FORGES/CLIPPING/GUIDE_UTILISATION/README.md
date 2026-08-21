@@ -18,14 +18,17 @@ Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les
 | `02_MODE_LOGO_HUMOUR.md` | logo / humour | ⏳ À compléter (même squelette) |
 | `03_MODE_WHOP.md` | whop (clip canon) | ⏳ À compléter (même squelette) |
 | `04_MODE_MEME.md` | logo / meme | ✅ **Complet** (doctrine montage 6 couches = contrat OMNIS_WATCH) |
+| `06_RECHERCHE_SUJETS_US_YOUTUBE_MEME.md` | Recherche | ✅ Profil US / YouTube Shorts / niche meme |
+| `07_HORIZONS_RECHERCHE.md` | Recherche | ✅ Fenêtres 6h / 24h / 7d / 30d |
 | `_PIEGES_APPRIS.md` | Tous | ✅ Les leçons du siège test — **à lire avant chaque siège** |
 
 ## 🧭 Comment naviguer
 
 1. **Premier lancement** → lis `00_COMMENCER_ICI.md`
 2. **Avant chaque siège** → relis `_PIEGES_APPRIS.md` (5 minutes, ça évite les erreurs déjà payées)
-3. **Mode utilisé** → ouvre le guide du mode (ex : `01_MODE_LOGO_INFORMATIF.md`)
-4. **Doute en cours de siège** → reviens sur la section concernée du guide
+3. **Recherche de sujet** → lis `06_RECHERCHE_SUJETS_US_YOUTUBE_MEME.md` puis `07_HORIZONS_RECHERCHE.md`
+4. **Mode utilisé** → ouvre le guide du mode (ex : `01_MODE_LOGO_INFORMATIF.md`)
+5. **Doute en cours de siège** → reviens sur la section concernée du guide
 
 ## ➕ Comment ajouter un guide (nouveau mode)
 
@@ -44,7 +47,7 @@ Règle de nommage : `NN_MODE_<PROFIL>_<SOUS_MODE>.md` (NN = ordre, 2 chiffres).
 ## 🏗️ Rappel de l'architecture (en bref)
 
 ```
-F00_CAPTEURS (scrap écosystème) ── avant Gate 1
+F00_CAPTEURS (recherche contextualisée + scrap écosystème) ── avant Gate 1
 F01 SCOUT        → capture le specimen (source)
 F02 TYRANT CAMP  → verdict GO/NO-GO (Gate 1)
 ANGLESMITH (F02) → forge les angles (Gate 2)

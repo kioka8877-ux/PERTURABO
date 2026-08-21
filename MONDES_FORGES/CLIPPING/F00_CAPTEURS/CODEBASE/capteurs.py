@@ -48,6 +48,7 @@ from f00_suggestions_ingestor import scan as suggestions_scan
 from f00_reddit_ingestor import scan as reddit_scan
 from f00_virality_scorer import score_subject, score_subject_from_metrics
 from f00_premium_synth import synthesize as premium_synthesize
+from research_profile import build_profile
 
 OUT_DIR = os.path.join(_CAPTEURS_DIR, "OUT")
 IN_DIR = os.path.join(_CAPTEURS_DIR, "IN")
@@ -318,6 +319,23 @@ def cmd_scrap_youtube(args):
 FRESHNESS_WINDOWS = {"brulant": 5, "frais": 24}
 
 
+def _profile_from_args(args, niche: str | None, mode: str, freshness: str) -> dict:
+    """Construit le contexte de recherche sans casser les anciennes commandes."""
+    try:
+        return build_profile(
+            horizon=args.horizon,
+            platform=args.platform,
+            market=args.market,
+            niche=niche,
+            niche_mode=args.niche_mode,
+            mode=mode,
+            freshness=freshness,
+        )
+    except ValueError as exc:
+        print(f"[F00_CAPTEURS] {exc}")
+        sys.exit(1)
+
+
 def _derive_keywords(niche: str) -> list[str]:
     """Dérive jusqu'à 6 mots-clés de la niche (phrase + bigrammes)."""
     words = [w.strip() for w in niche.split() if w.strip()]
@@ -365,32 +383,38 @@ def cmd_scan_subjects(args):
         print(f"[F00_CAPTEURS] freshness inconnue: {freshness} "
               f"(brulant|frais)"); sys.exit(1)
 
+    profile = _profile_from_args(args, niche, mode, freshness)
     keywords = _hot_keywords() if hot else _derive_keywords(niche)
     print(f"[F00_CAPTEURS] niche={niche or 'hot'} | mode={mode} | "
-          f"fraîcheur={freshness} ({FRESHNESS_WINDOWS[freshness]}h) | "
+          f"profil={profile['profile_id']} | horizon={profile['horizon']} | "
           f"keywords={keywords}")
 
-    # ---- Capture des 4 signaux (toujours en direct, jamais inventé) ----
+    # ---- Capture des signaux (toujours en direct, jamais inventé) ----
     rss = rss_scan(keywords, freshness=freshness, max_items=args.max_items)
     trends = trends_scan(keywords)
     yt = youtube_scan(keywords, max_results=8)
     sugg = suggestions_scan(keywords)
+    reddit = reddit_scan(keywords, max_items=args.max_items,
+                         timeframe=profile["reddit_timeframe"])
 
     payload = {
         "config": {"niche": niche, "hot": hot, "mode": mode,
                    "freshness": freshness,
-                   "window_hours": FRESHNESS_WINDOWS[freshness],
-                   "keywords": keywords},
+                   "window_hours": profile["window_hours"],
+                   "keywords": keywords,
+                   "research_profile": profile},
         "signal_rss_fraicheur": _capteur_snapshot("rss", keywords[0], rss),
         "signal_tendance": trends,
         "signal_vues_youtube": yt,
         "signal_demande": sugg,
+        "signal_reddit": reddit,
         "baseline": _load_baseline_summary(),
         "scoring_method": {
-            "weights": {"vues_youtube": 0.30, "tendance": 0.25,
-                        "fraicheur": 0.20, "demande": 0.15,
-                        "couverture": 0.10},
-            "note": "GLM 5.2 synthétise à partir de ces seules observations",
+            "legacy_weights": {"vues_youtube": 0.30, "tendance": 0.25,
+                                "fraicheur": 0.20, "demande": 0.15,
+                                "couverture": 0.10},
+            "contextual_weights": profile["weights"],
+            "note": "GLM 5.2 synthétise uniquement les observations des capteurs; le score contextualisé est calculé localement.",
         },
     }
 
@@ -407,11 +431,13 @@ def cmd_scan_subjects(args):
     for s in subjects:
         s["scan_id"] = scan_id
         _enrich_subject(s, window_hours)
+        _enrich_contextual_subject(s, payload, profile)
 
     proposal = {
         "scan_id": scan_id,
         "scanned_at": now_iso(),
         "config": payload["config"],
+        "research_profile": profile,
         "signal_payload": payload,
         "baseline": _load_baseline_summary(),
         "subjects": subjects,
@@ -460,6 +486,67 @@ def _enrich_subject(s: dict, window_hours: int) -> None:
     if s.get("coverage_media_count") is None:
         s["coverage_media_count"] = len(domains)
     s["metric_proof"] = _metric_proof(m)
+
+
+def _enrich_contextual_subject(s: dict, payload: dict, profile: dict) -> None:
+    """Ajoute les scores contextualisés sans modifier le score legacy."""
+    metrics = s.get("metrics") or {}
+    legacy = float(s.get("score_mecanique", 0) or 0)
+    views = float(metrics.get("top_video_views") or 0)
+    demand = float(metrics.get("demand_score") or 0)
+    freshness = metrics.get("freshness_hours")
+    reddit = payload.get("signal_reddit") or {}
+    reddit_posts = len(reddit.get("posts") or []) if reddit.get("status") == "ok" else 0
+    source_count = len(s.get("sources") or [])
+
+    # Scores déterministes : l'Oracle interprète, mais n'invente pas les preuves.
+    youtube_score = min(100.0, legacy * 0.45 + min(100.0, views / 10000.0) * 0.35 +
+                        min(100.0, source_count * 12.0) * 0.20)
+    freshness_score = 50.0 if freshness is None else max(
+        0.0, min(100.0, 100.0 * (1.0 - float(freshness) / max(1, profile["window_hours"]))))
+    demand_score = min(100.0, demand)
+    reddit_score = min(100.0, reddit_posts * 12.5)
+
+    # Initial US-native heuristic : profil US + signaux de langage/recherche.
+    subject_text = " ".join(str(s.get(k, "")) for k in
+                             ("subject_en", "notes_fr", "angle_propose_fr")).lower()
+    tokens = set(re.findall(r"[a-z0-9]+", subject_text))
+    us_terms = {"student", "college", "loan", "american", "nba", "nfl",
+                "dollar", "tax", "apartment", "credit", "prom", "homecoming"}
+    us_fit = min(100.0, 35.0 + sum(12.0 for t in us_terms if t in tokens))
+
+    # Meme fit : indicateur conservateur, à confirmer par le Champion et F02.
+    meme_terms = ("meme", "reaction", "funny", "joke", "crazy", "shocking",
+                  "theory", "unexpected", "debt", "student")
+    meme_fit = min(100.0, 35.0 + sum(10.0 for t in meme_terms if t in subject_text))
+    repeatability = min(100.0, 40.0 + min(5, source_count) * 10.0)
+    confidence = min(100.0, 25.0 + (25.0 if views else 0) +
+                     (20.0 if demand else 0) + (15.0 if reddit_posts else 0) +
+                     (15.0 if source_count >= 2 else 0))
+
+    # Pénalité de saturation : absence de preuve de saturation = neutre, pas bonus.
+    saturation_penalty = 0.0
+    contextual = (youtube_score * 0.30 + us_fit * 0.20 + meme_fit * 0.20 +
+                  freshness_score * 0.10 + demand_score * 0.10 +
+                  repeatability * 0.05 + confidence * 0.05 - saturation_penalty)
+    s["score_mecanique_legacy"] = round(legacy, 1)
+    s["contextual_scores"] = {
+        "us_native": round(us_fit, 1),
+        "youtube_shorts": round(youtube_score, 1),
+        "horizon": round(freshness_score, 1),
+        "meme_fit": round(meme_fit, 1),
+        "repeatability": round(repeatability, 1),
+        "confidence": round(confidence, 1),
+        "reddit_confirmation": round(reddit_score, 1),
+    }
+    blocked_terms = {"election", "president", "politics", "political", "abortion",
+                     "war", "terrorist", "terrorism", "shooting", "racial", "religion"}
+    safety_gate = "block" if tokens.intersection(blocked_terms) else "pass"
+    s["safety_gate"] = safety_gate
+    s["saturation_penalty"] = saturation_penalty
+    s["score_contextualise"] = round(max(0.0, min(100.0, contextual)), 1)
+    s["contextual_decision"] = "warsmith_review"
+    s["contextual_profile"] = profile["profile_id"]
 
 
 def _url_domain(url: str) -> str | None:
@@ -543,7 +630,9 @@ def _update_baseline(scan_id: str, subjects: list, window_hours: int) -> None:
              "demand_score": (s.get("metrics") or {}).get("demand_score"),
              "trend_growth_7d": (s.get("metrics") or {}).get("trend_growth_7d"),
              "coverage_media_count": s.get("coverage_media_count"),
-             "source_diversity": s.get("source_diversity")}
+             "source_diversity": s.get("source_diversity"),
+             "score_contextualise": s.get("score_contextualise"),
+             "contextual_profile": s.get("contextual_profile")}
             for s in subjects],
     }
     baseline.append(entry)
@@ -561,30 +650,30 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
         f"- Niche : {cfg.get('niche') or 'HOT (actu montante)'}",
         f"- Mode : {cfg.get('mode')} | Fraîcheur : {cfg.get('freshness')} "
         f"({cfg.get('window_hours')}h)",
+        f"- Profil recherche : {proposal.get('research_profile', {}).get('profile_id', 'legacy')}",
+        f"- Marché/plateforme/niche : {proposal.get('research_profile', {}).get('market', '—')} / {proposal.get('research_profile', {}).get('platform', '—')} / {proposal.get('research_profile', {}).get('niche_mode', '—')}",
         f"- Modèle : {proposal['premium_model']} (synthèse — stats observées)",
         "",
         "## Tableau des 5 sujets (score GLM /10 + score mécanique /100, "
         "métriques réelles)",
         "",
-        "| # | Sujet (EN) | GLM | Méca | Vues YT top | Recherche | "
-        "Tendance 7j | Demande | Fraîcheur | Couverture | Diversité | "
-        "Sous-mode |",
-        "|---|------------|-----|------|-------------|-----------|-----------"
-        "---|---------|-----------|------------|-----------|-----------|",
+        "| # | Sujet (EN) | GLM | Legacy | Contextuel | US | YT Shorts | Meme | Vues | Demande | Fraîcheur | Reddit | Sous-mode |",
+        "|---|------------|-----|--------|------------|----|-----------|------|------|---------|-----------|--------|-----------|",
     ]
     for i, s in enumerate(proposal["subjects"], 1):
         m = s.get("metrics") or {}
         def fmt(key):
             v = m.get(key)
             return "—" if v is None else str(v)
+        ctx = s.get('contextual_scores') or {}
         lines.append(
             f"| {i} | {s.get('subject_en','')} | **{s.get('score_10')}** | "
-            f"**{s.get('score_mecanique')}** | "
-            f"{fmt('top_video_views')} | {fmt('yt_search_views')} | "
-            f"{fmt('trend_growth_7d')} | {fmt('demand_score')} | "
-            f"{fmt('freshness_hours')}h | {fmt('coverage_media_count')} | "
-            f"{s.get('source_diversity')} | "
-            f"{s.get('sous_mode','')} |")
+            f"**{s.get('score_mecanique_legacy', s.get('score_mecanique'))}** | "
+            f"**{s.get('score_contextualise', '—')}** | "
+            f"{ctx.get('us_native', '—')} | {ctx.get('youtube_shorts', '—')} | "
+            f"{ctx.get('meme_fit', '—')} | {fmt('top_video_views')} | "
+            f"{fmt('demand_score')} | {fmt('freshness_hours')}h | "
+            f"{ctx.get('reddit_confirmation', '—')} | {s.get('sous_mode','')} |")
     lines += ["", "## Détail par sujet", ""]
     for i, s in enumerate(proposal["subjects"], 1):
         m = s.get("metrics") or {}
@@ -594,7 +683,8 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
                         for k, v in (mech.get("detail") or {}).items()]
         lines += [
             f"### {i}. {s.get('subject_en','')} — GLM {s.get('score_10')}/10 | "
-            f"mécanique {s.get('score_mecanique')}/100",
+            f"legacy {s.get('score_mecanique_legacy', s.get('score_mecanique'))}/100 | "
+            f"contextuel {s.get('score_contextualise', '—')}/100",
             "",
             f"**Notes (FR)** : {s.get('notes_fr','')}",
             "",
@@ -609,6 +699,10 @@ def _write_subjects_proposal_md(proposal: dict, json_path: str) -> str:
             f"({', '.join(s.get('source_domains', []) or [])})",
             "",
             f"**Score mécanique détail** : {' ; '.join(detail_parts) or 'aucun'}",
+            "",
+            f"**Scores contextualisés** : {json.dumps(s.get('contextual_scores') or {}, ensure_ascii=False)}",
+            "",
+            f"**Sécurité** : {s.get('safety_gate', 'warsmith_review')} | **Saturation** : {s.get('saturation_penalty', 0)} | **Décision** : {s.get('contextual_decision', 'warsmith_review')}",
             "",
             f"**Signaux manquants** : {', '.join(missing) or 'aucun'}",
             "",
@@ -1088,7 +1182,20 @@ def main():
                         help="Sous-mode dominant (défaut informatif)")
     parser.add_argument("--freshness", choices=["brulant", "frais"],
                         default="brulant",
-                        help="Fenêtre de fraîcheur (défaut brulant=5h)")
+                        help="Compatibilité legacy: fenêtre brulant=5h ou frais=24h")
+    parser.add_argument("--horizon", choices=["6h", "24h", "7d", "30d"],
+                        default=None,
+                        help="Profil contextualisé: horizon de recherche")
+    parser.add_argument("--platform", choices=["youtube_shorts"],
+                        default=None,
+                        help="Plateforme initiale du profil contextualisé")
+    parser.add_argument("--market", default=None,
+                        help="Marché du profil contextualisé (défaut US anglais)")
+    parser.add_argument("--niche-mode", choices=["general", "meme"],
+                        default=None,
+                        help="Niche de production (meme ou général)")
+    parser.add_argument("--n-angles", type=int, default=5,
+                        help="Nombre d’angles demandé au downstream (métadonnée)")
     parser.add_argument("--max-items", type=int, default=10,
                         help="Articles RSS max par scan (défaut 10)")
     parser.add_argument("--deliver-subject", type=int, default=None,

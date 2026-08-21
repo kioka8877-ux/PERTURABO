@@ -18,6 +18,26 @@ Objectif : produire une **cartographie complète de l'écosystème clipping** au
 
 ---
 
+## RECHERCHE CONTEXTUALISÉE — V2 ADDITIVE
+
+F00 conserve le comportement historique et ajoute un profil de recherche optionnel pour les sujets. Le profil initial cible `youtube_shorts` / `us_young_english` / `meme` et accepte les horizons `6h`, `24h`, `7d`, `30d`.
+
+Exemple :
+
+```bash
+python3 capteurs.py --scan-subjects \
+  --niche "student debt" \
+  --horizon 24h \
+  --platform youtube_shorts \
+  --market us_young_english \
+  --niche-mode meme \
+  --mode informatif
+```
+
+Le score historique reste dans `score_mecanique_legacy`. Le nouveau résultat est exposé dans `score_contextualise`, `contextual_scores`, `safety_gate`, `saturation_penalty` et `contextual_profile`. Le Champion reste le seul décideur (`warsmith_review`). Aucun top 1 automatique n’est autorisé.
+
+Les quatre horizons changent la pondération : `6h` privilégie la fraîcheur et l’accélération ; `24h` équilibre fraîcheur et stabilité ; `7d` privilégie tendance et répétabilité ; `30d` privilégie demande régulière et confirmation communautaire. YouTube est le signal de preuve principal ; Trends, Suggest, RSS et Reddit confirment ou contextualisent.
+
 ## INPUTS
 
 | Input | Source | Format | Obligatoire |
@@ -71,6 +91,22 @@ Objectif : produire une **cartographie complète de l'écosystème clipping** au
 
 ### Autres
 - `OUT/cartographie.md` — synthèse lisible pour le Warsmith (ce que l'écosystème dit de la campaigne, qui a clip quel angle, où sont les angles libres)
+- `OUT/subjects_proposal.json` — proposition de sujets avec scores legacy et contextualisés
+- `OUT/subjects_proposal.md` — tableau lisible pour le Champion
+
+### Champs contextualisés d’un sujet
+
+| Champ | Rôle |
+|---|---|
+| `score_mecanique_legacy` | Référence du score historique |
+| `score_contextualise` | Classement du profil actif |
+| `contextual_scores.us_native` | Ancrage marché US |
+| `contextual_scores.youtube_shorts` | Preuve vidéo et adéquation Shorts |
+| `contextual_scores.horizon` | Adéquation à la fenêtre demandée |
+| `contextual_scores.meme_fit` | Faisabilité dans la niche meme |
+| `contextual_scores.repeatability` | Déclinaison en angles |
+| `contextual_scores.confidence` | Confiance dans les preuves |
+| `safety_gate` | `pass` ou `block`, revue Champion obligatoire |
 
 ---
 
@@ -143,7 +179,8 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
 | Arborescence créée | ✅ | |
 | TRACKING.md rédigé | ✅ | Ce fichier |
 | Code Python implémenté | ✅ | v1 (commit F00_CAPTEURS) |
-| `capteurs.py` | ✅ | CLI commandité : `--scan` (cartographie complète) + `--scan-demons` (Démon wild) |
+| `capteurs.py` | ✅ | CLI commandité : `--scan`, `--scan-demons`, `--scan-subjects` legacy et profil contextualisé |
+| `research_profile.py` | ✅ | Profils horizon / plateforme / marché / niche et pondérations |
 | `libs/whop_scanner.py` | ✅ | Scrap Whop Discover + pages campagne (statut, budget, CPM, guidelines, assets) |
 | `libs/clipping_ecosystem_scanner.py` | ✅ | Scrap sites clipping du Warsmith (payouts, outils AI, campagnes référencées) |
 | `libs/campaign_context_scanner.py` | ✅ | Perception de la campagne dans l'écosystème (compétiteurs, angles déjà utilisés) |
@@ -170,6 +207,13 @@ python capteurs.py --scan-demons --scan-list IN/scan_list.json
   `ARCHIVUM/demons/demon_wild_scan_<id>.json`.
 - **Check-in IW_CUSTOS** : fin de scan → `CAPTEURS` done, `fleet_status`
   → `capteurs_done`.
+- **Compatibilité legacy** : les anciennes options `--freshness brulant|frais`
+  et leurs pondérations sont conservées ; le profil contextualisé s’ajoute en
+  parallèle et n’efface jamais `score_mecanique_legacy`.
+- **YouTube Shorts prioritaire** : YouTube porte la preuve vidéo ; les autres
+  capteurs servent de confirmation, de fraîcheur, de demande ou de conversation.
+- **Sécurité** : `safety_gate=block` interdit le classement opérationnel, même si
+  les vues sont élevées ; le Champion garde la revue finale.
 - **`--scrap-youtube`** (ajout v1.1, [DEV-F00_CAPTEURS-SCRAP]) : scrape une chaîne
   YouTube commanditée par le Warsmith (URL chaîne via `--channel` ou liste dans
   IN/scan_list.json `{"channels": [...]}`). Listing `yt-dlp --flat-playlist`
