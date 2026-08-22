@@ -167,3 +167,13 @@ Référence couplage : `HERESIE/CONTRACTS/anti_bullshit.md` (core).
 **Action requise** : Le Warsmith remplit chaque section avec son savoir. Ensuite, à la première initialisation, le modèle premium lit la doctrine complète et génère `copywriter_systemprompt.md` (figé ensuite).
 
 *Fer au-dedans, Fer au-dehors. Sans doctrine, le titre n'est que bruit.*
+
+---
+
+## ADDENDUM — DOCTRINE MODE MEME
+
+Pour le mode MEME, F04 ne produit pas une liste de variantes interchangeables. Chaque angle doit posséder un contexte propre : relation entre les personnes, lieu, déclencheur, réaction et chute. Une suite de théories absurdes ou de réactions identiques est une cannibalisation, même lorsque le vocabulaire change.
+
+Le tweet est un mini-récit autonome, en trois lignes maximum, sans marqueurs `A:` / `B:`. Le champ `text_emotion` est distinct du tweet : il s’agit d’un texte motion de quatre mots maximum, terminé par `:`, qui décrit la réaction des personnes réellement présentes, par exemple `My sister and me right now:` ou `The two neighbors right now:`. Il est interdit de conserver un personnage, une formule ou un sujet résiduel d’un ancien siège.
+
+Le premium peut rédiger le tweet, le texte motion et les métadonnées, mais il ne valide aucune Gate. L’Oracle contrôle la cohérence et signale les défauts ; le Champion décide. F05 assemble sans réécrire et la release n’est exportée qu’après validation explicite du Champion.

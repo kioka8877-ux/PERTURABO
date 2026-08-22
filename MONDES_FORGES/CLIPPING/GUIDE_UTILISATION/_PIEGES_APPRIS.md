@@ -89,3 +89,14 @@ Le Directeur dispose de trois tours maximum. Un tour supplémentaire doit répon
 ## 11. Faits et interprétations restent séparés
 
 Les réponses brutes de l’Oracle et les analyses du Directeur doivent rester dans des blocs séparés. Avant validation Champion, vérifier `invented = 0`, les URLs autorisées, les sources, le statut de confiance et l’état `warsmith_review`.
+
+## 12. Leçons du siège New York Bagel — mode MEME
+
+- **Le Champion est l’unique autorité des Gates.** Oracle présente, contrôle et suggère ; Oracle ne valide ni ne rejette à la place du Champion.
+- **Un siège fermé ne doit pas contaminer le suivant.** Après export et décision du Champion, exécuter `IW_CUSTOS.py --mode close-campaign` et ne pas réutiliser automatiquement ses inputs.
+- **Le tweet et le texte motion sont deux champs distincts.** Le tweet raconte le gag ; `text_emotion` est la réaction centrale, en quatre mots maximum, terminée par `:` et cohérente avec les personnes réellement présentes.
+- **Aucun résidu d’un ancien siège.** Les textes motion ne doivent jamais conserver un personnage, une formule ou un sujet d’un autre siège.
+- **Anti-cannibalisation de forme.** Dix tweets ne doivent pas recycler la même mécanique. Varier relation, lieu, déclencheur, réaction et chute ; contrôler les doublons sémantiques et structurels.
+- **F05 n’écrit rien.** Il assemble les payloads F04, la balise mème et les métadonnées. Le mode logo/meme produit un pack unique `production_pack_logo.json` avec `videos[]`.
+- **La balise mème doit être explicite.** Une balise comme `M1` peut être commune aux dix vidéos si le Champion l’a décidée ; elle ne doit pas être confondue avec les anciens identifiants `meme_001` / `meme_002`.
+- **Revue avant export.** F05 peut assembler hors `EXPORT`, mais la copie dans `EXPORT/` et l’expédition à LACRIMAE attendent la validation explicite du Champion.

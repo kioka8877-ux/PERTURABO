@@ -753,3 +753,12 @@ F00_CAPTEURS/CODEBASE/capteurs.py
 ## [2026-08-21T23:46:30Z] CAPTEURS — check-in — output: /home/ubuntu/perturabo_work/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_new_york_bagel.md — md5: 85e1ef3ab4646b01e8f328d994b12b27 — status: done
 
 ## [2026-08-22T08:53:55Z] campaign_closed — None — siege_closed_at: 2026-08-22T08:53:55Z
+
+## [2026-08-22] Siège New York Bagel — leçons MEME
+
+- F00 Discovery a été exécuté sur le marché US 25–45, YouTube Shorts, niche meme, avec ancrages de référence Zdak et Directeur premium ; les preuves et signaux restent séparés des hypothèses.
+- ANGLESMITH a produit 10 angles ; le Champion a validé le sujet, puis F04 a généré les tweets, les textes motion et les métadonnées avec la clé premium.
+- Le texte motion doit être contextualisé par les personnes du tweet (`My sister and me right now:`, `My friend and me right now:`), sans marqueur `A:` / `B:`, sans formule héritée d’un ancien siège et avec contrôle anti-cannibalisation.
+- F05 a assemblé un pack unique `production_pack_logo.json` avec 10 vidéos et la balise commune `M1`. F05 est déterministe et n’utilise pas la clé premium.
+- La revue opérateur précède l’export : le Champion est l’unique autorité des Gates. Le pack validé a été copié dans `EXPORT/production_pack_meme_new_york_bagel.json`, puis le siège a été fermé par IW_CUSTOS afin d’isoler ses résidus.
+- Les artefacts de production ont été commités et poussés dans le commit `bf78ea3`.

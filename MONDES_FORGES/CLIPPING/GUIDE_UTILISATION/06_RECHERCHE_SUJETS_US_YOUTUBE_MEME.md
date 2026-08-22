@@ -1,6 +1,6 @@
 # 06_RECHERCHE_SUJETS_US_YOUTUBE_MEME — Guide du moteur contextualisé
 
-> Ce guide décrit la recherche de sujets avant un nouveau siège. Il s’applique à la première version contextualisée : **YouTube Shorts**, **marché US**, **anglais** et **niche meme**.
+> Ce guide décrit la recherche de sujets avant un nouveau siège. Il s’applique à la recherche contextualisée **YouTube Shorts**, **marché US**, **anglais** et **niche meme**, avec possibilité d’ancrer la prospection sur une chaîne, un Démon et des hashtags observés.
 
 ## 1. Rôle du moteur
 
@@ -101,8 +101,14 @@ subjects_proposal.md
 
 Le Champion doit vérifier le profil, les deux scores, les preuves, les signaux manquants, la sécurité, la saturation et la compatibilité meme. Le choix du sujet reste manuel.
 
-## 8. Règles verrouillées
+## 8. Inputs de référence contrôlés
+
+Le Champion peut fournir une chaîne de référence, une vidéo de référence, un Démon ou des hashtags de niche. Les termes extraits d’une preuve sont conservés comme `observed_reference` ou `observed_demon`. Les termes générés par le Directeur premium restent `premium_proposed` jusqu’à leur vérification sur YouTube. Aucun hashtag proposé ne devient une preuve par simple génération.
+
+Chaque candidat meme doit être confirmé par au moins une vidéo YouTube observée, avec URL, titre, chaîne, date et métriques disponibles. Trends, Suggest, Reddit et RSS servent à découvrir ou confirmer une demande ; ils ne remplacent pas la preuve vidéo.
+
+## 9. Règles verrouillées
 
 Le moteur n’invente jamais une métrique. Une valeur manquante reste manquante. La collecte est commanditée par le Warsmith ; aucun cron ni auto-posting n’est ajouté. Aucun sujet n’est livré à la campagne sans validation du Champion. Le scan ne télécharge pas de clip en mode meme.
 
-La présence d’un sujet dans la proposition ne constitue pas une validation de campagne. Après le choix du Champion, le pipeline normal reprend avec les portes du siège.
+La présence d’un sujet dans la proposition ne constitue pas une validation de campagne. Après le choix du Champion, le pipeline normal reprend avec les portes du siège. Oracle présente les scores et les preuves ; seul le Champion valide le sujet et la Gate.

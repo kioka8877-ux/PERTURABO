@@ -20,11 +20,11 @@ de la méméthèque LACRIMAE** :
 
 | Valeur attendue | Commentaire |
 |---|---|
-| `meme_001` | format de meme n°1 |
-| `meme_002` | format de meme n°2 |
+| `meme_001` | format de meme n°1 historique |
+| `meme_002` | format de meme n°2 historique |
+| `M1` | balise de release mème validée par le Champion ; sa signification opérationnelle est définie dans le pack du siège |
 
-> ⚠️ **Ne PAS** utiliser `meme_1` / `meme_2` : ces noms ne correspondent à
-> aucun fichier de la méméthèque. Seuls `meme_001` / `meme_002` matchent.
+> ⚠️ Ne pas utiliser `meme_1` / `meme_2` comme identifiants de bibliothèque. Les identifiants historiques `meme_001` / `meme_002` restent valides lorsqu’ils existent dans la méméthèque ; une balise de release comme `M1` est valide lorsqu’elle est explicitement choisie par le Champion et inscrite dans le pack.
 
 ## 3. Le champ `tweet` d'une vidéo meme
 
@@ -89,7 +89,21 @@ keywords_style conforme :
 
 ## 5. Liste de contrôle pour PERTURABO
 
-- [ ] `meme` = `meme_001` ou `meme_002` (jamais `meme_1` / `meme_2`)
+- [ ] `meme` = une balise existante et validée par le Champion ; pour le siège New York Bagel, la balise est `M1`
+- [ ] ne pas confondre une balise de release de siège (`M1`) avec un ancien identifiant de bibliothèque (`meme_001`)
 - [ ] `keywords_style` = dict `{"green": [...], "red": [...]}` (jamais une liste)
 - [ ] chaque mot de `green`/`red` est **un mot seul** présent mot à mot dans `tweet.text`
 - [ ] pas de phrase multi-mots dans les couleurs
+
+
+## 6. Texte motion contextualisé
+
+Le champ `text_emotion` est une réaction courte placée au milieu de la vidéo. Il doit identifier les personnes réellement présentes dans le fake tweet et se terminer par `:`. Exemples : `My sister and me right now:`, `The two neighbors right now:` ou `My roommate and me right now:`. Les formes génériques, les marqueurs `A:` / `B:`, les personnages absents et les résidus d’un autre siège sont interdits.
+
+Le texte motion ne doit pas être copié mécaniquement d’un angle à l’autre. Le contexte, la relation et le ressort comique doivent être contrôlés angle par angle afin d’éviter le cannibalisme de forme.
+
+## 7. Validation de release
+
+F05 assemble le pack, mais ne décide pas de la Gate. Le Champion examine les dix tweets, les dix textes motion, les métadonnées et la balise mème avant l’export. La copie dans `EXPORT/` et l’expédition à LACRIMAE ne sont permises qu’après cette validation explicite.
+
+La clé premium sert à la génération éditoriale lorsqu’elle est activée ; F05 reste un assembleur déterministe et ne doit pas simuler un appel premium.

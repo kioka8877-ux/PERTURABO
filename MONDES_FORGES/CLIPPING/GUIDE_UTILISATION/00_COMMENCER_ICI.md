@@ -25,8 +25,11 @@ python3 -c "import json; d=json.load(open('MONDES_FORGES/CLIPPING/liber_clipping
 ```
 
 - `portes_validated: ['1','2','3']` → tu as validé jusqu'à la gate 3, la gate 4 est la prochaine.
-- `current_porte: closed` → siège terminé (4 gates validées).
-- `campaign_status: active` → la campagne tourne (F06 tracker toujours possible).
+- `current_porte: closed` → siège terminé.
+- `campaign_status: active` → la campagne tourne.
+- `campaign_status: closed` → siège isolé ; aucun résidu ne doit être repris automatiquement.
+
+La fermeture de la campagne est distincte de la validation d’une Gate : seul le Champion décide des Gates, puis IW_CUSTOS enregistre la clôture après l’export.
 
 ## 3. La séquence type d'un siège (résumé)
 
@@ -36,8 +39,9 @@ python3 -c "import json; d=json.load(open('MONDES_FORGES/CLIPPING/liber_clipping
 3. Gate 1 : verdict  →  valider
 4. Gate 2 : angles   →  valider
 5. Gate 3 : textes   →  valider
-6. Gate 4 : cuts + pack → valider → EXPÉDITION OMNIS_WATCH
-7. Copier le pack dans EXPORT/ + zip + push GitHub
+6. Gate 4 : pack → valider → copie dans EXPORT/ → transmission à LACRIMAE
+7. Après l’export : fermer le siège avec `IW_CUSTOS.py --mode close-campaign`
+8. Commit + push GitHub des artefacts de production, sans secrets ni fichiers temporaires
 ```
 
 Chaque étape détaillée est dans `01_MODE_LOGO_INFORMATIF.md`.
@@ -65,4 +69,4 @@ Chaque étape détaillée est dans `01_MODE_LOGO_INFORMATIF.md`.
 
 ---
 
-👉 **Tu es prêt.** Ouvre maintenant `01_MODE_LOGO_INFORMATIF.md` (le mode qu'on utilise aujourd'hui).
+👉 **Tu es prêt.** Ouvre maintenant le guide du mode choisi ; pour le mode MEME, commence par `04_MODE_MEME.md`, puis lis `05_NOTE_PERTURABO_PACK_MEME.md`.

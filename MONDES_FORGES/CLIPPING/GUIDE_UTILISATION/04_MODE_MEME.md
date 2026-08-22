@@ -1,16 +1,16 @@
 # 04_MODE_MEME — Guide complet
 
-> Le mode **logo / meme** : tu fournis un **mot-clé** → F00 scanne la viralité
-> sur TOUTES les sources (YouTube, Google Trends, RSS, Reddit, Twitter… ce qui
-> est viral US et ce qui marchera en Shorts) → le forge sort **5 angles** avec
-> émotion → F04 forge le texte de chaque angle → F05 assemble le pack dans
-> EXPORT → **OMNIS_WATCH** charge ce guide pour le montage et sort la vidéo.
+> Le mode **logo / meme** : tu fournis un **sujet ou mot-clé** → F00 scanne la viralité
+> avec des preuves observées → ANGLESMITH propose jusqu’à **10 angles** → F04 forge
+> pour chaque angle un tweet, un texte motion et des métadonnées → F05 assemble
+> un pack unique avec le mème validé → la release est revue par le Champion puis
+> transmise à **LACRIMAE**, qui réalise la vidéo.
 >
 > Doctrine issue de la dissection visuelle du démon @zdak (Kimi K3, rapport
 > `answers/question-2026-08-15-02.md` du repo Scriptorum).
 >
 > ⚠️ **Ce guide EST le contrat de montage.** Le pack meme référence
-> `montage_guide_ref: "GUIDE_UTILISATION/04_MODE_MEME.md"` — OMNIS_WATCH le
+> `montage_guide_ref: "GUIDE_UTILISATION/04_MODE_MEME.md"` — LACRIMAE le
 > charge pour rendre la vidéo.
 
 ---
@@ -19,10 +19,8 @@
 
 1. Tu donnes un **mot-clé** (ex : `westbrook retirement`) → le forge sait ce qui
    est viral dessus et pourquoi.
-2. Le forge sort **5 packs** (un par angle) : **titre en haut** (si nécessaire)
-   + **fake tweet** (max 3 lignes) + **texte d'émotion** (milieu, max 4 mots)
-   + **émotion** + **durée fourchette**.
-3. **OMNIS_WATCH** monte chaque vidéo selon la **doctrine 6 couches** ci-dessous
+2. Le forge sort jusqu’à **10 angles** : chaque angle reçoit un **fake tweet** (maximum 3 lignes), un **texte motion** (maximum 4 mots), une émotion et des métadonnées. Le texte motion doit refléter le contexte et les personnes du tweet.
+3. **LACRIMAE** monte chaque vidéo selon la **doctrine 6 couches** ci-dessous
    et poste → vues suivies par F06.
 
 ---
@@ -84,11 +82,12 @@ python3 orchestrator.py --gate 1 --decision valide --notes "viralité multi-sour
 
 ### 🚪 GATE 2 — Les angles (ANGLESMITH, mode meme)
 
-**Frégate** : `F02_TYRANT_CAMP` (ANGLESMITH) — forge 5 angles, **règle anti-spam**.
+**Frégate** : `F02_TYRANT_CAMP` (ANGLESMITH) — forge jusqu’à 10 angles, avec contrôle anti-cannibalisation.
 
 ```bash
 cd ../../F02_TYRANT_CAMP/CODEBASE
-python3 anglesmith.py --auto --n-angles 5 --sub-mode meme --finalize
+python3 anglesmith.py --auto --n-angles 10 --sub-mode meme
+# présenter les angles au Champion ; ne pas finaliser avant sa décision
 ```
 
 **Sortie** : `F02_TYRANT_CAMP/OUT/angles.json`
@@ -113,27 +112,28 @@ python3 orchestrator.py --gate 2 --decision valide --notes "5 angles meme forgé
 
 ### 🚪 GATE 3 — Les textes (F04 COPYWRITER, mode meme)
 
-**Frégate** : `F04_COPYWRITER` — forge les 5 text_payloads meme.
+**Frégate** : `F04_COPYWRITER` — forge les text_payloads meme des angles validés.
 
-Pour CHAQUE angle (A01 → A05) :
+Pour CHAQUE angle (A01 → A10) :
 
 ```bash
 cd ../../F04_COPYWRITER/CODEBASE
 python3 copywriter.py --setup-context --angle A01 --sub-mode meme
 python3 copywriter.py --generate --angle A01 --sub-mode meme   # AVEC clé premium
-python3 copywriter.py --ordonnance --angle A01 --auto-ord
-python3 copywriter.py --finalize --angle A01
+# présenter le tweet, le text_emotion et les métadonnées au Champion
+# ne lancer --ordonnance/--finalize qu’après validation explicite
 ```
 
-**Sortie** : `F04_COPYWRITER/OUT/text_payload_A0X.json`
+**Sortie** : `F04_COPYWRITER/OUT/text_payload_raw_A0X.json` pendant la revue ; le payload final ne peut être créé qu’après validation du Champion.
 
 | Champ du payload | Règle verrouillée |
 |---|---|
 | `title` (titre en haut) | **si nécessaire**, ≤ 6 mots, jamais de clickbait vide |
-| `tweet_text` (fake tweet) | **max 3 lignes**, format post X/Twitter |
-| `reaction_text` (milieu) | **max 4 mots**, l'émotion en texte |
-| `emotion` | l'émotion de l'angle (ajustable par l'opérateur) |
-| `duration_sec_range` | fourchette (défaut 5-7s) |
+| `tweet.text` (fake tweet) | **max 3 lignes**, format post X/Twitter |
+| `text_emotion` (motion central) | **max 4 mots**, réaction cohérente avec les personnes du tweet et terminée par `:` |
+| `emotion` | l'émotion de l'angle, ajustable par le Champion |
+| `metadata` | titre, description et tags dérivés du tweet, sans ancien sujet résiduel |
+| `duration_sec` | durée entière, normalement 5–7 secondes selon le guide de montage |
 
 > 🧙 Si la clé premium est absente : `--generate --oracle` → l'Oracle (l'assistant)
 > forge `F04_COPYWRITER/OUT/text_payload_raw_<angle>.json`, puis relance
@@ -147,9 +147,9 @@ python3 orchestrator.py --gate 3 --decision valide --notes "5 textes meme valid�
 
 ---
 
-### 🚪 GATE 4 — Le pack assemblé → EXPORT → OMNIS_WATCH
+### 🚪 GATE 4 — Le pack assemblé → validation Champion → EXPORT → LACRIMAE
 
-**Frégate** : `F05_PACKAGER`
+**Frégate** : `F05_PACKAGER` — assembleur déterministe ; il ne sollicite pas la clé premium.
 
 ```bash
 cd ../../F05_PACKAGER/CODEBASE
@@ -159,9 +159,9 @@ python3 packager.py --assemble --sub-mode meme --finalize
 **Sortie** : `F05_PACKAGER/OUT/production_pack_logo.json` (mode meme)
 
 Le pack contient : `sub_mode: "meme"`, `meme_source.keyword`, `meme_source.montage_guide_ref`,
-les textes verrouillés + `emotion` + `duration_sec_range` par vidéo.
+les textes verrouillés (`tweet.text`, `text_emotion`, métadonnées) + `emotion` + `duration_sec` par vidéo, ainsi que la balise mème validée.
 
-**Expédition** :
+**Après validation explicite du Champion seulement — Expédition :**
 
 ```bash
 cd MONDES_FORGES/CLIPPING
@@ -171,12 +171,18 @@ cp F05_PACKAGER/OUT/production_pack_logo.json EXPORT/production_pack_meme.json
 **Validation** :
 ```bash
 cd ../../ORCHESTRATOR/CODEBASE
-python3 orchestrator.py --gate 4 --decision valide --notes "pack meme conforme → OMNIS_WATCH (monte via 04_MODE_MEME.md)"
+python3 orchestrator.py --gate 4 --decision valide --notes "pack meme conforme → LACRIMAE (monte via 04_MODE_MEME.md)"
 ```
 
 ---
 
-## 🎬 LA DOCTRINE DE MONTAGE EN 6 COUCHES (ce que OMNIS_WATCH lit dans CE guide)
+## 🧠 RÈGLES ÉDITORIALES ANTI-CANNIBALISATION
+
+Chaque angle doit raconter un contexte distinct : relation, lieu, déclencheur et chute doivent varier. Dix formulations du même gag ne constituent pas dix angles. Le tweet doit ressembler à une publication humoristique autonome, sans marqueurs de dialogue `A:` / `B:`. Le champ `text_emotion` doit identifier la réaction des personnes réellement présentes dans le tweet, par exemple `My sister and me right now:` ou `The two neighbors right now:`. Il ne doit jamais conserver un personnage, un sujet ou une formule provenant d’un autre siège.
+
+Le Champion est l’unique autorité des Gates. Oracle peut signaler un défaut et suggérer une correction, mais ne peut ni valider ni rejeter une Gate à sa place.
+
+## 🎬 LA DOCTRINE DE MONTAGE EN 6 COUCHES (ce que LACRIMAE lit dans CE guide)
 
 > Source : dissection visuelle du démon @zdak (2.42M abonnés, 9.56 Mds vues).
 > La vidéo cible "This Teacher MIGHT Be Picasso" : 5.6s, zéro dialogue, muet-compréhensible.
@@ -230,10 +236,11 @@ python3 orchestrator.py --gate 4 --decision valide --notes "pack meme conforme �
 | Titre en haut | **si nécessaire**, ≤ 6 mots |
 | Fake tweet | **max 3 lignes** |
 | Texte d'émotion (milieu) | **max 4 mots** |
-| Émotion anti-spam | une émotion = **2 angles max** sur les 5 |
+| Émotion anti-spam | une émotion = **2 angles max** sur les 10, sauf décision explicite du Champion |
 | Durée | **5-7s** |
-| F01 / F03 | **SKIP** (pas de timecodes, pas de segments) |
+| F01 / F03 | **SKIP** en mode meme (pas de timecodes, pas de segments) |
 | Pas de clip à télécharger | F00 scanne les stats, jamais le contenu |
+| Balise mème | une balise validée par le Champion, par exemple `M1`, commune ou distincte selon la décision du siège |
 | URL de meme dans le pack | **interdit** (les sources restent dans `meme_source.virality_scan`) |
 
 ---
@@ -241,9 +248,9 @@ python3 orchestrator.py --gate 4 --decision valide --notes "pack meme conforme �
 ## ✅ Checklist rapide
 
 - [ ] `keyword.txt` déposé · [ ] Gate 1 : viralité multi-sources (0 clip téléchargé)
-- [ ] Gate 2 : 5 angles, anti-spam émotions OK
-- [ ] Gate 3 : tweet ≤ 3 lignes, reaction ≤ 4 mots, titre ≤ 6 mots si présent
-- [ ] Gate 4 : pack `sub_mode: meme` + `montage_guide_ref` + copié dans EXPORT/
+- [ ] Gate 2 : jusqu’à 10 angles, contextes distincts, anti-cannibalisation contrôlée
+- [ ] Gate 3 : tweet ≤ 3 lignes, text motion ≤ 4 mots, personnages cohérents, métadonnées propres
+- [ ] Gate 4 : pack `sub_mode: meme` + `montage_guide_ref` + balise mème + validation Champion + copié dans EXPORT/
 
 ---
 

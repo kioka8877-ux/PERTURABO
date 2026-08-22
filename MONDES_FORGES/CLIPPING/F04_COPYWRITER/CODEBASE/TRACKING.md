@@ -322,3 +322,11 @@ Règle de résolution : si `final_operator` est non-null, il gagne. Sinon, si `o
 - `load_json` en utf-8-sig (robustesse BOM Windows PowerShell).
 
 *Fer au-dedans, Fer au-dehors. Le titre ouvre la brèche, le paragraphe la tient, le loop verrouille la victoire.*
+
+## Addendum MEME — contrat opérationnel validé
+
+Pour le mode MEME, F04 produit par angle un payload brut de revue `text_payload_raw_Axx.json` contenant au minimum le tweet, `text_emotion`, l’émotion et les métadonnées. Le tweet est un mini-récit autonome de trois lignes maximum ; il ne doit pas utiliser de marqueurs `A:` / `B:`.
+
+`text_emotion` est limité à quatre mots et doit identifier la réaction des personnes réellement présentes dans le tweet, par exemple `My sister and me right now:` ou `The two neighbors right now:`. Il ne peut pas conserver une formule, un personnage ou un sujet résiduel d’un autre siège.
+
+Le contexte narratif doit varier angle par angle : relation, lieu, déclencheur et chute sont contrôlés pour empêcher le cannibalisme de forme. Le Champion valide le tweet, le texte motion et les métadonnées ; Oracle peut signaler une anomalie, mais ne valide jamais la Gate à sa place. Les sorties brutes restent en revue jusqu’à cette validation.

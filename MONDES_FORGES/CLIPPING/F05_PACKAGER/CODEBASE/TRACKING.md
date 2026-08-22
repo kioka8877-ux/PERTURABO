@@ -137,3 +137,11 @@ F05 ne fait **pas** appel à l'IRON — c'est un enchaînement purement détermi
 - Fourchettes cut : profil `ARCHIVUM/platform_generator/{p}_profile.md` (regex `clip_min/max_duration`), défauts déclarés sinon — aligné sur F03 duration_guard.
 
 *Fer au-dedans, Fer au-dehors.*
+
+## Addendum MEME — pack logo actuel
+
+En mode `logo` / `meme`, F05 produit un pack unique `OUT/production_pack_logo.json` contenant `videos[]`, et non un fichier séparé par angle. F01 et F03 sont ignorés : le pack consomme les angles F02 et les payloads F04 du mode meme. Quand aucun payload F04 finalisé n’existe encore, le fallback contrôlé lit `text_payload_raw_Axx.json` après revue du Champion ; F05 ne forge ni texte ni métadonnée.
+
+Chaque vidéo doit conserver `tweet.text`, `text_emotion`, `emotion`, les métadonnées et une balise mème validée par le Champion. Une même balise, telle que `M1`, peut être appliquée aux dix vidéos si le Champion le décide. Le texte motion doit rester cohérent avec les personnes du tweet et ne doit jamais provenir d’un ancien siège.
+
+L’assemblage F05 est distinct de la validation et de l’export. Le Champion examine le pack complet avant la copie dans `EXPORT/`. F05 ne clôture pas le siège et ne décide jamais à la place du Champion. La clé premium est utilisée par F04 lorsque la génération éditoriale l’exige ; F05 reste déterministe.

@@ -1,13 +1,13 @@
 # GUIDE_UTILISATION — PERTURABO CLIPPING
 
 > Le mode d'emploi du forge CLIPPING pour les **futurs champions (opérateurs)** et les **oracles**.
-> Tout ce qu'il faut savoir pour lancer un siège **sans connaître l'historique du développement**.
+> Tout ce qu'il faut savoir pour lancer un siège **sans connaître l'historique du développement**. Le Champion reste l’unique autorité de validation.
 
 ---
 
 ## 📚 Ce dossier
 
-Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les **commandes exactes**, comment mener un siège de A à Z : ce que tu fournis, ce que les frégates produisent, ce que tu valides à chaque gate, et ce qui part chez OMNIS_WATCH.
+Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les **commandes exactes**, comment mener un siège de A à Z : ce que tu fournis, ce que les frégates produisent, ce que tu valides à chaque gate, et ce qui part chez **LACRIMAE**.
 
 ## 🗂️ Les guides
 
@@ -17,7 +17,7 @@ Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les
 | `01_MODE_LOGO_INFORMATIF.md` | **logo / informatif** | ✅ **Complet** (testé en production, siège TS01_SANDOVAL) |
 | `02_MODE_LOGO_HUMOUR.md` | logo / humour | ⏳ À compléter (même squelette) |
 | `03_MODE_WHOP.md` | whop (clip canon) | ⏳ À compléter (même squelette) |
-| `04_MODE_MEME.md` | logo / meme | ✅ **Complet** (doctrine montage 6 couches = contrat OMNIS_WATCH) |
+| `04_MODE_MEME.md` | logo / meme | ✅ **Opérationnel** (10 angles, tweet/motion contextualisés, LACRIMAE) |
 | `06_RECHERCHE_SUJETS_US_YOUTUBE_MEME.md` | Recherche | ✅ Profil US / YouTube Shorts / niche meme |
 | `07_HORIZONS_RECHERCHE.md` | Recherche | ✅ Fenêtres 2h / 6h / 12h / 24h / 3d / 7d / 30d |
 | `08_DISCOVERY_MARKET_DEMONS_RED_BLUE.md` | Discovery | ✅ Marché, Démons, océans rouge/bleu et validation |
@@ -34,7 +34,7 @@ Ici, **un guide par mode**. Chaque guide explique, étape par étape et avec les
 
 ## ➕ Comment ajouter un guide (nouveau mode)
 
-Chaque guide suit le **même squelette** — duplique un guide existant et remplis :
+Chaque guide suit le **même squelette** — duplique un guide existant et remplis. En mode meme, les champs réels (`tweet.text`, `text_emotion`, métadonnées) priment sur l’ancien schéma généraliste :
 
 1. **Le but en 3 lignes** (ce que fait le mode)
 2. **Les inputs** (ce que le champion doit fournir, format, exemple)
@@ -60,10 +60,6 @@ F06 TRACKER      → suit les posts après publication
 ORCHESTRATOR     → le nerf central : gates + ledger + expédition
 ```
 
-**Mode meme** (logo / meme) : l'opérateur fournit un **mot-clé** → F00 scanne la
-viralité sur TOUTES les sources (YouTube, Trends, RSS, Reddit, Suggest), **0 clip
-téléchargé** → F02 forge 5 angles avec émotion (anti-spam) → F04 forge
-titre + fake tweet + texte d'émotion → F05 assemble le pack dans EXPORT →
-OMNIS_WATCH monte via `04_MODE_MEME.md` (doctrine 6 couches). **F01 et F03 SKIP.**
+**Mode meme** (logo / meme) : l'opérateur fournit un **sujet ou mot-clé** → F00 scanne les preuves, **0 clip téléchargé** → F02 forge jusqu’à 10 angles distincts → F04 forge pour chaque angle le tweet, le texte motion et les métadonnées → l’opérateur valide → F05 assemble le pack avec la balise mème choisie, par exemple `M1` → l’opérateur valide puis copie dans EXPORT → **LACRIMAE** monte via `04_MODE_MEME.md`. **F01 et F03 sont ignorés en mode meme.**
 
 **Vocabulaire** : on dit **gate** (ou porte) — `gate 1` à `gate 4`. Le champion **valide ou rejette** chaque gate. Rien ne passe sans ta signature.
