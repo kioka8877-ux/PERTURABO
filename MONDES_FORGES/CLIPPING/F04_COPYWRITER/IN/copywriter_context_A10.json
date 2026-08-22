@@ -1,19 +1,19 @@
 {
   "campaign_id": null,
-  "angle_id": "A06",
+  "angle_id": "A10",
   "sub_mode": "meme",
   "humour_spin": null,
   "angle": {
-    "angle_id": "A06",
+    "angle_id": "A10",
     "genre": null,
     "title": null,
     "body": null,
     "on_screen_text": null,
     "seo_tags": null,
     "angle_family": "reframing",
-    "emotion_mode": "nostalgique",
+    "emotion_mode": "charmant",
     "engagement_type": "observation",
-    "reframe_dim": "normal_vers_extraordinaire",
+    "reframe_dim": "fait_vers_absurde",
     "zone": "direct"
   },
   "clip_source_ref": {

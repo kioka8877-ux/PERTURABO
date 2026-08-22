@@ -749,3 +749,7 @@ F00_CAPTEURS/CODEBASE/capteurs.py
 ## [2026-08-18T16:08:05Z] F04 — check-in — output: /workspace/PERTURABO/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A07.md — md5: 5183f0c39c0326911dac175718e6d7a3 — status: done
 
 ## [2026-08-18T16:08:06Z] F04 — check-in — output: /workspace/PERTURABO/MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A08.md — md5: 0ffef97cbd450ef6063b575536243329 — status: done
+
+## [2026-08-21T23:46:30Z] CAPTEURS — check-in — output: /home/ubuntu/perturabo_work/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_new_york_bagel.md — md5: 85e1ef3ab4646b01e8f328d994b12b27 — status: done
+
+## [2026-08-22T08:53:55Z] campaign_closed — None — siege_closed_at: 2026-08-22T08:53:55Z

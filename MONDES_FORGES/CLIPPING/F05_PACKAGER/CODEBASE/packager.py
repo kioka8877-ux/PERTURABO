@@ -369,12 +369,8 @@ def _tweet_tokens(text: str) -> set:
 
 
 def _meme_for_angle(angle_id: str) -> str:
-    n = str(angle_id or "")
-    try:
-        num = int(n[1:]) if len(n) > 1 and n[0].upper() == "A" else 0
-    except ValueError:
-        num = 0
-    return "meme_002" if 5 <= num <= 6 else "meme_003"
+    """Balise meme fournie par le Warsmith : M1 est commune aux dix angles."""
+    return "M1"
 
 
 def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
@@ -388,6 +384,12 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
     for angle in angles:
         angle_id = angle.get("angle_id")
         p = os.path.join(F04_OUT, f"text_payload_{angle_id}.json")
+        # En mode meme, F04 produit d’abord text_payload_raw_Axx.json.
+        # F05 peut l’assembler directement après validation de la Gate F04.
+        if not os.path.exists(p):
+            raw_p = os.path.join(F04_OUT, f"text_payload_raw_{angle_id}.json")
+            if os.path.exists(raw_p):
+                p = raw_p
         if os.path.exists(p):
             try:
                 f01_payloads[angle_id] = load_json(p)

@@ -62,14 +62,16 @@ def build_probe_queries(
     words = [w for w in _tokens(market) if w not in STOPWORDS]
     handles = re.findall(r"@([A-Za-z0-9_]{2,})", market or "")
     queries: list[str] = []
+    # Les hashtags observés sont les ancres de territoire : ils passent avant
+    # les variantes génériques afin de ne pas noyer la niche meme.
+    for tag in (reference_hashtags or []) + (demon_hashtags or []):
+        clean = tag.strip()
+        if clean:
+            queries.extend([clean, f"{clean} meme"])
     for channel in (reference_channels or []) + handles:
         clean = channel.lstrip("@").strip()
         if clean:
             queries.extend([f"@{clean}", f"{clean} meme", f"{clean} funny", f"{clean} Shorts"])
-    for tag in (reference_hashtags or []) + (demon_hashtags or []):
-        clean = tag.strip()
-        if clean:
-            queries.extend([clean, f"{clean} meme", f"{clean} Shorts"])
     if words:
         queries.extend([" ".join(words), " ".join(words) + " meme", " ".join(words) + " Shorts"])
     if not queries:
@@ -195,13 +197,13 @@ def _demon_map(yt: dict) -> list[dict]:
     return demons
 
 
-def _score_candidate(c: dict, horizon: str, demons: list[dict], market: str) -> dict:
+def _score_candidate(c: dict, horizon: str, demons: list[dict], market: str, reference_terms: str = "") -> dict:
     views_score = min(100, c["youtube_top_views"] / 10000)
     demand_score = min(100, c["suggestion_count"] * 15 + c["reddit_post_count"] * 10 + c.get("trend_count", 0) * 5)
     evidence_score = min(100, 35 + c["youtube_video_count"] * 15 + (15 if c["suggestion_count"] else 0) + (15 if c["reddit_post_count"] else 0))
     demon_pressure = min(100, c["channel_count"] * 15 + c["youtube_video_count"] * 8)
     saturation = min(100, demon_pressure * 0.7 + c["youtube_video_count"] * 5)
-    market_terms = _meaningful_tokens(market)
+    market_terms = _meaningful_tokens(f"{market} {reference_terms}")
     title_terms = _meaningful_tokens(c["keyword"])
     handle_terms = {x.lower() for x in re.findall(r"@([A-Za-z0-9_]{2,})", market or "")}
     channel_names = {str(name).lower() for name in c.get("channel_names", [])}
@@ -276,7 +278,11 @@ def discover_market(market: str, platform: str, horizon: str, *,
     reddit = reddit_scan(probes, max_items=max_items, timeframe=spec["timeframe"])
     demons = _demon_map(yt)
     raw = _extract_observed_candidates(probes, yt, sugg, reddit, trends)
-    scored = [_score_candidate(c, horizon, demons, market) for c in raw]
+    generic_anchor_terms = {"funny", "funnymemes", "meme", "memes", "shorts"}
+    contextual_terms = [t for t in (reference_hashtags or []) + (demon_hashtags or [])
+                        if _norm(t).strip() not in generic_anchor_terms]
+    reference_terms = " ".join(contextual_terms)
+    scored = [_score_candidate(c, horizon, demons, market, reference_terms) for c in raw]
     unique, removed = _deduplicate(scored)
     eligible = [c for c in unique if c["safety_gate"] == "pass" and c["ocean"] != "desert"]
     rejected = [c for c in unique if c not in eligible]

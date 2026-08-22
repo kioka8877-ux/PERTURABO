@@ -49,7 +49,7 @@ from f00_reddit_ingestor import scan as reddit_scan
 from f00_virality_scorer import score_subject, score_subject_from_metrics
 from f00_premium_synth import synthesize as premium_synthesize
 from research_profile import build_profile
-from market_discovery import discover_market, build_packs, allocate_angles
+from market_discovery import discover_market, build_packs, allocate_angles, build_probe_queries
 from prospection_director import build_session, premium_plan, validate_question_plan
 
 OUT_DIR = os.path.join(_CAPTEURS_DIR, "OUT")
@@ -965,6 +965,15 @@ def cmd_discover_market(args):
         session["director"]["premium_error"] = premium_result.get("error")
     question_plan = session.get("turns", [{}])[0].get("questions", [])
     plan_queries = [q for item in question_plan for q in item.get("queries", [])]
+    # Les ancrages observés restent prioritaires : le Directeur peut enrichir,
+    # mais ne peut pas remplacer les signaux fournis par le Champion.
+    anchor_queries = build_probe_queries(
+        args.market,
+        args.reference_channel,
+        args.reference_hashtag,
+        args.demon_hashtag,
+    )
+    plan_queries = list(dict.fromkeys(anchor_queries + plan_queries))[:20]
     try:
         result = discover_market(
             args.market, args.platform, args.discovery_horizon,

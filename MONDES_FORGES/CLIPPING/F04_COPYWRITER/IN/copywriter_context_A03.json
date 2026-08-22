@@ -2,7 +2,7 @@
   "campaign_id": null,
   "angle_id": "A03",
   "sub_mode": "meme",
-  "humour_spin": "Docteur Doom fait tout ce qu il fait parce qu il a perdu sa famille alors que la reponse etait juste depuis le debut : il essaie de creer un timeline ou la dette etudiante n existe pas. Taylor Swift en reacteur emotionnel, reaction des etudiants (heureux).",
+  "humour_spin": null,
   "angle": {
     "angle_id": "A03",
     "genre": null,
@@ -10,36 +10,44 @@
     "body": null,
     "on_screen_text": null,
     "seo_tags": null,
-    "angle_family": "ironie",
-    "emotion_mode": "trahison",
-    "engagement_type": "hot_take",
-    "reframe_dim": "menace_vers_revelation_cachee",
+    "angle_family": "reframing",
+    "emotion_mode": "ironique",
+    "engagement_type": "observation",
+    "reframe_dim": "fait_vers_absurde",
     "zone": "direct"
   },
   "clip_source_ref": {
-    "source_type": "meme_keyword",
+    "source_type": "market_discovery",
     "sub_mode": "meme",
-    "keyword": "marvel doomsday",
-    "celebrity_or_subject": "Marvel Doomsday",
-    "niche": "pop-culture/mcu",
-    "market": "us_young_english",
-    "platform": "youtube",
-    "note": "Mode meme : aucun clip de référence fourni (F01/F03 SKIP). F00 scanna la viralité du mot-clé pour ANGLESMITH.",
+    "keyword": null,
+    "celebrity_or_subject": "@Zdak",
+    "niche": "meme",
+    "market": "US residents age 25-45 interested in @Zdak",
+    "platform": "youtube_shorts",
+    "language": "en-US",
+    "discovery_horizon": "3d",
+    "candidate_limit": 30,
+    "red_blue_policy": "balanced",
+    "words_per_pack": 2,
+    "angles": {
+      "total": 10,
+      "blue": 6,
+      "red": 4
+    },
+    "note": "Market-first discovery. No keyword is imposed. F00 and the Prospection Director must derive candidates only from observed evidence.",
     "reference_clip_required": false,
     "timecodes": {}
   },
   "article_source": null,
   "joke_source": null,
-  "keyword": "marvel doomsday",
+  "keyword": "New York Bagel",
   "meme_source": {
-    "scan_id": "MEME-5638b961",
-    "keyword": "marvel doomsday",
-    "scanned_at": "2026-08-18T13:43:40Z",
+    "scan_id": "MEME-59058f6d",
+    "keyword": "New York Bagel",
+    "scanned_at": "2026-08-21T23:46:30Z",
     "sources_scanned": [
       "youtube",
       "trends",
-      "rss",
-      "reddit",
       "suggest"
     ],
     "sources_available": {
@@ -56,79 +64,575 @@
         "search": {
           "status": "ok",
           "error": null,
-          "query": "marvel doomsday marvel doomsday",
+          "query": "New York Bagel | New | York",
+          "probes": [
+            "New York Bagel",
+            "New",
+            "York"
+          ],
           "videos": [
             {
-              "video_id": "00mmlw69QoE",
-              "title": "KANG EMOCIONABA igual que DOOM en AVENGERS DOOMSDAY | #Shorts",
-              "channel": "ComicsYotros Pormenores",
-              "published_at": "2026-08-18T00:00:38Z",
-              "view_count": 578155,
-              "like_count": 57276,
-              "comment_count": 499
+              "video_id": "qMNlOWU2SyU",
+              "url": "https://youtube.com/watch?v=qMNlOWU2SyU",
+              "title": "Cool gadgets!😍Smart Appliances,New Gadgets, Kitchen Gadgets, Home Gadgets,Inventions🙏P-1026",
+              "description": "Hi Everyone \nThis channel is all about Gadget and which makes your life much smarter creative.\n🙏 𝐓𝐡𝐚𝐧𝐤 𝐘𝐨𝐮 𝐅𝐨𝐫 𝐖𝐚𝐭𝐜𝐡𝐢𝐧𝐠!\nIf You Enjoyed This Videos Please Give It A 👍 Thumbs Up! and if you have any quires so please use the comment box.\n----- \n#short #shortsfeed #shortsviral #youtubeshorts #shortvideo #viral #ytshorts #smarthome #tools #items #homeappliances #gadgets #householditems #smartgadget #newgadgets #newinventions #new #trend #trending #trendingshorts #tiktok #coolgadgets #versatileutensils #tiktokchin in  #douyin #kawaii #tiktokjapan #creativegadgets #appliances #inventions #bestgadgets #smarthouse #smartgadgets #homeutilities #satisfying #smarthomegadgets #gadgetsshorts #smartitems #homecleaning #amazongadgets #Amazon #amazonfinds #utilitiesforeveryhome #smartgadgetsanditemsforeveryhome #appliancesforeveryhome #technology",
+              "channel": "Mr shahbaz update ",
+              "published_at": "2026-08-21T02:45:08Z",
+              "duration": "PT29S",
+              "tags": [],
+              "hashtags": [
+                "#Amazon",
+                "#amazonfinds",
+                "#amazongadgets",
+                "#appliances",
+                "#appliancesforeveryhome",
+                "#bestgadgets",
+                "#coolgadgets",
+                "#creativegadgets",
+                "#douyin",
+                "#gadgets",
+                "#gadgetsshorts",
+                "#homeappliances",
+                "#homecleaning",
+                "#homeutilities",
+                "#householditems",
+                "#inventions",
+                "#items",
+                "#kawaii",
+                "#new",
+                "#newgadgets",
+                "#newinventions",
+                "#satisfying",
+                "#short",
+                "#shortsfeed",
+                "#shortsviral",
+                "#shortvideo",
+                "#smartgadget",
+                "#smartgadgets",
+                "#smartgadgetsanditemsforeveryhome",
+                "#smarthome",
+                "#smarthomegadgets",
+                "#smarthouse",
+                "#smartitems",
+                "#technology",
+                "#tiktok",
+                "#tiktokchin",
+                "#tiktokjapan",
+                "#tools",
+                "#trend",
+                "#trending",
+                "#trendingshorts",
+                "#utilitiesforeveryhome",
+                "#versatileutensils",
+                "#viral",
+                "#youtubeshorts",
+                "#ytshorts"
+              ],
+              "view_count": 896124,
+              "like_count": 5910,
+              "comment_count": 0
             },
             {
-              "video_id": "hSWHerMLCBA",
-              "title": "A MARVEL DIVULGOU A LISTA OFICIAL COM TUDO QUE VOCÊ PRECISA ASSISTIR ANTES DE VINGADORES DOOMSDAY",
-              "channel": "THWIP",
-              "published_at": "2026-08-17T15:10:41Z",
-              "view_count": 299242,
-              "like_count": 29083,
-              "comment_count": 369
+              "video_id": "tke4quZ1T24",
+              "url": "https://youtube.com/watch?v=tke4quZ1T24",
+              "title": "Pinkiprajapati new shorts #pinkiprajapati",
+              "description": "",
+              "channel": "Pinki Prajapati",
+              "published_at": "2026-08-21T06:30:08Z",
+              "duration": "PT38S",
+              "tags": [],
+              "hashtags": [
+                "#pinkiprajapati"
+              ],
+              "view_count": 856112,
+              "like_count": 6987,
+              "comment_count": 1
             },
             {
-              "video_id": "M8rb8WrQ-bI",
-              "title": "PELÍCULAS que según MARVEL debes ver para entender AVENGERS DOOMSDAY🎬#avengers #peliculas",
-              "channel": "Pepe Ocampo",
-              "published_at": "2026-08-17T22:31:48Z",
-              "view_count": 216558,
-              "like_count": 16895,
-              "comment_count": 215
+              "video_id": "ny0ewzX1A3c",
+              "url": "https://youtube.com/watch?v=ny0ewzX1A3c",
+              "title": "BTS VIDEO 😂😂 #reelsvi̇deo #ytshorts #trending #new #shorts #sadsong",
+              "description": "BTS VIDEO 😂😂 #reelsvi̇deo #ytshorts #trending #new #shorts #sadsong",
+              "channel": "Lucky Samar",
+              "published_at": "2026-08-21T04:30:32Z",
+              "duration": "PT14S",
+              "tags": [
+                "reelsvideo",
+                "ytshorts",
+                "trending",
+                "new",
+                "shorts",
+                "sadsong"
+              ],
+              "hashtags": [
+                "#new",
+                "#reelsvi",
+                "#sadsong",
+                "#shorts",
+                "#trending",
+                "#ytshorts"
+              ],
+              "view_count": 536252,
+              "like_count": 3149,
+              "comment_count": 7
             },
             {
-              "video_id": "XOAqX6g7KDU",
-              "title": "Marvel misdirecting us again doomsday..? 💀 #shorts #avengers #doomsday",
-              "channel": "SENSIMITY",
-              "published_at": "2026-08-17T17:03:24Z",
-              "view_count": 180678,
-              "like_count": 7962,
-              "comment_count": 31
+              "video_id": "FffhEoUxgxM",
+              "url": "https://youtube.com/watch?v=FffhEoUxgxM",
+              "title": "Mahadev & Sons NEW PROMO 22nd August 2026  Rajji and Narmada hugged each other",
+              "description": "Please Subscribe to \" TellyBoosters\" Kyun Ki Serial Ke Sabhi Latest Updates Aapko Sirf Yahi Milenge Faster ! 🚀🚀\n\n𝐒𝐮𝐛𝐬𝐜𝐫𝐢𝐛𝐞 ▶ 𝐓𝐞𝐥𝐥𝐲𝐛𝐨𝐨𝐬𝐭𝐞𝐫𝐬  https://www.youtube.com/@Tellyboosters\nSocial Media Links ↴\n➦  https://www.instagram.com/tellyboosters\n➦  https://www.facebook.com/TellyBoosters\n➦  https://x.com/tellyboosters\n➦  https://tellyboosters.com/\n➦ Follow Tellyboosters With #tellyboosters #TellyboostersExclusive",
+              "channel": "Tellyboosters",
+              "published_at": "2026-08-21T01:13:09Z",
+              "duration": "PT2M17S",
+              "tags": [
+                "#tellyboosters",
+                "hindi tv serial updates"
+              ],
+              "hashtags": [
+                "#TellyboostersExclusive",
+                "#tellyboosters"
+              ],
+              "view_count": 498286,
+              "like_count": 7960,
+              "comment_count": 21
             },
             {
-              "video_id": "YHne-itlYmc",
-              "title": "¿ESE ES EL UNIVERSO DE TOBEY EXPLOTANDO? 💀 #marvel #doomsday #spiderman",
-              "channel": "TYK Glitch",
-              "published_at": "2026-08-17T23:00:15Z",
-              "view_count": 150760,
-              "like_count": 3096,
-              "comment_count": 66
+              "video_id": "SlE_WOm5qIM",
+              "url": "https://youtube.com/watch?v=SlE_WOm5qIM",
+              "title": "Yeh Rishta Kya Kehlata Hai Today Episode NEW PROMO | Samridhi Shukla |RohitPurohit| 21st August 2026",
+              "description": "Yeh Rishta Kya Kehlata Hai Today Episode NEW PROMO | Samridhi Shukla |RohitPurohit| 21st August 2026\n\nSUBSCRIBE NOW:- https://www.youtube.com/@TVPromosIndia\n\n⦿ SOCIAL MEDIA ⦿\n➤ https://www.facebook.com/TvPromosIndia\n➤ https://www.instagram.com/tvpromosindia\n➤ https://twitter.com/TvPromosIndia\n➤ https://www.linkedin.com/in/tvpromosindia\n\n⦿ WEBSITE ⦿\n➤ https://www.TvPromosIndia.com\n\n➤ Subscribe Us To Never Miss a Video: https://www.youtube.com/channel/UCfPHIZpLxI2x1RbsjUvDxcA?sub_confirmation=1\n\n⦿ HASHTAG ⦿\n➤ #TVPromosIndia #YehRishtaKyaKehlataHai #SamridhiiShukla #RohitPurohit #Armaan #Ruhi #Abhira #ShivangiJoshi #MohsinKhan #Tvshow #hindishow #hindiserial #BTS #BehindTheScemes #starplus \n\nThanks For Watching",
+              "channel": "TV Promos India",
+              "published_at": "2026-08-21T01:12:06Z",
+              "duration": "PT1M59S",
+              "tags": [
+                "TV Promos India",
+                "Yeh Rishta Kya Kehlata Hai",
+                "Yeh Rishta Kya Kehlata Hai Promo",
+                "Yeh Rishta kya kehlata hai on location",
+                "Ruhi",
+                "Abhira",
+                "Armaan",
+                "yeh rishta kya kehlata hai",
+                "yeh rishta kya kehlata hai today episode",
+                "yeh rishta kya kehlata hai new promo",
+                "yeh rishta kya kehlata hai full episode today",
+                "ye rishta kya kehlata hai today promo",
+                "yeh rishta kya kehlata hai serial",
+                "yeh rishta kya kehlata hai cast",
+                "cast of yeh rishta kya kehlata hai"
+              ],
+              "hashtags": [
+                "#Abhira",
+                "#Armaan",
+                "#BTS",
+                "#BehindTheScemes",
+                "#MohsinKhan",
+                "#RohitPurohit",
+                "#Ruhi",
+                "#SamridhiiShukla",
+                "#ShivangiJoshi",
+                "#TVPromosIndia",
+                "#Tvshow",
+                "#YehRishtaKyaKehlataHai",
+                "#hindiserial",
+                "#hindishow",
+                "#starplus"
+              ],
+              "view_count": 424333,
+              "like_count": 4091,
+              "comment_count": 10
             },
             {
-              "video_id": "UmJPLjT-L9U",
-              "title": "VAZOU! DOUTOR ESTRANHO SERÁ O \"BORIS\" EM VINGADORES DOOMSDAY",
-              "channel": "Ei Nerd",
-              "published_at": "2026-08-17T21:30:13Z",
-              "view_count": 122775,
-              "like_count": 13082,
-              "comment_count": 275
+              "video_id": "f14WZ9E4t7Q",
+              "url": "https://youtube.com/watch?v=f14WZ9E4t7Q",
+              "title": "Dr. Aarambhi NEW PROMO | 22nd August | Dimple Ko Avantika Ke Khilaf Bhadkayegi Nandita",
+              "description": "Dr. Aarambhi NEW PROMO | 22nd August | Dimple Ko Avantika Ke Khilaf Bhadkayegi Nandita",
+              "channel": "Bollywood pe Charcha",
+              "published_at": "2026-08-21T04:36:39Z",
+              "duration": "PT1M53S",
+              "tags": [
+                "bollywood news",
+                "bollywood news in hindi",
+                "hindi bollywood news",
+                "bollywood pe charcha",
+                "bollywood latest news",
+                "bollywood videos",
+                "bollywood news video",
+                "bollywood pe charcha latest video"
+              ],
+              "hashtags": [],
+              "view_count": 422702,
+              "like_count": 5512,
+              "comment_count": 3
             },
             {
-              "video_id": "EkJbkCYsx4Y",
-              "title": "Universes Coming To Avengers Doomsday #marvel #mcu",
-              "channel": "Built By Gamers",
-              "published_at": "2026-08-17T17:39:31Z",
-              "view_count": 99203,
-              "like_count": 3811,
-              "comment_count": 69
+              "video_id": "t0WRdZFFHTU",
+              "url": "https://youtube.com/watch?v=t0WRdZFFHTU",
+              "title": "Mahadev And Sons Today Episode NEW PROMO 21st August 2026 I Mahadev And Sons NEW Episode Promo",
+              "description": "Watch The Video To Know More.\n\nVideo Credit  - Colors & JioHotstar\nTo Watch More Videos SUBSCRIBE Telly Chaat Here \n►https://www.youtube.com/c/TellyChaat",
+              "channel": "Telly Chaat",
+              "published_at": "2026-08-21T00:55:21Z",
+              "duration": "PT2M56S",
+              "tags": [],
+              "hashtags": [],
+              "view_count": 367413,
+              "like_count": 5489,
+              "comment_count": 2
             },
             {
-              "video_id": "Qxnpi7I4fkg",
-              "title": "Marvel CONFIRMS EVERY MOVIE CONNECTION to Avengers Doomsday! ",
-              "channel": "The Cosmic Wonder",
-              "published_at": "2026-08-17T18:24:57Z",
-              "view_count": 68685,
-              "like_count": 1887,
-              "comment_count": 383
+              "video_id": "5pUOz3UkZ4k",
+              "url": "https://youtube.com/watch?v=5pUOz3UkZ4k",
+              "title": "Dr. Aarambhi Today Episode NEW PROMO | 22nd Aug 2026 | Episode Update",
+              "description": "Dr. Aarambhi Today Episode NEW PROMO | 22nd Aug 2026 | Episode Update\n\n📢 𝗙𝗢𝗥 𝗕𝗨𝗦𝗜𝗡𝗘𝗦𝗦 𝗘𝗡𝗤𝗨𝗜𝗥𝗜𝗘𝗦 & 𝗦𝗣𝗢𝗡𝗦𝗢𝗥𝗦𝗛𝗜𝗣\n✉️ Email: sponsorship@sanskrati.in\n\n📞 Contact / WhatsApp: 8679144418\n\n🎙️ 🔥 𝗝𝗢𝗜𝗡 𝗧𝗛𝗘 𝗧𝗘𝗟𝗟𝗬 𝗧𝗔𝗦𝗛𝗔𝗡 𝗙𝗔𝗠𝗜𝗟𝗬 🔥\n\nAre you passionate about TV Shows & Entertainment?\nWe are growing fast and looking for creative & talented people to join our team!\n\n✨ 𝗪𝗘'𝗥𝗘 𝗛𝗜𝗥𝗜𝗡𝗚:\n👤 Anchors\n✍️ Content Creators\n🎬 Video Editors\n\n💬 Send your intro / portfolio / demo reel on WhatsApp: 8679144418\n👉 Let’s create something amazing together 🚀\n\n📺 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗧𝗘𝗟𝗟𝗬 𝗧𝗔𝗦𝗛𝗔𝗡\n\nYour #1 destination for:\n🔥 TV Show Updates\n📺 Serial News & Gossip\n🎥 Episode Reviews\n🌟 TV Celebrities Updates\n📈 Trending TV Stories\n\nWe bring you fast, real & engaging updates from the world of television!\n\n🔔 𝗦𝗨𝗕𝗦𝗖𝗥𝗜𝗕𝗘 𝗡𝗢𝗪 & press the bell icon to stay updated!\n\n\nTV Serial News, Hindi TV Shows, Celebrity Gossip, TV Updates, Episode Review, Telly Tashan\n\n#TellyTashan #TVSerial #HindiTV #TVUpdates #CelebrityGossip #Trending",
+              "channel": "Telly Tashan",
+              "published_at": "2026-08-21T01:06:59Z",
+              "duration": "PT1M",
+              "tags": [
+                "telly tashan",
+                "telly updates",
+                "telly gossips",
+                "telly news in hindi",
+                "telly tashan news"
+              ],
+              "hashtags": [
+                "#1",
+                "#CelebrityGossip",
+                "#HindiTV",
+                "#TVSerial",
+                "#TVUpdates",
+                "#TellyTashan",
+                "#Trending"
+              ],
+              "view_count": 335781,
+              "like_count": 4001,
+              "comment_count": 2
+            },
+            {
+              "video_id": "1Qt_JWhRn4c",
+              "url": "https://youtube.com/watch?v=1Qt_JWhRn4c",
+              "title": "Missing New York Grandmother Alisa Goods Found Dead Near Las Vegas Airport",
+              "description": "The search for missing New York grandmother Alisa Goods ended with her body found near Harry Reid International Airport in Las Vegas.",
+              "channel": "KTNV Channel 13 Las Vegas",
+              "published_at": "2026-08-21T16:10:08Z",
+              "duration": "PT2M14S",
+              "tags": [
+                "channel 13 news",
+                "las vegas",
+                "las vegas headlines",
+                "las vegas news",
+                "las vegas top stories",
+                "news",
+                "news in las vegas",
+                "what's happening las vegas"
+              ],
+              "hashtags": [],
+              "view_count": 61249,
+              "like_count": 1763,
+              "comment_count": 110
+            },
+            {
+              "video_id": "xXjrj0ZRup4",
+              "url": "https://youtube.com/watch?v=xXjrj0ZRup4",
+              "title": "Watch: Rare Tornado Touches Down On New York's Long Island",
+              "description": "🌪️LONG ISLAND TWISTER: Watch this rare tornado touch down on Atlantic Beach, New York, on Long Island Thursday evening. Only 41 tornadoes have hit Long Island since 1950.  Watch FOX Weather for LIVE severe weather coverage:\n#tornado  #longisland  #newyorkcity  #rockawaybeach  #thunderstorm  #longbeach  #atlanticbeach  \n\nWatch more FOX Weather videos: https://www.foxweather.com/video\nWe’ve got you covered! Whether you’re planning your morning commute or keeping a close eye on a severe storm, no one keeps you prepared like FOX Weather - the perfect resource to keep you safe and secure from whatever Mother Nature throws your way. FOX Weather, Weathering It Together!\nHere's how you can stay safe with the FOX Weather app:\n· Get alerts for dangerous weather in your area\n· Stream our 24/7 live coverage with our hurricane experts\n· Track storms in your area with the 3D mobile radar\nDownload for free on iOS and Android devices!",
+              "channel": "FOX Weather",
+              "published_at": "2026-08-21T13:03:10Z",
+              "duration": "PT1M27S",
+              "tags": [
+                "fox weather",
+                "weather",
+                "fox weather app",
+                "weather app",
+                "weather news"
+              ],
+              "hashtags": [
+                "#atlanticbeach",
+                "#longbeach",
+                "#longisland",
+                "#newyorkcity",
+                "#rockawaybeach",
+                "#thunderstorm",
+                "#tornado"
+              ],
+              "view_count": 16760,
+              "like_count": 323,
+              "comment_count": 6
+            },
+            {
+              "video_id": "lUy70L39PK4",
+              "url": "https://youtube.com/watch?v=lUy70L39PK4",
+              "title": "Tormenta causa inundaciones en varios vecindarios de Nueva York",
+              "description": "Los aguaceros también les complicaron la movilidad a conductores que se desplazaban por calles y autopistas de la ciudad. Yilber Vega con lo último.",
+              "channel": "Telemundo 47",
+              "published_at": "2026-08-21T03:24:41Z",
+              "duration": "PT2M33S",
+              "tags": [],
+              "hashtags": [],
+              "view_count": 4552,
+              "like_count": 46,
+              "comment_count": 0
+            },
+            {
+              "video_id": "2l3x6XUxacE",
+              "url": "https://youtube.com/watch?v=2l3x6XUxacE",
+              "title": "Tornado atinge Nova York e tempestade causa grandes alagamentos",
+              "description": "🌪️🌧️ Tornado e chuva extrema provocam caos na região de Nova York\n\nUma tempestade severa atingiu Nova York e Long Island, provocando inundações, interrupções no metrô, centenas de cancelamentos de voos e um tornado confirmado em Atlantic Beach, no condado de Nassau.\n\nSegundo o National Weather Service (NWS), o fenômeno começou como uma tromba-d’água sobre o oceano e avançou para terra na noite de quinta-feira (20), transformando-se em tornado ao atingir Atlantic Beach.\n\n🌪️ O impacto foi especialmente forte no Sun and Surf Beach Club. Cerca de 50 cabanas foram danificadas ou destruídas, com móveis e destroços espalhados pela área. Mais de 100 pessoas estavam no clube, mas apenas uma pessoa sofreu ferimentos leves.\n\n🌊 A mesma tempestade provocou alagamentos severos em Nova York, com água invadindo estações e interrompendo temporariamente as linhas A, C, E e F do metrô. Trechos da Long Island Expressway também precisaram ser fechados.\n\n✈️ Os aeroportos LaGuardia, JFK e Newark registraram grandes atrasos e centenas de cancelamentos. Dados do FlightAware apontam 219 voos cancelados em LaGuardia durante o dia da tempestade.\n\nDiante dos danos e das enchentes, o condado de Nassau declarou estado de emergência, enquanto equipes realizaram resgates de pessoas presas em veículos pelas águas.\n\nO NWS continua analisando a trajetória e a intensidade do tornado. Foi o primeiro tornado confirmado no condado de Nassau desde 2021.\n\nCuradoria Xplora: informações verificadas com NWS, Associated Press (AP), CBS New York, FlightAware e UOL Notícias.\n\n#NovaYork #Tornado #Tempestade #Inundação #EstadosUnidos",
+              "channel": "Xplora Reserva",
+              "published_at": "2026-08-21T19:18:04Z",
+              "duration": "PT17S",
+              "tags": [],
+              "hashtags": [
+                "#EstadosUnidos",
+                "#Inunda",
+                "#NovaYork",
+                "#Tempestade",
+                "#Tornado"
+              ],
+              "view_count": 2328,
+              "like_count": 60,
+              "comment_count": 0
+            },
+            {
+              "video_id": "1OwrVrR12kQ",
+              "url": "https://youtube.com/watch?v=1OwrVrR12kQ",
+              "title": "Severe weather | Storm rolls through York County neighborhood and wreaks havoc",
+              "description": "A severe storm caused significant damage in parts of York County, ripping the roof and siding from a townhome and overturning a work trailer in Lower Windsor Township. #YorkCounty #SevereWeather #StormDamage #LowerWindsorTownship",
+              "channel": "wgaltv",
+              "published_at": "2026-08-21T02:45:35Z",
+              "duration": "PT37S",
+              "tags": [],
+              "hashtags": [
+                "#LowerWindsorTownship",
+                "#SevereWeather",
+                "#StormDamage",
+                "#YorkCounty"
+              ],
+              "view_count": 1691,
+              "like_count": 31,
+              "comment_count": 3
+            },
+            {
+              "video_id": "7dHQdcOhINM",
+              "url": "https://youtube.com/watch?v=7dHQdcOhINM",
+              "title": "🔥Best Bets for the York Ebor Festival Day 4 | Paul Kealy and Tom Segal",
+              "description": "The team give their best bets for the 4th day of the York Ebor Festival! \n\n#YorkEbor #York #horseracing #horseracingfestival #bestbets #Festival  \n\n-------\n\nWatch the full show here: https://youtube.com/live/nSmqOBSNwuE?feature=share\n\n—---------------\n\n🐎 For all the latest tips for the York Ebor Festival head here: https://www.racingpost.com/horse-racing-tips/\n\n🐴 National Racehorse week begins on Saturday 22nd of August, for more details click the link: https://nationalracehorseweek.uk/events/?only_show_events_with_availability=true&free_entry=false&search_distance=\n\n⭕ Our blog is LIVE, for today’s blog click here: https://shorturl.at/aUnpB\n\nGAMBLE RESPONSIBLY",
+              "channel": "Racing Post",
+              "published_at": "2026-08-21T19:00:38Z",
+              "duration": "PT44S",
+              "tags": [
+                "Racing Post",
+                "racingpost",
+                "racing",
+                "sport",
+                "horse racing",
+                "horse racing videos",
+                "horse racing tips",
+                "horse racing betting",
+                "horse racing (sport)"
+              ],
+              "hashtags": [
+                "#Festival",
+                "#York",
+                "#YorkEbor",
+                "#bestbets",
+                "#horseracing",
+                "#horseracingfestival"
+              ],
+              "view_count": 1618,
+              "like_count": 27,
+              "comment_count": 1
+            },
+            {
+              "video_id": "fPCHZKLwsJk",
+              "url": "https://youtube.com/watch?v=fPCHZKLwsJk",
+              "title": "should i eat it",
+              "description": "Thank you SO MUCH for watching and being a part of this community. My name is Madi and my channel Madi Goes is a storytelling channel built on two philosophies: Get Out. Go Within. AND Trade Certaintly for Curiosity. \n\nPillar 1 — Transformation Through Challenge (personal stories) | \"Get Out to Go Within.\" Internal transformation through endurance & discomfort. Escape Comfort Zone → Self-Growth.\n\nPillar 2 — Discovery Through Curiosity (stories around the world) | \"Trade Certainly for Curiosity\". External discovery through exploration & curiosity. Curiosity + Wonder → Interesting Story.\n\nThe Core Niche for Madi Goes Is: Transformational / Challenge / Self-Discovery (adventure + challenge + outside comfort zone + emotional growth + self-reflection). \n\nIf you love to watch Yes Theory and Kara & Nate’s travel challenge journeys, and enjoy meaningful discomfort stories — people pushing limits to grow, then you'll love Madi Goes!\n\nJoin as a MEMBER to get access to special perks:\nhttps://www.youtube.com/channel/UCEpr8uwfCEg0VggICknMBZQ/join\n\nHead to my Website: https://madigoes.com/\nSubscribe to my SATURDAY'S STORY Email Newsletter at: https://madigoes.com/\nFollow me on Insta: @madi.goes\nFollow me on TikTok: @madi..goes\nFollow our music on Insa: @smithsters.co\n\nGet Out. Go Within.",
+              "channel": "Madi Goes",
+              "published_at": "2026-08-21T14:00:19Z",
+              "duration": "PT10S",
+              "tags": [
+                "Bagel",
+                "Bagels",
+                "NYC",
+                "New York City"
+              ],
+              "hashtags": [],
+              "view_count": 1398,
+              "like_count": 15,
+              "comment_count": 0
+            },
+            {
+              "video_id": "Pp_mFNtwi_U",
+              "url": "https://youtube.com/watch?v=Pp_mFNtwi_U",
+              "title": "Storm damage | Eastern York High School suffers roof and HVAC damage",
+              "description": "A storm caused extensive damage to Eastern York High School. Emergency crews said they expected to remain at the school for several hours to assess the damage. The district’s superintendent was at the scene receiving updates. #YorkCountyNews #SevereWeather #EasternYorkHighSchool #StormDamage",
+              "channel": "wgaltv",
+              "published_at": "2026-08-21T01:10:29Z",
+              "duration": "PT57S",
+              "tags": [],
+              "hashtags": [
+                "#EasternYorkHighSchool",
+                "#SevereWeather",
+                "#StormDamage",
+                "#YorkCountyNews"
+              ],
+              "view_count": 1390,
+              "like_count": 46,
+              "comment_count": 4
+            },
+            {
+              "video_id": "9YJWTNxTH-M",
+              "url": "https://youtube.com/watch?v=9YJWTNxTH-M",
+              "title": "Storm damages Eastern York High School roof and nearby property",
+              "description": "A storm caused extensive damage to Eastern York High School, tearing sections of the roof from classrooms and damaging HVAC equipment, according to emergency responders. #SevereWeather #StormDamage #YorkCounty #EasternYorkHighSchool",
+              "channel": "wgaltv",
+              "published_at": "2026-08-20T23:55:16Z",
+              "duration": "PT40S",
+              "tags": [],
+              "hashtags": [
+                "#EasternYorkHighSchool",
+                "#SevereWeather",
+                "#StormDamage",
+                "#YorkCounty"
+              ],
+              "view_count": 1291,
+              "like_count": 36,
+              "comment_count": 0
+            },
+            {
+              "video_id": "KZiyxLFIx8U",
+              "url": "https://youtube.com/watch?v=KZiyxLFIx8U",
+              "title": "NEW YORK BAGEL🥯 #shorts #viral #food",
+              "description": "A New York–style bagel is a dense, chewy bread roll that is first boiled in malted water and then baked on burlap-covered wooden boards.\n\nKey Characteristics\nThe Process: Authentic New York bagels are always boiled in water mixed with barley malt before baking, which creates their distinct shiny, leathery crust and soft interior.\nThe Bake: They are traditionally baked on wet cedar or pine boards covered in burlap (often dusted with cornmeal) and flipped halfway through cooking.\nThe Size: Traditional New York bagels are smaller (around 3 to 4 ounces) rather than the oversized, puffy \"rolls with holes\" found in many modern commercial bakeries.\n\nPopular Flavors & Toppings\nseed, onion, garlic, pumpernickel, and cinnamon-raisin.\n\nClassic Toppings & Spreads: \nEaten plain, with butter, or smeared with cream cheese. A classic traditional deli style adds Nova lox (smoked salmon), sliced tomato, raw red onion, capers, and fresh dill.\n\n#foodie #newyork  #viral #ai #bagelsandwich #viralvideo",
+              "channel": "Foods etc at iba pa",
+              "published_at": "2026-08-21T03:33:15Z",
+              "duration": "PT11S",
+              "tags": [
+                "food",
+                "ai"
+              ],
+              "hashtags": [
+                "#ai",
+                "#bagelsandwich",
+                "#food",
+                "#foodie",
+                "#newyork",
+                "#shorts",
+                "#viral",
+                "#viralvideo"
+              ],
+              "view_count": 948,
+              "like_count": 9,
+              "comment_count": 0
+            },
+            {
+              "video_id": "7BNh30vR6wU",
+              "url": "https://youtube.com/watch?v=7BNh30vR6wU",
+              "title": "Rainbow Bagels!",
+              "description": "The rainbow starts at 3 a.m.! 🌈🥯 Our bakers make every colorful batch of Rainbow Bagels from scratch before they’re kettle-boiled and hearth-baked for that perfect New York bagel texture—chewy on the outside, soft on the inside. Now that’s how you brighten up breakfast! Delivery available - link in bio!\n\n#StewLeonards #RainbowBagels #NewYorkBagels #FreshBaked #BehindTheScenes",
+              "channel": "Stew Leonard's ",
+              "published_at": "2026-08-21T12:23:40Z",
+              "duration": "PT11S",
+              "tags": [],
+              "hashtags": [
+                "#BehindTheScenes",
+                "#FreshBaked",
+                "#NewYorkBagels",
+                "#RainbowBagels",
+                "#StewLeonards"
+              ],
+              "view_count": 935,
+              "like_count": 5,
+              "comment_count": 0
+            },
+            {
+              "video_id": "JnQ-PH-X5T0",
+              "url": "https://youtube.com/watch?v=JnQ-PH-X5T0",
+              "title": "The Jonas Brothers just served me their cream cheese collab with Pop Up Bagels! I ❤️ NYC 🥯🔥 #shorts",
+              "description": "I love NYC because the Jonas Brothers just served me their Burning Up cream cheese collab with Pop Up Bagels 🥯🔥\n\n#nyc #jonasbrothers #burninup #popupbagels #creamcheese",
+              "channel": "New York Post Lifestyle",
+              "published_at": "2026-08-21T22:45:24Z",
+              "duration": "PT23S",
+              "tags": [
+                "jonas brothers",
+                "jonas brothers collab",
+                "jonas brothers nyc",
+                "jonas brothers bagels",
+                "bagels",
+                "nyc bagels",
+                "jonas brothers cream cheese",
+                "cream cheese",
+                "bagels cream cheese",
+                "pop up bagels",
+                "pop up bagels jonas brothers collab"
+              ],
+              "hashtags": [
+                "#burninup",
+                "#creamcheese",
+                "#jonasbrothers",
+                "#nyc",
+                "#popupbagels",
+                "#shorts"
+              ],
+              "view_count": 569,
+              "like_count": 17,
+              "comment_count": 0
+            },
+            {
+              "video_id": "ZPzNEIExcWM",
+              "url": "https://youtube.com/watch?v=ZPzNEIExcWM",
+              "title": "Indian startup Bagel Brigade selected for NY BagelFest / India Abroad®",
+              "description": "Hyderabad-founded quick-service restaurant startup Bagel Brigade has been selected to compete at the 2026 BagelFest in New York, putting the Indian brand on an international stage alongside established bagel makers from the U.S. and abroad. The company, which has expanded to the U.S. with a store in Texas, was among fewer than 9 percent of applicants chosen for this year's competition.\n#hyderabad #startup #texas #indianbrands #internationalstage \n\n_________________________________________________________\nIndia Abroad®  - For Indians Abroad \n\n📌 All footage is used under Fair Use for commentary and educational purposes.  \n📌 This video is NOT sponsored and is created for informative purposes.\n_________________________________________________________\n\nCatch all the latest news videos here on \"India Abroad® \". India Abroad®  News strives to connect with the viewers and subscribers by bringing India Abroad's comprehensive news coverage in English and many other languages. India Abroad’ coverage is governed by its charter of FREE, FAIR & UNBIASED news reportage. \n\nIndia Abroad®  and New India Abroad®  are part of Indian Star LLC, based in Maryland, USA. We’re not linked to the former India Abroad newspaper (1972–2021).\n\nWe share stories and voices from the Indian diaspora—NRIs, expats, desis, and global Indians. All views in our content are personal opinions; Indian Star LLC isn’t liable for any claims made in videos, podcasts, or ads.\n\nFrom culture and tradition to real-life experiences, we cover what matters to Indians living abroad.\n_________________________________________________________\nOur Social Accounts:\nFollow us on Twitter ► https://x.com/IndiaAbroad_\nFollow us on Instagram ► https://www.instagram.com/indiaabroad_/\nFollow us on Facebook ► https://www.facebook.com/Theindiaabroad/\nFollow us on Whatsapp ►  https://whatsapp.com/channel/0029VaLhY8uAjPXQGDRrdQ45\nHindi YT Channel: https://www.youtube.com/@indiaabroadhindi\nGujarati YT Channel: www.youtube.com/@IndiaAbroadGujarati\nPunjabi YT Channel : https://www.youtube.com/@IndiaAbroadPunjabi\n \nOfficial website ► https://www.newindiaabroad.com/\n_________________________________________________________\nIndia Abroad®  and New India Abroad®  are publications of Indian Star LLC, registered in Maryland, USA. \nIndian Star LLC and its publications assumes no liability for claims / assumptions made in the podcasts and videos or advertorials. Views expressed by the writers and speakers are their own.\n_________________________________________________________\nKeywords\n\nIndian diaspora, Indian expatriates, NRI (Non-Resident Indian), Desi community, Indian culture abroad, Indian traditions overseas, Indian immigrants, Global Indians, Indian heritage worldwide, Diaspora experiences, Cultural exchange, Indian lifestyle abroad, Overseas Indians, Indian expat stories, Community connections, Indian identity, Diversity in diaspora, Diaspora celebrations, Indian festivals abroad, Diaspora perspectives, India Abroad, New India Abroad",
+              "channel": "India Abroad®",
+              "published_at": "2026-08-21T04:13:42Z",
+              "duration": "PT36S",
+              "tags": [
+                "new india abroad",
+                "new india",
+                "indian diaspora news",
+                "nri news",
+                "indian community news",
+                "new india new",
+                "trending news today",
+                "todays news bulletin",
+                "todays news",
+                "war news"
+              ],
+              "hashtags": [
+                "#hyderabad",
+                "#indianbrands",
+                "#internationalstage",
+                "#startup",
+                "#texas"
+              ],
+              "view_count": 142,
+              "like_count": 0,
+              "comment_count": 0
+            },
+            {
+              "video_id": "KbFjrUX4U88",
+              "url": "https://youtube.com/watch?v=KbFjrUX4U88",
+              "title": "034 • Homemade New York Style Bagels",
+              "description": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fadam.gallipeau%2Fposts%2Fpfbid0C6k51yRRRFqsK5Ui2A1vFsG5You6Jq4DNdFRdmtXXe3jbUubB8seGbEDyDHKzc7Zl&show_text=true&width=500\n\n\n\n034 • Homemade New York-Style Bagels\n\n\"Some of the best things we can place in someone's hands are simple things made with care.\"\n\nThis isn't bread with a hole — firm dough, bread flour, strong gluten, shape, slow 8-24 hr cold ferment for flavor, boil 45-60 sec per side in water + barley malt syrup/honey, then bake 425°F 20-25 min till deep golden.\n\n\"Share with the Lord's people who are in need. Practice hospitality.\" Romans 12:13\n\nPractice hospitality: 8 bagels, keep 4, give 4 in paper bag — \"Made this morning. Thought of you.\" Pair with 027 Homemade Peanut Butter.\n\nFloat test: if bagel floats in 10 sec, ready to boil. Poke & stretch hole 1.5-2\" — it shrinks.\n\nServe it with joy, share it with love.\n\n#CreatedToServe #HomemadeBagels #NYStyleBagels #Romans1213 #BoilThenBake #EverythingBagel #BreadFlour #FromScratch #PracticeHospitality #MakeOneGiveOne",
+              "channel": "Adam Gallipeau",
+              "published_at": "2026-08-21T12:28:38Z",
+              "duration": "PT2M26S",
+              "tags": [],
+              "hashtags": [
+                "#BoilThenBake",
+                "#BreadFlour",
+                "#CreatedToServe",
+                "#EverythingBagel",
+                "#FromScratch",
+                "#HomemadeBagels",
+                "#MakeOneGiveOne",
+                "#NYStyleBagels",
+                "#PracticeHospitality",
+                "#Romans1213"
+              ],
+              "view_count": 10,
+              "like_count": 0,
+              "comment_count": 0
             }
           ]
         },
@@ -137,76 +641,76 @@
           "error": null,
           "videos": [
             {
-              "video_id": "91FS6p9yC2E",
-              "title": "FullyChop - Purple Switch (Official Music Video)",
-              "channel": "FullyChop",
-              "published_at": "2026-08-17T21:30:46Z",
-              "view_count": 110203,
-              "like_count": 9543,
-              "comment_count": 642
+              "video_id": "ozsKU77OWpE",
+              "title": "Tom Cruise vs Evel Knievel. Epic Rap Battles Of History",
+              "channel": "ERB",
+              "published_at": "2026-08-21T17:00:16Z",
+              "view_count": 239581,
+              "like_count": 35093,
+              "comment_count": 718
             },
             {
-              "video_id": "9AsEwQJiQQE",
-              "title": "Chapter 7 Season 4: Override | Official Trailer",
-              "channel": "Fortnite",
-              "published_at": "2026-08-16T16:00:07Z",
-              "view_count": 1820687,
-              "like_count": 94029,
-              "comment_count": 9801
-            },
-            {
-              "video_id": "1OYU38dGlBI",
-              "title": "I Can't Believe They Streamed This",
-              "channel": "penguinz0",
-              "published_at": "2026-08-17T18:00:05Z",
-              "view_count": 2595118,
-              "like_count": 82791,
-              "comment_count": 10243
-            },
-            {
-              "video_id": "W4LhfsQTi5E",
-              "title": "KATSEYE - PINKY UP (Live From The Today Show/2026)",
-              "channel": "KATSEYEVEVO",
-              "published_at": "2026-08-17T19:51:20Z",
-              "view_count": 612636,
-              "like_count": 27914,
-              "comment_count": 4911
-            },
-            {
-              "video_id": "W8jMEXwErvk",
-              "title": "A Different World | Official Trailer | Netflix",
-              "channel": "Netflix",
-              "published_at": "2026-08-17T15:00:00Z",
-              "view_count": 583665,
-              "like_count": 26529,
-              "comment_count": 3003
-            },
-            {
-              "video_id": "ZyZb2dFYqQs",
-              "title": "If This Balloon Touches The Ground You DIE",
-              "channel": "SMii7Y",
-              "published_at": "2026-08-17T19:13:13Z",
-              "view_count": 1504740,
-              "like_count": 90219,
-              "comment_count": 2475
-            },
-            {
-              "video_id": "j5MKeHn_0v0",
-              "title": "James Blunt - Tastes Like Summer (Official Music Video)",
-              "channel": "James Blunt",
-              "published_at": "2026-08-14T12:00:06Z",
-              "view_count": 468610,
-              "like_count": 11200,
-              "comment_count": 1980
-            },
-            {
-              "video_id": "kzI4R1DwXb0",
-              "title": "VISIONQUEST TRAILER BREAKDOWN! Every Easter Egg & Detail You Missed!",
+              "video_id": "TsFvYJ8fQh4",
+              "title": "Let’s Finally Talk About the Avengers Doomsday (Reported) Opening Scene",
               "channel": "New Rockstars",
-              "published_at": "2026-08-18T00:08:58Z",
-              "view_count": 244420,
-              "like_count": 10957,
-              "comment_count": 848
+              "published_at": "2026-08-20T23:20:05Z",
+              "view_count": 499992,
+              "like_count": 15470,
+              "comment_count": 363
+            },
+            {
+              "video_id": "aA4pyww2cyc",
+              "title": "NOT ENDING UNTIL WE BEAT EVERY GAME ft. Kai Cenat",
+              "channel": "IShowSpeed",
+              "published_at": "2026-08-21T07:00:05Z",
+              "view_count": 6817615,
+              "like_count": 120741,
+              "comment_count": 413
+            },
+            {
+              "video_id": "MT-4Bk1Lw8g",
+              "title": "ENHYPEN (엔하이픈) 'Bloody Paradise' Official MV",
+              "channel": "HYBE LABELS",
+              "published_at": "2026-08-21T14:58:07Z",
+              "view_count": 2022834,
+              "like_count": 356896,
+              "comment_count": 5782
+            },
+            {
+              "video_id": "SyeHKMfswHk",
+              "title": "Cyberpunk: Edgerunners 2 | Official Teaser #3 | Netflix",
+              "channel": "Netflix",
+              "published_at": "2026-08-20T23:15:00Z",
+              "view_count": 616386,
+              "like_count": 37662,
+              "comment_count": 565
+            },
+            {
+              "video_id": "G_SCHL5QGi4",
+              "title": "That Ain't Me M'Lord",
+              "channel": "SMii7Y",
+              "published_at": "2026-08-21T19:13:26Z",
+              "view_count": 368419,
+              "like_count": 32644,
+              "comment_count": 158
+            },
+            {
+              "video_id": "S58gKtKfrKM",
+              "title": "Bien Pata - Cartel de Santa  | @elcarteldesantatv",
+              "channel": "elcarteldesantatv",
+              "published_at": "2026-08-21T06:15:06Z",
+              "view_count": 850555,
+              "like_count": 44187,
+              "comment_count": 3165
+            },
+            {
+              "video_id": "IBTK8PGe_Oo",
+              "title": "Cyberpunk: Edgerunners 2 | Premiere Date Teaser Trailer",
+              "channel": "Cyberpunk 2077",
+              "published_at": "2026-08-20T23:16:19Z",
+              "view_count": 443871,
+              "like_count": 49283,
+              "comment_count": 1095
             }
           ]
         }
@@ -214,252 +718,31 @@
       "signal_tendance": {
         "signal": "tendance",
         "global_trending_rss": {
-          "status": "ok",
-          "error": null,
-          "trending": [
-            {
-              "query": "new york times games",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            },
-            {
-              "query": "jenny mccarthy",
-              "approx_traffic": 500,
-              "approx_traffic_raw": "500+"
-            },
-            {
-              "query": "uzbekistan",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            },
-            {
-              "query": "mauricio umansky",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            },
-            {
-              "query": "cybele raver",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            },
-            {
-              "query": "oswaldo pirela ice detention",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            },
-            {
-              "query": "trevor goosby",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            },
-            {
-              "query": "za'darius smith",
-              "approx_traffic": 1000,
-              "approx_traffic_raw": "1000+"
-            },
-            {
-              "query": "thailand vs singapore",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            },
-            {
-              "query": "naacp",
-              "approx_traffic": 200,
-              "approx_traffic_raw": "200+"
-            }
-          ]
+          "status": "fetch_failed",
+          "error": "network__ssl.c:983: The handshake operation timed out",
+          "trending": []
         },
         "keyword_curves": {
-          "status": "ok",
-          "note": null,
+          "status": "pytrends_absent",
+          "note": "pytrends non installé — ajouter à requirements_capteurs.txt",
           "keywords": {
-            "marvel doomsday": {
+            "New York Bagel": {
               "is_trending": null,
               "growth_multiplier": null,
-              "note": "échec pytrends: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded wi"
+              "note": "pytrends absent"
             },
-            "marvel": {
+            "New": {
               "is_trending": null,
               "growth_multiplier": null,
-              "note": "échec pytrends: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded wi"
+              "note": "pytrends absent"
             },
-            "doomsday": {
-              "is_trending": false,
-              "growth_multiplier": 1.33,
-              "first": 18,
-              "last": 24,
-              "series_sample": [
-                18,
-                29,
-                13,
-                20,
-                16,
-                16,
-                25,
-                18,
-                41,
-                66,
-                65,
-                63,
-                35,
-                52,
-                23,
-                37,
-                28
-              ],
-              "note": null
+            "York": {
+              "is_trending": null,
+              "growth_multiplier": null,
+              "note": "pytrends absent"
             }
           }
         }
-      },
-      "signal_fraicheur_couverture": {
-        "signal": "fraicheur_et_couverture",
-        "window_hours": 5,
-        "keywords": [
-          "marvel doomsday",
-          "marvel",
-          "doomsday"
-        ],
-        "fetched_articles": 99,
-        "fresh_articles": [
-          {
-            "title": "Doctor Doom’s Ticket Sales Are Already Making Marvel History Before ‘Avengers: Doomsday’ Even Hits Theaters - IMDb",
-            "source": "IMDb",
-            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5vMXQzWGl4VElHS084cFJvVVVoaWxQTGV0cHZXTlhXNTJ1MTlDeG9oMGJHRXhTek4yc0dNeXdpT3J2OWtSWl93Qk1uenNqY2lMX0FmMXJGNHUxZ2paRjNCWnFIeWlNLVU?oc=5",
-            "age_hours": 4.4
-          },
-          {
-            "title": "Loki star teases possible Avengers: Doomsday cameo, and it's all to do with the Latverian Witch theory - GamesRadar+",
-            "source": "GamesRadar+",
-            "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQcUFCNU9Ibi1TTm1rTDVYZmhtQXI1NGFvWnFWdU8xNEhPR3Bfbjd4YzBXdUJUaldvNEw0Tzh1RVYzN2F6c0xVVUgzU0lUMlk4azBJNUxxT19QWE9mQlFxUTRsalZLakJtUU1ZUzBHV1F5ajdRaGxNa1lZcmFwdmFNT0UtclpEamJlOElTa2o3eG4zOVhzX2xMWkNSeFFXSDkwM0ZoZTZTc1UzNEl5WEdKeFV6cUxOajU4Qk5KTjJ0Wk9xWktZRkJyeGYzYlU0SnhoY1BmLThTNTdhc2R5dVlzYWc2LURUcDI1SHhr?oc=5",
-            "age_hours": 3.4
-          },
-          {
-            "title": "‘Avengers: Doomsday’ Tracking for Insane Worldwide Opening, Report Says - IMDb",
-            "source": "IMDb",
-            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5xeU9MWFY5dXpuaTE4MnMxTGxiTHU2X1ZfMmdaNUJ5SHJFY2RPS3FfRnp1OEFxTk8tV2FKend3LTRFR3FyQXFwdW92R0pEWUQ4ZlY1d29iRDB2UFhaLWpNV0YzVjlPZlk?oc=5",
-            "age_hours": 1.1
-          },
-          {
-            "title": "‘Avengers: Doomsday’ special look unveiled at D23 - IMDb",
-            "source": "IMDb",
-            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1Nc1NYM1hhRXljNnF0NVc0WmtWaG1nYnl2aUZNb3IycmZpcWx2UEt2bU5LMnI2b0lDYkxxZ01XVXh2SWdlYmZpcFQySlpOSjFpOXRRUnpPMGJvWm9telhvTWQzQ3YtdFE?oc=5",
-            "age_hours": 4.4
-          },
-          {
-            "title": "Avengers: Doomsday collectible features Doctor Doom holding a mysterious device, and fans have theories - GamesRadar+",
-            "source": "GamesRadar+",
-            "link": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPZFduOFJVaEhUcDl5WEhsMG9BbWpTWXdrTTlrUUJReXJ5OHBfbGNnbXZXWF95RTNZYXRzbFJ1SUlGZEVEaENBeGNDSm5CYnpURnQyNzJRU2k1QnM5QUN0Z3JTOFBxUHJ3Y25saHBIV3hKNk5wam94cHBWMC1aRW9MUm1qYWc1RnBXYW84endKb2ZwODFCU2JmUVViWTdjNEV5NE50UENnVUgwaXpBekJIRDBYdlNqaU42MHFvVnFFQmRTTWdBcWoyMTRGOTlIQXc3RWN0Ql9EbDM1ZkctR1U3TmtkaHFlbmxHbGx5Uk1n?oc=5",
-            "age_hours": 2.4
-          },
-          {
-            "title": "Early Ticket Sales Put “Avengers: Doomsday” Ahead of Record-Setting “Spider-Man” - IMDb",
-            "source": "IMDb",
-            "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5NZ0stSmdtQmFFRFhELVhtTW5CclJzNEMtalptQWQxVlVReVBTMGhZWXlTaldIMW4tWkNwWEJPZkE5bmVKdVBDTllBZUhlWGYzNmhaS2N4YUh6YVFYR3pVUDdsbkdlNFk?oc=5",
-            "age_hours": 2.6
-          },
-          {
-            "title": "Essential MCU Titles to Watch Before 'Avengers: Doomsday' - Tempo.co English",
-            "source": "Tempo.co English",
-            "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNeGtFcWg4Q25xaGVCZDhGV2Z6RnN1Tm14Zms1VVlLdmc5YVVueld0TG40bjFRZ1NSZWxpMHdlQWp0Mnp0Z3FrMWZWb2t5c3NaaThoMWh3Sng4ak9saUpTeUxqZGJQdE5KSHZqeGJtb3E3VS1CZVYtUFlrb2JOUWZWSzQ2emk4MndnbjJIZkVYRWs?oc=5",
-            "age_hours": 2.5
-          },
-          {
-            "title": "How Avengers: Endgame Sets Up Doctor Doom in Avengers: Doomsday - Epicstream",
-            "source": "Epicstream",
-            "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQcHFERHBmRE5VQ1Q3TlJ0YlEzSDJNc0R0cnkzU1BWVzEzS0tOMWtDNXNvQzJ3QVZNT1hNaUlYM0w4TWhXelZvemI4bno4d08xajFGekpUUlpVQVRTQU53emRySU03ZUZheHYyZ0ZRS0ljZEphYlhaU3RITC1seC1NOGNZNy1naVpyS3ZWci04WFh3NXVvQ09r?oc=5",
-            "age_hours": 0.5
-          },
-          {
-            "title": "Avengers: Doomsday eyes historic $1 billion global box office opening as presales break records months ahead of release | Hollywood - Hindustan Times",
-            "source": "Hindustan Times",
-            "link": "https://news.google.com/rss/articles/CBMingJBVV95cUxNQk81Mi1vdHN0NmJqU3JCRUZ3VGtYZ1RsVXlERlc0QXdDTF9xc0VDRWl2STkyRFFNN1N4REJrQzJ4ZzEtU0JQTjdEY2dEbldZVFczS1RGbHI3SDlHVmhuVHB6WEdCeXNFbEZzNkNDVE1GWTFlNHNrYUlMbDBDM2JWUFoxbzdkTXV4alA0LUNnRC1kRjlJYXRoS19BVDNHYXZUb05tcWpSYnB4a2ZCN25NWDVfVjN4UW5hYmU5cGRYVmFBYW1xVWVhUG1SUWoyRmFoSERpR0tnUUZEWkVnS1I1MDloVWFfQk5STTVPeHJfVXpQUlpXSTBOQi1pUEpoVDBNakx6LW9yWTJxOXFDLW56RlgtX3A4eXlSRVNvRWNR0gGjAkFVX3lxTE52RVRkUWs1Z1JWM2RPcnBVZVVzVWlWbXJVT2VEeHJkM01GVEtzZ1VILUdKRjF0WkhwaU5JcjFlYnc4V2FueWtveldaRVhQcGVld2ppT0JhU2lYMC0yamNMWnBRN0s0dENfd2E2SkNnZzVtODZfdWdXUUNQZDNEVHpiZXVpUGxmU3hDUzZKY1AzTkdhMWhNdG53UkFUcmtWUE4xTjMyUzh3UnBRVDRyTHgwVGt0REs4Q3JBYnBKZkRVMjB5NFk3WkdJZGxLVlNBN25QYVlkYTVXZUtCX0pPODNWdURRYTc0M0hmRnk3UjlBZFQxWFVJVmhFMzk2ZVYwa1VWMzRaRGhvSy1rWGVpcjcwZnliU1pTcUN2cVAxZWZ0Z3FCbw?oc=5",
-            "age_hours": 4.4
-          },
-          {
-            "title": "Avengers Doomsday Beats Spider-Man Brand New Day In Early Presales; Eyes $1 Billion Global Opening - ETV Bharat",
-            "source": "ETV Bharat",
-            "link": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNWlFDTWhIamNtNnZXRTNUSndYMmdaVlhiM0pWQlZ0WjlyV0VEWFlxajhNaHRfNGtyV0t1ZFJtdVFhMk51aVJlM3hZb0tDMEx1TjNFQVE1UC1FY3NZRGVHRmp1UUZPbFVMNkJtLXhab2tYZXp5dWFrR3VMWVM4RU5hX3dwaEs1YU5pemxkaW95TVdWak5zdVZpT3h6bjluM21PZF9jQmZ2d3lodjVFM2l2RmRXLVlCcGpXVFhnVVgzWV9hUGRaRG54RjNGRTNLUy1mNExmZUZ2bExqRFBlRUZiQUh6X1NtdUgzdW1nTUNxWGY4QWxkeXBz0gH8AUFVX3lxTE85LVJXSlJiZ19GUlhkS3ZocFExS09lNkdhLU1Qck5OaERpaUYwZWhIQkM1SG42emllZGZ6OEZTOUh6bzVhVllZT09EZjRPRExha05VLTNNWlZoM0paX0NZZ1c2WGx2NUc0RzRzY3RYMmZ1VmY4MDIxNXlQd2pyUmVrNEtGQ2JkTHBSZXRVX08yb0wxTllERzdqODBBYXR1NlpyeVdwU2hRdzAwZGx3NnV2SVdhM3RsUWlaTXBUa09nX19SZlVid3FPODdUQmZ5SmhZRXJwazh4VUJkYkdadmRMUzU3VV9jbkRpdGxtUXJlUXJtM08tNzI4SllLMw?oc=5",
-            "age_hours": 2.1
-          }
-        ],
-        "coverage": {
-          "doctor doom s ticket sales already": {
-            "count": 1,
-            "sources": [
-              "IMDb"
-            ]
-          },
-          "loki star teases possible avengers doomsday": {
-            "count": 1,
-            "sources": [
-              "GamesRadar+"
-            ]
-          },
-          "avengers doomsday tracking insane worldwide opening": {
-            "count": 1,
-            "sources": [
-              "IMDb"
-            ]
-          },
-          "avengers doomsday special look unveiled at": {
-            "count": 1,
-            "sources": [
-              "IMDb"
-            ]
-          },
-          "avengers doomsday collectible features doctor doom": {
-            "count": 1,
-            "sources": [
-              "GamesRadar+"
-            ]
-          },
-          "early ticket sales put avengers doomsday": {
-            "count": 1,
-            "sources": [
-              "IMDb"
-            ]
-          },
-          "essential mcu titles watch before avengers": {
-            "count": 1,
-            "sources": [
-              "Tempo.co English"
-            ]
-          },
-          "how avengers endgame sets up doctor": {
-            "count": 1,
-            "sources": [
-              "Epicstream"
-            ]
-          },
-          "avengers doomsday eyes historic 1 billion": {
-            "count": 1,
-            "sources": [
-              "Hindustan Times"
-            ]
-          },
-          "avengers doomsday beats spider man brand": {
-            "count": 1,
-            "sources": [
-              "ETV Bharat"
-            ]
-          }
-        },
-        "status": "ok",
-        "error": null
-      },
-      "signal_reddit_viralite": {
-        "signal": "reddit_viralite",
-        "status": "fetch_failed",
-        "error": "http_403",
-        "keywords": [
-          "marvel doomsday",
-          "marvel",
-          "doomsday"
-        ],
-        "posts": [],
-        "top_subreddits": [],
-        "demand_score": null
       },
       "signal_demande": {
         "signal": "demande",
@@ -467,56 +750,45 @@
         "note": "suggestions Google ds=yt",
         "keywords": [
           {
-            "query": "marvel doomsday",
+            "query": "New York Bagel",
             "suggestions": [
-              "marvel doomsday trailer",
-              "marvel doomsday explained",
-              "marvel doomsday teaser",
-              "marvel doomsday cast",
-              "marvel doomsday trailer reaction",
-              "marvel doomsday leak",
-              "marvel doomsday clock",
-              "marvel doomsday comic",
-              "marvel doomsday announcement",
-              "marvel doomsday trailer xmen"
-            ],
-            "tension_hits": 1,
-            "total_hits": 10,
-            "demand_score": 100
-          },
-          {
-            "query": "marvel",
-            "suggestions": [
-              "marvel rivals",
-              "marvel indonesia",
-              "marvel tokon",
-              "marvel zombies",
-              "marvel spider man 2",
-              "marvel studios",
-              "marvel trailer",
-              "marvel snap",
-              "marvel ultimate alliance",
-              "marvel intro"
+              "new york bagels",
+              "new york bagel recipe",
+              "new york bagel shop",
+              "new york bagel cream cheese",
+              "new york bagel advert",
+              "new york bagel guy",
+              "new york bagel sandwich",
+              "new york bagels at home",
+              "new york bagel review",
+              "new york bagel company"
             ],
             "tension_hits": 0,
             "total_hits": 10,
             "demand_score": 100
           },
           {
-            "query": "doomsday",
+            "query": "New",
+            "suggestions": [],
+            "tension_hits": 0,
+            "total_hits": 0,
+            "demand_score": 0
+          },
+          {
+            "query": "York",
             "suggestions": [
-              "doomsday trailer",
-              "doomsday trailer 2",
-              "doomsday trailer reaction",
-              "doomsday special look reaction",
-              "doomsday teaser",
-              "doomsday clock",
-              "doomsday trailer 2 reaction",
-              "doomsday special look",
-              "doomsday leak",
-              "doomsday reaction"
+              "yorkie",
+              "yorktown",
+              "yorkshire pudding",
+              "yorktown hamilton",
+              "york pa",
+              "yorkie puppies",
+              "yorkshire accent",
+              "yorkie barking",
+              "yorkshire terrier",
+              "yorkshire pudding recipe"
             ],
-            "tension_hits": 1,
+            "tension_hits": 0,
             "total_hits": 10,
             "demand_score": 100
           }
@@ -524,28 +796,29 @@
       }
     },
     "evidence_urls": [
-      "https://youtube.com/watch?v=00mmlw69QoE",
-      "https://youtube.com/watch?v=hSWHerMLCBA",
-      "https://youtube.com/watch?v=M8rb8WrQ-bI",
-      "https://youtube.com/watch?v=XOAqX6g7KDU",
-      "https://youtube.com/watch?v=YHne-itlYmc",
-      "https://youtube.com/watch?v=UmJPLjT-L9U",
-      "https://youtube.com/watch?v=EkJbkCYsx4Y",
-      "https://youtube.com/watch?v=Qxnpi7I4fkg",
-      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5vMXQzWGl4VElHS084cFJvVVVoaWxQTGV0cHZXTlhXNTJ1MTlDeG9oMGJHRXhTek4yc0dNeXdpT3J2OWtSWl93Qk1uenNqY2lMX0FmMXJGNHUxZ2paRjNCWnFIeWlNLVU?oc=5",
-      "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQcUFCNU9Ibi1TTm1rTDVYZmhtQXI1NGFvWnFWdU8xNEhPR3Bfbjd4YzBXdUJUaldvNEw0Tzh1RVYzN2F6c0xVVUgzU0lUMlk4azBJNUxxT19QWE9mQlFxUTRsalZLakJtUU1ZUzBHV1F5ajdRaGxNa1lZcmFwdmFNT0UtclpEamJlOElTa2o3eG4zOVhzX2xMWkNSeFFXSDkwM0ZoZTZTc1UzNEl5WEdKeFV6cUxOajU4Qk5KTjJ0Wk9xWktZRkJyeGYzYlU0SnhoY1BmLThTNTdhc2R5dVlzYWc2LURUcDI1SHhr?oc=5",
-      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5xeU9MWFY5dXpuaTE4MnMxTGxiTHU2X1ZfMmdaNUJ5SHJFY2RPS3FfRnp1OEFxTk8tV2FKend3LTRFR3FyQXFwdW92R0pEWUQ4ZlY1d29iRDB2UFhaLWpNV0YzVjlPZlk?oc=5",
-      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1Nc1NYM1hhRXljNnF0NVc0WmtWaG1nYnl2aUZNb3IycmZpcWx2UEt2bU5LMnI2b0lDYkxxZ01XVXh2SWdlYmZpcFQySlpOSjFpOXRRUnpPMGJvWm9telhvTWQzQ3YtdFE?oc=5",
-      "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPZFduOFJVaEhUcDl5WEhsMG9BbWpTWXdrTTlrUUJReXJ5OHBfbGNnbXZXWF95RTNZYXRzbFJ1SUlGZEVEaENBeGNDSm5CYnpURnQyNzJRU2k1QnM5QUN0Z3JTOFBxUHJ3Y25saHBIV3hKNk5wam94cHBWMC1aRW9MUm1qYWc1RnBXYW84endKb2ZwODFCU2JmUVViWTdjNEV5NE50UENnVUgwaXpBekJIRDBYdlNqaU42MHFvVnFFQmRTTWdBcWoyMTRGOTlIQXc3RWN0Ql9EbDM1ZkctR1U3TmtkaHFlbmxHbGx5Uk1n?oc=5",
-      "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5NZ0stSmdtQmFFRFhELVhtTW5CclJzNEMtalptQWQxVlVReVBTMGhZWXlTaldIMW4tWkNwWEJPZkE5bmVKdVBDTllBZUhlWGYzNmhaS2N4YUh6YVFYR3pVUDdsbkdlNFk?oc=5"
+      "https://youtube.com/watch?v=qMNlOWU2SyU",
+      "https://youtube.com/watch?v=tke4quZ1T24",
+      "https://youtube.com/watch?v=ny0ewzX1A3c",
+      "https://youtube.com/watch?v=FffhEoUxgxM",
+      "https://youtube.com/watch?v=SlE_WOm5qIM",
+      "https://youtube.com/watch?v=f14WZ9E4t7Q",
+      "https://youtube.com/watch?v=t0WRdZFFHTU",
+      "https://youtube.com/watch?v=5pUOz3UkZ4k",
+      "https://youtube.com/watch?v=1Qt_JWhRn4c",
+      "https://youtube.com/watch?v=xXjrj0ZRup4",
+      "https://youtube.com/watch?v=lUy70L39PK4",
+      "https://youtube.com/watch?v=2l3x6XUxacE",
+      "https://youtube.com/watch?v=1OwrVrR12kQ",
+      "https://youtube.com/watch?v=7dHQdcOhINM",
+      "https://youtube.com/watch?v=fPCHZKLwsJk"
     ],
     "no_clip_downloaded": true,
     "note": "Mode meme : F00 ne télécharge AUCUN clip. Ces stats servent à ANGLESMITH (5 angles) + F04 (textes) + F05 (pack)."
   },
   "reference_clip_style": null,
   "verdict": {},
-  "platform_target": "youtube",
-  "market_target": "us_young_english",
+  "platform_target": "youtube_shorts",
+  "market_target": "US residents age 25-45 interested in @Zdak",
   "archivum": {
     "copywriting_8_sous_dossiers": {
       "README.md": "# ARCHIVUM/copywriting/ — Le musée du copywriting (savoir secret)\n\n> *Contrat de savoir. Source unique pour F04_COPYWRITER (Phase A setup_context).*\n> *Ce dossier contient le savoir secret du Warsmith : subliminal, slang, formulas, hooks.* \n> *STATUT : squelettes — Le Warsmith remplit chaque sous-dossier avec son savoir.*\n\n---\n\n## 8 sous-dossiers\n\n### 1. `hooks_library/`\n\nTypes de hooks + exemples annotés :\n- `types.md` — taxonomy : question, declaration, stat choc, mystery, contradiction, cible-naming...\n- `by_platform.md` — dominance par plateforme (TT, YT Shorts, Reels)\n- `by_market.md` — nuances culturelles par marché\n- `examples.md` — exemples annotés (puise dans `demons/`)\n\n### 2. `title_formulas/`\n\nFormules de titres :\n- `hormozi.md` — \"N façons de...\" / \"Si tu fais Y, voici Z...\"\n- `ogilvy.md` — promesse + spécificité\n- `iman_gadzhi.md` — aspiration overdelivery\n- `reframing.md` — teaser + transformation de sens\n- `applicability.md` — matrice formule × plateforme × marché\n\n### 3. `caption_frameworks/`\n\nStructures de caption :\n- `paragraph_magic.md` — structure du paragraphe reframing 2 lignes\n- `caption_structure.md` — caption patterns (spacing, emojis, vertical comma)\n- `reframe_patterns.md` — patterns : highlight→motivation, rires→dramatisation, etc.\n- `anti_lengths.md` — longueurs mortes (long-court-longue = killed)\n\n### 4. `subliminal_language/`\n\nSAVOIR SECRET :\n- `words_tests.md` — mots qui pressent des boutons cognitifs\n- `phonetic_patterns.md` — allitération, assonance, répétition d'voyelle\n- `cadence.md` — 1-2 temps, 3 temps, creux-pic\n- `rhetoric.md` — question rhétorique vs engagement, déclaration d'autorité\n\n### 5. `slang_by_market/`\n\nCodex slang :\n- `us_young_english_2026.md` — slang US jeune vivant + morts\n- `tiktok_shadowban_terms.md` — termes bannis TT (reviewed)\n- `cultural_references.md` — créateurs phares, événements, memes viables\n\n### 6. `hashtags_research/`\n\nStratégie hashtags :\n- `3_strates.md` — large + moyen + niche (ex : #fitness + #grindset + #disciplineculture)\n- `by_platform.md` — TT vs YT Shorts vs Reels (algos différents)\n- `banned_recent.md` — hashtags shadowbannés récents\n- `rotation_strategy.md` — éviter SAT (Same-Hashtag Syndrome)\n\n### 7. `on_screen_text_patterns/`\n\nTexte affiché dans la vidéo à keyframe précise :\n- `positioning.md` — top, center, bottom — règles\n- `timing.md` — 0.5s, 1s après hook, etc.\n- `color_readability.md` — couleur + readability sur la source\n- `reframing_on_screen.md` — phrase qui transforme le sens quand elle apparaît\n- `max_per_clip.md` — max 1 (overdose = clutter)\n\n### 8. `reference_clips_titles/`\n\nTitres de clips qui ont percé — indexés titre (pas clip entier) :\n- `<clip_id>_title.md` — `{ url, title, platform, views, angle_observed }`\n- Index puise dans `ARCHIVUM/demons/`\n\n### 9. `transcripts/` — matière brute des cours copywriting\n\nTranscriptions complètes des vidéos/cours de copywriting scrapées par F00_CAPTEURS\n(`--scrap-youtube --out ARCHIVUM/copywriting/transcripts`), organisées par\nchaîne : `<channel_slug>/<video_id>.json` (schéma core YOUTUBE : transcript +\nsegments + vues/subs/outlier).\n\nRègle : ces transcripts sont la **source** ; les 8 sous-dossiers ci-dessus sont\nles **extractions structurées** (hooks, formules, cadences...) que F04_COPYWRITER\nconsomme. Après analyse d'un transcript, le Warsmith (ou l'IRON) verse les\npatterns dans les sous-dossiers concernés.\n\n- [x] `transcripts/andr_dubois/zuidLUaG23w.json` — André Dubois, \"Grand cours de\n      copywriting\" (43 min, outlier 1.34, FR) — [DEV-KB-COPYWRITING]\n\n---\n\n## Liens avec copywriting_doctrine.md\n\nLa doctrine (`CONTRACTS/copywriting_doctrine.md`) est le cadre de jugement qui **résume** ces 8 sous-dossiers. La doctrine est lue par l'IRON premium en initialization, les 8 sous-dossiers sont lus par F04_COPYWRITER à chaque exécution.\n\nRègle : si un sous-dossier est mis à jour, la doctrine peut être régénérée (optionnel, car le system prompt est figé — mais le contexte Phase A est dynamique, donc pas besoin de régénérer).\n\n## Statut de remplissage\n\n| Sous-dossier | État |\n|---|---|\n| `hooks_library/` | squelettes |\n| `title_formulas/` | squelettes |\n| `caption_frameworks/` | squelettes |\n| `subliminal_language/` | squelettes (savoir secret Warsmith) |\n| `slang_by_market/` | squelettes |\n| `hashtags_research/` | squelettes |\n| `on_screen_text_patterns/` | squelettes |\n| `reference_clips_titles/` | squelettes |\n| `transcripts/` | 1 transcript (André Dubois) — source pour les 8 zones |\n\nLes sous-dossiers 1-8 attendent le savoir du Warsmith (extractions structurées).\n`transcripts/` se remplit via F00_CAPTEURS --scrap-youtube. `.gitkeep` présent dans chacun.\n",
@@ -561,14 +834,15 @@
       "youtube/shorts_rules.md": "# RÈGLES D'OR — SHORTS\n# Extraites de l'ARCHIVUM (MoneyBoyMaxx, Tim Danilov, vidIQ) + recherche web 2025-2026\n\n## SOURCES\n- MoneyBoyMaxx — \"Beginners Guide To YouTube Shorts In 2026\" (10h+, 22307 segments)\n- MoneyBoyMaxx — \"$41,784 Shorts Strategy\" (1367 segments)\n- MoneyBoyMaxx — \"Reviewed your Shorts channels\" (commentary niche)\n- MoneyBoyMaxx — \"Avoid demonetization 2026\"\n- Tim Danilov — \"Every Level Of Niche Bending Explained\"\n- Tim Danilov — \"How Rom Scaled To 1M Subs With YT Shorts\"\n- Tim Danilov — \"I Scaled 3 Channels To 1M Subs\"\n- vidIQ — \"$250K YouTube Shorts Strategy\"\n- vidIQ — \"Why Your Videos Get Ignored\"\n- Recherche web 2025-2026 (algorithm signals, loop hooks, formats, benchmarks)\n\n---\n\n## RÈGLE S1 : LA FORMULE (MoneyBoyMaxx)\n**Énoncé :** Un Short a deux fondamentaux : un payoff et un hook. Hooks = swipe rate. Payoffs = retention.\n**Structure :** Hook → Explain Payoff → Foreshadow Payoff → Reveal Payoff.\n**Application :** Structurer tout le script autour du payoff. Le payoff est le point d'ancrage.\n**Validité :** Confirmée par MBM ($41K/mois) + viewer qui a appliqué la formule = 6M vues.\n\n## RÈGLE S2 : LE HOOK SET UP LE PAYOFF (MoneyBoyMaxx)\n**Énoncé :** Un hook moyen qui set up le payoff est meilleur qu'un hook génial qui ne le fait pas.\n**Application :** Le hook doit créer un vide cognitif ET préparer le payoff. Pas juste être viral.\n**Validité :** Confirmée par MBM + analyse de bons/mauvais Shorts.\n\n## RÈGLE S3 : LE HOOK VISUEL SANS SON (MoneyBoyMaxx)\n**Énoncé :** Le hook visuel doit fonctionner même sans son. \"Someone should see your video even if they can't hear anything.\"\n**Application :** Contraste élevé, mouvement, émotion dans la première frame.\n**Validité :** Confirmée par MBM.\n\n## RÈGLE S4 : LE LOOP HOOK (MoneyBoyMaxx)\n**Énoncé :** La fin doit reconnecter au début. Les replays comptent comme des views depuis mars 2025.\n**Application :** Combiner 2+ techniques (callback + visual match cut). Le viewer ne doit pas réaliser qu'il re-regarde.\n**Validité :** Confirmée par MBM + recherche web (5 techniques identifiées).\n\n## RÈGLE S5 : SWIPE RATE GOLDEN (MoneyBoyMaxx)\n**Énoncé :** Swipe rate golden = >80-81%. Doit être croissant ou stable pendant le push.\n**Application :** Si swipe rate baisse pendant le push = audience reject. Le hook est mauvais.\n**Validité :** Confirmée par MBM sur ses propres vidéos (85% → 81% = succès).\n\n## RÈGLE S6 : RETENTION > 100% (MoneyBoyMaxx)\n**Énoncé :** Tous les Shorts réussis ont >100% retention (possible avec loops) + 80-81% swipe rate.\n**Application :** Si retention baisse = le script/storytelling est mauvais. Corriger le milieu.\n**Validité :** Confirmée par MBM sur multiple chaînes.\n\n## RÈGLE S7 : NICHE BENDING SHORTS (Tim Danilov)\n**Énoncé :** \"Lock the format, swap the market.\" Prendre un format prouvé et l'appliquer à un marché vierge.\n**Application :** Identifier le format (3D, whiteboard, commentary, etc.) → le bend vers un marché où il n'existe pas.\n**Validité :** Confirmée par Tim ($56K/mois Shorts) + exemples (Paint Explainer → AI, Low poly → casinos).\n\n## RÈGLE S8 : CHANGE ONE VARIABLE (Tim Danilov)\n**Énoncé :** Changer une seule variable à la fois (hook, character, setup). Tuer vite les mauvaises idées.\n**Application :** Trigger = 3 vidéos qui dépassent le median de la chaîne par 3x.\n**Validité :** Confirmée par Tim sur 3 chaînes à 1M.\n\n## RÈGLE S9 : COMMENTARY IS KING (MoneyBoyMaxx)\n**Énoncé :** Commentary = format le plus accessible pour débutants. Ranking = deuxième.\n**Application :** Prendre du contenu existant, ajouter commentary, editing. C'est transformative.\n**Validité :** Confirmée par MBM (6 chaînes commentary monétisées).\n\n## RÈGLE S10 : BE TRANSFORMATIVE (MoneyBoyMaxx)\n**Énoncé :** Reused content = #1 threat. Doit ajouter narrative, commentary, editing.\n**Application :** Jamais juste copier-coller. AI voiceovers autorisés (11 Labs) mais le contenu doit être original.\n**Validité :** Confirmée par MBM (a gagné plusieurs appeals reused content).\n\n## RÈGLE S11 : ZERO VIEW JAIL EXISTS (MoneyBoyMaxx)\n**Énoncé :** YouTube peut ne pas pusher le contenu dans le shorts feed. Zero views.\n**Application :** Compte neuf ou incognito pour tester. Aged Gmails parfois mieux.\n**Validité :** Confirmée par MBM. \"Algorithm is the audience, audience is the algorithm.\"\n\n## RÈGLE S12 : AI SLOP THREAT (vidIQ)\n**Énoncé :** 33% du feed Shorts est de l'AI slop. L'algorithme filtre l'AI low quality.\n**Application :** Qualité > quantité. Éviter l'AI low quality. Être transformative.\n**Validité :** Confirmée par vidIQ ($250K strategy analysis).\n\n## RÈGLE S13 : ENGAGED VIEWS = PAIEMENT (MoneyBoyMaxx)\n**Énoncé :** On est payé pour les engaged views, pas juste les views. 45% creator / 55% YouTube.\n**Application :** Higher English audience = higher RPM. Content must meet advertiser guidelines.\n**Validité :** Confirmée par MBM ($41K/mois).\n\n## RÈGLE S14 : SMART COPYING > INNOVATION (Tim Danilov)\n**Énoncé :** \"Smart timely copying > original innovation most of the time.\"\n**Application :** Prendre un format qui marche, l'adapter à un nouveau marché. Ne pas réinventer.\n**Validité :** Confirmée par Tim sur 5+ chaînes à 1M.\n\n## RÈGLE S15 : TEAM STRUCTURE (Tim Danilov — Rom Case Study)\n**Énoncé :** Team = idea person + script person + animator/editor. Founder approve final script.\n**Application :** 7 vidéos/semaine possible avec team. Founder maintient la qualité.\n**Validité :** Confirmée par Rom (1M subs Shorts).\n\n## RÈGLE S16 : SHORTS ARE VOLATILE (Tim + vidIQ)\n**Énoncé :** \"On shorts, content can be gone in a week or in a month.\" \"Shorts can turn on you fast.\"\n**Application :** Bâtir une marque, pas juste chasser des views. \"We're building brands and that's the differentiator.\"\n**Validité :** Confirmée par Tim + Rom + vidIQ.\n\n## RÈGLE S17 : OUTLIER SCORE SHORTS-SPECIFIC (Tim + recherche web)\n**Énoncé :** Outlier = video_views / channel_shorts_baseline. JAMAIS mixer avec long baseline.\n**Application :** 2x notable | 3-5x strong | 10x+ breakout. Trigger expérimentation = 3 vidéos à 3x le median.\n**Validité :** Confirmée par Tim + recherche web (Overseer Ros, Outlyr).\n\n## RÈGLE S18 : FEED SCROLL PASSIF (MoneyBoyMaxx + recherche web)\n**Énoncé :** Le feed Shorts est un scroll passif, pas une recherche. Le titre fait tout pour l'acquisition.\n**Application :** Pas de thumbnail personnalisée — c'est la première frame qui compte. Le titre doit accrocher.\n**Validité :** Confirmée par MBM + recherche web (YouTube Help).\n",
       "youtube/tim_danilov_rules.md": "# RÈGLES D'OR — Tim Danilov (Stratégie Faceless YouTube)\n# Extraites des transcriptions de 3 vidéos et validées par l'anti-bullshit\n\n## SOURCE\n- \"How To Start A Faceless YouTube BUSINESS In 15 Minutes\" (397 segments)\n- \"Never Start Those 5 Faceless YouTube Channels\" (703 segments)\n- \"How He Made $250,000 On A Faceless Channel In 1 YEAR\" (1600 segments)\n\n---\n\n## RÈGLE 1 : LA PYRAMIDE FACELESS\n**Énoncé :** Les niches faceless se répartissent sur une pyramide. Plus la niche est facile à exécuter, plus la concurrence est forte. Plus la niche est difficile, moins il y a de concurrents.\n**Application :** Viser le haut de la pyramide (niches complexes comme 2D/3D animation) pour éviter la concurrence. Le seuil d'entrée est ta barrière défensive.\n**Validité :** Confirmée par 2 vidéos + données chiffrées ($260k, $220k).\n\n## RÈGLE 2 : LE MARCHÉ À DEMANDE FIXE\n**Énoncé :** YouTube est un marché à demande fixe. Seule l'offre décide combien de vues chaque concurrent reçoit en moyenne. 100M de vues sur 10 chaînes ≠ 100M sur 50 000 chaînes.\n**Application :** Éviter les niches saturées où l'offre est massive. Chercher les gaps où la demande existe mais l'offre est faible.\n**Validité :** Confirmée logiquement + illustrée avec exemples chiffrés.\n\n## RÈGLE 3 : NICHE BENDING > COPIE DIRECTE\n**Énoncé :** Ne copie jamais une chaîne dans le même marché. Prends le format d'une chaîne A et applique-le à un marché B où il n'existe pas.\n**Application :** Identifier le format (ex: \"stickman expliquant un univers fictionnel\"), puis l'appliquer à un univers adjacent (Harry Potter → Seigneur des Anneaux).\n**Validité :** Confirmée par 3 vidéos + exemple concret (inflation expliquée avec bananes → fitness).\n\n## RÈGLE 4 : SCRIPT BENDING — LE SQUELETTE AVANT LE SCRIPT\n**Énoncé :** Ne demande jamais à l'IA d'écrire un script from scratch. Extrais d'abord le squelette viral (hook, rehooks, payoff, CTA) de la vidéo cible, puis réécris un script original qui respecte ce squelette.\n**Application :** Le squelette est le moule. La niche est le métal. L'IA sans squelette produit du générique. L'IA avec squelette produit du viral.\n**Validité :** Confirmée par 2 vidéos + démonstration en direct avec l'Art of YouTube MCP.\n\n## RÈGLE 5 : L'OCÉAN BLEU EST LE SEUL CHEMEN\n**Énoncé :** Ne fight pas dans un océan rouge (marché saturé). Cherche les content gaps où la demande est forte mais l'offre inexistante ou de mauvaise qualité.\n**Application :** YouTube pousse activement les chaînes qui remplissent ces gaps — l'algorithme est soulagé quand quelqu'un enfin répond à la demande.\n**Validité :** Confirmée par 3 vidéos + référence au livre \"Blue Ocean Strategy\".\n\n## RÈGLE 6 : LE BUDGET DÉTERMINÉ LA NICHE\n**Énoncé :** Le budget mensuel détermine quelle niche est accessible. $100-500 = niches simples (voix off + B-roll). $1000-2000 = niches complexes (animation, équipe). $5000+ = niches premium (3D, production complète).\n**Application :** Ne pas viser une niche qui nécessite un budget supérieur au tien. La pyramide faceless est aussi une pyramide de capital.\n**Validité :** Confirmée par 1 vidéo avec exemples chiffrés.\n\n## RÈGLE 7 : L'ÉQUIPE > L'AUTOMATISATION TOTALE\n**Énoncé :** L'IA accélère mais ne remplace pas la supervision humaine. Les chaînes à 6 chiffres utilisent une équipe (éditeurs, scripteurs) + l'IA comme outil, pas comme remplaçant.\n**Application :** Automatiser la recherche et le script, mais garder un humain pour le montage et le contrôle qualité.\n**Validité :** Confirmée par 2 vidéos + exemple de la chaîne à $260k avec équipe.\n\n## RÈGLE 8 : LA VALIDATION AVANT LA PRODUCTION\n**Énoncé :** Valide la niche avant de produire. Teste une vidéo, mesure la rétention et le CTR. Si ça marche, produit en série. Si ça ne marche pas, pivote.\n**Application :** Ne jamais lancer 10 vidéos d'un coup. Une vidéo test → mesurer → itérer → scaler.\n**Validité :** Confirmée par 2 vidéos.\n"
     },
-    "platform_profile": "[introuvable: youtube_profile.md]",
-    "market_profile": "[introuvable: us_young_english.md]",
+    "platform_profile": "[introuvable: youtube_shorts_profile.md]",
+    "market_profile": "[introuvable: US residents age 25-45 interested in @Zdak.md]",
     "angles": {
       "angle_patterns.json": "{\"angle_patterns\":[],\"_comment\":\"Squelette initial. A remplir par le Warsmith. Chaque entry : angle_id, angle_family, emotion_mode, engagement_type, reframe_dim, hook_style_fit[], platforms_fit[], markets_fit[], loop_tech, proof_examples[]. Voir ARCHIVUM/angles/README.md.\"}\n",
       "angle_performance.json": "{\"cumulative_packs_executed\":0,\"eligible_for_weighting\":false,\"angle_performance\":[],\"_comment\":\"Squelette initial. Nourri par F06_TRACKER. Active le poids apres 50 packs cumules.\"}\n"
     },
     "demons": {
-      "README.md": "# ARCHIVUM/demons/ — Clips qui dominent\n\n> *Démon (campagne + veille). Cartographie par TYRANT prospectif.*\n> *Lu par F02_TYRANT_CAMP pour identifier les océans bleus sur les campagnes futures.*\n\n---\n\n## Deux types de Démon ici\n\n### 1. Démon de campaigne\nLe clip de référence fourni par le Warsmith pour une campaigne spécifique. Stocké dans `ARCHIVUM/campaign/reference_clip.json` + `reference_skeleton.json`. **Pas dupliqué ici** — vit dans `campaign/`.\n\n### 2. Démon de veille (ici, dans `demons/`)\nIdentifié par `TYRANT/` (mode prospectif) hors campaigne. Le scanner (F00_CAPTEURS) peut aussi contribuer via `demon_scanner.py`.\n\nCes Démon veille sont la mémoire globale du territoire clipping — utilisés par F02_TYRANT_CAMP pour identifier des océans bleus sur les prochaines campagnes.\n\n---\n\n## Structure d'un `<demon_id>.json`\n\n```json\n{\n  \"demon_id\": \"slug_unique\",\n  \"demon_url\": \"...\",\n  \"platform\": \"youtube|tiktok|instagram\",\n  \"views\": N,\n  \"outlier_score\": <float>,    // > 3x = Démon\n  \"dominant_emotion\": \"drame|joie|outrage|inspiration|...\",\n  \"dominant_engagement_type\": \"question|assertion|cliffhanger|...\",\n  \"exploited_territories\": [\"drame\"],\n  \"blue_ocean_unlocked\": [\n    {\n      \"territory\": \"grossophobie\",\n      \"rationale\": \"...\",\n      \"estimated_saturation\": \"low|medium|high\",\n      \"blue_ocean_depth\": 1\n    }\n  ],\n  \"skeleton_extract\": {\n    \"hook_type\": \"...\",\n    \"loop_technique\": \"...\",\n    \"structure_narrative\": \"...\"\n  },\n  \"scanned_at\": \"<ISO8601>\"\n}\n```\n\n## Règle 1-couche\n\n`blue_ocean_depth` est **TOUJOURS 1** dans cette ARCHIVUM. Le scanner TYRANT ne doit jamais proposer une profondeur 2 — cela serait hérésie (cf. `CONTRACTS/clipping_rules.md` et `TYRANT/CODEBASE/TRACKING.md`).\n\n## À remplir\n\nCe dossier est nourri par `TYRANT prospectif` au runtime. À l'init, vide avec `.gitkeep`. Le Warsmith peut pré-peupler avec quelques Démon déjà connus s'il en a (optional — TYRANT les trouvera au scan).\n"
+      "README.md": "# ARCHIVUM/demons/ — Clips qui dominent\n\n> *Démon (campagne + veille). Cartographie par TYRANT prospectif.*\n> *Lu par F02_TYRANT_CAMP pour identifier les océans bleus sur les campagnes futures.*\n\n---\n\n## Deux types de Démon ici\n\n### 1. Démon de campaigne\nLe clip de référence fourni par le Warsmith pour une campaigne spécifique. Stocké dans `ARCHIVUM/campaign/reference_clip.json` + `reference_skeleton.json`. **Pas dupliqué ici** — vit dans `campaign/`.\n\n### 2. Démon de veille (ici, dans `demons/`)\nIdentifié par `TYRANT/` (mode prospectif) hors campaigne. Le scanner (F00_CAPTEURS) peut aussi contribuer via `demon_scanner.py`.\n\nCes Démon veille sont la mémoire globale du territoire clipping — utilisés par F02_TYRANT_CAMP pour identifier des océans bleus sur les prochaines campagnes.\n\n---\n\n## Structure d'un `<demon_id>.json`\n\n```json\n{\n  \"demon_id\": \"slug_unique\",\n  \"demon_url\": \"...\",\n  \"platform\": \"youtube|tiktok|instagram\",\n  \"views\": N,\n  \"outlier_score\": <float>,    // > 3x = Démon\n  \"dominant_emotion\": \"drame|joie|outrage|inspiration|...\",\n  \"dominant_engagement_type\": \"question|assertion|cliffhanger|...\",\n  \"exploited_territories\": [\"drame\"],\n  \"blue_ocean_unlocked\": [\n    {\n      \"territory\": \"grossophobie\",\n      \"rationale\": \"...\",\n      \"estimated_saturation\": \"low|medium|high\",\n      \"blue_ocean_depth\": 1\n    }\n  ],\n  \"skeleton_extract\": {\n    \"hook_type\": \"...\",\n    \"loop_technique\": \"...\",\n    \"structure_narrative\": \"...\"\n  },\n  \"scanned_at\": \"<ISO8601>\"\n}\n```\n\n## Règle 1-couche\n\n`blue_ocean_depth` est **TOUJOURS 1** dans cette ARCHIVUM. Le scanner TYRANT ne doit jamais proposer une profondeur 2 — cela serait hérésie (cf. `CONTRACTS/clipping_rules.md` et `TYRANT/CODEBASE/TRACKING.md`).\n\n## À remplir\n\nCe dossier est nourri par `TYRANT prospectif` au runtime. À l'init, vide avec `.gitkeep`. Le Warsmith peut pré-peupler avec quelques Démon déjà connus s'il en a (optional — TYRANT les trouvera au scan).\n",
+      "zdak_reference_video_6GvIpJn3E8w.json": "{\n  \"status\": \"ok\",\n  \"source_url\": \"https://www.youtube.com/shorts/6GvIpJn3E8w\",\n  \"video_id\": \"6GvIpJn3E8w\",\n  \"title\": \"Bro Traumatized the Teacher 😭\",\n  \"description\": \"Funny Twitter post meme \\\"I was grading my fourth graders' papers after class and saw this\\\" with a picture of a gross kid's test paper \\\"Do not touch is snot it fell from my nose\\\" x Shocked Sackboy turning around meme\\n\\n#teacher #school #memes #meme #funny #funnymemes #shorts\\n\\nShorts: WoWSMoments\\n#worldofwarships #wowsmoments\",\n  \"channel\": \"Zdak\",\n  \"channel_id\": \"UC_485Ao_SxlCaBlOZORVsVQ\",\n  \"published_at\": \"2026-08-19T21:28:31Z\",\n  \"category_id\": \"22\",\n  \"duration\": \"PT6S\",\n  \"tags\": [],\n  \"hashtags\": [\"#funny\", \"#funnymemes\", \"#meme\", \"#memes\", \"#school\", \"#shorts\", \"#teacher\", \"#worldofwarships\", \"#wowsmoments\"],\n  \"view_count\": 2466217,\n  \"like_count\": 14231,\n  \"comment_count\": 332,\n  \"provenance\": \"youtube_data_api_v3_observed\"\n}\n"
     },
     "knowledge_base": {
       "README.md": "# ARCHIVUM/knowledge_base/ — TOUT sur le clipping\n\n> *Le musée du savoir clipping. Nourrit tous les prompts de F04_COPYWRITER et F02_TYRANT_CAMP.*\n\n---\n\n## Sous-dossiers\n\n### `sites/`\nListe des sites clipping connus + links significatifs :\n- `whop.md` — Whop Discover, Content Rewards, Whop Clips (officiels)\n- `clippa.md` — guide Clippa, payouts observés\n- `cliptic.md` — Cliptic\n- `vidiq.md` — outils YouTube\n- `captions_ai.md` — Captions.ai, Submagic, Klap\n- `opusclip.md` — OpusClip\n- `tools.md` — outils IA clipping 2026 (recensement)\n\n### `docs/`\nDocumentation long-form sur le clipping :\n- Strategie clipping general\n- FTC compliance full doc\n- Account warmup guide (TikTok, IG, YT)\n- Anti-shadowban practices\n- Case studies achetés / collectés (PDF convertis en markdown)\n- Whop Content Rewards guide PDF converti\n- Hormozi / Iman Gadzhi / Lopez copywriting guides (si possédé)\n\n### `transcripts/`\nTranscriptions des vidéos qui parlent de clipping :\n- YouTube long form sur le clipping\n- Podcasts sur le side hustle clipping\n- Interviews avec des top clippers\n- Sous-dossier `youtube/` : **copie locale** des ~207 transcripts du core\n  `MONDES_FORGES/YOUTUBE/ARCHIVUM/transcripts/` (MoneyBoyMaxx, Tim Danilov,\n  vidIQ, Romayroh) — décision du Warsmith [DEV-ARCHIVUM-YOUTUBE] pour que\n  les frégates CLIPPING lisent localement (plateforme cible #1 = YouTube)\n- Ici, ajouter les transcripts **clippED spécifiquement sur le clipping Whop**\n  (différents des chaînes YouTube générale)\n- `logo/clifster_logo_guidelines.md` — guidelines placement logo (profil LOGO) :\n  logo pré-placé, auto-snap 9:16, zéro rejet — ajouté le 2026-08-04\n\n## Plateformes suivantes\n\nStructure dédiée par plateforme cible, dans l'ordre de priorité du siège :\n- `transcripts/youtube/` — rempli (copie core)\n- `transcripts/instagram/` — à remplir (prochaine cible, recherche Warsmith)\n- `transcripts/tiktok/` — à remplir\n\n## Différence vs core `MONDES_FORGES/YOUTUBE/ARCHIVUM/transcripts/`\n\nLe core YOUTUBE a des transcripts de chaînes spécialisées shorts en général.\nIci, on spécialise sur :\n- Le clipping Whop spécifiquement\n- Le side hustle clipping\n- Le copywriting appliqué au clipping\n- Les guides opérationnels (warmup, volume, multi-plateforme)\n\n## Copie locale youtube/\n\nDepuis [DEV-ARCHIVUM-YOUTUBE], les transcripts du core sont copiés dans\n`transcripts/youtube/` (figés au moment du transfert). La copie est\n**synchronisée manuellement par le Warsmith** si le core évolue.\n\n## À remplir par le Warsmith\n\n- [ ] `sites/whop.md` — liens + structure page Discover\n- [ ] `sites/clippa.md`, `sites/cliptic.md`, `sites/opusclip.md`, etc. — selon connaissances\n- [ ] `docs/whop_content_rewards_guide.md` — si PDF obtenu\n- [ ] `docs/ftc_compliance.md` — doc FTC\n- [ ] `docs/warmup_guide.md` — guide warmup multi-plateforme\n- [x] `transcripts/logo/clifster_logo_guidelines.md` — guidelines placement logo (profil LOGO)\n- [ ] `transcripts/` — autres transcripts des vidéos clipping trouvées par le Warsmith\n"

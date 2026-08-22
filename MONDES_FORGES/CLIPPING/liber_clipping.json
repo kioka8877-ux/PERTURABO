@@ -1,84 +1,59 @@
 {
-  "siege_id": "siege_20260818_134224",
+  "siege_id": "siege_20260821_223947",
   "campaign_id": null,
   "campaign_status": "closed",
-  "current_porte": "p4",
+  "current_porte": "init",
   "fleet_status": "capteurs_done",
   "mode": "logo",
   "inputs_warsmith": {
-    "directive_path": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
-    "reference_clip_path": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
+    "directive_path": "/home/ubuntu/perturabo_work/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/directive.md",
+    "reference_clip_path": "/home/ubuntu/perturabo_work/MONDES_FORGES/CLIPPING/ARCHIVUM/campaign/reference_clip.json",
     "platform_target": "youtube",
-    "market_target": "us_young_english",
-    "n_angles": 5,
-    "spin_humour": "Docteur Doom fait tout ce qu il fait parce qu il a perdu sa famille alors que la reponse etait juste depuis le debut : il essaie de creer un timeline ou la dette etudiante n existe pas. Taylor Swift en reacteur emotionnel, reaction des etudiants (heureux)."
+    "market_target": "US residents age 25-45 interested in @Zdak",
+    "n_angles": 10
   },
   "fregates_status": {
     "f01_scout": "pending",
     "f01_scout_output": null,
     "f02_tyrant_camp": "pending",
     "f02_tyrant_camp_output": null,
-    "anglesmith": "done",
-    "anglesmith_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F02_TYRANT_CAMP/OUT/angles.json",
+    "anglesmith": "pending",
+    "anglesmith_output": null,
     "f03_source_hunter": "pending",
     "f03_source_hunter_output": null,
-    "f04_copywriter": "done",
-    "f04_copywriter_output": "MONDES_FORGES/CLIPPING/F04_COPYWRITER/OUT/text_payload_A08.md",
-    "f05_packager": "done",
-    "f05_packager_output": "MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md",
+    "f04_copywriter": "pending",
+    "f04_copywriter_output": null,
+    "f05_packager": "pending",
+    "f05_packager_output": null,
     "f06_tracker": "pending",
     "f06_tracker_output": null,
     "tyrant": "pending",
     "tyrant_output": null,
     "capteurs": "done",
-    "capteurs_output": "/workspace/PERTURABO/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_student_loan_forgiveness.md"
+    "capteurs_output": "/home/ubuntu/perturabo_work/MONDES_FORGES/CLIPPING/F00_CAPTEURS/OUT/meme_virality_new_york_bagel.md"
   },
-  "portes_validated": [
-    "2",
-    "4"
-  ],
-  "gate_decisions": {
-    "gate_2": {
-      "validated": true,
-      "notes": "8 angles meme forges via premium GLM 5.2 (marvel doomsday), anti-spam emotions OK, spin humour Warsmith injecte",
-      "timestamp": "2026-08-18T14:41:03Z"
-    },
-    "gate_4": {
-      "validated": true,
-      "notes": "Pack EXPORT/production_pack_meme_marvel_doomsday.json valide par l'operateur : 8 videos, meme_003 (A01-A04, A07-A08) / meme_002 (A05-A06), watermark @memecocktail, durees 6s, textes non valides par l'operateur (Gate 3)", 
-      "timestamp": "2026-08-18T20:21:00Z"
-    }
-  },
-  "packs_expedies_count": 1,
+  "portes_validated": [],
+  "gate_decisions": {},
+  "packs_expedies_count": 0,
   "packs_posted_count": 0,
   "packs_submitted_whop_count": 0,
-  "last_event": "2026-08-18T20:25:00Z",
-  "siege_started_at": "2026-08-18T13:42:24Z",
-  "siege_closed_at": "2026-08-18T20:25:00Z",
+  "last_event": "campaign_closed",
+  "siege_started_at": "2026-08-21T22:39:47Z",
+  "siege_closed_at": "2026-08-22T08:53:55Z",
   "log_event": [
     {
-      "at": "2026-08-18T13:42:24Z",
+      "at": "2026-08-21T22:39:47Z",
       "event": "siege_started",
       "angle_id": null
     },
     {
-      "at": "2026-08-18T14:41:03Z",
-      "event": "gate_2_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-18T20:21:00Z",
-      "event": "gate_4_valide",
-      "angle_id": null
-    },
-    {
-      "at": "2026-08-18T20:25:00Z",
-      "event": "siege_closed",
+      "at": "2026-08-21T22:39:47Z",
+      "event": "siege_started",
       "angle_id": null
     }
   ],
   "iw_custos": {
-    "last_validation": "2026-08-18T20:19:06Z",
+    "last_validation": "2026-08-22T08:53:55Z",
     "errors": []
   }
 }

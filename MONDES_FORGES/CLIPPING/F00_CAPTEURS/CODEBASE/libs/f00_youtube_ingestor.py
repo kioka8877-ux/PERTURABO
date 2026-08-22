@@ -99,30 +99,45 @@ def video_stats(video_id: str) -> dict:
 
 def search(keywords: list[str], max_results: int = 8,
            freshness_days: int = 1) -> dict:
-    """Recherche par mot-clé triée par vues (order=viewCount).
+    """Recherche multi-sondes, triée par vues, avec preuves observées.
 
-    Retourne les vidéos + leurs stats complètes via un 2e appel batch.
+    Chaque sonde est envoyée séparément : concaténer des hashtags et des
+    questions dans un seul ``q`` rend la recherche YouTube trop restrictive.
+    Les résultats sont ensuite dédupliqués avant la récupération des stats.
     """
-    q = " ".join(keywords[:6])
-    data, err = _get("/search", {
-        "part": "snippet",
-        "q": q,
-        "type": "video",
-        "order": "viewCount",
-        "maxResults": max_results,
-        "publishedAfter": f"{_days_ago_iso(freshness_days)}",
-    })
-    if data is None:
-        return {"status": "fetch_failed", "error": err, "videos": []}
+    probes = list(dict.fromkeys(k.strip() for k in keywords if k and k.strip()))[:12]
+    if not probes:
+        return {"status": "ok", "error": None, "query": "", "videos": []}
+    search_rows = []
+    errors = []
+    for q in probes:
+        data, err = _get("/search", {
+            "part": "snippet",
+            "q": q,
+            "type": "video",
+            "videoDuration": "short",
+            "regionCode": "US",
+            "relevanceLanguage": "en",
+            "order": "viewCount",
+            "maxResults": min(max_results, 8),
+            "publishedAfter": f"{_days_ago_iso(freshness_days)}",
+        })
+        if data is None:
+            errors.append(f"{q}: {err}")
+            continue
+        search_rows.extend((data or {}).get("items", []) or [])
 
-    items = (data or {}).get("items", []) or []
-    ids = [it.get("id", {}).get("videoId", "") for it in items if it.get("id")]
+    ids = list(dict.fromkeys(
+        it.get("id", {}).get("videoId", "") for it in search_rows if it.get("id", {}).get("videoId")
+    ))
     videos = []
     if ids:
-        stats_data, _err = _get("/videos", {
+        stats_data, stats_err = _get("/videos", {
             "part": "statistics,snippet,contentDetails",
-            "id": ",".join(ids),
+            "id": ",".join(ids[:50]),
         })
+        if stats_data is None:
+            errors.append(f"stats: {stats_err}")
         for it in ((stats_data or {}).get("items", []) or []):
             sn = it.get("snippet", {})
             st = it.get("statistics", {})
@@ -132,6 +147,7 @@ def search(keywords: list[str], max_results: int = 8,
             hashtags = sorted(set(__import__("re").findall(r"#[A-Za-z0-9_]+", f"{title} {description}")))
             videos.append({
                 "video_id": it.get("id"),
+                "url": f"https://youtube.com/watch?v={it.get('id')}",
                 "title": title,
                 "description": description,
                 "channel": sn.get("channelTitle", ""),
@@ -144,7 +160,13 @@ def search(keywords: list[str], max_results: int = 8,
                 "comment_count": int(st.get("commentCount", 0) or 0),
             })
     videos.sort(key=lambda v: v.get("view_count", 0), reverse=True)
-    return {"status": "ok", "error": None, "query": q, "videos": videos}
+    return {
+        "status": "ok" if not errors or videos else "fetch_failed",
+        "error": "; ".join(errors[:3]) if errors else None,
+        "query": " | ".join(probes),
+        "probes": probes,
+        "videos": videos,
+    }
 
 
 def trending(max_results: int = 10, category_id: str | None = None) -> dict:
