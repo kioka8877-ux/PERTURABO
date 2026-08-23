@@ -145,3 +145,12 @@ En mode `logo` / `meme`, F05 produit un pack unique `OUT/production_pack_logo.js
 Chaque vidéo doit conserver `tweet.text`, `text_emotion`, `emotion`, les métadonnées et une balise mème validée par le Champion. Une même balise, telle que `M1`, peut être appliquée aux dix vidéos si le Champion le décide. Le texte motion doit rester cohérent avec les personnes du tweet et ne doit jamais provenir d’un ancien siège.
 
 L’assemblage F05 est distinct de la validation et de l’export. Le Champion examine le pack complet avant la copie dans `EXPORT/`. F05 ne clôture pas le siège et ne décide jamais à la place du Champion. La clé premium est utilisée par F04 lorsque la génération éditoriale l’exige ; F05 reste déterministe.
+
+
+## Addendum MEME V2 — source sociale et transformation
+
+En mode MEME V2, F05 assemble un pack à partir de `source_post` fourni et contrôlé par F01 et des sorties F04. Le pack doit conserver séparément la copie du post original, sa capture, son URL, son auteur, sa date et ses métriques, puis la contribution PERTURABO : `reaction_angle`, `reaction_tweet`, `text_emotion` et `metadata`.
+
+F05 ne réécrit aucun de ces champs et ne sollicite pas de modèle premium. La capture et le crédit de la source sont destinés à LACRIMAE ; la réaction originale doit être visuellement distinguée de la source. Les angles et les réactions déjà validés par le Champion ne peuvent pas être remplacés par une paraphrase automatique.
+
+Une balise mème, comme `M1`, peut être commune à plusieurs vidéos uniquement si le Champion l’a explicitement choisie. L’export dans `EXPORT/`, l’expédition et la fermeture du siège restent des étapes séparées, postérieures à la revue et à la validation explicite du Champion.

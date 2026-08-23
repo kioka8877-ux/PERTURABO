@@ -177,3 +177,12 @@ Pour le mode MEME, F04 ne produit pas une liste de variantes interchangeables. C
 Le tweet est un mini-récit autonome, en trois lignes maximum, sans marqueurs `A:` / `B:`. Le champ `text_emotion` est distinct du tweet : il s’agit d’un texte motion de quatre mots maximum, terminé par `:`, qui décrit la réaction des personnes réellement présentes, par exemple `My sister and me right now:` ou `The two neighbors right now:`. Il est interdit de conserver un personnage, une formule ou un sujet résiduel d’un ancien siège.
 
 Le premium peut rédiger le tweet, le texte motion et les métadonnées, mais il ne valide aucune Gate. L’Oracle contrôle la cohérence et signale les défauts ; le Champion décide. F05 assemble sans réécrire et la release n’est exportée qu’après validation explicite du Champion.
+
+
+## ADDENDUM V2 — SOURCE SOCIALE ET REACTION TWEET
+
+Dans le mode MEME V2, la source sociale fournie par le Champion est la matière première ; elle n’est pas le contenu PERTURABO. Le `reaction_tweet` est la pièce stratégique centrale : il doit produire une lecture puissante, une tension ou une chute et viser explicitement `market_target`. Il ne doit pas simplement paraphraser le post original.
+
+Le flux éditorial est strictement séparé : `source_post` réel et archivé → `reaction_angle` distinct → `reaction_tweet` original → `text_emotion` court et contextualisé → métadonnées dérivées. Chaque angle doit changer réellement de tension, de lecture, de public ou de ressort comique. Des variantes lexicales d’une même blague constituent une cannibalisation.
+
+Le Champion valide le post source, les angles, la réaction, le motion et les métadonnées à leurs Gates respectives. Le premium peut générer ; l’Oracle peut contrôler et suggérer ; aucun modèle ne peut valider une Gate à la place du Champion.

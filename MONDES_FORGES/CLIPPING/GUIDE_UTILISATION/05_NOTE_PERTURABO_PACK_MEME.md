@@ -107,3 +107,33 @@ Le texte motion ne doit pas être copié mécaniquement d’un angle à l’autr
 F05 assemble le pack, mais ne décide pas de la Gate. Le Champion examine les dix tweets, les dix textes motion, les métadonnées et la balise mème avant l’export. La copie dans `EXPORT/` et l’expédition à LACRIMAE ne sont permises qu’après cette validation explicite.
 
 La clé premium sert à la génération éditoriale lorsqu’elle est activée ; F05 reste un assembleur déterministe et ne doit pas simuler un appel premium.
+
+## 8. Contrat MEME V2 : source et transformation
+
+Le pack ne doit plus traiter le post original comme un tweet PERTURABO. Les deux contenus sont séparés :
+
+| Champ | Contenu | Règle |
+|---|---|---|
+| `source_post.text` | Copie fidèle du tweet ou post Reddit choisi par le Champion | Ne pas le réécrire comme s’il était original |
+| `source_post.screenshot` | Capture originale lisible | Conservée comme preuve et fournie à LACRIMAE |
+| `source_post.url` | URL publique | Obligatoire lorsque disponible |
+| `source_post.author` | Auteur, compte ou subreddit | Ne pas inventer |
+| `source_post.observed_at` | Date et heure d’observation | Conserver l’horodatage |
+| `source_post.metrics` | Likes, vues, commentaires, reposts ou score | Valeurs observées ; les inconnues restent inconnues |
+| `reaction_tweet` | Réaction originale PERTURABO | Doit apporter une lecture, une tension ou une chute ; la paraphrase seule est interdite |
+| `text_emotion` | Motion court | Dérivé du contexte de réaction, sans résidu d’un autre siège |
+| `metadata` | Titre, description et tags | Dérivés de la source et de la réaction, sans promesse automatique de fair use ou de monétisation |
+
+La source affichée et la réaction doivent être visuellement distinctes dans le pack. Le pack doit permettre à LACRIMAE de montrer clairement ce qui provient du post original et ce qui constitue la contribution créative de PERTURABO.
+
+## 9. Puissance et anti-cannibalisation
+
+Le `reaction_tweet` est la pièce stratégique principale. Chaque réaction doit viser le `market_target` déclaré et posséder un point de vue identifiable. Dix réactions qui changent seulement le vocabulaire, le personnage ou la ponctuation sont une cannibalisation et doivent être refusées.
+
+Pour une même source, plusieurs angles ne sont acceptables que si la tension, la lecture, le public visé ou le ressort comique changent réellement. F04 doit enregistrer `reaction_angle` afin que la diversité puisse être contrôlée avant F05.
+
+## 10. Vision et conformité
+
+Un modèle de vision n’est pas obligatoire lorsque F01 reçoit la copie textuelle du post. Une vérification visuelle ou OCR peut être activée uniquement pour contrôler la lisibilité et la correspondance entre la capture et le texte fourni. La capture ne constitue pas à elle seule une autorisation de réutilisation ; la transformation, l’attribution et la conformité aux règles de la plateforme doivent être examinées avant publication.
+
+F05 assemble les champs validés et ne réécrit ni la source ni la réaction.

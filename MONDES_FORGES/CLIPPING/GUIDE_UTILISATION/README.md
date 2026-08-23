@@ -49,17 +49,26 @@ Règle de nommage : `NN_MODE_<PROFIL>_<SOUS_MODE>.md` (NN = ordre, 2 chiffres).
 ## 🏗️ Rappel de l'architecture (en bref)
 
 ```
-F00_CAPTEURS (recherche contextualisée + scrap écosystème) ── avant Gate 1
-F01 SCOUT        → capture le specimen (source)
-F02 TYRANT CAMP  → verdict GO/NO-GO (Gate 1)
-ANGLESMITH (F02) → forge les angles (Gate 2)
-F03 SOURCE HUNTER→ sélectionne asset + segments (skippé en mode logo et meme)
-F04 COPYWRITER   → forge les textes : titre, paragraphe, metadata, tags (Gate 3)
-F05 PACKAGER     → assemble le pack final (Gate 4)
+F00_CAPTEURS     → en pause en MEME V2 ; actif seulement pour les anciens scans
+F01 SCOUT        → archive et contrôle la source sociale fournie (Gate 1)
+F02 TYRANT CAMP  → analyse source/marché et verdict
+ANGLESMITH (F02) → forge les angles de réaction (Gate 2)
+F03 SOURCE HUNTER→ ignorée en mode MEME V2
+F04 COPYWRITER   → forge reaction_tweet + text_emotion + métadonnées (Gate 3)
+F05 PACKAGER     → assemble source + transformation (Gate 4)
 F06 TRACKER      → suit les posts après publication
 ORCHESTRATOR     → le nerf central : gates + ledger + expédition
 ```
 
-**Mode meme** (logo / meme) : l'opérateur fournit un **sujet ou mot-clé** → F00 scanne les preuves, **0 clip téléchargé** → F02 forge jusqu’à 10 angles distincts → F04 forge pour chaque angle le tweet, le texte motion et les métadonnées → l’opérateur valide → F05 assemble le pack avec la balise mème choisie, par exemple `M1` → l’opérateur valide puis copie dans EXPORT → **LACRIMAE** monte via `04_MODE_MEME.md`. **F01 et F03 sont ignorés en mode meme.**
+**Mode MEME V2** : le Champion fournit un **tweet ou post Reddit réel**, sa copie textuelle, sa capture, son URL, son auteur, sa date et ses métriques disponibles → F01 archive et contrôle la source → F02/ANGLESMITH analyse et forge jusqu’à 10 réactions distinctes → F04 produit un `reaction_tweet` puissant, un `text_emotion` contextualisé et les métadonnées → l’opérateur valide → F05 assemble source + transformation avec la balise choisie, par exemple `M1` → l’opérateur valide puis copie dans `EXPORT` → **LACRIMAE** monte via `04_MODE_MEME.md`. **F00 est en pause et F03 est ignorée en MEME V2.**
 
 **Vocabulaire** : on dit **gate** (ou porte) — `gate 1` à `gate 4`. Le champion **valide ou rejette** chaque gate. Rien ne passe sans ta signature.
+
+
+## Addendum MEME V2 — sourcing manuel et réaction originale
+
+Le mode MEME V2 ne démarre plus par un mot-clé inventé par le forge. Le Champion fournit un tweet ou post Reddit réel, sa copie textuelle, une capture, son URL, son auteur, sa date et les métriques disponibles. F01 archive et contrôle cette source ; F00 reste en pause dans ce mode.
+
+La source (`source_post`) est distincte de la transformation PERTURABO (`reaction_tweet`). ANGLESMITH forge des lectures réellement différentes, F04 produit une réaction puissante ciblée sur le marché, puis un `text_emotion` simple et contextualisé, et F05 assemble le tout pour LACRIMAE. Le Champion reste l’unique autorité des Gates.
+
+Référence détaillée : `04_MODE_MEME.md` et `05_NOTE_PERTURABO_PACK_MEME.md`.

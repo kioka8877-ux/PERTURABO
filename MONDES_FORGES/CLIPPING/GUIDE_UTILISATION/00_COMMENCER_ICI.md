@@ -9,7 +9,7 @@
 
 1. **Tu es le Champion (Warsmith).** Rien ne se valide sans TOI. Chaque gate = ta signature.
 2. **Tout tourne sur du Python stdlib.** Aucune installation de dépendances requise. On lance les scripts depuis leur dossier `CODEBASE/`.
-3. **Le dossier `OUT/` des frégates est gitignoré** (sorties runtime). Pour livrer un pack, on le copie dans `EXPORT/` (sinon OMNIS_WATCH ne peut pas le récupérer sur GitHub).
+3. **Le dossier `OUT/` des frégates est gitignoré** (sorties runtime). Pour livrer un pack, on le copie dans `EXPORT/` (sinon LACRIMAE ne peut pas le récupérer sur GitHub).
 
 ## 2. L'état du siège en un coup d'œil
 
@@ -29,17 +29,19 @@ python3 -c "import json; d=json.load(open('MONDES_FORGES/CLIPPING/liber_clipping
 - `campaign_status: active` → la campagne tourne.
 - `campaign_status: closed` → siège isolé ; aucun résidu ne doit être repris automatiquement.
 
+En mode MEME V2, F00 est en pause : le Champion choisit la source et F01 l’archive. Oracle présente les sorties ; le Champion est l’unique autorité des Gates.
+
 La fermeture de la campagne est distincte de la validation d’une Gate : seul le Champion décide des Gates, puis IW_CUSTOS enregistre la clôture après l’export.
 
 ## 3. La séquence type d'un siège (résumé)
 
 ```
-1. Déposer les inputs dans ARCHIVUM/campaign/  (directive + reference_clip + article/joke)
+1. MEME V2 : déposer le post réel, sa copie, sa capture, son URL et ses métriques dans ARCHIVUM/campaign/
 2. orchestrator.py --start-siege               (ouvre le siège)
-3. Gate 1 : verdict  →  valider
-4. Gate 2 : angles   →  valider
-5. Gate 3 : textes   →  valider
-6. Gate 4 : pack → valider → copie dans EXPORT/ → transmission à LACRIMAE
+3. Gate 1 : F01 source/provenance  →  valider
+4. Gate 2 : angles de réaction     →  valider
+5. Gate 3 : reaction_tweet + motion + métadonnées → valider
+6. Gate 4 : pack source + transformation → valider → copie dans EXPORT/ → transmission à LACRIMAE
 7. Après l’export : fermer le siège avec `IW_CUSTOS.py --mode close-campaign`
 8. Commit + push GitHub des artefacts de production, sans secrets ni fichiers temporaires
 ```

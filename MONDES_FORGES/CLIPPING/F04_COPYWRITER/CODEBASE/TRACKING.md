@@ -330,3 +330,17 @@ Pour le mode MEME, F04 produit par angle un payload brut de revue `text_payload_
 `text_emotion` est limité à quatre mots et doit identifier la réaction des personnes réellement présentes dans le tweet, par exemple `My sister and me right now:` ou `The two neighbors right now:`. Il ne peut pas conserver une formule, un personnage ou un sujet résiduel d’un autre siège.
 
 Le contexte narratif doit varier angle par angle : relation, lieu, déclencheur et chute sont contrôlés pour empêcher le cannibalisme de forme. Le Champion valide le tweet, le texte motion et les métadonnées ; Oracle peut signaler une anomalie, mais ne valide jamais la Gate à sa place. Les sorties brutes restent en revue jusqu’à cette validation.
+
+
+## Addendum MEME V2 — source, réaction et motion
+
+F04 reçoit une source sociale déjà archivée par F01. Il ne réécrit jamais `source_post` comme s’il s’agissait de son propre contenu. Pour chaque angle, il produit séparément :
+
+| Champ | Contrat |
+|---|---|
+| `reaction_angle` | Lecture stratégique explicitement ciblée sur `market_target` |
+| `reaction_tweet` | Réaction originale, puissante, autonome et transformatrice ; la paraphrase seule est interdite |
+| `text_emotion` | Motion court, simple et cohérent avec les personnes ou l’audience du contexte |
+| `metadata` | Titre, description et tags dérivés de la source et de la réaction, sans résidu d’un autre siège |
+
+Le `reaction_tweet` est la pièce stratégique principale. Dix variantes lexicales du même gag sont une cannibalisation. Les angles doivent changer réellement de tension, de lecture, de public visé ou de ressort comique. `text_emotion` ne doit jamais contenir de marqueur `A:` / `B:`, de personnage absent ou de formule héritée d’une autre campagne. Le premium génère si activé ; Oracle contrôle ; seul le Champion valide la Gate F04.

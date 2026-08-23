@@ -100,3 +100,14 @@ Les réponses brutes de l’Oracle et les analyses du Directeur doivent rester d
 - **F05 n’écrit rien.** Il assemble les payloads F04, la balise mème et les métadonnées. Le mode logo/meme produit un pack unique `production_pack_logo.json` avec `videos[]`.
 - **La balise mème doit être explicite.** Une balise comme `M1` peut être commune aux dix vidéos si le Champion l’a décidée ; elle ne doit pas être confondue avec les anciens identifiants `meme_001` / `meme_002`.
 - **Revue avant export.** F05 peut assembler hors `EXPORT`, mais la copie dans `EXPORT/` et l’expédition à LACRIMAE attendent la validation explicite du Champion.
+
+
+## 13. MEME V2 — source sociale et réaction puissante
+
+Le mode MEME V2 commence par une source sociale réelle fournie par le Champion : copie textuelle, capture, URL, auteur, date et métriques disponibles. F00 est en pause ; F01 archive et contrôle la provenance. Une source sans preuve ou sans contexte exploitable reste en revue et ne doit pas alimenter une série.
+
+Le `reaction_tweet` est la pièce stratégique principale. Il doit viser le marché déclaré, apporter un point de vue ou une chute et être clairement distinct de la source. Dix mini-scènes inventées autour d’un mot-clé, ou dix reformulations d’un même gag, ne constituent pas une stratégie meme viable.
+
+Le `text_emotion` est produit après la réaction et reste simple : il correspond aux personnes ou à l’audience du contexte (`Young adults seeing this:`, `My sister and me right now:`). Les résidus d’un autre siège, les marqueurs `A:` / `B:` et les motions génériques sont des erreurs bloquantes.
+
+F05 assemble la source, la capture, le crédit, la réaction et les métadonnées ; il ne génère rien. Le Champion valide chaque Gate, l’Oracle suggère uniquement, et l’export ainsi que la fermeture restent postérieurs à cette validation.

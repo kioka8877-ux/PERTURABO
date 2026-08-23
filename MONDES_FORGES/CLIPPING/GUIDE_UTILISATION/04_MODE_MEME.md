@@ -1,10 +1,14 @@
 # 04_MODE_MEME — Guide complet
 
-> Le mode **logo / meme** : tu fournis un **sujet ou mot-clé** → F00 scanne la viralité
-> avec des preuves observées → ANGLESMITH propose jusqu’à **10 angles** → F04 forge
-> pour chaque angle un tweet, un texte motion et des métadonnées → F05 assemble
-> un pack unique avec le mème validé → la release est revue par le Champion puis
+> **MODE MEME V2** : le Champion fournit un tweet ou post Reddit réel avec sa copie
+> textuelle et sa capture → F01 archive et contrôle la source → ANGLESMITH propose
+> des angles de réaction → F04 forge pour chaque angle un **reaction_tweet puissant**,
+> un `text_emotion` contextualisé et les métadonnées → F05 assemble un pack avec
+> la source et la transformation → la release est revue par le Champion puis
 > transmise à **LACRIMAE**, qui réalise la vidéo.
+>
+> F00 est en pause dans ce mode et ne fabrique plus de sujets à partir d’un mot-clé.
+> La source originale et la réaction PERTURABO sont toujours deux champs distincts.
 >
 > Doctrine issue de la dissection visuelle du démon @zdak (Kimi K3, rapport
 > `answers/question-2026-08-15-02.md` du repo Scriptorum).
@@ -17,11 +21,10 @@
 
 ## 🎯 Le but en 3 lignes
 
-1. Tu donnes un **mot-clé** (ex : `westbrook retirement`) → le forge sait ce qui
-   est viral dessus et pourquoi.
-2. Le forge sort jusqu’à **10 angles** : chaque angle reçoit un **fake tweet** (maximum 3 lignes), un **texte motion** (maximum 4 mots), une émotion et des métadonnées. Le texte motion doit refléter le contexte et les personnes du tweet.
-3. **LACRIMAE** monte chaque vidéo selon la **doctrine 6 couches** ci-dessous
-   et poste → vues suivies par F06.
+1. Tu fournis un **post réel** : copie textuelle, capture, URL, auteur, date et métriques disponibles.
+2. Le forge analyse la source puis propose jusqu’à **10 angles de réaction** réellement distincts.
+3. Chaque angle reçoit un **reaction_tweet puissant** (maximum 3 lignes), un `text_emotion` court et contextualisé, une émotion et des métadonnées dérivées de la source et de la réaction.
+4. **LACRIMAE** monte chaque vidéo selon la doctrine ci-dessous et poste ; les vues sont suivies par F06.
 
 ---
 
@@ -32,10 +35,11 @@
 | `keyword.txt` | Le **mot-clé** du siège | `westbrook retirement` |
 | `directive.md` | Le brief de la campagne | `MEME MODE: keyword ...` |
 
-> ⚠️ **Différence clé avec le mode informatif** : il n'y a **ni F01 ni F03**.
-> Aucun clip n'est fourni, aucun asset n'est chassé, aucun segment n'est
-> sélectionné. F00 ne **télécharge** rien : il scanne les **stats** (vues,
-> tendances, demandes) pour savoir ce qui est viral.
+> ⚠️ **Mode MEME V2** : F00 est en pause. F01 reçoit une source manuelle complète :
+> `source_post.text`, `source_post.screenshot`, `source_post.url`, auteur, date et
+> métriques disponibles. F01 ne nécessite pas de vision si la copie textuelle est
+> fournie ; il contrôle la cohérence et archive la preuve. F03 reste ignorée : aucun
+> clip n’est chassé et aucun segment n’est sélectionné.
 
 ---
 
@@ -50,24 +54,30 @@ python3 orchestrator.py --start-siege
 
 ---
 
-### 🚪 GATE 1 — F00 : scan de viralité par mot-clé (multi-sources)
+### 🚪 GATE 1 — F01 : intake et validation de la source manuelle
 
-**Frégate** : `F00_CAPTEURS` — scanne **TOUTES** les sources, SANS télécharger.
+**Frégate** : `F01_SCOUT` — archive et contrôle la source fournie par le Champion, sans télécharger de clip.
 
-```bash
-cd ../../F00_CAPTEURS/CODEBASE
-python3 capteurs.py --scan-meme --keyword westbrook --sources youtube trends rss reddit --max-videos 8
+```text
+source_post.text       = copie exacte du tweet ou post Reddit
+source_post.screenshot = capture originale lisible
+source_post.url        = URL publique de la source
+source_post.author     = auteur ou subreddit
+source_post.observed_at = date/heure d’observation
+source_post.metrics    = vues, likes, commentaires, reposts ou score disponibles
 ```
 
-**Sortie** : `F00_CAPTEURS/OUT/meme_virality_<keyword>.json` (+ `.md`)
+**Sortie** : `F01_SCOUT/OUT/source_post_<source_id>.json` (+ capture archivée et résumé de contrôle)
 
 | Champ | Signification |
 |---|---|
-| `keyword` | le mot-clé fourni |
-| `viral_evidence` | ce qui est viral US pour ce mot-clé (URLs réelles + stats) |
-| `sources_scanned` | les sources effectivement interrogées |
-| `signals` | vues YT, tendance, demande, fraîcheur, etc. (réelles) |
-| `recommended_niche` | la niche la plus porteuse (synthèse) |
+| `source_post.text` | copie textuelle exacte du post |
+| `source_post.screenshot` | capture utilisée comme preuve visuelle |
+| `source_post.url` | URL de provenance |
+| `source_post.author` | auteur, compte ou subreddit |
+| `source_post.observed_at` | horodatage de collecte |
+| `source_post.metrics` | métriques observées, avec valeurs manquantes conservées |
+| `source_post.provenance_status` | `verified`, `review` ou `blocked` |
 
 **Ce que F00 ne fait PAS** : télécharger la vidéo, fournir un clip, inventer
 une stat. `signal_vues_youtube` = stats réelles de l'API YouTube.
