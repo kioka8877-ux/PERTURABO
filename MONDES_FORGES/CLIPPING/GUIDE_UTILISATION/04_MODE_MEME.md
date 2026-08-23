@@ -266,3 +266,31 @@ Le Champion est l’unique autorité des Gates. Oracle peut signaler un défaut 
 
 👉 **Prochaine étape après le siège** : `F06_TRACKER` — `python3 tracker.py --post`
 une fois les vidéos publiées (suit vues 1h/24h, payout, learnings).
+
+
+## MODE MEME V1 OU V2 — QUESTION OBLIGATOIRE D’ORACLE
+
+Quand le Champion dit « entre en mode meme », Oracle doit demander avant toute action :
+
+> **MEME V1 ou MEME V2 ?**
+
+**MEME V1** conserve le flux historique par mot-clé : F00 Discovery, angles, F04, F05. **MEME V2** utilise une source sociale fournie manuellement : F00 est en pause, F01 archive la source, F02/ANGLESMITH analyse et forge, F04 crée la réaction originale, le motion et les métadonnées, puis F05 assemble.
+
+Oracle doit conserver la version choisie dans le contexte du siège et la répéter dans chaque compte rendu. Une version ne peut pas être changée en cours de siège sans décision explicite du Champion.
+
+## ORACLE CONDUIT MEME V2 JUSQU’AU BOUT
+
+En V2, Oracle guide le Champion dans cet ordre strict :
+
+| Étape | Action Oracle | Décision Champion |
+|---:|---|---|
+| 1 | Demander `source_post.text`, capture, URL, auteur, date et métriques | Fournir et valider la source à Gate 1 |
+| 2 | Faire préparer et contrôler F01 | Valider ou rejeter la provenance |
+| 3 | Faire analyser la tension, le marché et le potentiel | Autoriser la forge des angles |
+| 4 | Faire forger les angles anti-cannibalisation | Valider ou rejeter à Gate 2 |
+| 5 | Faire générer le `reaction_tweet` puissant | Examiner le texte réaction |
+| 6 | Générer le `text_emotion` depuis le contexte | Examiner le motion et les métadonnées à Gate 3 |
+| 7 | Faire assembler F05 avec source et transformation séparées | Valider ou rejeter le pack à Gate 4 |
+| 8 | Exporter et fermer le siège | Donner l’ordre explicite d’export puis de fermeture |
+
+Oracle présente toujours la sortie avant de demander la décision. Il ne lance jamais l’étape suivante en anticipant une validation, ne réutilise aucun résidu d’un autre siège et ne confond jamais la source originale avec la réaction PERTURABO.

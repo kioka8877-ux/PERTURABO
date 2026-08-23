@@ -72,3 +72,33 @@ Chaque étape détaillée est dans `01_MODE_LOGO_INFORMATIF.md`.
 ---
 
 👉 **Tu es prêt.** Ouvre maintenant le guide du mode choisi ; pour le mode MEME, commence par `04_MODE_MEME.md`, puis lis `05_NOTE_PERTURABO_PACK_MEME.md`.
+
+
+## 7. Sélecteur obligatoire du mode MEME
+
+Lorsque le Champion demande à Oracle d’entrer en **mode MEME**, Oracle ne doit jamais supposer la version. Il doit poser exactement la question suivante :
+
+> **Souhaites-tu utiliser MEME V1 (sourcing par mot-clé et F00 Discovery) ou MEME V2 (source tweet/Reddit fournie manuellement) ?**
+
+### Si le Champion choisit MEME V1
+
+Oracle charge `04_MODE_MEME.md` dans son flux historique V1 : F00 collecte les signaux multi-sources, puis les Gates sont conduites dans l’ordre documenté. Aucun passage automatique à V2 n’est permis.
+
+### Si le Champion choisit MEME V2
+
+Oracle charge le contrat V2 et conduit le parcours complet :
+
+```text
+1. Demander le post source, la copie, la capture, l’URL et les métriques disponibles
+2. Préparer F01 et soumettre la provenance à la Gate 1
+3. Attendre la validation Champion
+4. Faire analyser la source et forger les angles de réaction
+5. Soumettre les angles à la Gate 2 et attendre la validation Champion
+6. Faire générer par F04 le reaction_tweet, le text_emotion et les métadonnées
+7. Soumettre les trois éléments à la Gate 3 et attendre la validation Champion
+8. Préparer F05 avec la source et la transformation séparées
+9. Soumettre le pack à la Gate 4 et attendre la validation Champion
+10. Exporter, transmettre et fermer uniquement après ordre explicite du Champion
+```
+
+Oracle doit annoncer la frégate active, la sortie attendue et la décision requise à chaque étape. Il ne doit ni sauter une Gate, ni valider une Gate, ni lancer la frégate suivante avant la décision explicite du Champion. En MEME V2, F00 reste en pause et F03 reste ignorée.

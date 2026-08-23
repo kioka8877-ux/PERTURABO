@@ -187,3 +187,13 @@ orchestrator.py --close-siege --final-payout-summary ...
 Référence d'implémentation : `HERESIE/ORCHESTRATOR/CODEBASE/orchestrator.py` dans le core (probable réutilisation à 60-70%, adaptation pour les 4 Portes du forge clipping et la spécificité de F04).
 
 *Fer au-dedans, Fer au-dehors. L'Orchestrateur ne ment pas — il conduit.*
+
+
+## Addendum MEME V1/V2 — sélection et conduite Oracle
+
+Quand le Champion demande le mode MEME, l’Orchestrator ou Oracle doit demander explicitement `MEME V1` ou `MEME V2` avant toute initialisation. La version choisie doit être enregistrée dans le contexte du siège et ne peut pas changer sans décision explicite du Champion.
+
+- **MEME V1** : flux historique par mot-clé et Discovery F00, puis angles, F04 et F05.
+- **MEME V2** : F00 en pause ; le Champion fournit `source_post.text`, capture, URL, auteur, date et métriques ; F01 archive et contrôle ; F02/ANGLESMITH forge les angles ; F04 produit `reaction_tweet`, `text_emotion` et métadonnées ; F05 assemble source et transformation.
+
+En MEME V2, les portes sont conduites dans cet ordre : Gate 1 source/provenance, Gate 2 angles, Gate 3 réaction + motion + métadonnées, Gate 4 pack. Oracle doit annoncer la frégate active, la sortie attendue et la décision requise, puis attendre la validation Champion. Il est interdit de sauter une porte, de lancer la frégate suivante par anticipation ou de déclarer une validation au nom du Champion.
