@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "production_pack_schema_logo",
-  "_description": "Profil LOGO v2. Pack TEXTE ONLY produit par PERTURABO/CLIPPING. Deux sous-modes : informatif (article + video background illustratif) et humour (blague/meme + cuts operateur). OMNIS_WATCH gere le rendu video + le logo (image transparente fournie par la campagne).",
+  "_description": "Profil LOGO v2. Pack TEXTE ONLY produit par PERTURABO/CLIPPING. Deux sous-modes : informatif (article + video background illustratif) et humour (blague/meme + cuts operateur). LACRIMAE gere le rendu video + le logo (image transparente fournie par la campagne).",
   "_mode": "logo",
   "_clip_source_provided_by": "warsmith",
   "type": "object",
@@ -31,9 +31,10 @@
       "enum": [
         "informatif",
         "humour",
-        "meme"
+        "meme",
+        "meme_v2"
       ],
-      "_description": "informatif = article + video background. humour = blague/meme + cuts operateur. meme = mot-cle viral, pas de clip fourni : pack = textes + emotion + duree fourchette + reference au guide 04_MODE_MEME.md. F01/F03 SKIP. OMNIS_WATCH charge le guide pour le montage."
+      "_description": "meme_v2 utilise une source sociale fournie par le Champion ; F00 en pause, F01 archive, F04 forge et F05 assemble. meme conserve la compatibilité V1 historique."
     },
     "clip_source_ref": {
       "type": "object",
@@ -177,7 +178,7 @@
         },
         "montage_guide_ref": {
           "type": "string",
-          "_description": "Chemin du guide de montage charge par OMNIS_WATCH (doctrine 6 couches).",
+          "_description": "Chemin du guide de montage charge par LACRIMAE (doctrine 6 couches).",
           "const": "GUIDE_UTILISATION/04_MODE_MEME.md"
         }
       }
@@ -291,7 +292,7 @@
     "videos": {
       "type": "array",
       "minItems": 1,
-      "_description": "Les N assets finaux (un par angle) : titre viral, paragraphe, metadonnees, cuts precis, placement logo. OMNIS_WATCH consomme ce bloc.",
+      "_description": "Les N assets finaux (un par angle) : titre viral, paragraphe, metadonnees, cuts precis, placement logo. LACRIMAE consomme ce bloc.",
       "items": {
         "type": "object",
         "required": [
@@ -392,7 +393,7 @@
           },
           "logo_placement": {
             "type": "string",
-            "_description": "Le logo appartient a la campagne (image transparente). Perturabo instruit OMNIS_WATCH d'utiliser cette image transparente contenant le logo (placement campagne 1080x1920)."
+            "_description": "Le logo appartient a la campagne (image transparente). Perturabo instruit LACRIMAE d'utiliser cette image transparente contenant le logo (placement campagne 1080x1920)."
           },
           "on_screen_text": {
             "type": [
@@ -412,11 +413,12 @@
               "string",
               "null"
             ],
-            "enum": [
-              "meme_001",
-              "meme_002",
-              "meme_003"
-            ],
+          "enum": [
+            "meme_001",
+            "meme_002",
+            "meme_003",
+            "M1"
+          ],
             "_description": "Mode meme : fichier existant de la memetheque LACRIMAE. A01-A04 -> meme_003, A05-A06 -> meme_002, A07-A08 -> meme_003 (jamais meme_1/meme_2/meme_3)."
           },
           "tweet": {
@@ -484,8 +486,44 @@
             "minimum": 5,
             "maximum": 30,
             "_description": "Mode meme : duree du clip en secondes (default 8, plage 5-30)."
+          },
+          "clip_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "_description": "Référence du clip mème déjà présent dans la release LACRIMAE."
+          },
+          "meme_tag": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "_description": "Tag du clip fourni par l opérateur, par exemple M1."
+          },
+          "channel_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "_description": "Chaîne de destination fournie par l opérateur."
+          },
+          "source_post": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "_description": "Capture PNG et provenance du post source à afficher au-dessus du clip."
+          },
+          "reaction_tweet": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "_description": "Réaction originale PERTURABO, distincte du texte source."
           }
-        }
+        },
+        "_description": "MEME V2 ajoute source_post, reaction_tweet, clip_id, meme_tag et channel_id ; les anciens champs restent compatibles."
       }
     },
     "checklist": {
@@ -503,6 +541,92 @@
         },
         "seo_optimized": {
           "type": "boolean"
+        }
+      }
+    },
+    "meme_v2": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "_description": "Contrat MEME V2 : source sociale avec capture PNG, reaction PERTURABO, clip mème et bindings opérateur.",
+      "additionalProperties": false,
+      "required": [
+        "source_post",
+        "operator_bindings"
+      ],
+      "properties": {
+        "source_post": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "screenshot_png"
+          ],
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "screenshot_png": {
+              "type": "string"
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "author": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "observed_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "metrics": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": true
+            },
+            "credit_display": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "operator_bindings": {
+          "type": "object",
+          "_description": "Mapping angle_id vers clip_id, meme_tag et channel_id fournis par l operateur.",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "clip_id",
+              "meme_tag",
+              "channel_id"
+            ],
+            "properties": {
+              "clip_id": {
+                "type": "string"
+              },
+              "meme_tag": {
+                "type": "string",
+                "minLength": 1
+              },
+              "channel_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
         }
       }
     }

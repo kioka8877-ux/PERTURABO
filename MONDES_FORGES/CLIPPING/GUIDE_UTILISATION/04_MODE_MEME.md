@@ -166,16 +166,15 @@ cd ../../F05_PACKAGER/CODEBASE
 python3 packager.py --assemble --sub-mode meme --finalize
 ```
 
-**Sortie** : `F05_PACKAGER/OUT/production_pack_logo.json` (mode meme)
+**Sortie** : `F05_PACKAGER/OUT/production_pack_logo.json` en V1 ; en V2, le pack contient le bloc `meme_v2` et les entrées `videos[*].source_post`, `reaction_tweet`, `text_emotion`, `metadata`, `clip_id`, `meme_tag` et `channel_id`.
 
-Le pack contient : `sub_mode: "meme"`, `meme_source.keyword`, `meme_source.montage_guide_ref`,
-les textes verrouillés (`tweet.text`, `text_emotion`, métadonnées) + `emotion` + `duration_sec` par vidéo, ainsi que la balise mème validée.
+En V1, le pack contient `sub_mode: "meme"` et les champs historiques. En V2, chaque entrée porte la capture PNG de `source_post`, le `reaction_tweet`, le `text_emotion`, les métadonnées, le `clip_id`, le `meme_tag` et le `channel_id`. La copie textuelle complète du post reste interne à F01 ; LACRIMAE reçoit la capture comme preuve visuelle et la place au-dessus du clip mème.
 
 **Après validation explicite du Champion seulement — Expédition :**
 
 ```bash
 cd MONDES_FORGES/CLIPPING
-cp F05_PACKAGER/OUT/production_pack_logo.json EXPORT/production_pack_meme.json
+cp F05_PACKAGER/OUT/production_pack_logo.json EXPORT/production_pack_meme_<siege>.json
 ```
 
 **Validation** :
@@ -294,3 +293,10 @@ En V2, Oracle guide le Champion dans cet ordre strict :
 | 8 | Exporter et fermer le siège | Donner l’ordre explicite d’export puis de fermeture |
 
 Oracle présente toujours la sortie avant de demander la décision. Il ne lance jamais l’étape suivante en anticipant une validation, ne réutilise aucun résidu d’un autre siège et ne confond jamais la source originale avec la réaction PERTURABO.
+
+
+## MEME V2 — contrat d’asset final corrigé
+
+La copie du tweet ou post Reddit est fournie à F01 pour analyse interne et provenance. Elle n’est pas une couche textuelle obligatoire du pack final. La capture PNG, qui contient déjà le tweet et son image, est en revanche un asset obligatoire du pack final : LACRIMAE l’affiche au-dessus du clip mème.
+
+Le clip mème provient de la release LACRIMAE et est référencé par `clip_id` et `meme_tag`. L’Opérateur fournit `meme_tag` et `channel_id` pour chaque angle. F05 assemble la capture, la référence du clip, le `reaction_tweet`, le `text_emotion` et les métadonnées ; LACRIMAE fabrique le rendu final sans inventer ni réécrire ces éléments.

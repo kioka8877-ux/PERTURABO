@@ -81,6 +81,54 @@ def _reference_clip_meta(reference_clip_path: str) -> dict:
     }
 
 
+def _resolve_source_path(value: str, base_dir: str) -> str:
+    if not value:
+        return ""
+    return value if os.path.isabs(value) else os.path.abspath(os.path.join(base_dir, value))
+
+
+def cmd_meme_v2(args):
+    """F01 MEME V2 : archive une source sociale fournie manuellement.
+    Le texte est interne à PERTURABO ; la capture est l’asset destiné au pack."""
+    source_path = args.meme_v2_source
+    if not os.path.isabs(source_path):
+        source_path = os.path.join(_FORGE_ROOT, source_path)
+    data = load_json(source_path)
+    source = data.get("source_post") or data
+    screenshot = _resolve_source_path(source.get("screenshot_png"),
+                                      os.path.dirname(source_path))
+    if not source.get("text"):
+        print("[F01:MEME_V2] source_post.text manquant")
+        sys.exit(1)
+    if not screenshot or not os.path.isfile(screenshot):
+        print(f"[F01:MEME_V2] capture PNG introuvable: {screenshot or 'vide'}")
+        sys.exit(1)
+    campaign_id = data.get("campaign_id") or "manual_meme_v2"
+    source_internal = dict(source)
+    source_internal["screenshot_png"] = screenshot
+    specimen = {
+        "campaign_id": campaign_id,
+        "mode": "meme_v2",
+        "scanned_at": now_iso(),
+        "source_post": source_internal,
+        "assets": [{
+            "asset_id": "source_tweet_capture",
+            "type": "image",
+            "path": screenshot,
+            "url": source.get("url"),
+            "source_permission": "operator_provided"
+        }],
+        "check_in_iw_custos": None,
+        "iron_status": "manual_meme_v2",
+        "vision_required": False,
+    }
+    save_json(os.path.join(OUT_DIR, "source_post.json"), source_internal)
+    save_json(os.path.join(OUT_DIR, "source_specimen.json"), specimen)
+    print(f"[F01:MEME_V2] source_post archivé : {os.path.join(OUT_DIR, 'source_post.json')}")
+    print(f"[F01:MEME_V2] capture PNG : {screenshot}")
+    print("[F01:MEME_V2] vision non requise : texte source fourni par l’opérateur")
+
+
 def cmd_prepare(args):
     """Phase 1 — génère le prompt IRON + source_specimen.json pré-rempli."""
     directive_path = args.directive
@@ -169,6 +217,14 @@ def _validate_specimen(specimen: dict) -> list[str]:
     errors = []
     if not specimen.get("campaign_id"):
         errors.append("campaign_id manquant")
+    if specimen.get("mode") == "meme_v2":
+        source = specimen.get("source_post") or {}
+        screenshot = source.get("screenshot_png")
+        if not source.get("text"):
+            errors.append("MEME V2 source_post.text manquant")
+        if not screenshot or not os.path.isfile(screenshot):
+            errors.append("MEME V2 source_post.screenshot_png introuvable")
+        return errors
     if not specimen.get("assets"):
         errors.append("assets vide — strict-source violé ou directive.md vide")
     for a in specimen.get("assets", []):
@@ -237,9 +293,13 @@ def main():
     parser.add_argument("--reference-clip", default="ARCHIVUM/campaign/reference_clip.json")
     parser.add_argument("--transcribe", action="store_true",
                         help="Tente la transcription des vidéos (--auto)")
+    parser.add_argument("--meme-v2-source", default=None,
+                        help="Source JSON manuelle MEME V2 : texte + capture PNG + provenance")
     args = parser.parse_args()
 
-    if args.prepare:
+    if args.meme_v2_source:
+        cmd_meme_v2(args)
+    elif args.prepare:
         cmd_prepare(args)
     elif args.auto:
         cmd_auto(args)

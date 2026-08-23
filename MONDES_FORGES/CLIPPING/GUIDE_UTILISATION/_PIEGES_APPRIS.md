@@ -111,3 +111,5 @@ Le `reaction_tweet` est la pièce stratégique principale. Il doit viser le marc
 Le `text_emotion` est produit après la réaction et reste simple : il correspond aux personnes ou à l’audience du contexte (`Young adults seeing this:`, `My sister and me right now:`). Les résidus d’un autre siège, les marqueurs `A:` / `B:` et les motions génériques sont des erreurs bloquantes.
 
 F05 assemble la source, la capture, le crédit, la réaction et les métadonnées ; il ne génère rien. Le Champion valide chaque Gate, l’Oracle suggère uniquement, et l’export ainsi que la fermeture restent postérieurs à cette validation.
+
+En V2, la copie textuelle du tweet reste interne à F01, tandis que la capture PNG — qui contient le tweet et son image — est obligatoire dans le pack final. LACRIMAE l’affiche au-dessus du clip mème de sa release. `clip_id`, `meme_tag` et `channel_id` doivent être fournis par l’Opérateur ; leur absence bloque le finalizer.

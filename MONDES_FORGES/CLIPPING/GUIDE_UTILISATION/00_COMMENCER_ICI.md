@@ -102,3 +102,10 @@ Oracle charge le contrat V2 et conduit le parcours complet :
 ```
 
 Oracle doit annoncer la frégate active, la sortie attendue et la décision requise à chaque étape. Il ne doit ni sauter une Gate, ni valider une Gate, ni lancer la frégate suivante avant la décision explicite du Champion. En MEME V2, F00 reste en pause et F03 reste ignorée.
+
+
+## 8. Composition finale du pack MEME V2
+
+En MEME V2, la copie textuelle du tweet ou post Reddit est fournie à F01 pour l’analyse interne et la provenance. La capture PNG, qui contient déjà le tweet et son image, est l’asset visuel obligatoire du pack final. LACRIMAE l’affiche au-dessus du clip mème de sa release et produit la vidéo finale.
+
+Le pack transmet aussi le `reaction_tweet`, le `text_emotion`, les métadonnées, le `clip_id`, le `meme_tag` et le `channel_id`. Le tag et la chaîne sont fournis par l’Opérateur. F05 assemble ; LACRIMAE rend ; aucune frégate ne doit confondre la copie interne avec la capture de production.

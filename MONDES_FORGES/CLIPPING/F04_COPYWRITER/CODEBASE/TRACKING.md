@@ -16,7 +16,7 @@ F04_COPYWRITER est la **frégate lourde** de la Porte 3. Elle forge le **text_pa
 - **CTA text** — jamais "abonne-toi", toujours subtil ("commente X", "suis pour la suite")
 
 La frégate produit **deux outputs** par angle :
-1. `text_payload.json` — format strict, consommé par l'Oracle OMNIS_WATCH
+1. `text_payload.json` — format strict, consommé par l'Oracle LACRIMAE
 2. `text_payload.md` — format lisible opérateur, prêt à copier-coller au moment de poster
 
 ---
@@ -104,7 +104,7 @@ ARCHIVUM injecté dans le prompt (Phase A) :
   "paragraph": {
     "text": "...",                  // 2 lignes max
     "recommendation": "use|skip",    // F04_COPYWRITER propose
-    "override_omniswatch": null,     // Oracle OMNIS_WATCH peut override
+    "override_omniswatch": null,     // Oracle LACRIMAE peut override
     "final_operator": null          // Warsmith a le dernier mot au moment de poster
     // 3 niveaux de veto, dans cet ordre
   },
@@ -269,7 +269,7 @@ Voir la liste exhaustive ci-dessus dans "ARCHIVUM injecté dans le prompt". La f
   - ARCHIVUM complet (la matière à synthétiser)
 - **Downstream** :
   - F05_PACKAGER (intègre `text_payload.json` dans `production_pack.json`)
-  - Oracle OMNIS_WATCH (lit `text_payload.json` → peut `override_omniswatch` du paragraphe)
+  - Oracle LACRIMAE (lit `text_payload.json` → peut `override_omniswatch` du paragraphe)
   - Warsmith (lit `text_payload.md` au moment de poster → `final_operator`)
 
 ---
@@ -279,7 +279,7 @@ Voir la liste exhaustive ci-dessus dans "ARCHIVUM injecté dans le prompt". La f
 Le `paragraph` a une chaîne de décision stricte :
 
 1. **`recommendation`** (F04_COPYWIRITER) — en Phase C, l'IRON tag le paragraphe `"use"` ou `"skip"`. Une reco "skip" ne signifie pas suppression — signifie "à utiliser uniquement à des fins de révision possible".
-2. **`override_omniswatch`** (Oracle OMNIS_WATCH, plus tard dans la prod) — initialement `null`. Si l'Oracle estime que le rendu rend le paragraphe redondant ou que le clip n'a pas besoin de paragraphe, il met `"skip"`.
+2. **`override_omniswatch`** (Oracle LACRIMAE, plus tard dans la prod) — initialement `null`. Si l'Oracle estime que le rendu rend le paragraphe redondant ou que le clip n'a pas besoin de paragraphe, il met `"skip"`.
 3. **`final_operator`** (Warsmith, au moment de poster) — initialement `null`. Le Warsmith a le dernier mot : `"use"` ou `"skip"` écrase les 2 décisions précédentes.
 
 Règle de résolution : si `final_operator` est non-null, il gagne. Sinon, si `override_omniswatch` est non-null, il gagne. Sinon, `recommendation` s'applique.
@@ -344,3 +344,5 @@ F04 reçoit une source sociale déjà archivée par F01. Il ne réécrit jamais 
 | `metadata` | Titre, description et tags dérivés de la source et de la réaction, sans résidu d’un autre siège |
 
 Le `reaction_tweet` est la pièce stratégique principale. Dix variantes lexicales du même gag sont une cannibalisation. Les angles doivent changer réellement de tension, de lecture, de public visé ou de ressort comique. `text_emotion` ne doit jamais contenir de marqueur `A:` / `B:`, de personnage absent ou de formule héritée d’une autre campagne. Le premium génère si activé ; Oracle contrôle ; seul le Champion valide la Gate F04.
+
+En MEME V2, `source_post.text` reste un input interne de compréhension archivé par F01. La capture PNG de `source_post`, qui contient déjà le tweet et son image, est l’asset visuel destiné au pack final et à LACRIMAE. F04 doit transmettre séparément `reaction_tweet`, `text_emotion` et `metadata` ; il ne doit pas transformer la copie source en faux contenu PERTURABO. Le pack final associe ensuite la capture au `clip_id`, au `meme_tag` et au `channel_id` fournis par l’Opérateur.

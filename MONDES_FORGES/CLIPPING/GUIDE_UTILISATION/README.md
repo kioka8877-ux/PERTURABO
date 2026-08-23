@@ -72,3 +72,5 @@ Le mode MEME V2 ne démarre plus par un mot-clé inventé par le forge. Le Champ
 La source (`source_post`) est distincte de la transformation PERTURABO (`reaction_tweet`). ANGLESMITH forge des lectures réellement différentes, F04 produit une réaction puissante ciblée sur le marché, puis un `text_emotion` simple et contextualisé, et F05 assemble le tout pour LACRIMAE. Le Champion reste l’unique autorité des Gates.
 
 Référence détaillée : `04_MODE_MEME.md` et `05_NOTE_PERTURABO_PACK_MEME.md`.
+
+En V2, la copie textuelle du post reste un input interne F01. La capture PNG contenant le tweet et son image est obligatoire dans le pack final et s’affiche au-dessus du clip mème de la release LACRIMAE. Le pack contient aussi `reaction_tweet`, `text_emotion`, les métadonnées, `clip_id`, `meme_tag` et `channel_id`. L’Opérateur fournit le tag et la chaîne ; F05 assemble ; LACRIMAE produit la vidéo finale.

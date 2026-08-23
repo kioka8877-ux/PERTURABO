@@ -251,8 +251,20 @@ def _resolve_cuts(sub_mode: str, angle_id: str, cuts: dict) -> dict:
     }
 
 
+def _load_meme_v2_config() -> dict:
+    """Charge les inputs opérateur MEME V2 sans jamais inventer source, tag ou chaîne."""
+    path = os.path.join(ARCHIVUM_DIR, "campaign", "meme_v2.json")
+    if not os.path.exists(path):
+        return {}
+    try:
+        return load_json(path)
+    except (OSError, ValueError):
+        return {}
+
+
 def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
-                      cuts: dict, video_index: int, meme: str = None) -> dict:
+                      cuts: dict, video_index: int, meme: str = None,
+                      meme_v2: dict = None) -> dict:
     angle_id = angle.get("angle_id")
     payload = payload or {}
     title = payload.get("title") or angle.get("title")
@@ -287,19 +299,36 @@ def _logo_video_asset(angle: dict, payload: dict, sub_mode: str,
         "angle_id": angle_id,
         "title": title or "",
     }
-    if sub_mode == "meme":
+    if sub_mode in ("meme", "meme_v2"):
         # Contrat LACRIMAE : le pack meme porte les champs qu'OMNIS_WATCH
         # consomme. metadata (description) est exigé par le Warsmith pour
         # chaque vidéo : résumé du tweet + note fair use + avertissement.
         # cut/on_screen_text/logo_placement sont ignorés.
         tweet = payload.get("tweet") or {}
         asset["meme"] = meme or ""
+        reaction_text = payload.get("reaction_tweet") or tweet.get("text")
         asset["tweet"] = {
-            "text": tweet.get("text"),
+            "text": reaction_text,
             "keywords_style": _keywords_v2(tweet.get("keywords_style"),
-                                           tweet.get("text")),
+                                           reaction_text),
         }
+        asset["reaction_tweet"] = reaction_text
         asset["text_emotion"] = payload.get("text_emotion")
+        if sub_mode == "meme_v2":
+            cfg = meme_v2 or {}
+            source = cfg.get("source_post") or {}
+            binding = (cfg.get("operator_bindings") or {}).get(angle_id) or {}
+            asset["clip_id"] = binding.get("clip_id")
+            asset["meme_tag"] = binding.get("meme_tag")
+            asset["channel_id"] = binding.get("channel_id")
+            asset["source_post"] = {
+                "screenshot_png": source.get("screenshot_png"),
+                "url": source.get("url"),
+                "author": source.get("author"),
+                "observed_at": source.get("observed_at"),
+                "credit_display": source.get("credit_display"),
+            }
+
         asset["emotion"] = (payload.get("emotion")
                             or angle.get("emotion")
                             or angle.get("emotion_mode"))
@@ -368,9 +397,27 @@ def _tweet_tokens(text: str) -> set:
     return set(re.findall(r"[a-z0-9]+", (text or "").lower()))
 
 
-def _meme_for_angle(angle_id: str) -> str:
-    """Balise meme fournie par le Warsmith : M1 est commune aux dix angles."""
-    return "M1"
+def _meme_v2_export_block(config: dict) -> dict:
+    """Ne transmet que la capture et la provenance utile à LACRIMAE.
+    Le texte copié reste interne à F01/PERTURABO."""
+    source = config.get("source_post") or {}
+    return {
+        "source_post": {
+            "screenshot_png": source.get("screenshot_png"),
+            "url": source.get("url"),
+            "author": source.get("author"),
+            "observed_at": source.get("observed_at"),
+            "metrics": source.get("metrics"),
+            "credit_display": source.get("credit_display"),
+        },
+        "operator_bindings": config.get("operator_bindings") or {},
+    }
+
+
+def _meme_for_angle(angle_id: str, meme_v2: dict = None) -> str:
+    """Balise du clip : en MEME V2 elle vient du binding opérateur."""
+    binding = ((meme_v2 or {}).get("operator_bindings") or {}).get(angle_id) or {}
+    return str(binding.get("meme_tag") or "M1")
 
 
 def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
@@ -396,10 +443,12 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
             except Exception:
                 f01_payloads[angle_id] = {}
 
+    meme_v2_config = campaign.get("meme_v2") or {}
     videos = [
         _logo_video_asset(angle, f01_payloads.get(angle.get("angle_id")),
                           sub_mode, cuts, idx,
-                          meme=_meme_for_angle(angle.get("angle_id")))
+                          meme=_meme_for_angle(angle.get("angle_id"), meme_v2_config),
+                          meme_v2=meme_v2_config)
         for idx, angle in enumerate(angles, start=1)
     ]
     campaign_id = verdict.get("campaign_id") or (angles[0].get("campaign_id") if angles else None)
@@ -423,6 +472,8 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
             "seo_optimized": True,
         },
     }
+    if sub_mode == "meme_v2":
+        pack["meme_v2"] = _meme_v2_export_block(campaign.get("meme_v2") or {})
     if sub_mode == "meme":
         scan = campaign.get("meme_source") or _load_latest_meme_scan()
         pack["meme_source"] = {
@@ -720,9 +771,9 @@ def cmd_assemble_logo(args):
     """Assemblage LOGO v2 : 1 pack, N videos (une par angle)."""
     angles = angles_from_file(find_angles_path(args))
     sub_mode = (args.sub_mode or "informatif").lower()
-    if sub_mode not in ("informatif", "humour", "meme"):
+    if sub_mode not in ("informatif", "humour", "meme", "meme_v2"):
         print(f"[F05:LOGO] sub_mode inconnu: {sub_mode} "
-              f"(attendu: informatif|humour|meme)")
+              f"(attendu: informatif|humour|meme|meme_v2)")
         sys.exit(1)
     verdict = find_verdict()
     campaign = {
@@ -732,6 +783,7 @@ def cmd_assemble_logo(args):
         "reference_clip_style": _load_campaign_file("reference_clip_style.json"),
         "keyword": _load_campaign_keyword(),
         "meme_source": _load_latest_meme_scan() if sub_mode == "meme" else {},
+        "meme_v2": _load_meme_v2_config() if sub_mode == "meme_v2" else {},
     }
     siege_id = None
     if os.path.exists(LIBER_PATH):
@@ -795,10 +847,25 @@ def cmd_finalize_logo(args):
     packs = _collect_packs()
     validator = SchemaValidator(resolve_schema_path())
     errors = []
+    sub_mode = packs[0][1].get("sub_mode", "?")
     for path, pack in packs:
         errors += validator.validate(pack, root=os.path.basename(path))
         if pack.get("mode") != "logo":
             errors.append(f"{os.path.basename(path)}: mode != logo")
+        if sub_mode == "meme_v2":
+            cfg = pack.get("meme_v2") or {}
+            source = cfg.get("source_post") or {}
+            if not source.get("screenshot_png"):
+                errors.append(f"{os.path.basename(path)}: MEME V2 source_post.screenshot_png manquant")
+            bindings = cfg.get("operator_bindings") or {}
+            for video in pack.get("videos", []):
+                aid = video.get("angle_id")
+                binding = bindings.get(aid) or {}
+                for key in ("clip_id", "meme_tag", "channel_id"):
+                    if not binding.get(key):
+                        errors.append(f"{os.path.basename(path)}: binding {aid}.{key} manquant")
+                if not (video.get("source_post") or {}).get("screenshot_png"):
+                    errors.append(f"{os.path.basename(path)}: videos[{aid}] capture PNG manquante")
         for i, video in enumerate(pack.get("videos", [])):
             desc = (video.get("metadata") or {}).get("description") or ""
             if not desc.strip():

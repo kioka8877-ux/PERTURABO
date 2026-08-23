@@ -114,7 +114,7 @@ Le pack ne doit plus traiter le post original comme un tweet PERTURABO. Les deux
 
 | Champ | Contenu | Règle |
 |---|---|---|
-| `source_post.text` | Copie fidèle du tweet ou post Reddit choisi par le Champion | Ne pas le réécrire comme s’il était original |
+| `source_post.text` | Copie fidèle du tweet ou post Reddit choisi par le Champion | Input interne F01 ; archivé pour traçabilité, pas une couche obligatoire du pack final |
 | `source_post.screenshot` | Capture originale lisible | Conservée comme preuve et fournie à LACRIMAE |
 | `source_post.url` | URL publique | Obligatoire lorsque disponible |
 | `source_post.author` | Auteur, compte ou subreddit | Ne pas inventer |
@@ -124,7 +124,7 @@ Le pack ne doit plus traiter le post original comme un tweet PERTURABO. Les deux
 | `text_emotion` | Motion court | Dérivé du contexte de réaction, sans résidu d’un autre siège |
 | `metadata` | Titre, description et tags | Dérivés de la source et de la réaction, sans promesse automatique de fair use ou de monétisation |
 
-La source affichée et la réaction doivent être visuellement distinctes dans le pack. Le pack doit permettre à LACRIMAE de montrer clairement ce qui provient du post original et ce qui constitue la contribution créative de PERTURABO.
+La capture PNG de la source affichée et la réaction doivent être visuellement distinctes dans le pack. Le pack doit permettre à LACRIMAE de montrer clairement ce qui provient du post original et ce qui constitue la contribution créative de PERTURABO. La copie textuelle complète reste interne à F01 et n’est pas une couche de rendu obligatoire.
 
 ## 9. Puissance et anti-cannibalisation
 
@@ -137,3 +137,12 @@ Pour une même source, plusieurs angles ne sont acceptables que si la tension, l
 Un modèle de vision n’est pas obligatoire lorsque F01 reçoit la copie textuelle du post. Une vérification visuelle ou OCR peut être activée uniquement pour contrôler la lisibilité et la correspondance entre la capture et le texte fourni. La capture ne constitue pas à elle seule une autorisation de réutilisation ; la transformation, l’attribution et la conformité aux règles de la plateforme doivent être examinées avant publication.
 
 F05 assemble les champs validés et ne réécrit ni la source ni la réaction.
+
+
+## 11. Correction finale du pack MEME V2
+
+La copie textuelle (`source_post.text`) est un input interne de F01 pour comprendre la source sans modèle de vision obligatoire. Elle reste archivée pour la traçabilité, mais ne doit pas être envoyée comme couche textuelle obligatoire au pack final.
+
+La capture (`source_post.screenshot_png`) contient déjà le tweet et son image. Elle est obligatoire dans le pack final et doit être affichée au-dessus de la vidéo mème par LACRIMAE. Le pack transmet aussi le clip mème par `clip_id`, son `meme_tag` et la chaîne opérateur par `channel_id`.
+
+Le contrat d’export est donc : capture PNG + clip mème référencé + reaction_tweet + text_emotion + métadonnées + tag + chaîne. F05 assemble ces éléments ; LACRIMAE produit la vidéo finale. La valeur `source_post.text` ne doit pas devenir une couche de rendu séparée.

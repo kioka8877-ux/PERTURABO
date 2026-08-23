@@ -97,17 +97,17 @@ Pour chaque angle, F03 sélectionne l'asset + segments puis F04 forge le text_pa
 orchestrator.py --gate 3 --decision valide
 ```
 
-### Porte 4 — N production packs expédiés → OMNIS_WATCH
+### Porte 4 — N production packs expédiés → LACRIMAE
 
 Frégate mobilisée : F05_PACKAGER
 
-Ces N `production_pack_<angle>.json` sont livrés à OMNIS_WATCH (par raw.githubusercontent.com URL — point d'intégration existant).
+Ces N `production_pack_<angle>.json` sont livrés à LACRIMAE (par raw.githubusercontent.com URL — point d'intégration existant).
 
 F06_TRACKER prend le relais post-publication.
 
 ```
 orchestrator.py --gate 4 --decision valide
-# → distribue packs_index.json vers OMNIS_WATCH (via git push ou raw URL)
+# → distribue packs_index.json vers LACRIMAE (via git push ou raw URL)
 # → F06_TRACKER démarre
 ```
 
@@ -155,7 +155,7 @@ orchestrator.py --close-siege --final-payout-summary ...
 
 - **Amont** : Le Warsmith (4 inputs initiaux)
 - **Réseau interne** : toutes les frégates F01-F06, TYRANT, F00_CAPTEURS
-- **Downstream** : OMNIS_WATCH (recoit les packs via Porte 4), `ARCHIVUM/learnings/learnings.json` (à la fermeture)
+- **Downstream** : LACRIMAE (recoit les packs via Porte 4), `ARCHIVUM/learnings/learnings.json` (à la fermeture)
 
 ---
 
@@ -180,7 +180,7 @@ orchestrator.py --close-siege --final-payout-summary ...
 | `libs/ledger_manager.py` | ✅ | Gère liber_clipping.json + IW_CUSTOS.py |
 | `libs/gate_validator.py` | ✅ | Vérifie que les outputs attendus sont présents avant validation de porte |
 | `libs/siege_initializer.py` | ✅ | Valide les 4 inputs Warsmith + blocage si campagne active |
-| `libs/omnis_watch_distributor.py` | ✅ | packs_index.json + raw URLs pour OMNIS_WATCH |
+| `libs/omnis_watch_distributor.py` | ✅ | packs_index.json + raw URLs pour LACRIMAE |
 | `gates.py` | ✅ | Les 4 Portes du forge CLIPPING (verdict/angles/textes/packs) |
 | `requirements_orchestrator.txt` | ✅ | Standard lib — aucune dépendance externe |
 
@@ -197,3 +197,5 @@ Quand le Champion demande le mode MEME, l’Orchestrator ou Oracle doit demander
 - **MEME V2** : F00 en pause ; le Champion fournit `source_post.text`, capture, URL, auteur, date et métriques ; F01 archive et contrôle ; F02/ANGLESMITH forge les angles ; F04 produit `reaction_tweet`, `text_emotion` et métadonnées ; F05 assemble source et transformation.
 
 En MEME V2, les portes sont conduites dans cet ordre : Gate 1 source/provenance, Gate 2 angles, Gate 3 réaction + motion + métadonnées, Gate 4 pack. Oracle doit annoncer la frégate active, la sortie attendue et la décision requise, puis attendre la validation Champion. Il est interdit de sauter une porte, de lancer la frégate suivante par anticipation ou de déclarer une validation au nom du Champion.
+
+En MEME V2, la copie textuelle de la source reste un input interne F01. La capture PNG, qui contient le tweet et son image, est l’asset final transmis à LACRIMAE. Le pack de Porte 4 doit aussi contenir le `clip_id`, le `meme_tag` et le `channel_id` fournis par l’Opérateur, ainsi que le `reaction_tweet`, le `text_emotion` et les métadonnées. LACRIMAE assemble la capture au-dessus du clip mème de sa release et produit la vidéo finale ; F05 ne rend pas la vidéo.

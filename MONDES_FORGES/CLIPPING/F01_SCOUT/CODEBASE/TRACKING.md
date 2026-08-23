@@ -133,3 +133,11 @@ Phase 3 : finalize
 Le futur implémenteur doit s'inspirer de `MONDES_FORGES/YOUTUBE/F01_SENTINEL/CODEBASE/sentinel.py` comme squelette de référence (probablement 80% de réutilisation logique).
 
 *Fer au-dedans, Fer au-dehors.*
+
+## Addendum MEME V2 — intake manuel
+
+F01 accepte une source sociale fournie par le Champion via `--meme-v2-source <json>`. Le JSON d’entrée contient la copie textuelle du tweet ou post Reddit, la capture PNG, l’URL, l’auteur, l’horodatage et les métriques disponibles.
+
+La copie textuelle est archivée dans `OUT/source_post.json` et `OUT/source_specimen.json` pour l’analyse interne. La capture PNG est contrôlée comme fichier existant et devient l’asset visuel destiné au pack final LACRIMAE. Un modèle de vision n’est pas obligatoire si la copie textuelle est fournie ; un contrôle OCR/visuel peut rester optionnel.
+
+F01 ne télécharge pas de clip, ne génère pas de réaction et n’invente aucune métrique. Les valeurs inconnues restent `null`, et une capture absente ou illisible bloque la Gate 1.
