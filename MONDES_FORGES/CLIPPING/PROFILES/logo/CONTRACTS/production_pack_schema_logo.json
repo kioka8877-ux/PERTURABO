@@ -53,7 +53,8 @@
             "instagram",
             "custom_footage",
             "url",
-            "meme_keyword"
+            "meme_keyword",
+            "meme_v2_social"
           ]
         },
         "reference": {
@@ -416,8 +417,10 @@
           "enum": [
             "meme_001",
             "meme_002",
-            "meme_003",
-            "M1"
+                          "meme_003",
+              "M1",
+              "M7"
+
           ],
             "_description": "Mode meme : fichier existant de la memetheque LACRIMAE. A01-A04 -> meme_003, A05-A06 -> meme_002, A07-A08 -> meme_003 (jamais meme_1/meme_2/meme_3)."
           },

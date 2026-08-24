@@ -84,6 +84,20 @@ def load_verdict() -> dict:
     return load_json(path)
 
 
+def load_meme_v2_source() -> dict:
+    """Charge la source sociale archivée par F01, sans consulter F00."""
+    path = os.path.join(_FORGE_ROOT, "F01_SCOUT", "OUT", "source_specimen.json")
+    if not os.path.exists(path):
+        print(f"[ANGLESMITH:MEME_V2] source F01 introuvable: {path}")
+        sys.exit(1)
+    data = load_json(path)
+    source = data.get("source_post") or {}
+    if not source.get("text") or not source.get("screenshot_png"):
+        print("[ANGLESMITH:MEME_V2] source F01 incomplete: text/screenshot_png requis")
+        sys.exit(1)
+    return data
+
+
 def load_meme_virality() -> dict:
     """Mode MEME : charge le scan viralité F00 (OUT/meme_virality_*.json).
     Priorité au scan correspondant au mot-clé du siège (ARCHIVUM/campaign/
@@ -168,7 +182,32 @@ def cmd_auto(args):
     n = int(args.n_angles)
     forger = AngleForger()
 
-    if sub_mode == "meme":
+    if sub_mode == "meme_v2":
+        specimen = load_meme_v2_source()
+        source = specimen["source_post"]
+        target = source.get("target") or {}
+        keyword = source.get("source_id") or "manual_meme_v2"
+        virality = {"keyword": keyword, "duration_range_sec": {"min": 5, "max": 7},
+                    "metrics": source.get("metrics") or {}}
+        angles = forger.forge_meme(n=n, campaign_id=keyword, keyword=keyword,
+                                   virality=virality, spin_humour=None)
+        angle_briefs = [
+            "Instant regret: the bed promised a safe landing and the floor collected the phone.",
+            "Adult damage-control panic: one harmless throw becomes an expensive repair calculation.",
+            "Physics betrayal: the phone bounces once and turns confidence into a full-body flinch.",
+            "US apartment reality: the sound of the phone hitting the floor wakes every roommate and neighbor.",
+            "Thirty-year-old self-preservation: the owner freezes before checking whether the screen survived.",
+        ]
+        for index, angle in enumerate(angles):
+            angle["source_post_id"] = source.get("source_id")
+            angle["source_text"] = source.get("text")
+            angle["market_target"] = target.get("market", "US")
+            angle["age_range"] = target.get("age_range", "29-30")
+            angle["platform_target"] = target.get("platform", "youtube_shorts")
+            angle["angle_brief"] = angle_briefs[index] if index < len(angle_briefs) else "Source-specific reaction to the phone bounce fail."
+        campaign_id = keyword
+        print("[ANGLESMITH] MEME V2 : source F01 uniquement, F00 non utilisé")
+    elif sub_mode == "meme":
         virality = load_meme_virality()
         spin = load_humour_spin()
         angles = forger.forge_meme(n=n, campaign_id=virality.get("keyword"),
@@ -202,9 +241,9 @@ def cmd_auto(args):
     blue = [a for a in angles if a["zone"] == "blue_ocean"]
     print(f"[ANGLESMITH] --auto : {len(angles)} angles forges "
           f"({len(direct)} direct / {len(blue)} ocean bleu), weight_eligible={lw.eligible()}")
-    if sub_mode == "meme":
+    if sub_mode in ("meme", "meme_v2"):
         emotions = [a.get("emotion") for a in angles]
-        print(f"[ANGLESMITH] mode meme: keyword={campaign_id} — "
+        print(f"[ANGLESMITH] mode {sub_mode}: keyword={campaign_id} — "
               f"emotions={emotions} (anti-spam: 2 max par emotion)")
 
 

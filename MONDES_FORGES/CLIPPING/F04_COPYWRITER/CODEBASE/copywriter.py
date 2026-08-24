@@ -185,7 +185,7 @@ def _logo_campaign_inputs() -> dict:
 
 def _detect_sub_mode(args) -> str:
     sm = (getattr(args, "sub_mode", None) or "").lower()
-    if sm in ("informatif", "humour", "meme"):
+    if sm in ("informatif", "humour", "meme", "meme_v2"):
         return sm
     campaign = _logo_campaign_inputs()
     if campaign.get("joke_source"):
@@ -367,7 +367,7 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
         "check_in_iw_custos": None,
     }
 
-    if sub_mode == "meme":
+    if sub_mode in ("meme", "meme_v2"):
         tweet_raw = raw.get("tweet") or {}
         if isinstance(tweet_raw, str):
             tweet_raw = {"text": tweet_raw}
@@ -396,6 +396,7 @@ def _ordonnance_logo(raw: dict, angle: dict, sub_mode: str,
             "text": tweet or None,
             "keywords_style": keywords_style,
         }
+        payload["reaction_tweet"] = str(raw.get("reaction_tweet") or tweet or "").strip() or None
         payload["text_emotion"] = reaction or None
         payload["emotion"] = emotion or None
         payload["duration_sec"] = dur_sec
@@ -441,7 +442,7 @@ def _normalize_keywords_style(kws_style, tweet_text: str = "") -> dict:
 
 
 def _meme_heresies(sub_mode: str) -> list[str]:
-    if sub_mode != "meme":
+    if sub_mode not in ("meme", "meme_v2"):
         return [
             "Abonne-toi / Like et partage / Swipe up",
             "Titre > 6 mots",
@@ -472,7 +473,7 @@ def _render_keywords_md(kws: dict) -> str:
 
 def _render_logo_md(payload: dict) -> str:
     meta = payload.get("metadata", {})
-    if payload.get("sub_mode") == "meme":
+    if payload.get("sub_mode") in ("meme", "meme_v2"):
         tweet = (payload.get("tweet") or {}).get("text")
         kws = (payload.get("tweet") or {}).get("keywords_style") or []
         return (
@@ -846,6 +847,12 @@ def cmd_setup_context_logo(args):
 
     if sub_mode == "meme":
         campaign["meme_source"] = _load_meme_scan()
+    elif sub_mode == "meme_v2":
+        source = ContextBuilder(_FORGE_ROOT)._load_meme_v2_source()
+        campaign["meme_v2_source"] = source
+        target = source.get("target") or {}
+        platform = target.get("platform") or platform
+        market = target.get("market") or market
 
     builder = ContextBuilder(_FORGE_ROOT)
     context = builder.build_logo(angle, sub_mode, campaign, verdict,
@@ -905,7 +912,21 @@ def cmd_generate_logo(args):
         "tags, on-screen) en ANGLAIS, même si l'article source est dans une autre langue."
     )
 
-    if sub_mode == "meme":
+    if sub_mode == "meme_v2":
+        source = context.get("meme_v2_source") or {}
+        mission = (
+            "Mode MEME V2 : utilise exclusivement le post réel fourni par F01. "
+            "Forge pour CET angle un reaction_tweet original, puissant et ciblé sur "
+            "le marché US des 29-30 ans. La réaction doit transformer la situation du "
+            "téléphone qui rebondit du lit au sol, sans inventer de nouveau post ni "
+            "réécrire la source. Produis aussi un text_emotion contextualisé aux "
+            "personnes ou au groupe évoqué, maximum 4 mots avant le deux-points, "
+            "puis emotion, metadata (title, description, tags, hashtags) et duration_sec=5. "
+            "Tout en anglais US. Interdits : A/B, personnage absent, Doom, Students "
+            "reading this, fair-use ou promesse de monétisation, et toute formule d’un "
+            "autre siège. Réponds en JSON strict."
+        )
+    elif sub_mode == "meme":
         keyword = (context.get("keyword")
                    or (context.get("clip_source_ref") or {}).get("keyword")
                    or "inconnu")
@@ -964,7 +985,7 @@ def cmd_generate_logo(args):
             "portent le spin, jamais de moquerie diffamatoire."
         )
 
-    if sub_mode == "meme":
+    if sub_mode in ("meme", "meme_v2"):
         output_schema = {
             "title": "titre en haut (max 6 mots, SI nécessaire) ou null",
             "tweet": {
@@ -974,9 +995,10 @@ def cmd_generate_logo(args):
                     "red": ["mot seul du tweet"],
                 },
             },
-            "text_emotion": "texte d'émotion du milieu (max 4 mots)",
+            "reaction_tweet": "réaction originale PERTURABO, distincte de la source, maximum 3 lignes",
+            "text_emotion": "texte d'émotion du milieu (max 4 mots avant ':', contextualisé)",
             "emotion": "l'émotion de l'angle (ex: poignant, drole, choc, tendu)",
-            "duration_sec": 8,
+            "duration_sec": 5,
             "metadata": {
                 "title": "titre metadata YouTube",
                 "description": "paragraphe 1 : résumé du tweet en 2-3 lignes "
@@ -1016,7 +1038,12 @@ def cmd_generate_logo(args):
         "heresies_interdites": _meme_heresies(sub_mode),
     }
 
-    if sub_mode == "meme":
+    if sub_mode == "meme_v2":
+        user_prompt["source_post"] = context.get("meme_v2_source")
+        user_prompt["angle_brief"] = (context.get("angle") or {}).get("angle_brief")
+        user_prompt["required_duration_sec"] = 5
+        user_prompt["montage_guide_ref"] = "GUIDE_UTILISATION/04_MODE_MEME.md"
+    elif sub_mode == "meme":
         user_prompt["keyword"] = context.get("keyword")
         user_prompt["meme_source"] = context.get("meme_source")
         user_prompt["montage_guide_ref"] = (

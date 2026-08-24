@@ -762,3 +762,5 @@ F00_CAPTEURS/CODEBASE/capteurs.py
 - F05 a assemblé un pack unique `production_pack_logo.json` avec 10 vidéos et la balise commune `M1`. F05 est déterministe et n’utilise pas la clé premium.
 - La revue opérateur précède l’export : le Champion est l’unique autorité des Gates. Le pack validé a été copié dans `EXPORT/production_pack_meme_new_york_bagel.json`, puis le siège a été fermé par IW_CUSTOS afin d’isoler ses résidus.
 - Les artefacts de production ont été commités et poussés dans le commit `bf78ea3`.
+
+## [2026-08-24T09:35:33Z] F05 — check-in — output: /home/ubuntu/perturabo_work/MONDES_FORGES/CLIPPING/F05_PACKAGER/OUT/packager_summary.md — md5: 88f0278700e1c19b612ba400bc73481d — status: done

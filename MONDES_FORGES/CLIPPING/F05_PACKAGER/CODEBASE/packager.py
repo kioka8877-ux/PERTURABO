@@ -474,6 +474,8 @@ def assemble_logo_pack(angles: list[dict], sub_mode: str, campaign: dict,
     }
     if sub_mode == "meme_v2":
         pack["meme_v2"] = _meme_v2_export_block(campaign.get("meme_v2") or {})
+        pack["clip_source_ref"]["source_type"] = "meme_v2_social"
+        pack["clip_source_ref"]["reference"] = "manual_social_source"
     if sub_mode == "meme":
         scan = campaign.get("meme_source") or _load_latest_meme_scan()
         pack["meme_source"] = {

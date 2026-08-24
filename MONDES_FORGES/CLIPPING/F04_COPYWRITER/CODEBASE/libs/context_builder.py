@@ -123,6 +123,18 @@ class ContextBuilder:
         }
 
     # ------------------------------------------------------------------
+    def _load_meme_v2_source(self) -> dict:
+        path = os.path.join(self._forge_root, "F01_SCOUT", "OUT", "source_specimen.json")
+        if not os.path.exists(path):
+            return {}
+        try:
+            with open(path, "r", encoding="utf-8") as handle:
+                data = json.load(handle)
+            return data.get("source_post") or {}
+        except (OSError, json.JSONDecodeError):
+            return {}
+
+    # ------------------------------------------------------------------
     def build_logo(self, angle: dict, sub_mode: str, campaign: dict,
                    verdict: dict, platform: str, market: str) -> dict:
         """Contexte LOGO v2 : PAS de specimen F03 (le clip vient du Warsmith).
@@ -135,11 +147,13 @@ class ContextBuilder:
         orienter la forge.
         """
         spin_humour = self._load_spin_humour()
+        meme_v2_source = self._load_meme_v2_source() if sub_mode == "meme_v2" else None
         return {
             "campaign_id": verdict.get("campaign_id"),
             "angle_id": angle.get("angle_id"),
             "sub_mode": sub_mode,
             "humour_spin": spin_humour if sub_mode in ("humour", "meme") else None,
+            "meme_v2_source": meme_v2_source,
             "angle": {
                 "angle_id": angle.get("angle_id"),
                 "genre": angle.get("genre"),
@@ -152,6 +166,8 @@ class ContextBuilder:
                 "engagement_type": angle.get("engagement_type"),
                 "reframe_dim": angle.get("reframe_dim"),
                 "zone": angle.get("zone"),
+                "angle_brief": angle.get("angle_brief"),
+                "source_post_id": angle.get("source_post_id"),
             },
             "clip_source_ref": campaign.get("reference_clip"),
             "article_source": campaign.get("article_source"),
