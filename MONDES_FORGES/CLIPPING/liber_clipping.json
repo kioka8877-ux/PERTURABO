@@ -83,5 +83,27 @@
     "siege_id": "siege_20260821_223947",
     "ledger_archive": "ARCHIVUM/sieges/siege_20260821_223947_ledger.json"
   },
-  "f05_export_path": "EXPORT/production_pack_meme_wayvee_phone_bounce.json"
+  "f05_export_path": "EXPORT/production_pack_meme_wayvee_phone_bounce.json",
+  "mode_pur": {
+    "enabled": true,
+    "label": "PUR",
+    "description": "Directives de montage générées sans toucher à la vidéo ni publier",
+    "frigate": "F06_DIRECTOR",
+    "status": "integrated",
+    "input_contract": {
+      "segment": "F03_SOURCE_HUNTER/OUT/segment.json",
+      "text_payload": "F04_COPYWRITER/OUT/text_payload.json",
+      "context": "F06_DIRECTOR/IN/context.json"
+    },
+    "output": "F06_DIRECTOR/OUT/montage_instructions.json",
+    "platforms": ["youtube_shorts", "tiktok", "instagram_reels"],
+    "passive_boundary": "F06_DIRECTOR ne touche jamais à la vidéo et ne poste jamais"
+  },
+  "f06_director": {
+    "status": "integrated",
+    "codebase": "F06_DIRECTOR/CODEBASE",
+    "rules": "ARCHIVUM/montage/rules",
+    "patterns": "ARCHIVUM/montage/patterns",
+    "next_consumer": "F05_PACKAGER"
+  }
 }

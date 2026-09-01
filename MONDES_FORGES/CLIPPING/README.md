@@ -235,3 +235,42 @@ F00 sépare les candidats éligibles des observations, rejets et déserts. Le qu
 Le Directeur de prospection premium peut utiliser Baseten comme planificateur de questions et de requêtes via l'endpoint OpenAI-compatible `https://inference.baseten.co/v1`. Il ne remplace pas les capteurs et ne peut jamais créer une métrique, une URL, une date ou un résultat. Les faits bruts restent séparés de l'interprétation premium.
 
 La progression des frégates est séquentielle : F00 doit être validée par le Warsmith/Champion avant qu'une seule frégate suivante soit autorisée. Aucune production automatique ne découle de la découverte.
+
+
+## MODE PUR — F06_DIRECTOR
+
+Le **Mode PUR** ajoute une frégate passive de direction de montage. `F06_DIRECTOR` reçoit un segment issu de F03, le payload texte de F04 et un contexte de campagne. Il lit les règles de plateforme dans `ARCHIVUM/montage/rules/` ainsi que les patterns disponibles dans `ARCHIVUM/montage/patterns/`, puis produit `F06_DIRECTOR/OUT/montage_instructions.json`.
+
+F06_DIRECTOR ne coupe, ne rend et ne publie jamais une vidéo. Il transmet uniquement des directives structurées à `F05_PACKAGER` et à l’outil de production aval. Le **F06_TRACKER existant** conserve son rôle séparé de suivi des publications, des soumissions Whop, des vues, des payouts et des learnings.
+
+### Entrées et sortie
+
+| Élément | Chemin |
+|---|---|
+| Segment source | `F03_SOURCE_HUNTER/OUT/segment.json` |
+| Payload texte | `F04_COPYWRITER/OUT/text_payload.json` |
+| Contexte | `F06_DIRECTOR/IN/context.json` |
+| Règles plateforme | `ARCHIVUM/montage/rules/` |
+| Patterns | `ARCHIVUM/montage/patterns/` |
+| Instructions générées | `F06_DIRECTOR/OUT/montage_instructions.json` |
+
+### Plateformes prises en charge
+
+Les règles initiales couvrent `youtube_shorts`, `tiktok` et `instagram_reels`. Les transcripts de tutoriels sont attendus dans `ARCHIVUM/montage/transcripts/`; l’extracteur peut produire ou enrichir les patterns sans modifier les transcripts originaux.
+
+Commande indicative :
+
+```bash
+python MONDES_FORGES/CLIPPING/F06_DIRECTOR/CODEBASE/director.py \
+  F03_SOURCE_HUNTER/OUT/segment.json \
+  F04_COPYWRITER/OUT/text_payload.json \
+  F06_DIRECTOR/IN/context.json
+```
+
+Le Mode PUR est déclaré dans `liber_clipping.json`. Il ne remplace pas les modes `logo` ou `meme_v2` déjà présents.
+
+> **Limite de responsabilité :** PERTURABO décrit et ordonnance le montage ; OMNIS_WATCH exécute le montage ; l’opérateur humain conserve la responsabilité de la publication.
+
+*Mode PUR intégré depuis `totorhina600-glitch/jgvjfjf`, branche `main`, commit source observé `45cd790`.*
+
+Fer au-dedans, Fer au-dehors.

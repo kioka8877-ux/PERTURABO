@@ -432,3 +432,18 @@ python3 capteurs.py --scan-subjects --niche "Lakers basketball" --mode informati
   Retry.__init__() got an unexpected keyword argument 'method_whitelist'`).
 - La clé YouTube (CONTRACTS/youtube_secrets.json) est valide et testée.
 - IW_CUSTOS : nom canonique `CAPTEURS`, PAS `F00_CAPTEURS`.
+
+
+## INTÉGRATION MODE PUR — F06_DIRECTOR
+
+Le Mode PUR a été intégré depuis le dépôt secondaire `totorhina600-glitch/jgvjfjf` (branche `main`, commit source observé `45cd790`) dans une branche dédiée de PERTURABO. Cette frégate est distincte de `F06_TRACKER` :
+
+- `F06_DIRECTOR` reçoit le segment F03, le payload F04 et un contexte ;
+- il lit `ARCHIVUM/montage/rules/` et `ARCHIVUM/montage/patterns/` ;
+- il génère `F06_DIRECTOR/OUT/montage_instructions.json` ;
+- il ne touche jamais à la vidéo et ne poste jamais ;
+- `F06_TRACKER` reste responsable du suivi post-publication, des vues, payouts et learnings.
+
+Le manifeste `MONDES_FORGES/CLIPPING/liber_clipping.json` déclare désormais `mode_pur` et `f06_director`. Les règles initiales couvrent YouTube Shorts, TikTok et Instagram Reels. Avant utilisation réelle, fournir un `context.json` conforme et vérifier que F05_PACKAGER consomme bien le nouveau fichier d’instructions.
+
+La branche d’intégration contient aussi une correction de compatibilité du directeur : les intervalles de cuts sont désormais des entiers valides (`1`, `2`, `4`, `6`) au lieu d’expressions Python comme `2-3`.
