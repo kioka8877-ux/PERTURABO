@@ -1,0 +1,142 @@
+{
+  "pattern_name": "anti_detection",
+  "description": "Techniques anti-detection pour éviter les bans/shadow bans lors du clipping de contenus réutilisés",
+  "purpose": "Les plateformes comparent les hashes audio/vidéo. Sans traitement, elles détectent la duplication.",
+  "techniques": {
+    "mirror_flip": {
+      "description": "Retourner la vidéo horizontalement",
+      "method": "Flip horizontal (1 clic dans CapCut)",
+      "impact_detection": "Élevé - change significativement le hash vidéo",
+      "limitation": "Les textes à l'écran sont inversés",
+      "when_to_use": "Clips sans texte OU texte ajouté après le flip",
+      "priority": 1
+    },
+    "zoom_invisible": {
+      "description": "Zoom très lent et imperceptible qui crée du dynamisme",
+      "types": {
+        "slow_push_in": "100% → 108% sur 15 secondes (0.5%/sec)",
+        "slow_pull_out": "108% → 100% sur 15 secondes",
+        "breathing_zoom": "Avant → arrière → avant (cycle)",
+        "punch_zoom": "Zoom rapide sur moment clé (115% max)"
+      },
+      "max_zoom": "115% du frame original",
+      "rule": "Le viewer ne doit JAMAIS remarquer le zoom",
+      "impact_detection": "Moyen - change la composition progressivement",
+      "priority": 2
+    },
+    "speed_variation": {
+      "description": "Modifier légèrement la vitesse de lecture",
+      "techniques": {
+        "slight_speed_up": {"speed": "1.05x-1.1x", "usage": "Clip plus dynamique"},
+        "speed_ramp": {"pattern": "0.8x → 1.2x → 0.8x", "usage": "Crée du rythme"},
+        "slow_moment": {"speed": "0.7x-0.8x", "usage": "Accentue l'émotion sur moment clé"}
+      },
+      "max_variations_per_clip": 2,
+      "rule": "Trop de variations = unnatural",
+      "impact_detection": "Élevé - change la durée et le hash audio",
+      "priority": 3
+    },
+    "crop_reposition": {
+      "description": "Recadrer légèrement la vidéo",
+      "techniques": {
+        "crop_edges": "Couper 2-5% des bords",
+        "reposition": "Décaler le speaker de 10-20px",
+        "center_shift": "Décaler le centre d'intérêt"
+      },
+      "impact_detection": "Moyen - change la composition",
+      "priority": 4
+    },
+    "audio_treatment": {
+      "description": "Modifier l'audio pour changer le hash audio",
+      "techniques": {
+        "pitch_shift": {"range": "±2-3%", "impact": "Significatif"},
+        "background_music": {"volume": "-15 à -20dB", "impact": "Masque l'audio original"},
+        "sfx_overlay": {"count": "1-2 par clip", "impact": "Ajoute des éléments uniques"},
+        "audio_eq": {"modification": "basses/aigus ±10%", "impact": "Subtil"}
+      },
+      "priority": 5
+    }
+  },
+  "sfx_library": {
+    "essential": [
+      {"name": "whoosh", "usage": "Transition entre segments", "timing": "Sur chaque cut", "volume_db": -18},
+      {"name": "boom_impact", "usage": "Moment shockant", "timing": "Sur le punchline", "volume_db": -15},
+      {"name": "riser", "usage": "Montée en tension", "timing": "Avant moment clé", "volume_db": -20},
+      {"name": "hit", "usage": "Accent visuel", "timing": "Sur zoom ou texte", "volume_db": -18},
+      {"name": "sub_drop", "usage": "Effet grave profond", "timing": "Moment dramatique", "volume_db": -15},
+      {"name": "notification", "usage": "Attirer l'attention", "timing": "Début ou moment clé", "volume_db": -20},
+      {"name": "crowd_reaction", "usage": "Réaction collective", "timing": "Après moment drôle", "volume_db": -18},
+      {"name": "record_scratch", "usage": "Arrêt brutal", "timing": "Moment surprenant", "volume_db": -15}
+    ],
+    "max_sfx_per_clip": 2,
+    "volume_rule": "Toujours en dessous de la voix (-15 à -20dB)",
+    "sources": ["CapCut intégré", "Pixabay", "Freesound.org", "Epidemic Sound"]
+  },
+  "zoom_patterns_by_style": {
+    "ranking": {
+      "pattern": "punch_zoom sur chaque segment",
+      "intensity": "Fort (110-115%)",
+      "timing": "Sur le numéro de rang"
+    },
+    "emotionnel": {
+      "pattern": "slow_push_in pendant le discours",
+      "intensity": "Léger (102-108%)",
+      "timing": "Pendant les moments forts"
+    },
+    "drôle": {
+      "pattern": "breathing_zoom",
+      "intensity": "Moyen (105-110%)",
+      "timing": "Pendant les punchlines"
+    },
+    "shock": {
+      "pattern": "quick_zoom_in + hold",
+      "intensity": "Fort (115%)",
+      "timing": "Sur le moment shockant"
+    },
+    "storytelling": {
+      "pattern": "slow_pull_out pour révéler",
+      "intensity": "Léger (95-100%)",
+      "timing": "En fin de clip"
+    }
+  },
+  "production_pack_format": {
+    "anti_detection": {
+      "mirror": false,
+      "zoom_invisible": {
+        "type": "slow_push_in",
+        "start_pct": 100,
+        "end_pct": 108,
+        "curve": "linear"
+      },
+      "speed_variation": {
+        "base": 1.0,
+        "variations": [
+          {"at_sec": 15.0, "speed": 1.05, "duration_sec": 3}
+        ]
+      },
+      "crop": {
+        "top_pct": 0.02,
+        "bottom_pct": 0.02,
+        "left_pct": 0.01,
+        "right_pct": 0.01
+      }
+    },
+    "sfx": [
+      {"type": "whoosh", "at_sec": 3.0, "volume_db": -18},
+      {"type": "boom", "at_sec": 15.0, "volume_db": -15}
+    ],
+    "zoom_pattern": [
+      {"start_sec": 0, "end_sec": 3, "zoom_pct": 100},
+      {"start_sec": 3, "end_sec": 15, "zoom_pct": 106},
+      {"start_sec": 15, "end_sec": 20, "zoom_pct": 104},
+      {"start_sec": 20, "end_sec": 28, "zoom_pct": 110},
+      {"start_sec": 28, "end_sec": 30, "zoom_pct": 100}
+    ]
+  },
+  "minimum_requirements_per_clip": {
+    "visual_treatment": "Au moins 1 (mirror OU zoom OU crop)",
+    "audio_treatment": "Au moins 1 (musique OU SFX OU pitch)",
+    "zoom_invisible": "Quasi permanent (100% → 108-110%)",
+    "sfx": "1-2 aux moments clés"
+  }
+}
