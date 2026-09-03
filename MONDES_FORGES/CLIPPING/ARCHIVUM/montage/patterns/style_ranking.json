@@ -15,6 +15,17 @@
       "avoid": "Pas de B-roll sur le moment le plus choquant du segment"
     }
   },
+  "copywriting": {
+    "ref": "ARCHIVUM/montage/patterns/copywriting_pur.json",
+    "title_max_words": 4,
+    "clip_label_max_words": 1,
+    "countdown_order": "#1 = plus captivant, dernier = meilleur (crescendo)",
+    "narrative_reframing": true,
+    "no_cta": true,
+    "oracle_generates": true,
+    "warsmith_validates": true,
+    "captions_source": "transcript"
+  },
   "workflow": {
     "step_1": {"name": "Trouver 5 moments viraux"},
     "step_2": {"name": "Extraire les segments (2-5s chacun)"},

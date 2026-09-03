@@ -56,10 +56,12 @@ PUR/
 **Output** : segment.json (5 moments scoringués)
 **Commande** : `python3 pur.py --select`
 
-### Gate 3 — Textes + hooks (F04)
-**Input** : segment.json + style
-**Output** : text_payload.json (titres, captions, B-roll prompts)
+### Gate 3 — Copywriting + hooks (F04 + Oracle)
+**Input** : segment.json + style + ARCHIVUM (hooks_pur, copywriting_pur, hooks_psychology)
+**Output** : text_payload.json (titres reframing, labels clips, captions transcript, B-roll prompts)
 **Commande** : `python3 pur.py --text --style ranking`
+**Processus** : Oracle (clé premium) génère → Warsmith valide
+**Règles** : titre ≤ 4 mots (ranking) / ~2 lignes (autres), label 1 mot, countdown #1=plus captivant, pas de CTA
 
 ### Gate 4 — Assemblage pack PUR (F05 + F06)
 **Input** : segment + textes + B-roll + anti-detection
@@ -72,11 +74,20 @@ PUR/
 **Commande** : `python3 pur.py --direct`
 **Note** : Gate 5 spécifique au mode split_scene — layout, sous-layout, broll fullscreen
 
+## 📝 ARCHIVUM Copywriting PUR
+
+| Pattern | Description |
+|---------|-------------|
+| `hooks_pur.json` | Psychologie des hooks PUR — reframing narratif, countdown, proof-reveal |
+| `copywriting_pur.json` | Règles de copywriting PUR — Oracle génère, Warsmith valide |
+| `hooks_psychology.json` | Psychologie générale (étendu avec référence PUR) |
+| `style_ranking.json` | Pattern ranking (étendu avec copywriting PUR) |
+
 ## 📊 Styles supportés
 
 | Style | Description | B-roll | Gate 5 |
 |-------|-------------|--------|--------|
-| `ranking` | 5 moments, countdown 5→1 | 4-6 par clip | Non |
+| `ranking` | 1-6 clips, countdown (max 10 vidéos) | 4-6 par clip | Non |
 | `reframing` | Zoom simple 9:16 | 1-3 par clip | Non |
 | `blur` | Dupliquer + blur + centrer | 1-3 par clip | Non |
 | `split_scene` | Podcast haut + titre centre + bas variable | Full-screen overlay | **Oui** |
@@ -115,8 +126,9 @@ Minimum 5 secondes entre chaque B-roll.
 | Élément | Statut |
 |---------|--------|
 | Structure | ✅ Créée |
-| Patterns ARCHIVUM | ✅ En place (7 fichiers + style_split_scene) |
+| Patterns ARCHIVUM | ✅ En place (9 fichiers : styles + anti_detection + broll + hooks + hooks_pur + copywriting_pur) |
 | Guides | ✅ En place (11_MODE_PUR + 12_NOTE_TECHNIQUE + _PIEGES_APPRIS) |
 | Scripts Python | ✅ En place (pur.py + 4 libs, 5 gates) |
 | Split Scene | ✅ Implémenté (pattern + pur.py + docs) |
+| Copywriting PUR | ✅ Implémenté (hooks_pur.json + copywriting_pur.json + pur.py Gate 3 amélioré) |
 | Tests | ⏳ En attente |

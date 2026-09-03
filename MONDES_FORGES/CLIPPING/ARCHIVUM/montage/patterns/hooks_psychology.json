@@ -60,6 +60,11 @@
       "when_to_use": "Storytelling, narrative clips"
     }
   },
+  "pur_mode_reference": {
+    "description": "Pour le mode PUR, consulter hooks_pur.json — le titre TRANSFORME le contenu au lieu de le décrire",
+    "key_difference": "hooks_psychology = descriptif (informatif, meme). hooks_pur = reframing narratif (le titre change le sens)",
+    "referenced_patterns": ["hooks_pur.json", "copywriting_pur.json"]
+  },
   "critical_rules": {
     "first_2_seconds": "MUST have a hook - high energy, controversial, or recognizable",
     "cut_frequency": "Change shots every 2-3 seconds for retention",

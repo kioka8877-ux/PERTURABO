@@ -56,19 +56,44 @@ python3 pur.py --select --n-moments 5
 python3 pur.py --gate 2 --decision valide --notes "5 moments scoringués"
 ```
 ---
-### 🚪 GATE 3 — Textes + hooks + B-roll prompts
-**Frégate** : F04 (via import) + `broll_scorer.py` — génère les textes et scoringue le B-roll.
+### 🚪 GATE 3 — Copywriting + hooks + B-roll prompts
+**Frégate** : F04 (via import) + `broll_scorer.py`
+**Oracle** : Génère les titres via clé premium + ARCHIVUM
+**Warsmith** : Valide les titres et labels
 ```bash
 python3 pur.py --text --style ranking
 ```
 **Sortie** : `PUR/OUT/text_payload.json`
 | Champ | Signification |
 |---|---|
-| `title` | Titre viral (≤ 6 mots) |
+| `title` | Titre reframing narratif (≤ 4 mots ranking / ~2 lignes autres) |
+| `clip_label` | Label du clip (1 mot, ranking seulement) |
 | `hook_text` | Texte du hook (premières secondes) |
-| `captions[]` | Captions动态 par segment |
+| `captions[]` | Transcript du speech (pas de texte écrit) |
 | `broll_schedule[]` | B-roll scoringués avec timestamps |
 | `metadata` | Titre YouTube, description, tags |
+| `copywriting_rules` | Règles de reframing (Oracle → Warsmith) |
+
+#### Le système de titres PUR
+| Style | Limite titre principal | Label clip |
+|---|---|---|
+| **Ranking** | ≤ 4 mots | 1 mot (2 si article) |
+| **Blur** | ~2 lignes | Aucun |
+| **Split Scene** | ~2 lignes | Aucun |
+| **Reframing** | ~2 lignes | Aucun |
+
+#### Le countdown (ranking)
+- **#1** = le plus captivant (accroche immédiate)
+- **Milieu** = montée en puissance
+- **Dernier** = meilleur moment (crescendo)
+
+#### Règles de reframing
+- Le titre **TRANSFORME** le sens du contenu (pas une description)
+- Le label EST le reframing titre de chaque clip
+- Captions = transcript du speech, pas de texte écrit
+- Pas de CTA (contenu organique)
+- Langue choisie par le Warsmith (FR ou EN)
+- ARCHIVUM : `hooks_pur.json` + `copywriting_pur.json`
 **Validation** :
 ```bash
 python3 pur.py --gate 3 --decision valide --notes "textes + B-roll validés"
@@ -165,7 +190,9 @@ python3 pur.py --export
 ### Avant Gate 2
 - [ ] 5 moments sélectionnés · [ ] Scores différents (pas de doublon)
 ### Avant Gate 3
-- [ ] Titres ≤ 6 mots · [ ] B-roll scoringué · [ ] Hooks psychologiques
+- [ ] Titres ≤ 4 mots (ranking) ou ~2 lignes (autres) · [ ] B-roll scoringué
+- [ ] Labels clips (1 mot, ranking seulement) · [ ] Oracle a généré · [ ] Warsmith a validé
+- [ ] Captions = transcript · [ ] Pas de CTA · [ ] Langue choisie
 ### Avant Gate 4
 - [ ] Anti-detection configurée · [ ] Montage instructions complètes
 - [ ] Pack copié dans EXPORT/
