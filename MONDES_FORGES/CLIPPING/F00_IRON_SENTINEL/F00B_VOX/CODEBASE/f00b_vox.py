@@ -25,6 +25,12 @@ from datetime import datetime
 from math import fabs
 from pathlib import Path
 
+# ─── Libs auto-detect (Option A) ────────────────────────────────────────────
+CODEBASE_DIR = Path(__file__).resolve().parent
+_LIBS_DIR = CODEBASE_DIR / "libs"
+if _LIBS_DIR.exists():
+    sys.path.insert(0, str(_LIBS_DIR))
+
 # ─── Paths ───────────────────────────────────────────────────────────────────
 BASE = Path(__file__).resolve().parent.parent  # F00B_VOX/
 IN_DIR = BASE / "IN"
@@ -725,16 +731,76 @@ def cmd_trail(args):
 
 
 # ─── CLI ─────────────────────────────────────────────────────────────────────
+def cmd_auto_detect(args):
+    """
+    Auto-detect : audio seul → transcription word-level → chat replay
+    → scoring → candidats.json (même schéma que detect).
+    Le Warsmith valide ensuite via gate.
+
+    Nécessite : yt-dlp + ffmpeg (installés), + clé premium pour la
+    transcription (CONTRACTS/f00b_secrets.json ou AI_GATEWAY_API_KEY).
+    """
+    try:
+        from auto_detector import run_auto_detect
+    except ImportError as e:
+        log(f"❌ Module auto-detect indisponible : {e}")
+        log("   Installer les dépendances : pip install -r requirements_f00b.txt")
+        sys.exit(1)
+
+    input_file = IN_DIR / "vox_input.json"
+    if not input_file.exists():
+        log("❌ IN/vox_input.json introuvable.")
+        log("   Créer le fichier avec vod_urls + nb_clips_demandes minimum.")
+        sys.exit(1)
+
+    data = load_json(input_file)
+    vod_urls = data.get("vod_urls", [])
+    if not vod_urls:
+        log("❌ Aucune URL VOD dans vox_input.json.")
+        sys.exit(1)
+
+    vod_url = vod_urls[0].get("url") if isinstance(vod_urls[0], dict) else vod_urls[0]
+    nb_clips = data.get("nb_clips_demandes", args.nb_clips or 5)
+    market = getattr(args, "market", None) or "us_young_english"
+    platform = getattr(args, "platform", None) or data.get("plateforme", "youtube")
+    keep_audio = getattr(args, "keep_audio", False)
+    no_chat = getattr(args, "no_chat", False)
+
+    # Calcul du FORGE_ROOT (4 niveaux au-dessus de f00b_vox.py)
+    forge_root = str(BASE.parent.parent.parent)
+
+    run_auto_detect(
+        forge_root=forge_root,
+        vod_url=vod_url,
+        nb_clips=nb_clips,
+        market=market,
+        platform=platform,
+        keep_audio=keep_audio,
+        no_chat=no_chat,
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="F00B_VOX — L'Oreille Absolue. Pipeline VOD Twitch → clips trail_ready.",
     )
     parser.add_argument(
         "command",
-        choices=["ingest", "detect", "score", "gate", "gate_apply", "trail", "status"],
+        choices=["ingest", "detect", "score", "gate", "gate_apply",
+                 "trail", "status", "auto_detect"],
         help="Étape du pipeline VOX",
     )
     parser.add_argument("--execute", action="store_true", help="Exécuter les commandes yt-dlp (ingest)")
+    parser.add_argument("--keep-audio", action="store_true",
+                        help="Conserver l'audio après auto_detect (debug)")
+    parser.add_argument("--no-chat", action="store_true",
+                        help="Ignorer le chat replay (auto_detect)")
+    parser.add_argument("--market", default=None,
+                        help="Marché cible (auto_detect, défaut: us_young_english)")
+    parser.add_argument("--platform", default=None,
+                        help="Plateforme cible (auto_detect)")
+    parser.add_argument("--nb-clips", type=int, default=None,
+                        help="Nombre de clips (auto_detect, défaut depuis vox_input)")
 
     args = parser.parse_args()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -744,6 +810,8 @@ def main():
 
     if args.command == "ingest":
         cmd_ingest(args)
+    elif args.command == "auto_detect":
+        cmd_auto_detect(args)
     elif args.command == "detect":
         cmd_detect(args)
     elif args.command == "score":

@@ -59,6 +59,21 @@ F00B_VOX → F01 → F02 → F03 → F04 → F05 → F06
 
 ## 3. Pipeline VOX (commandes)
 
+### Mode Auto-Detect (recommandé)
+F00B détecte automatiquement les moments viraux sans input humain :
+
+```bash
+# Étape 0 — Auto-detect (audio + transcription word-level + chat replay + scoring)
+python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --nb-clips 5
+python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --keep-audio --no-chat
+python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --market us_young_english --platform youtube_shorts
+```
+
+**Prérequis :** yt-dlp + ffmpeg installés, clé premium configurée.
+**Clé premium :** `CONTRACTS/f00b_secrets.json` ou env `CLIPPING_F00B_API_KEY` / `AI_GATEWAY_API_KEY`.
+**Sortie :** `OUT/candidats.json` (même schéma que detect → score/gate/trail inchangés).
+
+### Mode Manuel (legacy)
 ```bash
 # Étape 1 — Ingest (génère commandes yt-dlp)
 python F00B_VOX/CODEBASE/f00b_vox.py ingest
