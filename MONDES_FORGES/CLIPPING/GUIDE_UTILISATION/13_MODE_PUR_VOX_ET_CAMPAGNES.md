@@ -63,7 +63,7 @@ F00B_VOX → F01 → F02 → F03 → F04 → F05 → F06
 F00B détecte automatiquement les moments viraux sans input humain :
 
 ```bash
-# Étape 0 — Auto-detect (audio + transcription word-level + chat replay + scoring)
+# Étape 0 — Auto-detect (audio + transcription + chat replay + scoring)
 python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --nb-clips 5
 python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --keep-audio --no-chat
 python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --market us_young_english --platform youtube_shorts
@@ -71,7 +71,14 @@ python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --market us_young_english --pla
 
 **Prérequis :** yt-dlp + ffmpeg installés, clé premium configurée.
 **Clé premium :** `CONTRACTS/f00b_secrets.json` ou env `CLIPPING_F00B_API_KEY` / `AI_GATEWAY_API_KEY`.
+
+**Modes de transcription supportés (auto-détectés) :**
+1. **Word-level** (optimal) — `words[]` avec timestamps mot par mot → analyse speech complète
+2. **Segments** — `segments[]` avec timestamps début/fin → conversion en pseudo-mots, analyse speech
+3. **Texte seul** (fallback) — `text` brut sans timestamps → **analyse speech désactivée**, scoring basé chat uniquement
+
 **Sortie :** `OUT/candidats.json` (même schéma que detect → score/gate/trail inchangés).
+**Rapport :** `OUT/auto_detect_report.json` avec `transcription.mode` indiquant le mode utilisé.
 
 ### Mode Manuel (legacy)
 ```bash

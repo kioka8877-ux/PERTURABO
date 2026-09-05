@@ -17,9 +17,12 @@
 
 **Après** : F00B détecte automatiquement :
 1. **Audio seul** (yt-dlp -f ba, stream copy) → pas de MP4 complet
-2. **Transcription word-level** via clé premium (Whisper API OpenAI-compatible, chunks ffmpeg stream copy)
+2. **Transcription** via clé premium (Whisper API OpenAI-compatible, chunks ffmpeg stream copy)
+   - Mode **words** : timestamps mot par mot → analyse speech complète
+   - Mode **segments** : timestamps par segments → conversion pseudo-mots
+   - Mode **texte** : texte brut → fallback chat-only (analyse speech désactivée)
 3. **Chat replay Twitch** (API v5 publique, pas d'auth) → pics d'engagement
-4. **Speech analysis** (triggers, punchlines, densité)
+4. **Speech analysis** (triggers, punchlines, densité) — si mode words/segments
 5. **Fusion + scoring multicritère** → candidats.json
 6. **Gate Warsmith** reste obligatoire → le Warsmith valide, il ne détecte plus
 

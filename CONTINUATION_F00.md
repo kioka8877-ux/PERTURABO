@@ -116,7 +116,9 @@ F00B_VOX/
 ├── CODEBASE/
 │   ├── f00b_vox.py          ← Script principal (CLI)
 │   ├── requirements_f00b.txt ← Dépendances (yt-dlp)
-│   └── ...
+│   └── libs/
+│       ├── __init__.py
+│       └── auto_detector.py  ← Auto-detect (Option A)
 ├── IN/                      ← Inputs
 │   ├── vox_input.json       ← URLs VOD + segments
 │   ├── signals.json         ← Signaux détection
@@ -126,9 +128,14 @@ F00B_VOX/
 │   ├── candidats.json
 │   ├── scoring.json
 │   ├── gate_verdict.json
-│   └── trail.json
+│   ├── trail.json
+│   ├── transcript.json       ← Transcription (words + segments + mode)
+│   ├── chat.json             ← Chat replay
+│   └── auto_detect_report.json ← Rapport complet
+├── CONTRACTS/
+│   └── f00b_secrets.json     ← Config clé premium (pattern F04)
 └── TRACKING/
-    └── F00B_LOG.md          ← Journal
+    └── F00B_LOG.md           ← Journal
 ```
 
 ### Scoring Multicritère
@@ -138,11 +145,14 @@ score = 0.30 × hook_force + 0.25 × emotion + 0.15 × clarity
       + bonus - malus
 ```
 
+**Mode texte seul (fallback) :** sans word-level timestamps, les critères `hook_force`, `clarity`, `quotability` sont estimés via le type de signal (punchline/trigger_word) et l'intensité chat. Le scoring reste fonctionnel mais moins précis.
+
 ### Règles d'or
 - ❌ Jamais de VOD complète (segments HLS uniquement)
 - ❌ Jamais de recompression (stream copy)
 - ❌ Jamais de trail sans verdict gate
 - ❌ Budget max 20 min par session
+- ⚠️ Auto-detect nécessite clé premium + yt-dlp + ffmpeg
 
 ---
 
@@ -158,6 +168,11 @@ python F00B_VOX/CODEBASE/f00b_vox.py gate            # Génère skeleton gate
 python F00B_VOX/CODEBASE/f00b_vox.py gate_apply      # Applique décisions
 python F00B_VOX/CODEBASE/f00b_vox.py trail           # Génère trails F03
 python F00B_VOX/CODEBASE/f00b_vox.py status          # État du pipeline
+
+# Auto-detect (Option A — recommandé)
+python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --nb-clips 5
+python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --keep-audio --no-chat
+python F00B_VOX/CODEBASE/f00b_vox.py auto_detect --market us_young_english --platform youtube_shorts
 ```
 
 ---
@@ -166,10 +181,11 @@ python F00B_VOX/CODEBASE/f00b_vox.py status          # État du pipeline
 
 ### Court terme
 1. ✅ F00B_VOX créé (code + specs + examples)
-2. ⏳ Tester avec une vraie VOD Twitch
-3. ⏳ Intégrer F00B dans le workflow PUR complet
-4. ⏳ Plan 2 : Support campagnes Clipify (watermarks, directives)
-5. ⏳ Plan 3 : Mise à jour documentation
+2. ✅ Auto-detect v1 implémenté (transcription multi-mode + chat replay + scoring)
+3. ⏳ Tester auto_detect avec une vraie VOD Twitch (Aishah Sofey)
+4. ⏳ Intégrer F00B dans le workflow PUR complet
+5. ⏳ Plan 2 : Support campagnes Clipify (watermarks, directives)
+6. ⏳ Plan 3 : Mise à jour documentation
 
 ### Moyen terme
 1. Enrichir ARCHIVUM/montage/ avec plus de patterns

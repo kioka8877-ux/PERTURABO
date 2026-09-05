@@ -96,6 +96,33 @@ def _candidate_id(vod_url, start_sec):
     return hashlib.md5(raw.encode()).hexdigest()[:10]
 
 
+def _segments_to_words(segments):
+    """Convertit segments (texte + start/end) → liste de pseudo-mots pour compatibilité.
+    Approximation: 1 mot ≈ 0.3s, réparti uniformément sur la durée du segment."""
+    words = []
+    for seg in segments:
+        text = seg.get("text", "").strip()
+        if not text:
+            continue
+        start = float(seg.get("start", 0))
+        end = float(seg.get("end", start))
+        dur = end - start
+        # Split en mots simples
+        word_list = text.split()
+        if not word_list:
+            continue
+        word_dur = dur / len(word_list) if len(word_list) > 0 else 0.3
+        for idx, w in enumerate(word_list):
+            w_start = start + idx * word_dur
+            w_end = w_start + word_dur
+            words.append({
+                "word": w,
+                "start": round(w_start, 3),
+                "end": round(w_end, 3),
+            })
+    return words
+
+
 def _load_json(path):
     if not os.path.exists(path):
         return {}
@@ -520,42 +547,51 @@ WEIGHTS = {
 def score_candidates(candidates, words, chat_messages, vod_url):
     """Score chaque candidat avec des critères réels (speech + chat)."""
     scored = []
-    duration = float(words[-1].get("end", 0)) if words else 0
+    has_words = len(words) > 0
+    duration = float(words[-1].get("end", 0)) if has_words else 0
 
     for cand in candidates:
         start, end = cand["start"], cand["end"]
         dur = cand["duration"]
 
-        # Mots dans la fenêtre
-        win_words = [w for w in words
-                     if float(w.get("start", 0)) >= start
-                     and float(w.get("start", 0)) < end]
-        win_text = " ".join(w.get("word", "") for w in win_words)
+        # Mots dans la fenêtre (si disponibles)
+        if has_words:
+            win_words = [w for w in words
+                         if float(w.get("start", 0)) >= start
+                         and float(w.get("start", 0)) < end]
+            win_text = " ".join(w.get("word", "") for w in win_words)
+
+            # Hook force : mots triggers dans les 3 premières secondes
+            hook_zone = [w for w in win_words
+                         if float(w.get("start", 0)) - start <= 3.0]
+            hook_text = " ".join(w.get("word", "") for w in hook_zone).lower()
+            hook_hits = sum(1 for tw in TRIGGER_WORDS if tw in hook_text)
+            hook_score = min(10, 4.0 + hook_hits * 2.5 + (1.5 if cand["type"] == "punchline" else 0))
+
+            # Clarté : densité de mots dans la fenêtre
+            word_density = len(win_words) / dur if dur > 0 else 0
+            clarity_score = min(10, 5.0 + word_density * 2)
+
+            # Quotability : punchlines + triggers
+            excl_count = win_text.count("!") + win_text.count("?")
+            quotability_score = min(10, 3.0 + excl_count * 1.5 + hook_hits * 1.5)
+        else:
+            # Mode fallback sans mots : scoring basé sur type de signal + chat
+            win_text = ""
+            hook_hits = 0
+            hook_score = 4.0 + (1.5 if cand["type"] == "punchline" else 0) + (1.0 if cand["type"] == "trigger_word" else 0)
+            clarity_score = 5.0
+            quotability_score = 3.0
 
         # Messages chat dans la fenêtre
         win_chat = [m for m in chat_messages
                     if m.get("offset_sec", 0) >= start
                     and m.get("offset_sec", 0) < end]
 
-        # Hook force : mots triggers dans les 3 premières secondes
-        hook_zone = [w for w in win_words
-                     if float(w.get("start", 0)) - start <= 3.0]
-        hook_text = " ".join(w.get("word", "") for w in hook_zone).lower()
-        hook_hits = sum(1 for tw in TRIGGER_WORDS if tw in hook_text)
-        hook_score = min(10, 4.0 + hook_hits * 2.5 + (1.5 if cand["type"] == "punchline" else 0))
-
         # Émotion : intensité du chat + type de signal
         chat_intensity = cand.get("intensity", 0.5)
         chat_count = len(win_chat)
         emotion_score = min(10, 3.0 + chat_intensity * 4 + min(3, chat_count / 10))
-
-        # Clarté : densité de mots dans la fenêtre
-        word_density = len(win_words) / dur if dur > 0 else 0
-        clarity_score = min(10, 5.0 + word_density * 2)
-
-        # Quotability : punchlines + triggers
-        excl_count = win_text.count("!") + win_text.count("?")
-        quotability_score = min(10, 3.0 + excl_count * 1.5 + hook_hits * 1.5)
 
         # Timing : durée optimale
         if 20 <= dur <= 35:
@@ -597,14 +633,15 @@ def score_candidates(candidates, words, chat_messages, vod_url):
         if hook_hits >= 2:
             bonuses.append({"rule": "multi_trigger", "delta": 1.0})
 
-        # TOS risk
-        tos_hits = sum(1 for tw in TOS_RISK_WORDS if tw in win_text.lower())
-        if tos_hits:
-            maluses.append({"rule": "tos_risk", "delta": -2.0 * tos_hits})
-            reasons.append("tos_risk")
+        # TOS risk (si mots disponibles)
+        if has_words and win_text:
+            tos_hits = sum(1 for tw in TOS_RISK_WORDS if tw in win_text.lower())
+            if tos_hits:
+                maluses.append({"rule": "tos_risk", "delta": -2.0 * tos_hits})
+                reasons.append("tos_risk")
 
-        # Silences longs (> 3s sans parole)
-        if win_words:
+        # Silences longs (si mots disponibles)
+        if has_words and win_words:
             gaps = []
             prev_end = start
             for w in sorted(win_words, key=lambda x: float(x.get("start", 0))):
@@ -624,7 +661,7 @@ def score_candidates(candidates, words, chat_messages, vod_url):
 
         # Statut
         status = "scored"
-        if final < 4.0 or tos_hits:
+        if final < 4.0 or (has_words and tos_hits):
             status = "auto_rejected"
             reasons.append("score_lt_4" if final < 4.0 else "tos_risk")
 
@@ -772,26 +809,74 @@ def run_auto_detect(forge_root, vod_url, nb_clips=5,
     _log(f"  {len(chunks)} chunks créés")
 
     # ── 4. Transcription word-level ─────────────────────────────────────
-    _log("📝 Transcription word-level (clé premium)...")
+    _log("📝 Transcription (clé premium)...")
     transcriber = PremiumTranscriber(forge_root)
     all_words = []
+    all_segments = []
+    transcription_mode = "none"
 
     for i, chunk_path in enumerate(chunks):
         _log(f"  Chunk {i+1}/{len(chunks)} ({os.path.getsize(chunk_path) / (1024*1024):.1f} Mo)...")
         try:
             result = transcriber.transcribe_chunk(chunk_path)
             chunk_offset = i * chunk_sec
-            for w in result.get("words", []):
-                all_words.append({
-                    "word": w.get("word", ""),
-                    "start": round(w.get("start", 0) + chunk_offset, 3),
-                    "end": round(w.get("end", 0) + chunk_offset, 3),
+
+            # Cas 1: word-level timestamps (format OpenAI verbose_json avec timestamp_granularities=word)
+            if "words" in result and result["words"]:
+                transcription_mode = "words"
+                for w in result.get("words", []):
+                    all_words.append({
+                        "word": w.get("word", ""),
+                        "start": round(w.get("start", 0) + chunk_offset, 3),
+                        "end": round(w.get("end", 0) + chunk_offset, 3),
+                    })
+
+            # Cas 2: segments avec timestamps (format verbose_json standard)
+            elif "segments" in result and result["segments"]:
+                transcription_mode = "segments"
+                for seg in result.get("segments", []):
+                    all_segments.append({
+                        "text": seg.get("text", "").strip(),
+                        "start": round(seg.get("start", 0) + chunk_offset, 3),
+                        "end": round(seg.get("end", 0) + chunk_offset, 3),
+                    })
+
+            # Cas 3: texte seul (fallback)
+            elif "text" in result and result["text"]:
+                transcription_mode = "text"
+                # On stocke le texte brut par chunk pour référence
+                all_segments.append({
+                    "text": result["text"].strip(),
+                    "start": chunk_offset,
+                    "end": chunk_offset + chunk_sec,
                 })
+
+            else:
+                _log(f"  ⚠️  Chunk {i+1}: format de réponse inattendu")
+
         except Exception as e:
             _log(f"  ⚠️  Erreur chunk {i+1}: {e}")
             continue
 
-    _log(f"  {len(all_words)} mots transcrits (durée totale: {_fmt_time(all_words[-1]['end']) if all_words else '0'})")
+    _log(f"  Mode transcription: {transcription_mode}")
+
+    # Construire all_words selon le mode disponible
+    if transcription_mode == "words":
+        _log(f"  {len(all_words)} mots transcrits (durée: {_fmt_time(all_words[-1]['end']) if all_words else '0'})")
+
+    elif transcription_mode == "segments":
+        _log(f"  {len(all_segments)} segments transcrits")
+        # Convertir segments → pseudo-mots pour compatibilité analyse existante
+        all_words = _segments_to_words(all_segments)
+        _log(f"  Converti en {len(all_words)} pseudo-mots pour analyse")
+
+    elif transcription_mode == "text":
+        _log(f"  ⚠️  Texte seul — analyse word-level impossible, fallback chat-only")
+        # Pas de mots → on ne peut pas faire analyze_speech
+        # Le pipeline continuera avec chat replay uniquement
+
+    else:
+        raise RuntimeError("Échec transcription: aucun format reconnu (ni words, ni segments, ni text)")
 
     # Sauvegarder le transcript
     transcript_path = os.path.join(out_dir, "transcript.json")
@@ -801,8 +886,10 @@ def run_auto_detect(forge_root, vod_url, nb_clips=5,
         "vod_title": vod_title,
         "vod_duration": vod_duration,
         "upload_date": upload_date,
+        "transcription_mode": transcription_mode,
         "total_words": len(all_words),
         "words": all_words,
+        "segments": all_segments if all_segments else None,
     })
     _log(f"  Transcript sauvegardé → {transcript_path}")
 
@@ -823,13 +910,20 @@ def run_auto_detect(forge_root, vod_url, nb_clips=5,
         _log("  Chat ignoré (--no-chat)")
 
     # ── 6. Analyse speech + chat → peaks ────────────────────────────────
-    _log("🔍 Analyse speech (triggers + punchlines + densité)...")
-    speech_peaks = analyze_speech(all_words)
-    _log(f"  {len(speech_peaks)} speech peaks")
+    if all_words:
+        _log("🔍 Analyse speech (triggers + punchlines + densité)...")
+        speech_peaks = analyze_speech(all_words)
+        _log(f"  {len(speech_peaks)} speech peaks")
+    else:
+        _log("⚠️  Aucun mot timestampé — analyse speech ignorée")
+        speech_peaks = []
 
     _log("🔍 Analyse chat (pics d'engagement)...")
     chat_peaks = analyze_chat(chat_messages, vod_duration)
     _log(f"  {len(chat_peaks)} chat peaks")
+
+    if not speech_peaks and not chat_peaks:
+        raise RuntimeError("Aucun signal détecté (ni speech, ni chat) — impossible de générer des candidats")
 
     # ── 7. Fusion → candidats ───────────────────────────────────────────
     _log(f"🎯 Fusion des pics → {nb_clips * 2} candidats max...")
@@ -863,7 +957,9 @@ def run_auto_detect(forge_root, vod_url, nb_clips=5,
         "transcription": {
             "engine": transcriber.model_id,
             "provider": transcriber._config.get("provider", "unknown"),
+            "mode": transcription_mode,
             "total_words": len(all_words),
+            "total_segments": len(all_segments),
             "chunks_processed": len(chunks),
             "audio_size_mb": round(os.path.getsize(audio_path) / (1024*1024), 1) if os.path.exists(audio_path) else 0,
         },
