@@ -1,0 +1,12 @@
+# F00B_VOX — L'Oreille Absolue
+# Sous-frégate de F00_CAPTEURS
+#
+# L'ingest partielle des VODs Twitch repose sur yt-dlp + ffmpeg :
+#   yt-dlp --download-sections "*HH:MM:SS-HH:MM:SS" --force-keyframes-at-cuts ...
+# Stream copy : aucune recompression, qualité native garantie.
+#
+# Le script f00b_vox.py fonctionne avec la stdlib seule pour le scoring/gate/trail.
+# L'ingest (--execute) nécessite yt-dlp installé sur la machine.
+
+# yt-dlp>=2024.08.06
+# ffmpeg (systeme, pas un package pip)
